@@ -16,14 +16,18 @@
             <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Background="White" Opacity="0.5"></StackPanel>
+        <Ellipse Grid.Column="0" Stroke="Gray" StrokeThickness="1" Fill="White" Opacity="0.5" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <Ellipse.BitmapEffect>
+                <BlurBitmapEffect Radius="1" KernelType="Gaussian" />
+            </Ellipse.BitmapEffect>
+        </Ellipse>
         <Grid Background="White" Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="40*"/>
                 <RowDefinition Height="40*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Name="ClassName" Foreground="White" Content="Ny Klass*" Background="#404d5c" VerticalContentAlignment="Center"></Label>
+            <TextBox Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="Ny Klass*" Background="#404d5c"/>
             <ListBox Grid.Row="1" Name="Attributes" Background="#768ca5" Foreground="White"></ListBox>
             <ListBox Grid.Row="2" Name="Methods" Background="#404d5c" Foreground="White"></ListBox>
         </Grid>

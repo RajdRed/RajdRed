@@ -99,6 +99,9 @@ namespace RajdRed
             if (e.ClickCount == 2)
             {
                 ClassSettings cs = new ClassSettings(this);
+                Point pt = new Point(Canvas.GetLeft(this), Canvas.GetTop(this));
+                Canvas.SetLeft(cs, pt.X-cs.Width/2+this.Width/2);
+                Canvas.SetTop(cs, pt.Y-cs.Height/2-this.Height/2);
                 canvas.Children.Add(cs);
             }
             else
