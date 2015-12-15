@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RajdRed
+namespace rajdred
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,7 +24,6 @@ namespace RajdRed
         {
             InitializeComponent();
         }
-
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {

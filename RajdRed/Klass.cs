@@ -10,16 +10,19 @@ using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows;
 
-namespace RajdRed
+namespace rajdred
 {
     public class Klass : Grid
     {
         private TranslateTransform tt = new TranslateTransform();
         private MainWindow MainWindow;
         private Label header;
-        private Point m_start;
-        private Vector m_startOffset;
         private Canvas canvas;
+        private bool onField;
+
+        private Klass _shapeSelected = null;
+        private Point _posOfMouseOnHit;
+        private Point _posOfShapeOnHit;
 
         public Klass(MainWindow w, string name)
         {
@@ -28,6 +31,7 @@ namespace RajdRed
             MinHeight = 100;
             MainWindow = w;
             canvas = MainWindow.getCanvas();
+            onField = false;
 
             Grid grid = new Grid();
             grid.RenderTransform = tt;
@@ -40,16 +44,19 @@ namespace RajdRed
             grid.RowDefinitions[1].Height = new GridLength(40, GridUnitType.Star);
             grid.RowDefinitions[2].Height = new GridLength(40, GridUnitType.Star);
 
-            Border borderHeader = new Border() { 
-                CornerRadius=new CornerRadius(2,2,0,0), 
-                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c") 
+            Border borderHeader = new Border()
+            {
+                CornerRadius = new CornerRadius(2, 2, 0, 0),
+                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c")
             };
-            Border borderAttributes = new Border() {
-                Background = (Brush)new BrushConverter().ConvertFrom("#768ca5") 
+            Border borderAttributes = new Border()
+            {
+                Background = (Brush)new BrushConverter().ConvertFrom("#768ca5")
             };
-            Border borderMethods = new Border() { 
+            Border borderMethods = new Border()
+            {
                 CornerRadius = new CornerRadius(0, 0, 2, 2),
-                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c") 
+                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c")
             };
 
             //Label
@@ -57,12 +64,12 @@ namespace RajdRed
             header.FontWeight = FontWeights.Bold;
             header.HorizontalAlignment = HorizontalAlignment.Center;
             header.Content = name;
-            
+
             Grid grid_header = new Grid();
             grid_header.SetValue(Grid.RowProperty, 0);
             grid_header.Children.Add(borderHeader);
             grid_header.Children.Add(header);
-            grid.Children.Add(grid_header);            
+            grid.Children.Add(grid_header);
 
             Grid grid_attributes = new Grid();
             grid_attributes.SetValue(Grid.RowProperty, 1);
@@ -88,19 +95,33 @@ namespace RajdRed
 
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            m_start = e.GetPosition(canvas);
-            m_startOffset = new Vector(tt.X, tt.Y);
             CaptureMouse();
+
+            Point pt = e.GetPosition(canvas);
+
+            _shapeSelected = this;
+            canvas.Children.Remove(_shapeSelected);
+            canvas.Children.Add(_shapeSelected);
+            _posOfMouseOnHit = pt;
+            _posOfShapeOnHit.X = Canvas.GetLeft(_shapeSelected);
+            _posOfShapeOnHit.Y = Canvas.GetTop(_shapeSelected);
         }
 
-        private void Klass_MouseMove(object sender, MouseEventArgs e)
+        public void Klass_MouseMove(object sender, MouseEventArgs e)
         {
-            if (IsMouseCaptured)
+            if (IsMouseCaptured && _shapeSelected != null)
             {
-                Vector offset = Point.Subtract(e.GetPosition(canvas), m_start);
+                Point pt = e.GetPosition(canvas);
+                Canvas.SetLeft(_shapeSelected, (pt.X - _posOfMouseOnHit.X) + _posOfShapeOnHit.X);
+                Canvas.SetTop(_shapeSelected, (pt.Y - _posOfMouseOnHit.Y) + _posOfShapeOnHit.Y);
 
-                tt.X = m_startOffset.X + offset.X;
-                tt.Y = m_startOffset.Y + offset.Y;
+                Point posOnCanvas = pt - _posOfMouseOnHit + _posOfShapeOnHit;
+
+                if (onField && posOnCanvas.Y <= 72)
+                    Canvas.SetTop(_shapeSelected, 72.1);
+
+                if (posOnCanvas.X <= 0)
+                    Canvas.SetLeft(_shapeSelected, 0.1);
             }
         }
 
@@ -108,11 +129,18 @@ namespace RajdRed
         {
             ReleaseMouseCapture();
 
-            Point posOnCanvas = e.GetPosition(canvas);
-            posOnCanvas.Y = posOnCanvas.Y - m_startOffset.Y - 10;
+            if (_shapeSelected == null)
+                return;
 
-            if (posOnCanvas.Y < 0)
+            Point pt = e.GetPosition(canvas);
+            Point posOnCanvas = pt - _posOfMouseOnHit + _posOfShapeOnHit;
+
+            if (posOnCanvas.Y <= 72 && !onField)
                 MainWindow.DeleteKlass(this);
+
+            else onField = true;
+
+            _shapeSelected = null;
         }
     }
 }
