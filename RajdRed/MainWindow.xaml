@@ -1,18 +1,14 @@
-﻿<Window x:Class="RajdRed.MainWindow"
+﻿<Window x:Class="rajdred.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="720" Width="1024"
         MinHeight="720" MinWidth="1024">
-    <Grid Background="#EAEDF2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="72" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#3b444f">
+    <Canvas Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
+        <Grid Height="100" Background="#3b444f" Grid.Row="0"  Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25*" />
-                <RowDefinition Height="75*" />
+                <RowDefinition Height="22*" />
+                <RowDefinition Height="78*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Background="#222931">
                 <!-- Detta är ÖVRE delen av menyn -->
@@ -42,9 +38,7 @@
                 <Button Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">Add class</Button>
             </Grid>
         </Grid>
+        <!-- Detta är Canvasen där klasserna skall ligga -->
 
-        <Canvas Name="theCanvas" Grid.Row="1" Background="#EAEDF2">
-            <!-- Detta är Canvasen där klasserna skall ligga -->
-        </Canvas>
-    </Grid>
+    </Canvas>
 </Window>
