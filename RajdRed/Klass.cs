@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows;
 
-namespace rajdred
+namespace RajdRed
 {
     public class Klass : Grid
     {
