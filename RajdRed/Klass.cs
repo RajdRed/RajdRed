@@ -30,7 +30,7 @@ namespace RajdRed
         public Klass(MainWindow w, string name)
         {
             //Attribut
-            Width = 100;
+            MinWidth = 100;
             MinHeight = 100;
             _mainWindow = w;
             canvas = w.getCanvas();
