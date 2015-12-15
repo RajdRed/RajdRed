@@ -117,8 +117,8 @@ namespace rajdred
 
                 Point posOnCanvas = pt - _posOfMouseOnHit + _posOfShapeOnHit;
 
-                if (onField && posOnCanvas.Y <= 72)
-                    Canvas.SetTop(_shapeSelected, 72.1);
+                if (onField && posOnCanvas.Y <= 100)
+                    Canvas.SetTop(_shapeSelected, 100.1);
 
                 if (posOnCanvas.X <= 0)
                     Canvas.SetLeft(_shapeSelected, 0.1);
@@ -135,7 +135,7 @@ namespace rajdred
             Point pt = e.GetPosition(canvas);
             Point posOnCanvas = pt - _posOfMouseOnHit + _posOfShapeOnHit;
 
-            if (posOnCanvas.Y <= 72 && !onField)
+            if (posOnCanvas.Y <= 100 && !onField)
                 MainWindow.DeleteKlass(this);
 
             else onField = true;

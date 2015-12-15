@@ -5,10 +5,10 @@
         MinHeight="720" MinWidth="1024">
 
     <Canvas Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
-        <Grid Height="72" Background="#3b444f" Grid.Row="0"  Width="{Binding ActualWidth, ElementName=theCanvas}">
+        <Grid Height="100" Background="#3b444f" Grid.Row="0"  Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25*" />
-                <RowDefinition Height="75*" />
+                <RowDefinition Height="22*" />
+                <RowDefinition Height="78*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Background="#222931">
                 <!-- Detta är ÖVRE delen av menyn -->
