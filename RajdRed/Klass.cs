@@ -84,6 +84,22 @@ namespace RajdRed
 
             //Slutligen lägger till detta objektet till canvasen
             canvas.Children.Add(this);
+            
+           
+        }
+
+        private void createNod()
+        {
+            Point pt = new Point();
+            pt.X = Canvas.GetLeft(this);
+            pt.Y = Canvas.GetTop(this);
+            
+
+            
+
+            Nod n = new Nod(canvas, this);
+            Canvas.SetLeft(n, pt.X-15);
+            Canvas.SetTop(n, pt.Y);
         }
 
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
@@ -91,6 +107,7 @@ namespace RajdRed
             m_start = e.GetPosition(canvas);
             m_startOffset = new Vector(tt.X, tt.Y);
             CaptureMouse();
+            createNod();
         }
 
         private void Klass_MouseMove(object sender, MouseEventArgs e)
@@ -113,6 +130,8 @@ namespace RajdRed
 
             if (posOnCanvas.Y < 0)
                 MainWindow.DeleteKlass(this);
+
+            
         }
     }
 }
