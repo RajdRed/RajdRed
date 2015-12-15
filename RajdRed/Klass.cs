@@ -22,6 +22,7 @@ namespace RajdRed
         public TextBlock Methods = new TextBlock() { Background = Brushes.Transparent, Foreground = Brushes.White, Padding = new Thickness(5) };
         private Canvas canvas;
         private bool onField;
+        public List<string> Colors = new List<string>() { "#222931", "#323a45" };
 
         private Klass _shapeSelected = null;
         private Point _posOfMouseOnHit;
@@ -51,16 +52,16 @@ namespace RajdRed
             Border borderHeader = new Border()
             {
                 CornerRadius = new CornerRadius(2, 2, 0, 0),
-                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c")
+                Background = (Brush)new BrushConverter().ConvertFrom(Colors[0])
             };
             Border borderAttributes = new Border()
             {
-                Background = (Brush)new BrushConverter().ConvertFrom("#768ca5")
+                Background = (Brush)new BrushConverter().ConvertFrom(Colors[1])
             };
             Border borderMethods = new Border()
             {
                 CornerRadius = new CornerRadius(0, 0, 2, 2),
-                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c")
+                Background = (Brush)new BrushConverter().ConvertFrom(Colors[0])
             };
 
             //Label

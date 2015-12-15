@@ -29,6 +29,10 @@ namespace RajdRed
             Attributes.Text = _klass.Attributes.Text;
             Methods.Text = _klass.Methods.Text;
 
+            //Lägger till vald färg
+            ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
+            Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[1]);
+            Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
         }
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)

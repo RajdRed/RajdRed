@@ -23,6 +23,7 @@ namespace RajdRed
         public MainWindow()
         {
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -44,6 +45,35 @@ namespace RajdRed
         public Canvas getCanvas()
         {
             return theCanvas;
+        }
+
+        private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Ellipse_MaximizeWindow(object sender, MouseButtonEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+
+            else WindowState = WindowState.Maximized;
+        }
+
+        private void Ellipse_CloseWindow(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void WindowDragAndMove(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2 && WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+
+            else if (e.ClickCount == 2 && WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+
+            else DragMove();
         }
     }
 }
