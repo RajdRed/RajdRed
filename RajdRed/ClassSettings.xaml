@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="RajdRed.ClassSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="500" Width="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Background="White" Opacity="0.5"></StackPanel>
+        <Grid Background="White" Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="40*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Name="ClassName" Foreground="White" Content="Ny Klass*" Background="#404d5c" VerticalContentAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Name="Attributes" Background="#768ca5" Foreground="White"></ListBox>
+            <ListBox Grid.Row="2" Name="Methods" Background="#404d5c" Foreground="White"></ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

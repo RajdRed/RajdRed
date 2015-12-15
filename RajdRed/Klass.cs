@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows;
 
-namespace rajdred
+namespace RajdRed
 {
     public class Klass : Grid
     {
@@ -35,6 +35,7 @@ namespace rajdred
 
             Grid grid = new Grid();
             grid.RenderTransform = tt;
+
             for (int i = 0; i < 3; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -95,16 +96,24 @@ namespace rajdred
 
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            CaptureMouse();
+            if (e.ClickCount == 2)
+            {
+                ClassSettings cs = new ClassSettings(this);
+                canvas.Children.Add(cs);
+            }
+            else
+            {
+                CaptureMouse();
 
-            Point pt = e.GetPosition(canvas);
+                Point pt = e.GetPosition(canvas);
 
-            _shapeSelected = this;
-            canvas.Children.Remove(_shapeSelected);
-            canvas.Children.Add(_shapeSelected);
-            _posOfMouseOnHit = pt;
-            _posOfShapeOnHit.X = Canvas.GetLeft(_shapeSelected);
-            _posOfShapeOnHit.Y = Canvas.GetTop(_shapeSelected);
+                _shapeSelected = this;
+                canvas.Children.Remove(_shapeSelected);
+                canvas.Children.Add(_shapeSelected);
+                _posOfMouseOnHit = pt;
+                _posOfShapeOnHit.X = Canvas.GetLeft(_shapeSelected);
+                _posOfShapeOnHit.Y = Canvas.GetTop(_shapeSelected);
+            }
         }
 
         public void Klass_MouseMove(object sender, MouseEventArgs e)

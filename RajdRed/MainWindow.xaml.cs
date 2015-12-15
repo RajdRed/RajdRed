@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace rajdred
+namespace RajdRed
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
