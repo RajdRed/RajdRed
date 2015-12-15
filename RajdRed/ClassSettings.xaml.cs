@@ -25,6 +25,31 @@ namespace RajdRed
         {
             InitializeComponent();
             _klass = k;
+            ClassName.Text = _klass.ClassName.Content.ToString();
+            Attributes.Text = _klass.Attributes.Text;
+            Methods.Text = _klass.Methods.Text;
+
+        }
+
+        private void Btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Är du säker?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                _klass.Delete();
+                _klass.CloseSettings(this);
+            }
+        }
+
+        private void Btn_Abort_Click(object sender, RoutedEventArgs e)
+        {
+            _klass.CloseSettings(this);
+        }
+
+        private void Btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+            _klass.Save(this);
+            _klass.CloseSettings(this);
         }
     }
 }
