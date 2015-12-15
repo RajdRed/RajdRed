@@ -47,16 +47,16 @@ namespace RajdRed
             Border borderHeader = new Border()
             {
                 CornerRadius = new CornerRadius(2, 2, 0, 0),
-                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c")
+                Background = (Brush)new BrushConverter().ConvertFrom("#222931")
             };
             Border borderAttributes = new Border()
             {
-                Background = (Brush)new BrushConverter().ConvertFrom("#768ca5")
+                Background = (Brush)new BrushConverter().ConvertFrom("#323a45")
             };
             Border borderMethods = new Border()
             {
                 CornerRadius = new CornerRadius(0, 0, 2, 2),
-                Background = (Brush)new BrushConverter().ConvertFrom("#404d5c")
+                Background = (Brush)new BrushConverter().ConvertFrom("#222931")
             };
 
             //Label
