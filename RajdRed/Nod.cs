@@ -58,6 +58,7 @@ namespace RajdRed
 
             this.MouseLeftButtonDown += Nod_DoubleClick;
             this.MouseEnter += Nod_MouseEnter;
+            this.MouseLeave += Nod_MouseLeave;
             k.MouseMove += Klass_MouseMoving;
             k.MouseEnter += Klass_MouseEnter;
             k.MouseLeave += Klass_MouseLeave;
@@ -67,6 +68,8 @@ namespace RajdRed
             canvas.Children.Add(this);
             
         }
+
+        
 
         private void setPosition()
         {
@@ -92,13 +95,15 @@ namespace RajdRed
         private void createGeneralization()
         {
             Polygon triangle = new Polygon();
+            triangle.Height = 10;
+            triangle.Width = 10;
             triangle.Stroke = Brushes.Black;
             triangle.Fill = (Brush)new BrushConverter().ConvertFrom("#EAEDF2");
             triangle.StrokeThickness = 2;
 
-            Point p1 = new Point(9, 0);
-            Point p2 = new Point(18, 18);
-            Point p3 = new Point(0, 18);
+            Point p1 = new Point(5, 1);
+            Point p2 = new Point(9, 9);
+            Point p3 = new Point(1, 9);
             PointCollection pc = new PointCollection();
             pc.Add(p1);
             pc.Add(p2);
@@ -116,6 +121,8 @@ namespace RajdRed
         private void createAggregation(bool filled)
         {
             Polygon diamond = new Polygon();
+            diamond.Height = 10;
+            diamond.Width = 10;
             diamond.Stroke = Brushes.Black;
             if (filled)
             {
@@ -128,10 +135,10 @@ namespace RajdRed
            
             diamond.StrokeThickness = 2;
 
-            Point p1 = new Point(9, 0);
-            Point p2 = new Point(18, 9);
-            Point p3 = new Point(9, 18);
-            Point p4 = new Point(0, 9);
+            Point p1 = new Point(5, 1);
+            Point p2 = new Point(9, 5);
+            Point p3 = new Point(5, 9);
+            Point p4 = new Point(1, 5);
             PointCollection pc = new PointCollection();
             pc.Add(p1);
             pc.Add(p2);
@@ -203,14 +210,35 @@ namespace RajdRed
             if (!alwaysVisible)
             {
                 this.Visibility = Visibility.Visible;
-                
+                var el = this.Children.OfType<Ellipse>().FirstOrDefault();
+                el.Height = 15;
+                el.Width = 15;
+            }
+        }
+
+        private void Nod_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!alwaysVisible)
+            {
+                var el = this.Children.OfType<Ellipse>().FirstOrDefault();
+                el.Height = 10;
+                el.Width = 10;
+                TheEnclosingMethod();
             }
         }
 
         public async void TheEnclosingMethod()
         {
-            await Task.Delay(2000);
-            this.Visibility = Visibility.Hidden;
+            await Task.Delay(3000);
+            if (!(klass.IsMouseOver || this.IsMouseOver))
+            {
+                if (!alwaysVisible)
+                {
+                    this.Visibility = Visibility.Hidden;
+                }
+                
+            }
+            
         }
     }
 }
