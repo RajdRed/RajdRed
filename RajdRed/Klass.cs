@@ -105,8 +105,19 @@ namespace RajdRed
             {
                 ClassSettings cs = new ClassSettings(this);
                 Point posOnCanvas = e.GetPosition(canvas) - _posOfMouseOnHit + _posOfShapeOnHit;
-                Canvas.SetLeft(cs, (posOnCanvas.X+ActualWidth/2)-cs.Width/2);
-                Canvas.SetTop(cs, (posOnCanvas.Y+ActualHeight/2)-cs.Height/2);
+                double x = (posOnCanvas.X+ActualWidth/2)-cs.Width/2;
+                double y = (posOnCanvas.Y+ActualHeight/2)-cs.Height/2;
+
+                if (cs.Width + x > _mainWindow.ActualWidth)
+                    Canvas.SetLeft(cs, x - (x + cs.Width - _mainWindow.ActualWidth));
+                else
+                    Canvas.SetLeft(cs, x);
+
+                if (cs.Height + y > _mainWindow.ActualHeight)
+                    Canvas.SetTop(cs, y-(y+cs.Height - _mainWindow.ActualHeight));
+                else
+                    Canvas.SetTop(cs, y);
+
                 canvas.Children.Add(cs);
             }
             else
