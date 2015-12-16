@@ -104,9 +104,9 @@ namespace RajdRed
             if (e.ClickCount == 2)
             {
                 ClassSettings cs = new ClassSettings(this);
-                Point pt = new Point(Canvas.GetLeft(this), Canvas.GetTop(this));
-                Canvas.SetLeft(cs, pt.X-cs.Width/2+this.Width/2);
-                Canvas.SetTop(cs, pt.Y-cs.Height/2-this.Height/2);
+                Point posOnCanvas = e.GetPosition(canvas) - _posOfMouseOnHit + _posOfShapeOnHit;
+                Canvas.SetLeft(cs, (posOnCanvas.X+Width/2)-cs.Width/2);
+                Canvas.SetTop(cs, (posOnCanvas.Y+Height/2)-cs.Height/2);
                 canvas.Children.Add(cs);
             }
             else

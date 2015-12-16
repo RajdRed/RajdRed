@@ -74,21 +74,21 @@
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="29*"/>
         </Grid.ColumnDefinitions>
-        <Button Name="Btn_Save" Click="Btn_Save_Click" Content="" Foreground="#404d5c" Style="{DynamicResource SaveStyleButton}" FontSize="50" FontFamily="FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,23,38">
+        <Button Name="Btn_Save" Click="Btn_Save_Click" Content="" Foreground="#404d5c" Style="{DynamicResource SaveStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,23,38">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <TextBlock Text="{TemplateBinding Content}" />
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Name="Btn_Abort" Click="Btn_Abort_Click" Content="" Foreground="#404d5c" Style="{DynamicResource SaveStyleButton}" FontSize="50" FontFamily="FontAwesome" Grid.Column="3" Grid.Row="2" Margin="0,0,19,38">
+        <Button Name="Btn_Abort" Click="Btn_Abort_Click" Content="" Foreground="#404d5c" Style="{DynamicResource SaveStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="3" Grid.Row="2" Margin="0,0,19,38">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <TextBlock Text="{TemplateBinding Content}" />
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Name="Btn_Delete" Content="" Foreground="#404d5c" Click="Btn_Delete_Click" Style="{DynamicResource DeleteStyleButton}" FontSize="50" FontFamily="FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,29,4">
+        <Button Name="Btn_Delete" Content="" Foreground="#404d5c" Click="Btn_Delete_Click" Style="{DynamicResource DeleteStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,29,4">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <TextBlock Text="{TemplateBinding Content}" />
