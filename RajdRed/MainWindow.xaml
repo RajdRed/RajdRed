@@ -52,7 +52,19 @@
                 </Grid>
                 <Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="{StaticResource createClassImg}" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
                 </Button>
-            </Grid>
+				<Grid Name="SettingsMenuGrid" Grid.Column="2" HorizontalAlignment="Right">
+					<Grid.Style>
+						<Style TargetType="Grid">
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="#6B7584" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Grid.Style>
+					<Button PreviewMouseUp="Button_SettingsMenu_MouseUp" PreviewMouseDown="Button_SettingsMenu_MouseDown" Background="{StaticResource settingsMenuImg}" Width="78"></Button>
+				</Grid>
+			</Grid>
         </Grid>
     </Canvas>
 </Window>
