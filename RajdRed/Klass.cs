@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows;
 
-namespace rajdred
+namespace RajdRed
 {
     public class Klass : Grid
     {
@@ -97,24 +97,24 @@ namespace rajdred
 
         private void createNod()
         {
-            Point pt = new Point();
+            for (int i = 0; i < 6; ++i)
+            {
+                Nod n = new Nod(canvas, this, i);
+            }
+
+            /*Point pt = new Point();
             pt.X = Canvas.GetLeft(this);
             pt.Y = Canvas.GetTop(this);
             
-
-            
-
             Nod n = new Nod(canvas, this);
             Canvas.SetLeft(n, pt.X-15);
-            Canvas.SetTop(n, pt.Y);
+            Canvas.SetTop(n, pt.Y);*/
         }
 
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CaptureMouse();
-<<<<<<< HEAD
-            createNod();
-=======
+
 
             Point pt = e.GetPosition(canvas);
 
@@ -124,7 +124,7 @@ namespace rajdred
             _posOfMouseOnHit = pt;
             _posOfShapeOnHit.X = Canvas.GetLeft(_shapeSelected);
             _posOfShapeOnHit.Y = Canvas.GetTop(_shapeSelected);
->>>>>>> refs/remotes/origin/MouseFollow-Jocke
+
         }
 
         public void Klass_MouseMove(object sender, MouseEventArgs e)
@@ -150,21 +150,30 @@ namespace rajdred
             ReleaseMouseCapture();
 
             if (_shapeSelected == null)
+            {
                 return;
+            }
+               
 
             Point pt = e.GetPosition(canvas);
             Point posOnCanvas = pt - _posOfMouseOnHit + _posOfShapeOnHit;
 
             if (posOnCanvas.Y <= 100 && !onField)
+            {
                 MainWindow.DeleteKlass(this);
+            }
+            else
+            {
+                if (!onField)
+                {
+                    createNod();
+                }
+                onField = true;
+            }
 
-<<<<<<< HEAD
             
-=======
-            else onField = true;
-
             _shapeSelected = null;
->>>>>>> refs/remotes/origin/MouseFollow-Jocke
+
         }
     }
 }

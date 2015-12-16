@@ -16,42 +16,51 @@ namespace RajdRed
     {
         private Canvas canvas;
         private Klass klass;
-        ContextMenu menu = new ContextMenu();
+        private ContextMenu menu = new ContextMenu();
+        private bool alwaysVisible = false;
+        private int pos;
+        private Point[] posPoint = new Point[6] { new Point(-15, 20), new Point(-15, 70), 
+                                     new Point(40, -15), new Point(95, 20), 
+                                     new Point(95, 70), new Point(40, 95)};
 
-        public Nod(Canvas c, Klass k)
+        public Nod(Canvas c, Klass k, int p)
         {
             //Attribut
             Height = 20;
             Width = 20;
+            this.Visibility = Visibility.Hidden;
             canvas = c;
             klass = k;
+            pos = p;
 
-            createCircle();
-            
+            setPosition();
+            createAssociation();
             
             //Contextmeny
-            
-            
             MenuItem item1 = new MenuItem();
             MenuItem item2 = new MenuItem();
             MenuItem item3 = new MenuItem();
             MenuItem item4 = new MenuItem();
 
             item1.Header = "Association";
-            item1.Click += MenuCircle_Click;
+            item1.Click += MenuAssociation_Click;
             menu.Items.Add(item1);
             item2.Header = "Aggregat";
-            item2.Click += MenuDiamond_Click;
+            item2.Click += MenuAggregation_Click;
             menu.Items.Add(item2);
             item3.Header = "Komposition";
-            item3.Click += MenuFilledDiamond_Click;
+            item3.Click += MenuComposition_Click;
             menu.Items.Add(item3);
             item4.Header = "Generalisering";
-            item4.Click += MenuTriangle_Click;
+            item4.Click += MenuGeneralization_Click;
             menu.Items.Add(item4);
 
-            
-            this.MouseRightButtonDown += Nod_Click;
+
+            this.MouseLeftButtonDown += Nod_DoubleClick;
+            this.MouseEnter += Nod_MouseEnter;
+            k.MouseMove += Klass_MouseMoving;
+            k.MouseEnter += Klass_MouseEnter;
+            k.MouseLeave += Klass_MouseLeave;
             
 
 
@@ -59,17 +68,28 @@ namespace RajdRed
             
         }
 
-        private void createCircle()
+        private void setPosition()
+        {
+            Point pt = new Point();
+            pt.X = Canvas.GetLeft(klass);
+            pt.Y = Canvas.GetTop(klass);
+
+            Canvas.SetLeft(this, pt.X + posPoint[pos].X);
+            Canvas.SetTop(this, pt.Y + posPoint[pos].Y);
+        }
+
+        private void createAssociation()
         {
             Ellipse el = new Ellipse();
             el.Fill = Brushes.Black;
             el.Height = 10;
             el.Width = 10;
+            alwaysVisible = false;
             this.Children.Clear();
             this.Children.Add(el);
         }
 
-        private void createTriangle()
+        private void createGeneralization()
         {
             Polygon triangle = new Polygon();
             triangle.Stroke = Brushes.Black;
@@ -88,11 +108,12 @@ namespace RajdRed
             triangle.HorizontalAlignment = HorizontalAlignment.Center;
             triangle.VerticalAlignment = VerticalAlignment.Center;
 
+            alwaysVisible = true;
             this.Children.Clear();
             this.Children.Add(triangle);
         }
 
-        private void createDiamond(bool filled)
+        private void createAggregation(bool filled)
         {
             Polygon diamond = new Polygon();
             diamond.Stroke = Brushes.Black;
@@ -121,36 +142,75 @@ namespace RajdRed
             diamond.HorizontalAlignment = HorizontalAlignment.Center;
             diamond.VerticalAlignment = VerticalAlignment.Center;
 
+            alwaysVisible = true;
             this.Children.Clear();
             this.Children.Add(diamond);
         }
 
-        private void MenuCircle_Click(object sender, RoutedEventArgs e)
+        private void MenuAssociation_Click(object sender, RoutedEventArgs e)
         {
-            createCircle();
+            createAssociation();
         }
-        private void MenuTriangle_Click(object sender, RoutedEventArgs e)
+        private void MenuGeneralization_Click(object sender, RoutedEventArgs e)
         {
-            createTriangle();
+            createGeneralization();
         }
-        private void MenuDiamond_Click(object sender, RoutedEventArgs e)
+        private void MenuAggregation_Click(object sender, RoutedEventArgs e)
         {
-            createDiamond(false);
+            createAggregation(false);
         }
-        private void MenuFilledDiamond_Click(object sender, RoutedEventArgs e)
+        private void MenuComposition_Click(object sender, RoutedEventArgs e)
         {
-            createDiamond(true);
-        }
-
-        private void Nod_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            
+            createAggregation(true);
         }
 
-        private void Nod_Click(object sender, MouseButtonEventArgs e)
+
+        private void Nod_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            menu.IsOpen = true;
+            if (e.ClickCount == 2)
+            {
+                menu.IsOpen = true;
+            }
+
         }
 
+        private void Klass_MouseMoving(object sender, MouseEventArgs e)
+        {
+            Point pt = new Point();
+            pt.X = Canvas.GetLeft(klass);
+            pt.Y = Canvas.GetTop(klass);
+
+            Canvas.SetLeft(this, pt.X + posPoint[pos].X);
+            Canvas.SetTop(this, pt.Y + posPoint[pos].Y);
+        }
+
+        private void Klass_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Visibility = Visibility.Visible;
+        }
+
+        private void Klass_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!alwaysVisible)
+            {
+                TheEnclosingMethod();
+            }
+              
+        }
+
+        private void Nod_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!alwaysVisible)
+            {
+                this.Visibility = Visibility.Visible;
+                
+            }
+        }
+
+        public async void TheEnclosingMethod()
+        {
+            await Task.Delay(2000);
+            this.Visibility = Visibility.Hidden;
+        }
     }
 }
