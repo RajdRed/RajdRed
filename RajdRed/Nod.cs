@@ -12,28 +12,21 @@ using System.Windows;
 
 namespace RajdRed
 {
-    class Nod : Grid
+    public class Nod : Grid
     {
-        private Canvas canvas;
         private Klass klass;
         private ContextMenu menu = new ContextMenu();
         private bool alwaysVisible = false;
-        private int pos;
-        private Point[] posPoint = new Point[6] { new Point(-15, 20), new Point(-15, 70), 
-                                     new Point(40, -15), new Point(95, 20), 
-                                     new Point(95, 70), new Point(40, 95)};
 
-        public Nod(Canvas c, Klass k, int p)
+
+        public Nod(Klass k)
         {
             //Attribut
-            Height = 20;
-            Width = 20;
+            Height = 15;
+            Width = 15;
             this.Visibility = Visibility.Hidden;
-            canvas = c;
             klass = k;
-            pos = p;
 
-            setPosition();
             createAssociation();
             
             //Contextmeny
@@ -59,26 +52,9 @@ namespace RajdRed
             this.MouseLeftButtonDown += Nod_DoubleClick;
             this.MouseEnter += Nod_MouseEnter;
             this.MouseLeave += Nod_MouseLeave;
-            k.MouseMove += Klass_MouseMoving;
             k.MouseEnter += Klass_MouseEnter;
             k.MouseLeave += Klass_MouseLeave;
-            
-
-
-            canvas.Children.Add(this);
-            
-        }
-
-        
-
-        private void setPosition()
-        {
-            Point pt = new Point();
-            pt.X = Canvas.GetLeft(klass);
-            pt.Y = Canvas.GetTop(klass);
-
-            Canvas.SetLeft(this, pt.X + posPoint[pos].X);
-            Canvas.SetTop(this, pt.Y + posPoint[pos].Y);
+   
         }
 
         private void createAssociation()
@@ -179,16 +155,6 @@ namespace RajdRed
                 menu.IsOpen = true;
             }
 
-        }
-
-        private void Klass_MouseMoving(object sender, MouseEventArgs e)
-        {
-            Point pt = new Point();
-            pt.X = Canvas.GetLeft(klass);
-            pt.Y = Canvas.GetTop(klass);
-
-            Canvas.SetLeft(this, pt.X + posPoint[pos].X);
-            Canvas.SetTop(this, pt.Y + posPoint[pos].Y);
         }
 
         private void Klass_MouseEnter(object sender, MouseEventArgs e)
