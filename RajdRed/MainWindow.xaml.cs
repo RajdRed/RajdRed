@@ -18,8 +18,12 @@ namespace RajdRed
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window
     {
+		private ArchiveMenu archiveMenu = new ArchiveMenu();
+        private bool isArchiveMenuActive = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -75,5 +79,54 @@ namespace RajdRed
 
             else DragMove();
         }
+
+        private void Button_ArchiveMenu_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+			if (!isArchiveMenuActive) {
+				Canvas.SetLeft(archiveMenu, 0);
+				Canvas.SetTop(archiveMenu, 100);
+				theCanvas.Children.Add(archiveMenu);
+				isArchiveMenuActive = true;
+
+				var bc = new BrushConverter();
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+			}
+
+			else {
+				theCanvas.Children.Remove(archiveMenu);
+				isArchiveMenuActive = false;
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+        }
+
+		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (isArchiveMenuActive) {
+				theCanvas.Children.Remove(archiveMenu);
+				isArchiveMenuActive = false;
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+		}
+
+		private void theCanvas_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (isArchiveMenuActive) {
+				Point pt = e.GetPosition(theCanvas);
+
+				var bc = new BrushConverter();
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+			}
+		}
+
+		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
+		{
+			Point pt = e.GetPosition(theCanvas);
+
+			if (pt.X > 150 || pt.Y > 220) {
+				theCanvas.Children.Remove(archiveMenu);
+				isArchiveMenuActive = false;
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+		}
     }
 }
