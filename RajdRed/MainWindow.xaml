@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="720" Width="1024"
         Name="RajdRedMainWindow"
-        MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
+        MinHeight="720" MinWidth="1024" WindowStyle="None" WindowState="Maximized" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
     <Canvas Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
         <Grid Height="100" Background="#4f5b6d" Grid.Row="0"  Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>

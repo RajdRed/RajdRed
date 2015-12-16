@@ -21,10 +21,12 @@ namespace RajdRed
     public partial class ClassSettings : UserControl
     {
         private Klass _klass;
-        public ClassSettings(Klass k)
+        private Grid _backgroundGrid;
+        public ClassSettings(Klass k, Grid g)
         {
             InitializeComponent();
             _klass = k;
+            _backgroundGrid = g;
             ClassName.Text = _klass.ClassName.Content.ToString();
             Attributes.Text = _klass.Attributes.Text;
             Methods.Text = _klass.Methods.Text;
@@ -37,23 +39,23 @@ namespace RajdRed
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Är du säker?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Är du säker på att du vill ta bort \"" + ClassName.Text + "\"", "Konfirmera borttagning", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 _klass.Delete();
-                _klass.CloseSettings(this);
+                _klass.CloseSettings(this, _backgroundGrid);
             }
         }
 
         private void Btn_Abort_Click(object sender, RoutedEventArgs e)
         {
-            _klass.CloseSettings(this);
+            _klass.CloseSettings(this, _backgroundGrid);
         }
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
             _klass.Save(this);
-            _klass.CloseSettings(this);
+            _klass.CloseSettings(this, _backgroundGrid);
         }
     }
 }

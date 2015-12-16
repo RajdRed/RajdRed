@@ -103,21 +103,30 @@ namespace RajdRed
         {
             if (e.ClickCount == 2)
             {
-                ClassSettings cs = new ClassSettings(this);
+                Grid g = new Grid() { Width = canvas.ActualWidth, Height = canvas.ActualHeight, Background=Brushes.Black, Opacity=0.2 };
+                Canvas.SetLeft(g, 0);
+                Canvas.SetTop(g, 0);
+
+                ClassSettings cs = new ClassSettings(this, g);
                 Point posOnCanvas = e.GetPosition(canvas) - _posOfMouseOnHit + _posOfShapeOnHit;
                 double x = (posOnCanvas.X+ActualWidth/2)-cs.Width/2;
                 double y = (posOnCanvas.Y+ActualHeight/2)-cs.Height/2;
 
                 if (cs.Width + x > _mainWindow.ActualWidth)
                     Canvas.SetLeft(cs, x - (x + cs.Width - _mainWindow.ActualWidth));
+                else if (x < 0)
+                    Canvas.SetLeft(cs, x-x);
                 else
                     Canvas.SetLeft(cs, x);
 
                 if (cs.Height + y > _mainWindow.ActualHeight)
-                    Canvas.SetTop(cs, y-(y+cs.Height - _mainWindow.ActualHeight));
+                    Canvas.SetTop(cs, y - (y + cs.Height - _mainWindow.ActualHeight));
+                else if (y < 0)
+                    Canvas.SetTop(cs, y-y);
                 else
                     Canvas.SetTop(cs, y);
 
+                canvas.Children.Add(g);
                 canvas.Children.Add(cs);
             }
             else
@@ -176,9 +185,10 @@ namespace RajdRed
             _mainWindow.DeleteKlass(this);
         }
 
-        public void CloseSettings(ClassSettings cs)
+        public void CloseSettings(ClassSettings cs, Grid g)
         {
             canvas.Children.Remove(cs);
+            canvas.Children.Remove(g);
         }
 
         public void Save(ClassSettings cs)
