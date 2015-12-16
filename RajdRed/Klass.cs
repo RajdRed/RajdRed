@@ -28,6 +28,8 @@ namespace RajdRed
         private Point _posOfMouseOnHit;
         private Point _posOfShapeOnHit;
 
+        public List<Nod> Nodes = new List<Nod>();
+
         public Klass(MainWindow w, string name)
         {
             //Attribut
@@ -97,6 +99,25 @@ namespace RajdRed
 
             //Slutligen lägger till detta objektet till canvasen
             canvas.Children.Add(this);
+           
+        }
+
+        private void createNod()
+        {
+            for (int i = 0; i < 6; ++i)
+            {
+                Nod n = new Nod(this, i);
+                Nodes.Add(n);
+                canvas.Children.Add(n);
+            }
+
+            /*Point pt = new Point();
+            pt.X = Canvas.GetLeft(this);
+            pt.Y = Canvas.GetTop(this);
+            
+            Nod n = new Nod(canvas, this);
+            Canvas.SetLeft(n, pt.X-15);
+            Canvas.SetTop(n, pt.Y);*/
         }
 
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
@@ -132,7 +153,6 @@ namespace RajdRed
             else
             {
                 CaptureMouse();
-
                 Point pt = e.GetPosition(canvas);
 
                 _shapeSelected = this;
@@ -167,17 +187,29 @@ namespace RajdRed
             ReleaseMouseCapture();
 
             if (_shapeSelected == null)
+            {
                 return;
+            }
+               
 
             Point pt = e.GetPosition(canvas);
             Point posOnCanvas = pt - _posOfMouseOnHit + _posOfShapeOnHit;
 
             if (posOnCanvas.Y <= 100 && !onField)
+            {
                 Delete();
-
-            else onField = true;
-
+            }
+            else
+            {
+                if (!onField)
+                {
+                    createNod();
+                }
+                onField = true;
+            }
+            
             _shapeSelected = null;
+
         }
 
         public void Delete()

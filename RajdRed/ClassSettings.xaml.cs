@@ -27,6 +27,7 @@ namespace RajdRed
             InitializeComponent();
             _klass = k;
             _backgroundGrid = g;
+
             ClassName.Text = _klass.ClassName.Content.ToString();
             Attributes.Text = _klass.Attributes.Text;
             Methods.Text = _klass.Methods.Text;
@@ -35,6 +36,8 @@ namespace RajdRed
             ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
             Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[1]);
             Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
+
+            printNodes();
         }
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)
@@ -56,6 +59,16 @@ namespace RajdRed
         {
             _klass.Save(this);
             _klass.CloseSettings(this, _backgroundGrid);
+        }
+
+        private void printNodes()
+        {
+            foreach (Nod node in _klass.Nodes)
+            {
+                node.Width = 25;
+                node.Height = 25;
+
+            }
         }
     }
 }
