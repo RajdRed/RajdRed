@@ -63,7 +63,7 @@ namespace RajdRed
 
         private void printNodes()
         {
-            foreach (Nod node in _klass.Nodes)
+            foreach (Nod node in _klass.Noder)
             {
                 node.Width = 25;
                 node.Height = 25;

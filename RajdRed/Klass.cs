@@ -23,12 +23,15 @@ namespace RajdRed
         private Canvas canvas;
         private bool onField;
         public List<string> Colors = new List<string>() { "#222931", "#323a45" };
+        private Point[] posPoint = new Point[8] { new Point(20, 97.5), new Point(65, 97.5), 
+                                                  new Point(97.5, 65), new Point(97.5, 20), 
+                                                  new Point(20, -12.5), new Point(65, -12.5),
+                                                  new Point(-12.5, 20), new Point(-12.5, 65)};
 
         private Klass _shapeSelected = null;
         private Point _posOfMouseOnHit;
         private Point _posOfShapeOnHit;
-
-        public List<Nod> Nodes = new List<Nod>();
+        public List<Nod> Noder = new List<Nod>(); 
 
         public Klass(MainWindow w, string name)
         {
@@ -96,19 +99,60 @@ namespace RajdRed
             this.MouseDown += Klass_MouseDown;
             this.MouseMove += Klass_MouseMove;
             this.MouseUp += Klass_MouseUp;
+            this.SizeChanged += Klass_SizeChanged;
 
             //Slutligen lägger till detta objektet till canvasen
             canvas.Children.Add(this);
            
         }
 
+        void Klass_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double ah = this.ActualHeight;
+            double aw = this.ActualWidth;
+          
+            posPoint[0] = new Point((aw - (aw / 10 * 8)), ah - 2.5);
+            posPoint[1] = new Point((aw - (aw / 10 * 3.5)), ah - 2.5);
+            posPoint[2] = new Point((aw - 2.5), (ah - (ah / 10 * 3.5)));
+            posPoint[3] = new Point((aw - 2.5), (ah - (ah / 10 * 8)));
+            posPoint[4] = new Point((aw - (aw / 10 * 3.5)), -12.5);
+            posPoint[5] = new Point((aw - (aw / 10 * 8)), -12.5);
+            posPoint[6] = new Point(-12.5, (ah - (ah / 10 * 8)));
+            posPoint[7] = new Point(-12.5, (ah - (ah / 10 * 3.5)));
+            
+        }
+
         private void createNod()
         {
-            for (int i = 0; i < 6; ++i)
+            
+            for (int i = 0; i < 8; ++i)
             {
-                Nod n = new Nod(this, i);
-                Nodes.Add(n);
+                Nod n = new Nod(this);
+                Point pt = new Point();
+                pt.X = Canvas.GetLeft(this);
+                pt.Y = Canvas.GetTop(this);
+
+                Canvas.SetLeft(n, pt.X + posPoint[i].X);
+                Canvas.SetTop(n, pt.Y + posPoint[i].Y);
+                Noder.Add(n);
                 canvas.Children.Add(n);
+            }
+        }
+
+        private void changePosOfNod()
+        {
+            int i = 0;
+            foreach (Nod n in Noder)
+            {
+                canvas.Children.Remove(n);
+                canvas.Children.Add(n);
+                Point pt = new Point();
+                pt.X = Canvas.GetLeft(this);
+                pt.Y = Canvas.GetTop(this);
+
+                Canvas.SetLeft(n, pt.X + posPoint[i].X);
+                Canvas.SetTop(n, pt.Y + posPoint[i].Y);
+                i++;
             }
         }
 
@@ -171,6 +215,11 @@ namespace RajdRed
 
                 if (posOnCanvas.X <= 0)
                     Canvas.SetLeft(_shapeSelected, 0.1);
+                if (onField)
+                {
+                    changePosOfNod();
+                }
+                
             }
         }
 
