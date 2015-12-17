@@ -59,10 +59,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Klass.xaml.cs">
+      <DependentUpon>Klass.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
     <Page Include="ArchiveMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Klass.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -74,16 +81,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-
     <Compile Include="ClassSettings.xaml.cs">
       <DependentUpon>ClassSettings.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="ArchiveMenu.xaml.cs">
       <DependentUpon>ArchiveMenu.xaml</DependentUpon>
     </Compile>
-    
-    <Compile Include="Klass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

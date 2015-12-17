@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="RajdRed.Klass"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             MinHeight="105" MinWidth="105">
+    <Grid>
+        <Border Margin="5,5,5,5" CornerRadius="2,2,2,2" BorderBrush="Gray" BorderThickness="1">
+            <Grid Cursor="Hand" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0">
+                    <Grid>
+                        <Label Name="ClassName" Foreground="White" FontSize="10" HorizontalContentAlignment="Center" FontWeight="Bold" >Ny Klass *</Label>
+                    </Grid>
+                </Border>
+                <Grid Grid.Row="1">
+                    <TextBlock Name="Attributes" Background="#323a45"></TextBlock>
+                </Grid>
+                <Border Background="#222931" Grid.Row="2" CornerRadius="0,0,2,2">
+                    <Grid Grid.Row="2">
+                        <TextBlock Name="Methods" ></TextBlock>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
