@@ -40,6 +40,7 @@ namespace RajdRed
 
             Canvas.SetLeft(klass, pt.X - 50);
             Canvas.SetTop(klass, pt.Y - 10);
+
             klass.Klass_MouseDown(sender, e);
         }
 
