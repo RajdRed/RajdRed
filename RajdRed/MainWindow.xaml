@@ -24,12 +24,9 @@
                         <ColumnDefinition Width="22" />
                     </Grid.ColumnDefinitions>
                     <!-- Detta är menyknapparna -->
-                    <Ellipse Margin="5" Fill="#FDBD41" Grid.Column="0"></Ellipse>
-                    <Label MouseLeftButtonUp="Ellipse_MinimizeWindow" Margin="3.65, -3.3, 0, 0" FontSize="12" Grid.Column="0">-</Label>
-                    <Ellipse Margin="5" Fill="#34C749" Grid.Column="1"></Ellipse>
-                    <Label MouseLeftButtonUp="Ellipse_MaximizeWindow" Margin="2.65, 0, 0, 0" FontSize="10" Grid.Column="1">^</Label>
-                    <Ellipse Margin="5" Fill="#FC615D" Grid.Column="2"></Ellipse>
-                    <Label MouseLeftButtonUp="Ellipse_CloseWindow" Margin="3.6, 0.6, 0, 0" FontSize="8" Grid.Column="2">X</Label>
+                    <Ellipse MouseLeftButtonUp="Ellipse_MinimizeWindow" Margin="5" Fill="#FDBD41" Grid.Column="0"></Ellipse>
+                    <Ellipse  MouseLeftButtonUp="Ellipse_MaximizeWindow" Margin="5" Fill="#34C749" Grid.Column="1"></Ellipse>
+                    <Ellipse MouseLeftButtonUp="Ellipse_CloseWindow" Margin="5" Fill="#FC615D" Grid.Column="2"></Ellipse>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Background="Transparent">
