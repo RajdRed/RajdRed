@@ -93,7 +93,10 @@ namespace RajdRed
 				isArchiveMenuActive = true;
 
 				var bc = new BrushConverter();
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+				
+				if (!darkColorTheme)
+					ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+				else ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
 			}
 
 			else {
@@ -125,7 +128,10 @@ namespace RajdRed
 				Point pt = e.GetPosition(theCanvas);
 
 				var bc = new BrushConverter();
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+				
+				if (!darkColorTheme)
+					ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+				else ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
 			}
 
 			if (isSettingsMenuActive)
@@ -136,9 +142,7 @@ namespace RajdRed
 
 				if (!darkColorTheme)
 					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
-
-				else
-					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
+				else SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
 			}
 		}
 
@@ -200,6 +204,9 @@ namespace RajdRed
 				menuTopRight.Background = (Brush)bc.ConvertFrom("#151515");
 				menuTopLeft.Fill = (Brush)bc.ConvertFrom("#151515");
 				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
+				var uri = new Uri("pack://application:,,,/img/createClassBg-Dark.png");
+				var bitmap = new BitmapImage(uri);
+				addClassButton.Source = bitmap;
 			}
 
 			if (color == "light") {
@@ -208,6 +215,9 @@ namespace RajdRed
 				menuBot.Background = (Brush)bc.ConvertFrom("#4f5b6d");
 				menuTopRight.Background = (Brush)bc.ConvertFrom("#222931");
 				menuTopLeft.Fill = (Brush)bc.ConvertFrom("#222931");
+				var uri = new Uri("pack://application:,,,/img/createClassBg.png");
+				var bitmap = new BitmapImage(uri);
+				addClassButton.Source = bitmap;
 			}
 		}
     }

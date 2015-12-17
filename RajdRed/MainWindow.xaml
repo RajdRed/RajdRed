@@ -50,8 +50,9 @@
 					</Grid.Style>
                     <Button PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
                 </Grid>
-                <Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="{StaticResource createClassImg}" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
-                </Button>
+                <Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
+					<Image Name="addClassButton"  Source="img/createClassBg.png" />
+				</Button>
 				<Grid Name="SettingsMenuGrid" Grid.Column="2" HorizontalAlignment="Right">
 					<Grid.Style>
 						<Style TargetType="Grid">

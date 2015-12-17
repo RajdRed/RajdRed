@@ -125,15 +125,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="img\createClassBg-Dark.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="img\createClassBg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\archivemenubg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\settingsmenubg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
