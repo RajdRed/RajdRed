@@ -123,7 +123,7 @@
                             <RowDefinition Height="40*"/>
                             <RowDefinition Height="40*"/>
                         </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0" CaretBrush="White" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="Ny Klass*" Background="#404d5c"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="0" CaretBrush="White" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="Ny Klass*" Background="#404d5c"/>
                         <TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="1" BorderThickness="0" Name="Attributes" Background="#768ca5" Foreground="White"></TextBox>
                         <TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="2" BorderThickness="0" Name="Methods" Background="#404d5c" Foreground="White"></TextBox>
                     </Grid>
