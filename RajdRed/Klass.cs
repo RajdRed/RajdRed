@@ -110,14 +110,6 @@ namespace RajdRed
                 Nodes.Add(n);
                 canvas.Children.Add(n);
             }
-
-            /*Point pt = new Point();
-            pt.X = Canvas.GetLeft(this);
-            pt.Y = Canvas.GetTop(this);
-            
-            Nod n = new Nod(canvas, this);
-            Canvas.SetLeft(n, pt.X-15);
-            Canvas.SetTop(n, pt.Y);*/
         }
 
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
