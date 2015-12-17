@@ -6,6 +6,7 @@
         <ImageBrush x:Key="createClassImg" ImageSource="/img/createClassBg.png" />
         <ImageBrush x:Key="archiveMenuImg" ImageSource="/img/archivemenubg.png" />
 		<ImageBrush x:Key="settingsMenuImg" ImageSource="/img/settingsmenubg.png" />
+        <Style TargetType="{x:Type Label}"></Style>
 		<Style TargetType="{x:Type Button}" >
             <Setter Property="Template">
                 <Setter.Value>
