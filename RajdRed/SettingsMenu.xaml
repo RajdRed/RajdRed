@@ -17,8 +17,8 @@
 				<RowDefinition Height="30"></RowDefinition>
 			</Grid.RowDefinitions>
 
-			<Button Background="White" Grid.Row="0" FontSize="11" HorizontalContentAlignment="Left">
-				<TextBlock Text="New" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
+			<Button Click="darkModeButton_Click" Background="White" Grid.Row="0" FontSize="11" HorizontalContentAlignment="Left">
+				<TextBlock Name="txtBlockColor" Text="Dark Mode" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
 							<Style.Triggers>

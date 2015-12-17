@@ -24,5 +24,20 @@ namespace RajdRed
 		{
 			InitializeComponent();
 		}
+
+		private void darkModeButton_Click(object sender, RoutedEventArgs e)
+		{
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+
+			if (txtBlockColor.Text == "Dark Mode") {
+				mw.ChangeColorTheme("dark");
+				txtBlockColor.Text = "Light Mode";
+			}
+
+			else {
+				mw.ChangeColorTheme("light");
+				txtBlockColor.Text = "Dark Mode";
+			}
+		}
 	}
 }

@@ -25,6 +25,7 @@ namespace RajdRed
 		private SettingsMenu settingsMenu = new SettingsMenu();
         private bool isArchiveMenuActive = false;
 		private bool isSettingsMenuActive = false;
+		private bool darkColorTheme = false;
 
         public MainWindow()
         {
@@ -132,7 +133,12 @@ namespace RajdRed
 				Point pt = e.GetPosition(theCanvas);
 
 				var bc = new BrushConverter();
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+
+				if (!darkColorTheme)
+					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+
+				else
+					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
 			}
 		}
 
@@ -157,7 +163,10 @@ namespace RajdRed
 				isSettingsMenuActive = true;
 
 				var bc = new BrushConverter();
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+				if (!darkColorTheme)
+					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
+				else
+					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
 			}
 
 			else
@@ -177,6 +186,28 @@ namespace RajdRed
 				theCanvas.Children.Remove(settingsMenu);
 				isSettingsMenuActive = false;
 				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+		}
+
+		public void ChangeColorTheme(string color)
+		{
+			var bc = new BrushConverter();
+
+			if (color == "dark") {
+				this.darkColorTheme = true;
+				theCanvas.Background = (Brush)bc.ConvertFrom("#333");
+				menuBot.Background = (Brush)bc.ConvertFrom("#222");
+				menuTopRight.Background = (Brush)bc.ConvertFrom("#151515");
+				menuTopLeft.Fill = (Brush)bc.ConvertFrom("#151515");
+				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
+			}
+
+			if (color == "light") {
+				this.darkColorTheme = false;
+				theCanvas.Background = (Brush)bc.ConvertFrom("#EAEDF2");
+				menuBot.Background = (Brush)bc.ConvertFrom("#4f5b6d");
+				menuTopRight.Background = (Brush)bc.ConvertFrom("#222931");
+				menuTopLeft.Fill = (Brush)bc.ConvertFrom("#222931");
 			}
 		}
     }
