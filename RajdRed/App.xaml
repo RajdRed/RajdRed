@@ -4,7 +4,9 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ImageBrush x:Key="createClassImg" ImageSource="/img/createClassBg.png" />
-        <Style TargetType="{x:Type Button}">
+        <ImageBrush x:Key="archiveMenuImg" ImageSource="/img/archivemenubg.png" />
+		<ImageBrush x:Key="settingsMenuImg" ImageSource="/img/settingsmenubg.png" />
+		<Style TargetType="{x:Type Button}" >
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -15,10 +17,16 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Background" Value="{StaticResource createClassImg}"></Setter>
-                </Trigger>
-            </Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="true">
+					<Setter Property="Cursor" Value="Hand"></Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+        <Style TargetType="{x:Type Button}" x:Key="MenuButton" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="FontFamily" Value="./fonts/#FontAwesome"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="Foreground" Value="#EAEDF2"></Setter>
         </Style>
-    </Application.Resources>
+	</Application.Resources>
 </Application>
