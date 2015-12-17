@@ -63,12 +63,7 @@ namespace RajdRed
 
         private void printNodes()
         {
-            foreach (Nod node in _klass.Noder)
-            {
-                node.Width = 25;
-                node.Height = 25;
-
-            }
+            Ellipse el = new Ellipse() { Width = 15, Height = 15, Stroke=Brushes.Gray, StrokeThickness=1 };
         }
     }
 }
