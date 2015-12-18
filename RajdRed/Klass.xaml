@@ -7,7 +7,7 @@
              MinHeight="105" MinWidth="105">
     <Grid>
         <Border Margin="5,5,5,5" CornerRadius="2,2,2,2" BorderBrush="Gray" BorderThickness="1">
-            <Grid Cursor="Hand" Background="Transparent">
+            <Grid Cursor="SizeAll" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="40*"/>
