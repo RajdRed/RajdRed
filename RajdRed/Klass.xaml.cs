@@ -37,7 +37,7 @@ namespace RajdRed
             _mainWindow = w;
             _canvas = w.getCanvas();
 
-            MouseDown += Klass_MouseDown;
+            //MouseDown += Klass_MouseDown;
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
 
@@ -149,6 +149,21 @@ namespace RajdRed
             ClassName.Content = cs.ClassName.Text;
             Attributes.Text = cs.Attributes.Text;
             Methods.Text = cs.Methods.Text;
+        }
+
+        private void InnerGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            OuterBorder.Visibility = Visibility.Visible;
+        }
+
+        private void OuterGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            OuterBorder.Visibility = Visibility.Hidden;
+        }
+
+        private void OuterBorder_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Cross;
         }
     }
 }
