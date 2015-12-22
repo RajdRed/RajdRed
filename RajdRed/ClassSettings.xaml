@@ -10,8 +10,8 @@
             <BeginStoryboard>
                 <Storyboard>
                     <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)" From="0" To="1" Duration="0:0:5"/>
-                    <!--<DoubleAnimation Storyboard.TargetProperty="Width" From="0" To="580" Duration="0:0:0.2" />
-                    <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="500" Duration="0:0:0.2" />-->
+                    <DoubleAnimation Storyboard.TargetProperty="Width" From="0" To="580" Duration="0:0:0.2" />
+                    <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="500" Duration="0:0:0.2" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>

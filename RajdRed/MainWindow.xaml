@@ -5,7 +5,7 @@
         Name="RajdRedMainWindow"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
-	<Canvas MouseMove="theCanvas_MouseMove" MouseDown="theCanvas_MouseDown" MouseRightButtonDown="theCanvas_MouseRightButtonDown"  Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
+	<Canvas MouseMove="theCanvas_MouseMove" MouseDown="theCanvas_MouseDown" Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
         <Grid Height="100" Background="#4f5b6d" Grid.Row="0"  Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="22*" />
@@ -66,5 +66,10 @@
 				</Grid>
 			</Grid>
         </Grid>
+        <Canvas.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="NewLine" ></MenuItem>
+            </ContextMenu>
+        </Canvas.ContextMenu>
     </Canvas>
 </Window>

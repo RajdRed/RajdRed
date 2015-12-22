@@ -180,17 +180,6 @@ namespace RajdRed
 			}
 		}
 
-        private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Point pt = e.GetPosition(theCanvas);
-            RightClickMenu rClickMenu = new RightClickMenu(this);            
-
-            Canvas.SetLeft(rClickMenu, pt.X - 50);
-            Canvas.SetTop(rClickMenu, pt.Y - 10);
-
-            rClickMenu.RightClickMenu_MouseRightButtonDown(sender, e);
-               
-
-        }
+       
     }
 }
