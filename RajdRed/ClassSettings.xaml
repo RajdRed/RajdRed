@@ -111,7 +111,7 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
                 </Grid.RowDefinitions>
-                <Ellipse Grid.Column="0" Stroke="Gray" StrokeThickness="1" Fill="White" Opacity="0.5" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="5">
+                <Ellipse Grid.Column="0" Stroke="Gray" StrokeThickness="1" Fill="White" Opacity="0.5" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="5" Focusable="True">
                     <Ellipse.BitmapEffect>
                         <BlurBitmapEffect Radius="1" KernelType="Gaussian" />
                     </Ellipse.BitmapEffect>

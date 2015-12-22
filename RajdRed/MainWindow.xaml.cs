@@ -117,6 +117,14 @@ namespace RajdRed
 				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 		}
+        public void disableLineContextMenu()
+        {
+            drawLineContextMenu.IsEnabled = false;
+        }
+        public void enableLineContextMenu()
+        {
+            drawLineContextMenu.IsEnabled = true;
+        }
 
 		private void theCanvas_MouseMove(object sender, MouseEventArgs e)
 		{

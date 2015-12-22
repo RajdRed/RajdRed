@@ -37,7 +37,7 @@ namespace RajdRed
             _mainWindow = w;
             _canvas = w.getCanvas();
 
-            //MouseDown += Klass_MouseDown;
+            MouseDown += Klass_MouseDown;
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
 
@@ -49,8 +49,10 @@ namespace RajdRed
             Cursor = Cursors.SizeAll;
             if (e.ClickCount == 2)
             {
+                _mainWindow.disableLineContextMenu(); //så inte dubbla contxtmenyer skapas
                 if (_onField)
                 {
+                    
                     Grid g = new Grid() { Width = _canvas.ActualWidth, Height = _canvas.ActualHeight, Background = Brushes.Black, Opacity = 0.2 };
                     Canvas.SetLeft(g, 0);
                     Canvas.SetTop(g, 0);
@@ -77,6 +79,7 @@ namespace RajdRed
                     _canvas.Children.Add(g);
                     _canvas.Children.Add(cs);
                 }
+                
             }
             else
             {
@@ -164,6 +167,10 @@ namespace RajdRed
         private void OuterBorder_MouseEnter(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Cross;
+        }
+        public void enableDrawLine()
+        {
+            _mainWindow.enableLineContextMenu();
         }
     }
 }

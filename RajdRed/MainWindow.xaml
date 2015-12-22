@@ -67,8 +67,10 @@
 			</Grid>
         </Grid>
         <Canvas.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="NewLine" ></MenuItem>
+            <ContextMenu Name="lineContextMenu" IsEnabled="True">
+                <MenuItem Name="drawLineContextMenu" IsEnabled="True" Header="NewLine" />
+                <Separator />
+                <MenuItem Header="Reserv"/>
             </ContextMenu>
         </Canvas.ContextMenu>
     </Canvas>

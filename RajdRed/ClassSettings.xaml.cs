@@ -45,18 +45,23 @@ namespace RajdRed
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 _klass.Delete();
+                _klass.enableDrawLine(); //David
                 _klass.CloseSettings(this, _backgroundGrid);
             }
+            
         }
 
         private void Btn_Abort_Click(object sender, RoutedEventArgs e)
         {
+            _klass.enableDrawLine(); //David
             _klass.CloseSettings(this, _backgroundGrid);
+
         }
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
             _klass.Save(this);
+            _klass.enableDrawLine(); //David
             _klass.CloseSettings(this, _backgroundGrid);
         }
     }
