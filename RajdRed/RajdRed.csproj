@@ -62,6 +62,9 @@
     <Compile Include="Klass.xaml.cs">
       <DependentUpon>Klass.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RightClickMenu.xaml.cs">
+      <DependentUpon>RightClickMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RightClickMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
