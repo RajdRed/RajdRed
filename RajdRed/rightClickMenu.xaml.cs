@@ -33,9 +33,8 @@ namespace RajdRed
         }
         public void RightClickMenu_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            CaptureMouse();
-            Delete();
-            
+            //CaptureMouse();
+            //Delete();            
         }
         private void Delete()
         {
