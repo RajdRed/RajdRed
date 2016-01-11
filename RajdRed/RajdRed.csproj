@@ -63,6 +63,9 @@
       <DependentUpon>Klass.xaml</DependentUpon>
     </Compile>
     <Compile Include="Linje.cs" />
+    <Compile Include="Nod.xaml.cs">
+      <DependentUpon>Nod.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Nod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
