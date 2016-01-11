@@ -30,7 +30,7 @@ namespace RajdRed
     public partial class Nod : UserControl
     {
         private Klass _klass = null;
-        //private Linje _linje = null;
+        private Linje _linje = null;
         private Shape _shape = new Ellipse() { MinWidth=15, MinHeight=15, Stroke=Brushes.Black, StrokeThickness=1 };
         private int _countBindnings = 0;
         private Point _p;
@@ -59,9 +59,9 @@ namespace RajdRed
             return _klass;
         }
 
-        public void IsBindToLinje()
+        public bool IsBindToLinje()
         {
-
+            return (_linje != null ? true : false);
         }
 
         public void TurnEmpty()
