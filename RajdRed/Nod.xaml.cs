@@ -32,7 +32,7 @@ namespace RajdRed
         private Klass _klass = null;
         //private Linje _linje = null;
         private Shape _shape = new Ellipse() { MinWidth=15, MinHeight=15, Stroke=Brushes.Black, StrokeThickness=1 };
-        private int _countBindnings = 0;
+        private int _numberOfBonds = 0;
         private Point _p;
         private OnSide _onSide;
 
@@ -46,12 +46,12 @@ namespace RajdRed
         {
             InitializeComponent();
             _klass = k;
-            _countBindnings++;
+            _numberOfBonds++;
         }
 
-        public int CountBindnings()
+        public int NumberOfBonds()
         {
-            return _countBindnings;
+            return _numberOfBonds;
         }
 
         public Klass IsBindToKlass()
@@ -61,7 +61,7 @@ namespace RajdRed
 
         public void IsBindToLinje()
         {
-
+            //return (_linje != null ? true : false);
         }
 
         public void TurnEmpty()
