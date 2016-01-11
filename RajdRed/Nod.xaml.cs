@@ -129,5 +129,9 @@ namespace RajdRed
                     break;
             }
         }
+
+        public Point getPosition() {
+            return _p;
+        }
     }
 }
