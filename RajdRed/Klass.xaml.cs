@@ -37,7 +37,7 @@ namespace RajdRed
             _mainWindow = w;
             _canvas = w.getCanvas();
 
-            //MouseDown += Klass_MouseDown;
+            MouseDown += Klass_MouseDown;
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
 
