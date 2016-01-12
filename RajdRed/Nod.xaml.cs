@@ -42,6 +42,12 @@ namespace RajdRed
             OuterGrid.Children.Add(_shape);
         }
 
+        /*
+        public Nod(Linje l) {
+        
+        }
+         */
+
         public Nod(Klass k)
         {
             InitializeComponent();
@@ -54,14 +60,15 @@ namespace RajdRed
             return _numberOfBonds;
         }
 
-        public Klass IsBindToKlass()
+        public bool IsBindToKlass()
         {
-            return _klass;
+            return (_klass != null ? true : false);
         }
 
-        public void IsBindToLinje()
+        public bool IsBindToLinje()
         {
             //return (_linje != null ? true : false);
+            return false;
         }
 
         public void TurnEmpty()
@@ -80,54 +87,49 @@ namespace RajdRed
             };
         }
 
-        public void TurnUnit()
+        public void TurnUnit(bool filled)
         {
+            Polygon newpoly = new Polygon() { Stroke=Brushes.Black, StrokeThickness = 1 };
+            if (filled)
+                _shape.Fill = Brushes.Black;
+
             switch (_onSide)
             {
                 case OnSide.Left:
-                    _shape = new Polyline() { 
-                        Points = new PointCollection() { 
+                    newpoly.Points = new PointCollection() { 
                             _p, 
                             new Point(_p.X - 15, _p.Y), 
                             new Point(_p.X-7.5, _p.Y-7.5), 
                             new Point(_p.X-7.5, _p.Y+7.5) 
-                        } 
-                    };
+                        };
                     break;
                 case OnSide.Right:
-                    _shape = new Polyline()
-                    {
-                        Points = new PointCollection() { 
+                    newpoly.Points = new PointCollection() { 
                             _p, 
                             new Point(_p.X + 15, _p.Y), 
                             new Point(_p.X + 7.5, _p.Y - 7.5), 
                             new Point(_p.X + 7.5, _p.Y + 7.5) 
-                        }
-                    };
+                        };
                     break;
                 case OnSide.Top:
-                    _shape = new Polyline()
-                    {
-                        Points = new PointCollection() { 
+                    newpoly.Points = new PointCollection() { 
                             _p, 
                             new Point(_p.X, _p.Y - 15), 
                             new Point(_p.X - 7.5, _p.Y - 7.5), 
                             new Point(_p.X + 7.5, _p.Y - 7.5) 
-                        }
-                    };
+                        };
                     break;
                 case OnSide.Bottom:
-                    _shape = new Polyline()
-                    {
-                        Points = new PointCollection() { 
+                    newpoly.Points = new PointCollection() { 
                             _p, 
                             new Point(_p.X, _p.Y + 15), 
                             new Point(_p.X - 7.5, _p.Y + 7.5), 
                             new Point(_p.X + 7.5, _p.Y + 7.5) 
-                        }
-                    };
+                        };
                     break;
             }
+
+            _shape = newpoly;
         }
 
         public Point getPosition() {
