@@ -24,15 +24,15 @@ namespace RajdRed
         Left,
         Right,
         Top,
-        Bottom
+        Bottom,
+        Corner
     }
 
     public partial class Nod : UserControl
     {
         private Klass _klass = null;
         //private Linje _linje = null;
-        private Shape _shape = new Ellipse() { MinWidth=15, MinHeight=15, Stroke=Brushes.Black, StrokeThickness=1 };
-        private int _numberOfBonds = 0;
+        private Shape _shape;
         private Point _p;
         private OnSide _onSide;
 
@@ -48,16 +48,50 @@ namespace RajdRed
         }
          */
 
-        public Nod(Klass k)
+        public Nod(Klass k, OnSide os, Point p)
         {
             InitializeComponent();
+            _onSide = os;
             _klass = k;
-            _numberOfBonds++;
+
+            _shape = new Ellipse() { 
+                Width = 10, 
+                Height = 10, 
+                Stroke = Brushes.Black, 
+                StrokeThickness = 1
+            };
+
+            this.OuterGrid.Children.Add(_shape);
+
+            setMargin(p);
+
+            k.OuterGrid.Children.Add(this);
         }
 
-        public int NumberOfBonds()
+        private void setMargin(Point p)
         {
-            return _numberOfBonds;
+            switch (_onSide) {
+                case OnSide.Left:
+                    this.Margin = new Thickness(0, p.Y, 0, 0);
+                    this.HorizontalAlignment = HorizontalAlignment.Left;
+                    this.VerticalAlignment = VerticalAlignment.Top;
+                    break;
+                case OnSide.Right:
+                    this.Margin = new Thickness(0, p.Y, 0, 0);
+                    this.HorizontalAlignment = HorizontalAlignment.Right;
+                    this.VerticalAlignment = VerticalAlignment.Top;
+                    break;
+                case OnSide.Top:
+                    this.Margin = new Thickness(p.X, 0, 0, 0);
+                    this.HorizontalAlignment = HorizontalAlignment.Left;
+                    this.VerticalAlignment = VerticalAlignment.Top;
+                    break;
+                case OnSide.Bottom:
+                    this.Margin = new Thickness(p.X, 0, 0, 0);
+                    this.HorizontalAlignment = HorizontalAlignment.Left;
+                    this.VerticalAlignment = VerticalAlignment.Bottom;
+                    break;
+            }
         }
 
         public bool IsBindToKlass()
@@ -73,7 +107,7 @@ namespace RajdRed
 
         public void TurnEmpty()
         {
-            _shape = null;
+            _shape = new Ellipse() { MinWidth = 15, MinHeight = 15, Stroke = Brushes.Black, StrokeThickness = 1 };
         }
 
         public void TurnInheritance()
@@ -132,8 +166,9 @@ namespace RajdRed
             _shape = newpoly;
         }
 
-        public Point getPosition() {
-            return _p;
+        public OnSide GetOnSide()
+        {
+            return _onSide;
         }
     }
 }
