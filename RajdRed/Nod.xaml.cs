@@ -31,8 +31,7 @@ namespace RajdRed
     {
         private Klass _klass = null;
         //private Linje _linje = null;
-        private Shape _shape = new Ellipse() { MinWidth=15, MinHeight=15, Stroke=Brushes.Black, StrokeThickness=1 };
-        private int _numberOfBonds = 0;
+        private Shape _shape = new Ellipse() { MinWidth=10, MinHeight=10, Stroke=Brushes.Black, StrokeThickness=1 };
         private Point _p;
         private OnSide _onSide;
 
@@ -52,12 +51,7 @@ namespace RajdRed
         {
             InitializeComponent();
             _klass = k;
-            _numberOfBonds++;
-        }
-
-        public int NumberOfBonds()
-        {
-            return _numberOfBonds;
+            OuterGrid.Children.Add(_shape);
         }
 
         public bool IsBindToKlass()
@@ -73,18 +67,23 @@ namespace RajdRed
 
         public void TurnEmpty()
         {
-            _shape = null;
+            _shape = new Ellipse() { MinWidth = 10, MinHeight = 10, Stroke = Brushes.Black, StrokeThickness = 1 };
         }
 
         public void TurnInheritance()
         {
-            _shape = new Polygon() { 
-                Points = new PointCollection() { 
+            if (_onSide == OnSide.Bottom)
+            {
+                _shape = new Polygon()
+                {
+                    Points = new PointCollection() { 
                     _p, 
                     new Point(_p.X - 7.5, _p.Y + 15), 
                     new Point(_p.X + 7.5, _p.Y + 15) 
-                } 
-            };
+                }
+                };
+            }
+            
         }
 
         public void TurnUnit(bool filled)
