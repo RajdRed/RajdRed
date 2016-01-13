@@ -69,9 +69,7 @@ namespace RajdRed
 
             this.OuterGrid.Children.Add(_shape);
 
-            setPositionWithMargin(p);
-
-            k.OuterGrid.Children.Add(this);
+            setMargin(p);
         }
 
         /// <summary>
