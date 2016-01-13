@@ -63,10 +63,14 @@ namespace RajdRed
             TurnToGeneralization();
 
             this.OuterGrid.Children.Add(_shape);
+<<<<<<< HEAD
 
             setPositionWithMargin(p);
 
             k.OuterGrid.Children.Add(this);
+=======
+            setMargin(p);
+>>>>>>> refs/remotes/origin/MasterKlass
         }
 
         /// <summary>
