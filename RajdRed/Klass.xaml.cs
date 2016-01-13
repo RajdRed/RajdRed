@@ -171,6 +171,11 @@ namespace RajdRed
             return _noder;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OuterBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {   
             Point p = e.GetPosition(this);
