@@ -14,7 +14,6 @@ namespace RajdRed
 		public string TheCanvasBg = "";
 		public string MenuBotBg = "";
 		public string MenuButtonBg = "";
-		public string ClassSettingsButtons = "";
 
 		public RajdColors() {
  			
@@ -28,7 +27,6 @@ namespace RajdRed
 			TheCanvasBg = r.TheCanvasBg;
 			MenuBotBg = r.MenuBotBg;
 			MenuButtonBg = r.MenuButtonBg;
-			ClassSettingsButtons = r.ClassSettingsButtons;
 		}
 	}
 }

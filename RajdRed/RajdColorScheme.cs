@@ -15,7 +15,6 @@ namespace RajdRed
 			TheCanvasBg = "#333",
 			MenuBotBg = "#222",
 			MenuButtonBg = "#191919",
-			ClassSettingsButtons = "#EAEDF2"
 		};
 
 		public static RajdColors Light = new RajdColors()
@@ -26,7 +25,6 @@ namespace RajdRed
 			TheCanvasBg = "#EAEDF2",
 			MenuBotBg = "#4f5b6d",
 			MenuButtonBg = "#323a45",
-			ClassSettingsButtons = "#404d5c"
 		};
 	}
 }

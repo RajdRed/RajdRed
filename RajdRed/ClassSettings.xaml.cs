@@ -37,11 +37,7 @@ namespace RajdRed
             ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassNameBg);
             Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassAttributesBg);
 			Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassMethodsBg);
-
-			Btn_Save.Foreground = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.ClassSettingsButtons);
-			Btn_Abort.Foreground = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.ClassSettingsButtons);
-			Btn_Delete.Foreground = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.ClassSettingsButtons);
-
+			
             drawNodes();
         }
 
