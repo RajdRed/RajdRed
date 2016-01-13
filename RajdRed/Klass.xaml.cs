@@ -43,6 +43,7 @@ namespace RajdRed
 
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
+            SizeChanged += Klass_SizeChanged;
 
             _canvas.Children.Add(this);
         }
@@ -279,6 +280,14 @@ namespace RajdRed
             }
 
             return OnSide.Corner;
+        }
+
+        private void Klass_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            foreach (var nod in _noder)
+            {
+                nod.SetPositionWithMargin();
+            }
         }
 
 		public void setKlassColors()

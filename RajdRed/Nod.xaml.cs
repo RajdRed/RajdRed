@@ -33,13 +33,14 @@ namespace RajdRed
         private Klass _klass = null;
         //private Linje _linje = null;
         private Shape _shape;
-        private Point _p;
         private OnSide _onSide;
+        private Point _nodPos;
 
         public Nod() 
         {
             InitializeComponent();
             OuterGrid.Children.Add(_shape);
+            
         }
 
         /*
@@ -60,42 +61,44 @@ namespace RajdRed
             _onSide = os;
             _klass = k;
 
-            _shape = new Ellipse() { 
-                Width = 10, 
-                Height = 10, 
-                Stroke = Brushes.Black, 
-                StrokeThickness = 1
-            };
+            TurnToAssociation();
 
             this.OuterGrid.Children.Add(_shape);
+            PositionOfNod(p);
+            SetPositionWithMargin();
 
-            setPositionWithMargin(p);
+        }
+
+        public void PositionOfNod(Point p)
+        {
+            _nodPos.X = p.X / _klass.ActualWidth;
+            _nodPos.Y = p.Y / _klass.ActualHeight;
         }
 
         /// <summary>
         /// Sätter noden på rätt position runt en klass
         /// </summary>
         /// <param name="p"></param>
-        private void setPositionWithMargin(Point p)
+        public void SetPositionWithMargin()
         {
             switch (_onSide) {
                 case OnSide.Left:
-                    this.Margin = new Thickness(0, p.Y, 0, 0);
+                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Right:
-                    this.Margin = new Thickness(0, p.Y, 0, 0);
+                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Right;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Top:
-                    this.Margin = new Thickness(p.X, 0, 0, 0);
+                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Bottom:
-                    this.Margin = new Thickness(p.X, 0, 0, 0);
+                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Bottom;
                     break;
@@ -124,42 +127,56 @@ namespace RajdRed
         /// <summary>
         /// Ändrar noden till en association
         /// </summary>
-        public void TurnAssociation()
+        public void TurnToAssociation()
         {
-            _shape = new Ellipse() { MinWidth = 15, MinHeight = 15, Stroke = Brushes.Black, StrokeThickness = 1 };
+            _shape = new Ellipse() {Stroke = Brushes.Black, StrokeThickness = 1};
+
         }
 
         /// <summary>
         /// Ändrar noden till ett arv
         /// </summary>
-        public void TurnInheritance()
+        public void TurnToGeneralization()
         {
-            _shape = new Polygon() { 
-                Points = new PointCollection() { 
-                    _p, 
-                    new Point(_p.X - 7.5, _p.Y + 15), 
-                    new Point(_p.X + 7.5, _p.Y + 15) 
-                } 
-            };
+            if (_onSide == OnSide.Bottom)
+            {
+                _shape = new Polygon()
+                {
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
+                    Points = new PointCollection() { 
+                    new Point(this.Width/2, 0), 
+                    new Point(this.Width, this.Height), 
+                    new Point(0, this.Height) 
+                    }
+                };
+            }
+            
         }
 
         /// <summary>
         /// Ändrar noden till ett aggregat eller komposition (om fylld)
         /// </summary>
         /// <param name="filled"></param>
-        public void TurnAggregation(bool filled)
+        public void TurnToAggregation(bool filled)
         {
-            Polygon newpoly = new Polygon() { Stroke=Brushes.Black, StrokeThickness = 1 };
-            if (filled)
-                _shape.Fill = Brushes.Black;
-            newpoly.Points = new PointCollection() { 
-                            _p, 
-                            new Point(_p.X - 15, _p.Y), 
-                            new Point(_p.X-7.5, _p.Y-7.5), 
-                            new Point(_p.X-7.5, _p.Y+7.5)
+            _shape = new Polygon() { 
+                Stroke=Brushes.Black, 
+                StrokeThickness = 1,
+                Points = new PointCollection()
+                {
+                    new Point(this.Width/2, 0),
+                    new Point(this.Width, this.Height/2),
+                    new Point(this.Width/2, this.Height),
+                    new Point(0, this.Height/2)
+                }
             };
 
-            _shape = newpoly;
+            if (filled)
+            {
+                _shape.Fill = Brushes.Black;
+            }
+
         }
 
         /// <summary>
