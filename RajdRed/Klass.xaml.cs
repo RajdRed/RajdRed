@@ -29,18 +29,17 @@ namespace RajdRed
 
         public List<Nod> _noder = new List<Nod>(); 
 
-
-        /// <summary>
-        /// Placerar Klass på Canvas
-        /// </summary>
-        /// <param name="w"></param>
-        /// <param name="name"></param>
-        public Klass(MainWindow w, string name)
+        public Klass(MainWindow w, Point pt)
         {
             InitializeComponent();
 
             _mainWindow = w;
             _canvas = w.getCanvas();
+
+			setKlassColors();
+
+			Canvas.SetLeft(this, pt.X - 50);
+			Canvas.SetTop(this, pt.Y - 10);
 
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
@@ -48,6 +47,10 @@ namespace RajdRed
 
             _canvas.Children.Add(this);
         }
+		public MainWindow MainWindow()
+		{
+			return _mainWindow;
+		}
 
         /// <summary>
         /// Händer när användaren klickar ned på Klassen
@@ -279,14 +282,6 @@ namespace RajdRed
             return OnSide.Corner;
         }
 
-        /// <summary>
-        /// Hämtar MainWindow
-        /// </summary>
-        /// <returns></returns>
-        public MainWindow MainWindow() {
-            return _mainWindow;
-        }
-
         private void Klass_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             foreach (var nod in _noder)
@@ -294,5 +289,12 @@ namespace RajdRed
                 nod.SetPositionWithMargin();
             }
         }
+
+		public void setKlassColors()
+		{
+			bgTopRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassNameBg);
+			bgMidRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassAttributesBg);
+			bgBotRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassMethodsBg);
+		}
     }
 }

@@ -16,22 +16,19 @@ using System.Windows.Shapes;
 namespace RajdRed
 {
     /// <summary>
-    /// Interaction logic for ArchiveMenu.xaml
+    /// Interaction logic for NodSettings.xaml
     /// </summary>
-    public partial class ArchiveMenu : UserControl
+
+    public partial class NodSettings : UserControl
     {
-        public ArchiveMenu()
+        private Klass _klass;
+
+        public NodSettings(Klass k)
         {
             InitializeComponent();
+            _klass = k;
+
+            PolygonAggregate.Fill = k.MainWindow().Colors.KlassAttributesBg;
         }
-
-		private void exitButton_click(object sender, RoutedEventArgs e)
-		{
-			Application.Current.Shutdown();
-		}
-
-		private void newButton_click(object sender, RoutedEventArgs e)
-		{
-		}
     }
 }

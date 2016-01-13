@@ -65,6 +65,11 @@
     <Compile Include="Nod.xaml.cs">
       <DependentUpon>Nod.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NodSettings.xaml.cs">
+      <DependentUpon>NodSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RajdColors.cs" />
+    <Compile Include="RajdColorScheme.cs" />
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
@@ -98,13 +103,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="NodSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Nod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,15 +140,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="img\createClassBg-Dark.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="img\createClassBg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\archivemenubg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\settingsmenubg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
