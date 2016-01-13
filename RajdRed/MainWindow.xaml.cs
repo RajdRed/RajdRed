@@ -25,6 +25,7 @@ namespace RajdRed
 		private SettingsMenu settingsMenu = new SettingsMenu();
         private bool isArchiveMenuActive = false;
 		private bool isSettingsMenuActive = false;
+        public string[] Colors = new string[2] {"#222931", "#323A45"};
 
         public MainWindow()
         {

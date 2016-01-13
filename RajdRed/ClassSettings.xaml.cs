@@ -33,15 +33,19 @@ namespace RajdRed
             Methods.Text = _klass.Methods.Text;
 
             //Lägger till vald färg
-            ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
-            Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[1]);
-            Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
+            ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors[0]);
+            Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors[1]);
+            Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors[0]);
 
             drawNodes();
         }
 
         private void drawNodes()
         {
+            foreach (Nod node in _klass.GetNods())
+            {
+
+            }
         }
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)
