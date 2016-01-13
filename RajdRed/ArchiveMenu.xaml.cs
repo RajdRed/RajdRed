@@ -29,5 +29,9 @@ namespace RajdRed
 		{
 			Application.Current.Shutdown();
 		}
+
+		private void newButton_click(object sender, RoutedEventArgs e)
+		{
+		}
     }
 }

@@ -6,18 +6,18 @@
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
 	<Canvas MouseMove="theCanvas_MouseMove" MouseDown="theCanvas_MouseDown" Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
-        <Grid Height="100" Background="#4f5b6d" Grid.Row="0"  Width="{Binding ActualWidth, ElementName=theCanvas}">
+        <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="22*" />
                 <RowDefinition Height="78*" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Background="#222931">
+            <Grid Name="menuTopRight" Grid.Row="0" Background="#222931">
                 <!-- Detta är ÖVRE delen av menyn -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="956*" />
                     <ColumnDefinition Width="68*" />
                 </Grid.ColumnDefinitions>
-                <Rectangle Fill="#222931" MouseDown="WindowDragAndMove" Grid.Column="0"></Rectangle>
+                <Rectangle Name="menuTopLeft" Fill="#222931" MouseDown="WindowDragAndMove" Grid.Column="0"></Rectangle>
                 <Grid Grid.Column="1" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="22" />
@@ -48,11 +48,12 @@
 							</Style.Triggers>
 						</Style>
 					</Grid.Style>
-                    <Button PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
-                </Grid>
-                <Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="{StaticResource createClassImg}" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
-                </Button>
-				<Grid Name="SettingsMenuGrid" Grid.Column="2" HorizontalAlignment="Right">
+					<Button PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
+				</Grid>
+				<Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
+					<Image Name="addClassButton"  Source="img/createClassBg.png" />
+					</Button>
+					<Grid Name="SettingsMenuGrid" Grid.Column="2" HorizontalAlignment="Right">
 					<Grid.Style>
 						<Style TargetType="Grid">
 							<Style.Triggers>

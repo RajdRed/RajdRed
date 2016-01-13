@@ -25,20 +25,41 @@
                 <EventTrigger RoutedEvent="UIElement.MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="CornflowerBlue" />
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="Green" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#404d5c" />
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#34C749" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
             </Style.Triggers>
         </Style>
-        <Style TargetType="Button" x:Key="DeleteStyleButton">
+		<Style TargetType="Button" x:Key="AbortStyleButton">
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Cursor" Value="Hand" />
+				</Trigger>
+				<EventTrigger RoutedEvent="UIElement.MouseEnter">
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#DDD" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+				<EventTrigger RoutedEvent="UIElement.MouseLeave">
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#EAEDF2" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="Button" x:Key="DeleteStyleButton">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand" />
@@ -46,14 +67,14 @@
                 <EventTrigger RoutedEvent="UIElement.MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="IndianRed" />
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="DarkRed" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="UIElement.MouseLeave">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#404d5c" />
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#FC615D" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -75,21 +96,21 @@
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="29*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="Btn_Save" Click="Btn_Save_Click" Content="" Foreground="#404d5c" Style="{DynamicResource SaveStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,23,38">
+			<Button Name="Btn_Save" Click="Btn_Save_Click" Content="" Foreground="#34C749" Style="{DynamicResource SaveStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,23,38">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <TextBlock Text="{TemplateBinding Content}" />
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Name="Btn_Abort" Click="Btn_Abort_Click" Content="" Foreground="#404d5c" Style="{DynamicResource SaveStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="3" Grid.Row="2" Margin="0,0,19,38">
+			<Button Name="Btn_Abort" Click="Btn_Abort_Click" Content="" Foreground="#EAEDF2" Style="{DynamicResource AbortStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="3" Grid.Row="2" Margin="0,0,19,38">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <TextBlock Text="{TemplateBinding Content}" />
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Name="Btn_Delete" Content="" Foreground="#404d5c" Click="Btn_Delete_Click" Style="{DynamicResource DeleteStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,29,4">
+			<Button Name="Btn_Delete" Content="" Foreground="#FC615D" Click="Btn_Delete_Click" Style="{DynamicResource DeleteStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,29,4">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <TextBlock Text="{TemplateBinding Content}" />
@@ -123,7 +144,7 @@
                             <RowDefinition Height="40*"/>
                             <RowDefinition Height="40*"/>
                         </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0" CaretBrush="White" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="Ny Klass*" Background="#404d5c"/>
+                        <TextBox TextWrapping="Wrap" Grid.Row="0" CaretBrush="White" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="Ny Klass*" Background="#404d5c"/>
                         <TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="1" BorderThickness="0" Name="Attributes" Background="#768ca5" Foreground="White"></TextBox>
                         <TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="2" BorderThickness="0" Name="Methods" Background="#404d5c" Foreground="White"></TextBox>
                     </Grid>
