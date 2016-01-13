@@ -76,7 +76,7 @@ namespace RajdRed
         /// Sätter noden på rätt position runt en klass
         /// </summary>
         /// <param name="p"></param>
-        private void setPositionWithMargin(Point p)
+        private void setMargin(Point p)
         {
             switch (_onSide) {
                 case OnSide.Left:
