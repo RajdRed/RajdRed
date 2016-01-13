@@ -30,12 +30,15 @@ namespace RajdRed
 
         public List<Nod> Noder = new List<Nod>(); 
 
-        public Klass(MainWindow w, string name)
+        public Klass(MainWindow w, Point pt, bool dark)
         {
             InitializeComponent();
 
             _mainWindow = w;
             canvas = w.getCanvas();
+
+			Canvas.SetLeft(this, pt.X - 50);
+			Canvas.SetTop(this, pt.Y - 10);
 
             MouseDown += Klass_MouseDown;
             MouseMove += Klass_MouseMove;

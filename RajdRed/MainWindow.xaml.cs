@@ -26,6 +26,7 @@ namespace RajdRed
         private bool isArchiveMenuActive = false;
 		private bool isSettingsMenuActive = false;
 		private bool darkColorTheme = false;
+		private List<Klass> klassList = new List<Klass>(); 
 
         public MainWindow()
         {
@@ -37,17 +38,16 @@ namespace RajdRed
         {
             Point pt = e.GetPosition(theCanvas);
 
-            Klass klass = new Klass(this, "Ny klass*");
-
-            Canvas.SetLeft(klass, pt.X - 50);
-            Canvas.SetTop(klass, pt.Y - 10);
+            Klass klass = new Klass(this, pt, darkColorTheme);
+			klassList.Add(klass);
 
             klass.Klass_MouseDown(sender, e);
         }
 
-        public void DeleteKlass(UIElement ui)
+        public void DeleteKlass(Klass klass)
         {
-            theCanvas.Children.Remove(ui);
+            theCanvas.Children.Remove(klass);
+			klassList.Remove(klass);
         }
 
         public Canvas getCanvas()
