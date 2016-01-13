@@ -166,18 +166,6 @@ namespace RajdRed
             Cursor = Cursors.Cross;
         }
 
-<<<<<<< HEAD
-        private void OuterBorder_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Point CanvasPt = e.GetPosition(_canvas);
-            Point BorderPt = e.GetPosition(OuterBorder);
-
-            Nod n = new Nod(this);
-            Canvas.SetLeft(n, CanvasPt.X - BorderPt.X);
-            Canvas.SetTop(n, BorderPt.Y);
-            _canvas.Children.Add(n);
-
-=======
         public List<Nod> GetNods()
         {
             return _noder;
@@ -215,7 +203,6 @@ namespace RajdRed
             }
 
             return OnSide.Corner;
->>>>>>> refs/remotes/origin/MasterNod
         }
     }
 }

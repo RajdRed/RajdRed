@@ -6,16 +6,9 @@
              mc:Ignorable="d" 
              MinHeight="110" MinWidth="110">
     <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave">
-<<<<<<< HEAD
-        <Border Visibility="Visible" MouseEnter="OuterBorder_MouseEnter" MouseDown="OuterBorder_MouseDown" Background="Silver" 
-                Opacity="0.6" CornerRadius="2,2,2,2" Name="OuterBorder"></Border>
-        <Grid>
-            <Border Margin="10" CornerRadius="2,2,2,2" BorderBrush="Gray" MouseDown="Klass_MouseDown" BorderThickness="1">
-=======
         <Border Visibility="Visible" MouseEnter="OuterBorder_MouseEnter" MouseDown="OuterBorder_MouseDown" Background="Silver" Opacity="0.6" CornerRadius="2,2,2,2" Name="OuterBorder"></Border>
         <Grid>
             <Border Name="InnerBorder" Margin="10" CornerRadius="2,2,2,2" BorderBrush="Black" MouseDown="Klass_MouseDown" BorderThickness="1">
->>>>>>> refs/remotes/origin/MasterNod
                 <Grid Name="InnerGrid" Cursor="SizeAll" Background="Transparent" MouseEnter="InnerGrid_MouseEnter">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>

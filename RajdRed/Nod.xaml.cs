@@ -32,11 +32,7 @@ namespace RajdRed
     {
         private Klass _klass = null;
         //private Linje _linje = null;
-<<<<<<< HEAD
-        private Shape _shape = new Ellipse() { MinWidth=10, MinHeight=10, Stroke=Brushes.Black, StrokeThickness=1 };
-=======
         private Shape _shape;
->>>>>>> refs/remotes/origin/MasterNod
         private Point _p;
         private OnSide _onSide;
 
@@ -63,16 +59,8 @@ namespace RajdRed
             InitializeComponent();
             _onSide = os;
             _klass = k;
-<<<<<<< HEAD
-            OuterGrid.Children.Add(_shape);
-=======
 
-            _shape = new Ellipse() { 
-                Width = 10, 
-                Height = 10, 
-                Stroke = Brushes.Black, 
-                StrokeThickness = 1
-            };
+            TurnToGeneralization();
 
             this.OuterGrid.Children.Add(_shape);
 
@@ -109,7 +97,6 @@ namespace RajdRed
                     this.VerticalAlignment = VerticalAlignment.Bottom;
                     break;
             }
->>>>>>> refs/remotes/origin/MasterNod
         }
 
         /// <summary>
@@ -134,29 +121,28 @@ namespace RajdRed
         /// <summary>
         /// Ändrar noden till en association
         /// </summary>
-        public void TurnAssociation()
+        public void TurnToAssociation()
         {
-<<<<<<< HEAD
-            _shape = new Ellipse() { MinWidth = 10, MinHeight = 10, Stroke = Brushes.Black, StrokeThickness = 1 };
-=======
-            _shape = new Ellipse() { MinWidth = 15, MinHeight = 15, Stroke = Brushes.Black, StrokeThickness = 1 };
->>>>>>> refs/remotes/origin/MasterNod
+            _shape = new Ellipse() {Stroke = Brushes.Black, StrokeThickness = 1};
+
         }
 
         /// <summary>
         /// Ändrar noden till ett arv
         /// </summary>
-        public void TurnInheritance()
+        public void TurnToGeneralization()
         {
             if (_onSide == OnSide.Bottom)
             {
                 _shape = new Polygon()
                 {
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
                     Points = new PointCollection() { 
-                    _p, 
-                    new Point(_p.X - 7.5, _p.Y + 15), 
-                    new Point(_p.X + 7.5, _p.Y + 15) 
-                }
+                    new Point(this.Width/2, 0), 
+                    new Point(this.Width, this.Height), 
+                    new Point(0, this.Height) 
+                    }
                 };
             }
             
@@ -166,7 +152,7 @@ namespace RajdRed
         /// Ändrar noden till ett aggregat eller komposition (om fylld)
         /// </summary>
         /// <param name="filled"></param>
-        public void TurnAggregation(bool filled)
+        public void TurnToAggregation(bool filled)
         {
             Polygon newpoly = new Polygon() { Stroke=Brushes.Black, StrokeThickness = 1 };
             if (filled)
@@ -179,6 +165,7 @@ namespace RajdRed
             };
 
             _shape = newpoly;
+            
         }
 
         /// <summary>
