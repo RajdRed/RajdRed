@@ -48,6 +48,12 @@ namespace RajdRed
         }
          */
 
+        /// <summary>
+        /// Nodens konstruktor om den skapas bunden till en klass
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="os"></param>
+        /// <param name="p"></param>
         public Nod(Klass k, OnSide os, Point p)
         {
             InitializeComponent();
@@ -63,12 +69,16 @@ namespace RajdRed
 
             this.OuterGrid.Children.Add(_shape);
 
-            setMargin(p);
+            setPositionWithMargin(p);
 
             k.OuterGrid.Children.Add(this);
         }
 
-        private void setMargin(Point p)
+        /// <summary>
+        /// Sätter noden på rätt position runt en klass
+        /// </summary>
+        /// <param name="p"></param>
+        private void setPositionWithMargin(Point p)
         {
             switch (_onSide) {
                 case OnSide.Left:
@@ -94,22 +104,36 @@ namespace RajdRed
             }
         }
 
+        /// <summary>
+        /// Returnerar om noden är bunden till en klass
+        /// </summary>
+        /// <returns></returns>
         public bool IsBindToKlass()
         {
             return (_klass != null ? true : false);
         }
 
+        /// <summary>
+        /// Returnerar om noden är bunden till en extern linje
+        /// </summary>
+        /// <returns></returns>
         public bool IsBindToLinje()
         {
             //return (_linje != null ? true : false);
             return false;
         }
 
-        public void TurnEmpty()
+        /// <summary>
+        /// Ändrar noden till en association
+        /// </summary>
+        public void TurnAssociation()
         {
             _shape = new Ellipse() { MinWidth = 15, MinHeight = 15, Stroke = Brushes.Black, StrokeThickness = 1 };
         }
 
+        /// <summary>
+        /// Ändrar noden till ett arv
+        /// </summary>
         public void TurnInheritance()
         {
             _shape = new Polygon() { 
@@ -121,51 +145,29 @@ namespace RajdRed
             };
         }
 
-        public void TurnUnit(bool filled)
+        /// <summary>
+        /// Ändrar noden till ett aggregat eller komposition (om fylld)
+        /// </summary>
+        /// <param name="filled"></param>
+        public void TurnAggregation(bool filled)
         {
             Polygon newpoly = new Polygon() { Stroke=Brushes.Black, StrokeThickness = 1 };
             if (filled)
                 _shape.Fill = Brushes.Black;
-
-            switch (_onSide)
-            {
-                case OnSide.Left:
-                    newpoly.Points = new PointCollection() { 
+            newpoly.Points = new PointCollection() { 
                             _p, 
                             new Point(_p.X - 15, _p.Y), 
                             new Point(_p.X-7.5, _p.Y-7.5), 
-                            new Point(_p.X-7.5, _p.Y+7.5) 
-                        };
-                    break;
-                case OnSide.Right:
-                    newpoly.Points = new PointCollection() { 
-                            _p, 
-                            new Point(_p.X + 15, _p.Y), 
-                            new Point(_p.X + 7.5, _p.Y - 7.5), 
-                            new Point(_p.X + 7.5, _p.Y + 7.5) 
-                        };
-                    break;
-                case OnSide.Top:
-                    newpoly.Points = new PointCollection() { 
-                            _p, 
-                            new Point(_p.X, _p.Y - 15), 
-                            new Point(_p.X - 7.5, _p.Y - 7.5), 
-                            new Point(_p.X + 7.5, _p.Y - 7.5) 
-                        };
-                    break;
-                case OnSide.Bottom:
-                    newpoly.Points = new PointCollection() { 
-                            _p, 
-                            new Point(_p.X, _p.Y + 15), 
-                            new Point(_p.X - 7.5, _p.Y + 7.5), 
-                            new Point(_p.X + 7.5, _p.Y + 7.5) 
-                        };
-                    break;
-            }
+                            new Point(_p.X-7.5, _p.Y+7.5)
+            };
 
             _shape = newpoly;
         }
 
+        /// <summary>
+        /// Returnerar _onSide
+        /// </summary>
+        /// <returns></returns>
         public OnSide GetOnSide()
         {
             return _onSide;
