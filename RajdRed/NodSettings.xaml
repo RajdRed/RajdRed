@@ -13,12 +13,12 @@
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="31*"/>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="41*"/>
         </Grid.RowDefinitions>
-        <Ellipse Grid.Column="2" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Top" Width="30" Height="30" Grid.Row="2" Stroke="Gray" StrokeThickness="1"/>
-        <Polygon Name="PolygonComposition" Grid.Row="2" Grid.Column="1" Stroke="Red" StrokeThickness="1">
+        <Ellipse Grid.Column="2" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Top" Width="30" Height="30" Grid.Row="2"/>
+        <Polygon Name="PolygonComposition" Grid.Row="2" Grid.Column="1" >
             <Polygon.Fill>
                 <SolidColorBrush Color="White" />
             </Polygon.Fill>
@@ -29,7 +29,7 @@
                 <Point X="40" Y="15"></Point>
             </Polygon.Points>
         </Polygon>
-        <Polygon Name="PolygonAggregate" Grid.Row="2" Grid.Column="1" Stroke="Red" StrokeThickness="1">
+        <Polygon Name="PolygonAggregate" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
             <Polygon.Fill>
                 <SolidColorBrush Color="White" />
             </Polygon.Fill>
@@ -38,6 +38,16 @@
                 <Point X="10" Y="15"></Point>
                 <Point X="25" Y="30"></Point>
                 <Point X="40" Y="15"></Point>
+            </Polygon.Points>
+        </Polygon>
+        <Polygon Name="PolygonInheritence" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2">
+            <Polygon.Fill>
+                <SolidColorBrush Color="White" />
+            </Polygon.Fill>
+            <Polygon.Points>
+                <Point X="25" Y="0"></Point>
+                <Point X="10" Y="25"></Point>
+                <Point X="40" Y="25"></Point>
             </Polygon.Points>
         </Polygon>
     </Grid>
