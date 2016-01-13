@@ -65,6 +65,9 @@
     <Compile Include="Nod.xaml.cs">
       <DependentUpon>Nod.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NodSettings.xaml.cs">
+      <DependentUpon>NodSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RajdColors.cs" />
     <Compile Include="RajdColorScheme.cs" />
     <Compile Include="SettingsMenu.xaml.cs">
@@ -97,6 +100,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Nod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NodSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -28,7 +28,7 @@ namespace RajdRed
 		private bool darkColorTheme = false;
 		private List<Klass> _klassList = new List<Klass>();
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
-
+		
         public MainWindow()
         {
             InitializeComponent();

@@ -33,7 +33,6 @@ namespace RajdRed
             Attributes.Text = _klass.Attributes.Text;
             Methods.Text = _klass.Methods.Text;
 
-            //Lägger till vald färg
             ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassNameBg);
             Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassAttributesBg);
 			Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassMethodsBg);
