@@ -28,7 +28,7 @@ namespace RajdRed
         private Point _posOfMouseOnHit;
         private Point _posOfShapeOnHit;
 
-        public List<Nod> Noder = new List<Nod>(); 
+        public List<Nod> _noder = new List<Nod>(); 
 
         public Klass(MainWindow w, string name)
         {
@@ -166,6 +166,7 @@ namespace RajdRed
             Cursor = Cursors.Cross;
         }
 
+<<<<<<< HEAD
         private void OuterBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Point CanvasPt = e.GetPosition(_canvas);
@@ -176,6 +177,45 @@ namespace RajdRed
             Canvas.SetTop(n, BorderPt.Y);
             _canvas.Children.Add(n);
 
+=======
+        public List<Nod> GetNods()
+        {
+            return _noder;
+        }
+
+        private void OuterBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        {   
+            Point p = e.GetPosition(this);
+            OnSide os = getSideByPoint(p);
+            if (os != OnSide.Corner)
+                _noder.Add(new Nod(this, os, new Point(p.X-5, p.Y-5)));
+        }
+
+        private OnSide getSideByPoint(Point p)
+        {
+            if (p.X <= InnerBorder.Margin.Left 
+                && (p.Y >= InnerBorder.Margin.Left && p.Y < this.ActualHeight-InnerBorder.Margin.Left))
+            {
+                return OnSide.Left;
+            }
+            else if (p.X >= this.ActualWidth-InnerBorder.Margin.Left 
+                && (p.Y >= InnerBorder.Margin.Left && p.Y < this.ActualHeight-InnerBorder.Margin.Left)) {
+                    return OnSide.Right;
+                }
+            else if (p.Y >= this.ActualHeight - InnerBorder.Margin.Left
+              && (p.X >= InnerBorder.Margin.Left && p.X < this.ActualWidth - InnerBorder.Margin.Left)
+                )
+            {
+                return OnSide.Bottom;
+            }
+            else if (p.Y <= InnerBorder.Margin.Left
+              && (p.X >= InnerBorder.Margin.Left && p.X < this.ActualWidth - InnerBorder.Margin.Left))
+            {
+                return OnSide.Top;
+            }
+
+            return OnSide.Corner;
+>>>>>>> refs/remotes/origin/MasterNod
         }
     }
 }

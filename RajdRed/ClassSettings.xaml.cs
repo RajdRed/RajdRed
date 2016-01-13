@@ -37,6 +37,11 @@ namespace RajdRed
             Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[1]);
             Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
 
+            drawNodes();
+        }
+
+        private void drawNodes()
+        {
         }
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)
