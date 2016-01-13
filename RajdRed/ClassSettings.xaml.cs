@@ -44,6 +44,7 @@ namespace RajdRed
         {
             foreach (Nod node in _klass.GetNods())
             {
+                NodSettings ns = new NodSettings(node);
 
             }
         }

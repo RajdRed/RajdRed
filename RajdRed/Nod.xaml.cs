@@ -69,14 +69,14 @@ namespace RajdRed
 
             this.OuterGrid.Children.Add(_shape);
 
-            setMargin(p);
+            setPositionWithMargin(p);
         }
 
         /// <summary>
         /// Sätter noden på rätt position runt en klass
         /// </summary>
         /// <param name="p"></param>
-        private void setMargin(Point p)
+        private void setPositionWithMargin(Point p)
         {
             switch (_onSide) {
                 case OnSide.Left:
