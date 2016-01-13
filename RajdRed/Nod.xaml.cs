@@ -33,13 +33,14 @@ namespace RajdRed
         private Klass _klass = null;
         //private Linje _linje = null;
         private Shape _shape;
-        private Point _p;
         private OnSide _onSide;
+        private Point _nodPos;
 
         public Nod() 
         {
             InitializeComponent();
             OuterGrid.Children.Add(_shape);
+            
         }
 
         /*
@@ -63,35 +64,41 @@ namespace RajdRed
             TurnToAssociation();
 
             this.OuterGrid.Children.Add(_shape);
+            PositionOfNod(p);
+            SetPositionWithMargin();
 
-            setPositionWithMargin(p);
+        }
 
+        public void PositionOfNod(Point p)
+        {
+            _nodPos.X = p.X / _klass.ActualWidth;
+            _nodPos.Y = p.Y / _klass.ActualHeight;
         }
 
         /// <summary>
         /// Sätter noden på rätt position runt en klass
         /// </summary>
         /// <param name="p"></param>
-        private void setPositionWithMargin(Point p)
+        public void SetPositionWithMargin()
         {
             switch (_onSide) {
                 case OnSide.Left:
-                    this.Margin = new Thickness(0, p.Y, 0, 0);
+                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Right:
-                    this.Margin = new Thickness(0, p.Y, 0, 0);
+                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Right;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Top:
-                    this.Margin = new Thickness(p.X, 0, 0, 0);
+                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Bottom:
-                    this.Margin = new Thickness(p.X, 0, 0, 0);
+                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Bottom;
                     break;

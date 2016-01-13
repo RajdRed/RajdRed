@@ -44,6 +44,7 @@ namespace RajdRed
 
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
+            SizeChanged += Klass_SizeChanged;
 
             _canvas.Children.Add(this);
         }
@@ -284,6 +285,14 @@ namespace RajdRed
         /// <returns></returns>
         public MainWindow MainWindow() {
             return _mainWindow;
+        }
+
+        private void Klass_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            foreach (var nod in _noder)
+            {
+                nod.SetPositionWithMargin();
+            }
         }
     }
 }
