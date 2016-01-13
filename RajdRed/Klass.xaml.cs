@@ -283,11 +283,9 @@ namespace RajdRed
 
 		public void setKlassColors()
 		{
-			var bc = new BrushConverter();
-
-			bgTopRow.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(MainWindow().Colors.KlassNameBg));
-			bgMidRow.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(MainWindow().Colors.KlassAttributesBg));
-			bgBotRow.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(MainWindow().Colors.KlassMethodsBg));
+			bgTopRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassNameBg);
+			bgMidRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassAttributesBg);
+			bgBotRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassMethodsBg);
 		}
     }
 }
