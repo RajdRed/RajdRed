@@ -30,12 +30,14 @@ namespace RajdRed
 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
 
 			if (txtBlockColor.Text == "Dark Mode") {
-				mw.ChangeColorTheme("dark");
+				mw.changeColors(false);
+				mw.ChangeColorTheme(true);
 				txtBlockColor.Text = "Light Mode";
 			}
 
 			else {
-				mw.ChangeColorTheme("light");
+				mw.changeColors(true);
+				mw.ChangeColorTheme(false);
 				txtBlockColor.Text = "Dark Mode";
 			}
 		}

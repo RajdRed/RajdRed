@@ -30,8 +30,8 @@
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
+					<BeginStoryboard>
+						<Storyboard>
                             <ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#404d5c" />
                         </Storyboard>
                     </BeginStoryboard>

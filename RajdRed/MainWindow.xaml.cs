@@ -26,7 +26,8 @@ namespace RajdRed
         private bool isArchiveMenuActive = false;
 		private bool isSettingsMenuActive = false;
 		private bool darkColorTheme = false;
-		private List<Klass> klassList = new List<Klass>(); 
+		private List<Klass> _klassList = new List<Klass>();
+		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 
         public MainWindow()
         {
@@ -34,12 +35,21 @@ namespace RajdRed
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
+		public void changeColors(bool dark)
+		{
+			if (!dark)
+				Colors = RajdColorScheme.Dark;
+
+			else
+				Colors = RajdColorScheme.Light;
+		} 
+
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Point pt = e.GetPosition(theCanvas);
 
-            Klass klass = new Klass(this, pt, darkColorTheme);
-			klassList.Add(klass);
+            Klass klass = new Klass(this, pt);
+			_klassList.Add(klass);
 
             klass.Klass_MouseDown(sender, e);
         }
@@ -47,7 +57,7 @@ namespace RajdRed
         public void DeleteKlass(Klass klass)
         {
             theCanvas.Children.Remove(klass);
-			klassList.Remove(klass);
+			_klassList.Remove(klass);
         }
 
         public Canvas getCanvas()
@@ -93,10 +103,7 @@ namespace RajdRed
 				isArchiveMenuActive = true;
 
 				var bc = new BrushConverter();
-				
-				if (!darkColorTheme)
-					ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
-				else ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
 			}
 
 			else {
@@ -128,10 +135,7 @@ namespace RajdRed
 				Point pt = e.GetPosition(theCanvas);
 
 				var bc = new BrushConverter();
-				
-				if (!darkColorTheme)
-					ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
-				else ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
 			}
 
 			if (isSettingsMenuActive)
@@ -139,10 +143,7 @@ namespace RajdRed
 				Point pt = e.GetPosition(theCanvas);
 
 				var bc = new BrushConverter();
-
-				if (!darkColorTheme)
-					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
-				else SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
+				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
 			}
 		}
 
@@ -167,10 +168,7 @@ namespace RajdRed
 				isSettingsMenuActive = true;
 
 				var bc = new BrushConverter();
-				if (!darkColorTheme)
-					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#323a45"));
-				else
-					SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
+				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
 			}
 
 			else
@@ -185,40 +183,39 @@ namespace RajdRed
 		{
 			Point pt = e.GetPosition(theCanvas);
 
-			if (pt.X < theCanvas.ActualWidth - 150 || pt.Y > 220)
-			{
+			if (pt.X < theCanvas.ActualWidth - 150 || pt.Y > 220) {
 				theCanvas.Children.Remove(settingsMenu);
 				isSettingsMenuActive = false;
 				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 		}
 
-		public void ChangeColorTheme(string color)
+		public void ChangeColorTheme(bool dark)
 		{
 			var bc = new BrushConverter();
 
-			if (color == "dark") {
+			if (dark) {
 				this.darkColorTheme = true;
-				theCanvas.Background = (Brush)bc.ConvertFrom("#333");
-				menuBot.Background = (Brush)bc.ConvertFrom("#222");
-				menuTopRight.Background = (Brush)bc.ConvertFrom("#151515");
-				menuTopLeft.Fill = (Brush)bc.ConvertFrom("#151515");
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom("#191919"));
 				var uri = new Uri("pack://application:,,,/img/createClassBg-Dark.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;
 			}
 
-			if (color == "light") {
+			else {
 				this.darkColorTheme = false;
-				theCanvas.Background = (Brush)bc.ConvertFrom("#EAEDF2");
-				menuBot.Background = (Brush)bc.ConvertFrom("#4f5b6d");
-				menuTopRight.Background = (Brush)bc.ConvertFrom("#222931");
-				menuTopLeft.Fill = (Brush)bc.ConvertFrom("#222931");
 				var uri = new Uri("pack://application:,,,/img/createClassBg.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;
 			}
+
+			theCanvas.Background = (Brush)bc.ConvertFrom(Colors.TheCanvasBg);
+			menuBot.Background = (Brush)bc.ConvertFrom(Colors.MenuBotBg);
+			menuTopRight.Background = (Brush)bc.ConvertFrom(Colors.KlassNameBg);
+			menuTopLeft.Fill = (Brush)bc.ConvertFrom(Colors.KlassNameBg);
+			SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
+
+			foreach (Klass k in _klassList)
+				k.setKlassColors();
 		}
     }
 }

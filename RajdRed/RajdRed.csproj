@@ -65,6 +65,8 @@
     <Compile Include="Nod.xaml.cs">
       <DependentUpon>Nod.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RajdColors.cs" />
+    <Compile Include="RajdColorScheme.cs" />
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>

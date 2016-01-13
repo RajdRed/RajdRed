@@ -23,33 +23,34 @@ namespace RajdRed
         private MainWindow _mainWindow;
         private Canvas _canvas;
         private bool _onField = false;
-        public List<string> Colors = new List<string>() { "#222931", "#323a45" };
         private bool _isSelected = false;
         private Point _posOfMouseOnHit;
         private Point _posOfShapeOnHit;
 
         public List<Nod> _noder = new List<Nod>(); 
 
-        public Klass(MainWindow w, Point pt, bool dark)
+        public Klass(MainWindow w, Point pt)
         {
             InitializeComponent();
 
             _mainWindow = w;
             _canvas = w.getCanvas();
 
-<<<<<<< HEAD
+			setKlassColors();
+
 			Canvas.SetLeft(this, pt.X - 50);
 			Canvas.SetTop(this, pt.Y - 10);
 
-            MouseDown += Klass_MouseDown;
-=======
-            //MouseDown += Klass_MouseDown;
->>>>>>> refs/remotes/origin/MasterNod
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
 
             _canvas.Children.Add(this);
         }
+
+		public MainWindow MainWindow()
+		{
+			return _mainWindow;
+		}
 
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -211,5 +212,14 @@ namespace RajdRed
 
             return OnSide.Corner;
         }
+
+		public void setKlassColors()
+		{
+			var bc = new BrushConverter();
+
+			bgTopRow.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(MainWindow().Colors.KlassNameBg));
+			bgMidRow.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(MainWindow().Colors.KlassAttributesBg));
+			bgBotRow.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(MainWindow().Colors.KlassMethodsBg));
+		}
     }
 }

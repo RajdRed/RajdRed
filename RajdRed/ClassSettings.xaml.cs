@@ -22,6 +22,7 @@ namespace RajdRed
     {
         private Klass _klass;
         private Grid _backgroundGrid;
+
         public ClassSettings(Klass k, Grid g)
         {
             InitializeComponent();
@@ -33,9 +34,13 @@ namespace RajdRed
             Methods.Text = _klass.Methods.Text;
 
             //Lägger till vald färg
-            ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
-            Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[1]);
-            Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.Colors[0]);
+            ClassName.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassNameBg);
+            Attributes.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassAttributesBg);
+			Methods.Background = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.KlassMethodsBg);
+
+			Btn_Save.Foreground = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.ClassSettingsButtons);
+			Btn_Abort.Foreground = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.ClassSettingsButtons);
+			Btn_Delete.Foreground = (Brush)new BrushConverter().ConvertFrom(_klass.MainWindow().Colors.ClassSettingsButtons);
 
             drawNodes();
         }
