@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace RajdRed
 {
 	public class RajdColors
 	{
-		public string KlassNameBg = "";
-		public string KlassAttributesBg = "";
-		public string KlassMethodsBg = "";
-		public string TheCanvasBg = "";
-		public string MenuBotBg = "";
-		public string MenuButtonBg = "";
+		public Brush KlassNameBg;
+        public Brush KlassAttributesBg;
+        public Brush KlassMethodsBg;
+        public Brush TheCanvasBg;
+        public Brush MenuBotBg;
+        public Brush MenuButtonBg;
 
 		public RajdColors() {
  			

@@ -28,15 +28,7 @@ namespace RajdRed
             InitializeComponent();
             _klass = k;
 
-            Polygon polygon = new Polygon() { 
-                VerticalAlignment = VerticalAlignment.Top, 
-                HorizontalAlignment=HorizontalAlignment.Center 
-            };
-
-            Grid.SetColumn(polygon, 1);
-            Grid.SetRow(polygon, 2);
-
-            OuterGrid.Children.Add(polygon);
+            PolygonAggregate.Fill = k.MainWindow().Colors.KlassAttributesBg;
         }
     }
 }

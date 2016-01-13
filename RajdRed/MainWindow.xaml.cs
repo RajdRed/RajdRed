@@ -102,8 +102,7 @@ namespace RajdRed
 				theCanvas.Children.Add(archiveMenu);
 				isArchiveMenuActive = true;
 
-				var bc = new BrushConverter();
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 			}
 
 			else {
@@ -134,16 +133,14 @@ namespace RajdRed
 			if (isArchiveMenuActive) {
 				Point pt = e.GetPosition(theCanvas);
 
-				var bc = new BrushConverter();
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
+				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 			}
 
 			if (isSettingsMenuActive)
 			{
 				Point pt = e.GetPosition(theCanvas);
 
-				var bc = new BrushConverter();
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
+				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 			}
 		}
 
@@ -167,8 +164,7 @@ namespace RajdRed
 				theCanvas.Children.Add(settingsMenu);
 				isSettingsMenuActive = true;
 
-				var bc = new BrushConverter();
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
+				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 			}
 
 			else
@@ -192,8 +188,6 @@ namespace RajdRed
 
 		public void ChangeColorTheme(bool dark)
 		{
-			var bc = new BrushConverter();
-
 			if (dark) {
 				this.darkColorTheme = true;
 				var uri = new Uri("pack://application:,,,/img/createClassBg-Dark.png");
@@ -208,11 +202,11 @@ namespace RajdRed
 				addClassButton.Source = bitmap;
 			}
 
-			theCanvas.Background = (Brush)bc.ConvertFrom(Colors.TheCanvasBg);
-			menuBot.Background = (Brush)bc.ConvertFrom(Colors.MenuBotBg);
-			menuTopRight.Background = (Brush)bc.ConvertFrom(Colors.KlassNameBg);
-			menuTopLeft.Fill = (Brush)bc.ConvertFrom(Colors.KlassNameBg);
-			SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, (Brush)bc.ConvertFrom(Colors.MenuButtonBg));
+			theCanvas.Background = Colors.TheCanvasBg;
+			menuBot.Background = Colors.MenuBotBg;
+			menuTopRight.Background = Colors.KlassNameBg;
+			menuTopLeft.Fill = Colors.KlassNameBg;
+			SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 
 			foreach (Klass k in _klassList)
 				k.setKlassColors();
