@@ -15,15 +15,15 @@
                         <RowDefinition Height="40*"/>
                         <RowDefinition Height="40*"/>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0">
+                    <Border Name="bgTopRow" Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0">
                         <Grid>
                             <Label Name="ClassName" Padding="5" Foreground="White" FontSize="10" HorizontalContentAlignment="Center" FontWeight="Bold" >Ny Klass *</Label>
                         </Grid>
                     </Border>
-                    <Grid Grid.Row="1">
-                        <TextBlock Name="Attributes" Padding="5" Foreground="White" Background="#323a45"></TextBlock>
+					<Grid Name="bgMidRow" Grid.Row="1" Background="#323a45">
+                        <TextBlock Name="Attributes" Padding="5" Foreground="White"></TextBlock>
                     </Grid>
-                    <Border Background="#222931" Grid.Row="2" CornerRadius="0,0,2,2">
+                    <Border Name="bgBotRow" Background="#222931" Grid.Row="2" CornerRadius="0,0,2,2">
                         <Grid Grid.Row="2">
                             <TextBlock Name="Methods" Padding="5" Foreground="White" ></TextBlock>
                         </Grid>
