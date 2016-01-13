@@ -60,17 +60,12 @@ namespace RajdRed
             _onSide = os;
             _klass = k;
 
-            TurnToGeneralization();
+            TurnToAssociation();
 
             this.OuterGrid.Children.Add(_shape);
-<<<<<<< HEAD
 
             setPositionWithMargin(p);
 
-            k.OuterGrid.Children.Add(this);
-=======
-            setMargin(p);
->>>>>>> refs/remotes/origin/MasterKlass
         }
 
         /// <summary>
@@ -158,18 +153,23 @@ namespace RajdRed
         /// <param name="filled"></param>
         public void TurnToAggregation(bool filled)
         {
-            Polygon newpoly = new Polygon() { Stroke=Brushes.Black, StrokeThickness = 1 };
-            if (filled)
-                _shape.Fill = Brushes.Black;
-            newpoly.Points = new PointCollection() { 
-                            _p, 
-                            new Point(_p.X - 15, _p.Y), 
-                            new Point(_p.X-7.5, _p.Y-7.5), 
-                            new Point(_p.X-7.5, _p.Y+7.5)
+            _shape = new Polygon() { 
+                Stroke=Brushes.Black, 
+                StrokeThickness = 1,
+                Points = new PointCollection()
+                {
+                    new Point(this.Width/2, 0),
+                    new Point(this.Width, this.Height/2),
+                    new Point(this.Width/2, this.Height),
+                    new Point(0, this.Height/2)
+                }
             };
 
-            _shape = newpoly;
-            
+            if (filled)
+            {
+                _shape.Fill = Brushes.Black;
+            }
+
         }
 
         /// <summary>
