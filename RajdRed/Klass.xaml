@@ -4,29 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             MinHeight="105" MinWidth="105">
-    <Grid>
-        <Border Margin="5,5,5,5" CornerRadius="2,2,2,2" BorderBrush="Gray" BorderThickness="1">
-            <Grid Cursor="Hand" Background="Transparent">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20*"/>
-                    <RowDefinition Height="40*"/>
-                    <RowDefinition Height="40*"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0">
-                    <Grid>
-                        <Label Name="ClassName" Foreground="White" FontSize="10" HorizontalContentAlignment="Center" FontWeight="Bold" >Ny Klass *</Label>
+             MinHeight="110" MinWidth="110">
+    <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave">
+        <Border Visibility="Visible" MouseEnter="OuterBorder_MouseEnter" MouseDown="OuterBorder_MouseDown" Background="Silver" Opacity="0.6" CornerRadius="2,2,2,2" Name="OuterBorder"></Border>
+        <Grid>
+            <Border Name="InnerBorder" Margin="10" CornerRadius="2,2,2,2" BorderBrush="Black" MouseDown="Klass_MouseDown" BorderThickness="1">
+                <Grid Name="InnerGrid" Cursor="SizeAll" Background="Transparent" MouseEnter="InnerGrid_MouseEnter">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="40*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0">
+                        <Grid>
+                            <Label Name="ClassName" Padding="5" Foreground="White" FontSize="10" HorizontalContentAlignment="Center" FontWeight="Bold" >Ny Klass *</Label>
+                        </Grid>
+                    </Border>
+                    <Grid Grid.Row="1">
+                        <TextBlock Name="Attributes" Padding="5" Foreground="White" Background="#323a45"></TextBlock>
                     </Grid>
-                </Border>
-                <Grid Grid.Row="1">
-                    <TextBlock Name="Attributes" Background="#323a45"></TextBlock>
+                    <Border Background="#222931" Grid.Row="2" CornerRadius="0,0,2,2">
+                        <Grid Grid.Row="2">
+                            <TextBlock Name="Methods" Padding="5" Foreground="White" ></TextBlock>
+                        </Grid>
+                    </Border>
                 </Grid>
-                <Border Background="#222931" Grid.Row="2" CornerRadius="0,0,2,2">
-                    <Grid Grid.Row="2">
-                        <TextBlock Name="Methods" ></TextBlock>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Border>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>
