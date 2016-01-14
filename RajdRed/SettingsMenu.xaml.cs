@@ -41,5 +41,13 @@ namespace RajdRed
 				txtBlockColor.Text = "Dark Mode";
 			}
 		}
+
+		private void AboutProgram_Click(object sender, RoutedEventArgs e)
+		{
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+			AboutWindow aboutWindow = new AboutWindow();
+			aboutWindow.Owner = mw;
+			aboutWindow.Show();
+		}
 	}
 }

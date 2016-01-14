@@ -56,7 +56,7 @@
 					</TextBlock.Style>
 				</TextBlock>
 			</Button>
-			<Button Background="#f9f9f9" Grid.Row="3" FontSize="11" HorizontalContentAlignment="Left">
+			<Button Click="AboutProgram_Click" Background="#f9f9f9" Grid.Row="3" FontSize="11" HorizontalContentAlignment="Left">
 				<TextBlock Text="About UML Maker" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
