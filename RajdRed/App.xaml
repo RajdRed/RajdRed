@@ -20,9 +20,8 @@
 			</Style.Triggers>
 		</Style>
         <Style TargetType="{x:Type Button}" x:Key="MenuButton" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="FontFamily" Value="./fonts/#FontAwesome"></Setter>
-            <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="FontSize" Value="25"></Setter>
+			<Setter Property="FontFamily" Value="./fonts/#FontAwesome"></Setter>
+			<Setter Property="FontSize" Value="25"></Setter>
             <Setter Property="Foreground" Value="#EAEDF2"></Setter>
         </Style>
 	</Application.Resources>

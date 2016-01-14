@@ -5,7 +5,7 @@
         Name="RajdRedMainWindow"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
-	<Canvas MouseMove="theCanvas_MouseMove" MouseDown="theCanvas_MouseDown" Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
+	<Canvas MouseDown="theCanvas_MouseDown" Name="theCanvas" Background="#EAEDF2" Grid.Row="0">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="22*" />
@@ -38,7 +38,7 @@
                     <ColumnDefinition Width="447*" />
                 </Grid.ColumnDefinitions>
                 <!-- Vänstra delen av menyn -->
-				<Grid Name="ArchiveButtonGrid" Grid.Column="0" HorizontalAlignment="Left">
+				<Grid Grid.Column="0" HorizontalAlignment="Left">
 					<Grid.Style>
 						<Style TargetType="Grid">
 							<Style.Triggers>
@@ -48,12 +48,12 @@
 							</Style.Triggers>
 						</Style>
 					</Grid.Style>
-					<Button PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
+					<Button Name="archiveMenuBtn" Background="Transparent" PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
 				</Grid>
 				<Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
 					<Image Name="addClassButton"  Source="img/createClassBg.png" />
 					</Button>
-					<Grid Name="SettingsMenuGrid" Grid.Column="2" HorizontalAlignment="Right">
+					<Grid Grid.Column="2" HorizontalAlignment="Right">
 					<Grid.Style>
 						<Style TargetType="Grid">
 							<Style.Triggers>
@@ -63,7 +63,7 @@
 							</Style.Triggers>
 						</Style>
 					</Grid.Style>
-                    <Button PreviewMouseUp="Button_SettingsMenu_MouseUp" Style="{DynamicResource MenuButton}" PreviewMouseDown="Button_SettingsMenu_MouseDown" Content="" Width="78"></Button>
+					<Button Name="settingsMenuBtn" Background="Transparent" PreviewMouseUp="Button_SettingsMenu_MouseUp" Style="{DynamicResource MenuButton}" PreviewMouseDown="Button_SettingsMenu_MouseDown" Content="" Width="78"></Button>
 				</Grid>
 			</Grid>
         </Grid>
