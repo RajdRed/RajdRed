@@ -10,7 +10,7 @@
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="27.5*" />
-					<RowDefinition Height="372.5" />
+					<RowDefinition Height="362.5" />
 				</Grid.RowDefinitions>
 				<!-- **************** Meny **************** -->
 				<Grid Name="menuBot" Height="27.5" Grid.Row="0" Background="#4f5b6d" Width="{Binding ActualWidth, ElementName=aboutCanvas}">
@@ -51,9 +51,31 @@
 						<LineBreak></LineBreak>
 						All rights reserved.
 					</TextBlock>
-					<TextBlock Margin="20, 0, 0, 0" Grid.Column="1">
-						<Bold FontSize="13">The RajdRed Team</Bold>
-					</TextBlock>
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="40"></RowDefinition>
+							<RowDefinition Height="272.5"></RowDefinition>
+						</Grid.RowDefinitions>
+						<TextBlock Margin="20, 0, 0, 0" Grid.Row="0">
+							<Bold FontSize="13">The RajdRed Team</Bold>
+						</TextBlock>
+						<Grid Grid.Row="1">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="50*"></RowDefinition>
+								<RowDefinition Height="50*"></RowDefinition>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="20*"></ColumnDefinition>
+								<ColumnDefinition Width="30*"></ColumnDefinition>
+								<ColumnDefinition Width="30*"></ColumnDefinition>
+								<ColumnDefinition Width="20*"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Image Margin="10, 5, 10, 20" Grid.Column="1" Grid.Row="0" Source="img/avatar.png" />
+							<Image Margin="10, 5, 10, 20" Grid.Column="2" Grid.Row="0" Source="img/avatar.png" />
+							<Image Margin="10, 0, 10, 25" Grid.Column="1" Grid.Row="1" Source="img/avatar.png" />
+							<Image Margin="10, 0, 10, 25" Grid.Column="2" Grid.Row="1" Source="img/avatar.png" />
+						</Grid>
+					</Grid>
 				</Grid>
 			</Grid>
 		</Canvas>
