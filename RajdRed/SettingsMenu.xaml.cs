@@ -48,6 +48,10 @@ namespace RajdRed
 			AboutWindow aboutWindow = new AboutWindow();
 			aboutWindow.Owner = mw;
 			aboutWindow.Show();
+
+			mw.theCanvas.Children.Remove(this);
+			mw.isSettingsMenuActive = false;
+			mw.settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 		}
 	}
 }

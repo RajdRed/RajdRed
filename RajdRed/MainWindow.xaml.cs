@@ -24,9 +24,10 @@ namespace RajdRed
 		private ArchiveMenu archiveMenu = new ArchiveMenu();
 		private SettingsMenu settingsMenu = new SettingsMenu();
         private bool isArchiveMenuActive = false;
-		private bool isSettingsMenuActive = false;
+		public bool isSettingsMenuActive = false;
 		private List<Klass> _klassList = new List<Klass>();
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
+		private bool darkMode = false;
 		
         public MainWindow()
         {
@@ -37,10 +38,16 @@ namespace RajdRed
 		public void changeColors(bool dark)
 		{
 			if (!dark)
+			{
 				Colors = RajdColorScheme.Dark;
+				darkMode = true;
+			}
 
 			else
+			{
 				Colors = RajdColorScheme.Light;
+				darkMode = false;
+			}
 		} 
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -63,6 +70,11 @@ namespace RajdRed
         {
             return theCanvas;
         }
+
+		public bool getDarkMode()
+		{
+			return darkMode;
+		}
 
         private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
         {
