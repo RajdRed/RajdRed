@@ -23,7 +23,7 @@ namespace RajdRed
     {
 		private ArchiveMenu archiveMenu = new ArchiveMenu();
 		private SettingsMenu settingsMenu = new SettingsMenu();
-        private bool isArchiveMenuActive = false;
+        public bool isArchiveMenuActive = false;
 		public bool isSettingsMenuActive = false;
 		private List<Klass> _klassList = new List<Klass>();
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
