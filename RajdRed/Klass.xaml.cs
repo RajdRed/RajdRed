@@ -43,14 +43,66 @@ namespace RajdRed
 
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
-            SizeChanged += Klass_SizeChanged;
 
             _canvas.Children.Add(this);
+
+            createNodes();
         }
+
 		public MainWindow MainWindow()
 		{
 			return _mainWindow;
 		}
+
+        private void createNodes()
+        {
+            for (int i = 1; i <= 16; i++)
+            {
+                if (i <= 4)
+                {
+                    Nod n = new Nod(this) { 
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                        Margin = new Thickness(0, 20*i, 0, 0)
+                    };
+                    _noder.Add(n);
+                    this.NodeGrid.Children.Add(n);
+                }
+                else if (i > 4 && i <= 8)
+                {
+                    Nod n = new Nod(this)
+                    {
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                        Margin = new Thickness(0, 20 * (i-4), 0, 0)
+                    };
+                    _noder.Add(n);
+                    this.NodeGrid.Children.Add(n);
+                }
+                else if (i > 8 && i <= 12)
+                {
+                    Nod n = new Nod(this)
+                    {
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                        Margin = new Thickness(20 * (i-8), 0, 0, 0)
+                    };
+                    _noder.Add(n);
+                    this.NodeGrid.Children.Add(n);
+                }
+                else
+                {
+                    Nod n = new Nod(this)
+                    {
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                        Margin = new Thickness(20 * (i - 12), 0, 0, 0)
+                    };
+                    _noder.Add(n);
+                    this.NodeGrid.Children.Add(n);
+                }
+            }
+        }
 
         /// <summary>
         /// Händer när användaren klickar ned på Klassen
@@ -121,7 +173,7 @@ namespace RajdRed
         /// <param name="e"></param>
         public void Klass_MouseMove(object sender, MouseEventArgs e)
         {
-            if (IsMouseCaptured && _isSelected != false)
+            if (IsMouseCaptured && _isSelected)
             {
                 Point pt = e.GetPosition(_canvas);
                 Canvas.SetLeft(this, (pt.X - _posOfMouseOnHit.X) + _posOfShapeOnHit.X);
@@ -202,7 +254,8 @@ namespace RajdRed
         /// <param name="e"></param>
         private void InnerGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            OuterBorder.Visibility = Visibility.Visible;
+            NodeGrid.Visibility = Visibility.Visible;
+            Cursor = Cursors.SizeAll;
         }
 
         /// <summary>
@@ -212,17 +265,7 @@ namespace RajdRed
         /// <param name="e"></param>
         private void OuterGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            OuterBorder.Visibility = Visibility.Hidden;
-        }
-
-        /// <summary>
-        /// Ändrar muspekaren till ett plus
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OuterBorder_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Cursor = Cursors.Cross;
+            NodeGrid.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -235,28 +278,11 @@ namespace RajdRed
         }
 
         /// <summary>
-        /// MouseDown-Event för OuterBorder. Händer när användaren försöker dra en linje från klassen
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OuterBorder_MouseDown(object sender, MouseButtonEventArgs e)
-        {   
-            Point p = e.GetPosition(this);
-            OnSide os = getSideByPoint(p);
-            if (os != OnSide.Corner)
-            {
-                Nod node = new Nod(this, os, new Point(p.X - 5, p.Y - 5));
-                _noder.Add(node);
-                this.OuterGrid.Children.Add(node);
-            }
-        }
-
-        /// <summary>
         /// Returnerar vilken sida ett musklick befinner sig om Klassen. Musklicket måste ske på yttre området
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        private OnSide getSideByPoint(Point p)
+        public OnSide GetSideByPoint(Point p)
         {
             if (p.X <= InnerBorder.Margin.Left 
                 && (p.Y >= InnerBorder.Margin.Left && p.Y < this.ActualHeight-InnerBorder.Margin.Left))
@@ -282,19 +308,42 @@ namespace RajdRed
             return OnSide.Corner;
         }
 
-        private void Klass_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            foreach (var nod in _noder)
-            {
-                nod.SetPositionWithMargin();
-            }
-        }
-
 		public void setKlassColors()
 		{
 			bgTopRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassNameBg);
 			bgMidRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassAttributesBg);
 			bgBotRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassMethodsBg);
 		}
+
+        private void InnerGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+        }
+
+        /// <summary>
+        /// Fastställer nod: nod försvinner ej vid klass_mouseleave 
+        /// </summary>
+        /// <param name="n"></param>
+        public void SetNode(Nod n)
+        {
+            if (NodeGrid.Children.Contains(n))
+            {
+                NodeGrid.Children.Remove(n);
+                NodeSetGrid.Children.Add(n);
+            }
+        }
+
+        /// <summary>
+        /// Lossar nod: nod försvinner vid klass_mouseleave
+        /// </summary>
+        /// <param name="n"></param>
+        public void LooseNode(Nod n)
+        {
+            if (NodeSetGrid.Children.Contains(n))
+            {
+                NodeSetGrid.Children.Remove(n);
+                NodeGrid.Children.Add(n);
+            }
+        }
     }
 }

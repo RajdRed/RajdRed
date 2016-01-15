@@ -6,10 +6,11 @@
              mc:Ignorable="d" 
              MinHeight="110" MinWidth="110">
     <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave">
-        <Border Visibility="Visible" MouseEnter="OuterBorder_MouseEnter" MouseDown="OuterBorder_MouseDown" Background="Silver" Opacity="0.6" CornerRadius="2,2,2,2" Name="OuterBorder"></Border>
-        <Grid>
+        <Grid Background="Transparent" Name="NodeGrid">
+        </Grid>
+        <Grid Name="NodeSetGrid">
             <Border Name="InnerBorder" Margin="10" CornerRadius="2,2,2,2" BorderBrush="Black" MouseDown="Klass_MouseDown" BorderThickness="1">
-                <Grid Name="InnerGrid" Cursor="SizeAll" Background="Transparent" MouseEnter="InnerGrid_MouseEnter">
+                <Grid Name="InnerGrid" Background="Transparent" MouseLeave="InnerGrid_MouseLeave" MouseEnter="InnerGrid_MouseEnter">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
                         <RowDefinition Height="40*"/>

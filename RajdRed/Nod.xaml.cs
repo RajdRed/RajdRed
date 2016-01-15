@@ -31,7 +31,7 @@ namespace RajdRed
     public partial class Nod : UserControl
     {
         private Klass _klass = null;
-        //private Linje _linje = null;
+        private Linje _linje = null;
         private Shape _shape;
         private OnSide _onSide;
         private Point _nodPos;
@@ -40,14 +40,14 @@ namespace RajdRed
         {
             InitializeComponent();
             OuterGrid.Children.Add(_shape);
-            
         }
 
-        /*
         public Nod(Linje l) {
-        
+            InitializeComponent();
+            _linje = l;
+
+
         }
-         */
 
         /// <summary>
         /// Nodens konstruktor om den skapas bunden till en klass
@@ -55,55 +55,66 @@ namespace RajdRed
         /// <param name="k"></param>
         /// <param name="os"></param>
         /// <param name="p"></param>
-        public Nod(Klass k, OnSide os, Point p)
+        public Nod(Klass k)
         {
             InitializeComponent();
-            _onSide = os;
+            //_onSide = os;
             _klass = k;
 
-            TurnToAssociation();
-
+            TurnToNode();
             this.OuterGrid.Children.Add(_shape);
-            PositionOfNod(p);
-            SetPositionWithMargin();
 
+            //PositionOfNod(p);
+            //SetPositionWithMargin();
         }
 
-        public void PositionOfNod(Point p)
+        /// <summary>
+        /// Position relativt Canvas:en
+        /// </summary>
+        /// <returns></returns>
+        public Point Position()
         {
-            _nodPos.X = p.X / _klass.ActualWidth;
-            _nodPos.Y = p.Y / _klass.ActualHeight;
+            return new Point(
+                    Canvas.GetLeft(_klass.MainWindow().getCanvas()), 
+                    Canvas.GetTop(_klass.MainWindow().getCanvas())
+                );
         }
+
+        //public void PositionOfNod(Point p)
+        //{
+        //    _nodPos.X = p.X / _klass.MinWidth;
+        //    _nodPos.Y = p.Y / _klass.MinHeight;
+        //}
 
         /// <summary>
         /// Sätter noden på rätt position runt en klass
         /// </summary>
         /// <param name="p"></param>
-        public void SetPositionWithMargin()
-        {
-            switch (_onSide) {
-                case OnSide.Left:
-                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
-                    this.HorizontalAlignment = HorizontalAlignment.Left;
-                    this.VerticalAlignment = VerticalAlignment.Top;
-                    break;
-                case OnSide.Right:
-                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
-                    this.HorizontalAlignment = HorizontalAlignment.Right;
-                    this.VerticalAlignment = VerticalAlignment.Top;
-                    break;
-                case OnSide.Top:
-                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
-                    this.HorizontalAlignment = HorizontalAlignment.Left;
-                    this.VerticalAlignment = VerticalAlignment.Top;
-                    break;
-                case OnSide.Bottom:
-                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
-                    this.HorizontalAlignment = HorizontalAlignment.Left;
-                    this.VerticalAlignment = VerticalAlignment.Bottom;
-                    break;
-            }
-        }
+        //public void SetPositionWithMargin()
+        //{
+        //    switch (_onSide) {
+        //        case OnSide.Left:
+        //            this.Margin = new Thickness(0, _nodPos.Y * _klass.MinHeight, 0, 0);
+        //            this.HorizontalAlignment = HorizontalAlignment.Left;
+        //            this.VerticalAlignment = VerticalAlignment.Top;
+        //            break;
+        //        case OnSide.Right:
+        //            this.Margin = new Thickness(0, _nodPos.Y * _klass.MinHeight, 0, 0);
+        //            this.HorizontalAlignment = HorizontalAlignment.Right;
+        //            this.VerticalAlignment = VerticalAlignment.Top;
+        //            break;
+        //        case OnSide.Top:
+        //            this.Margin = new Thickness(_nodPos.X * _klass.MinWidth, 0, 0, 0);
+        //            this.HorizontalAlignment = HorizontalAlignment.Left;
+        //            this.VerticalAlignment = VerticalAlignment.Top;
+        //            break;
+        //        case OnSide.Bottom:
+        //            this.Margin = new Thickness(_nodPos.X * _klass.MinWidth, 0, 0, 0);
+        //            this.HorizontalAlignment = HorizontalAlignment.Left;
+        //            this.VerticalAlignment = VerticalAlignment.Bottom;
+        //            break;
+        //    }
+        //}
 
         /// <summary>
         /// Returnerar om noden är bunden till en klass
@@ -179,6 +190,22 @@ namespace RajdRed
 
         }
 
+        public void TurnToNode()
+        {
+            _shape = new Polygon()
+            {
+                Points = new PointCollection() {
+                    new Point(2,5),
+                    new Point(8,5),
+                    new Point(5,5),
+                    new Point(5,2),
+                    new Point(5,8)
+                },
+                StrokeThickness = 1,
+                Stroke = Brushes.Gray
+            };
+        }
+
         /// <summary>
         /// Returnerar _onSide
         /// </summary>
@@ -187,5 +214,29 @@ namespace RajdRed
         {
             return _onSide;
         }
+
+        private void OuterGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            OuterEllipse.Visibility = Visibility.Visible;
+        }
+
+        private void OuterGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            OuterEllipse.Visibility = Visibility.Hidden;
+        }
+
+        private void OuterGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _klass.SetNode(this);
+            _klass.NodeGrid.Visibility = Visibility.Hidden;
+            _linje = new Linje(this, e.GetPosition(_klass.MainWindow().getCanvas()));
+        }
+
+        public Klass GetKlass()
+        {
+            return _klass;
+        }
+
+
     }
 }

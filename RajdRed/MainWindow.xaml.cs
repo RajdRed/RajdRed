@@ -128,21 +128,21 @@ namespace RajdRed
 			}
 		}
 
-		private void theCanvas_MouseMove(object sender, MouseEventArgs e)
-		{
-			if (isArchiveMenuActive) {
-				Point pt = e.GetPosition(theCanvas);
+        //private void theCanvas_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (isArchiveMenuActive) {
+        //        Point pt = e.GetPosition(theCanvas);
 
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
-			}
+        //        ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
+        //    }
 
-			if (isSettingsMenuActive)
-			{
-				Point pt = e.GetPosition(theCanvas);
+        //    if (isSettingsMenuActive)
+        //    {
+        //        Point pt = e.GetPosition(theCanvas);
 
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
-			}
-		}
+        //        SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
+        //    }
+        //}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
 		{
