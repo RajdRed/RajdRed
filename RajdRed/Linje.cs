@@ -46,9 +46,10 @@ namespace RajdRed
             }
             else
             {
-                X2 = 10;
-                Y2 = 10;
+                X2 = p.X;
+                Y2 = p.Y;
             }
+            InvalidateVisual();
         }
 
         protected override Geometry DefiningGeometry
