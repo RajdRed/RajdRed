@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace RajdRed
 {
@@ -215,6 +216,18 @@ namespace RajdRed
 
 			foreach (Klass k in _klassList)
 				k.setKlassColors();
+		}
+
+		private void addClassButton_MouseEnter(object sender, MouseEventArgs e)
+		{
+			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(0), TimeSpan.FromSeconds(0.2));
+			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
+		}
+
+		private void addClassButton_MouseLeave(object sender, MouseEventArgs e)
+		{
+			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(5), TimeSpan.FromSeconds(0.2));
+			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
 		}
     }
 }

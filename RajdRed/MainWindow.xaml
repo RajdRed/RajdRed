@@ -5,6 +5,15 @@
         Name="RajdRedMainWindow"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
+	<Window.Resources>
+		<Storyboard x:Key="ScaleImageStoryboard">
+			<DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True"
+                             Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleX"/>
+			<DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True" 
+                             Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleY"/>
+		</Storyboard>
+	</Window.Resources>
+
 	<Canvas MouseDown="theCanvas_MouseDown" Name="theCanvas" Background="#EAEDF2">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
@@ -51,9 +60,9 @@
 					<Button Name="archiveMenuBtn" Background="Transparent" PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
 				</Grid>
 				<Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
-					<Image Name="addClassButton"  Source="img/createClassBg.png" />
-					</Button>
-					<Grid Grid.Column="2" HorizontalAlignment="Right">
+					<Image Margin="5" MouseEnter="addClassButton_MouseEnter" MouseLeave="addClassButton_MouseLeave" Name="addClassButton"  Source="img/createClassBg.png" />
+				</Button>
+				<Grid Grid.Column="2" HorizontalAlignment="Right">
 					<Grid.Style>
 						<Style TargetType="Grid">
 							<Style.Triggers>
