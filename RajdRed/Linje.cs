@@ -13,8 +13,8 @@ namespace RajdRed
 {
     public class Linje : Shape
     {
-        public Nod StartNode { get; set; }
-        public Nod EndNode { get; set; }
+        public Nod StartNod { get; set; }
+        public Nod EndNod { get; set; }
 
         private LineGeometry line = new LineGeometry();
         private Point start = new Point(0, 0);
@@ -40,23 +40,40 @@ namespace RajdRed
             }
         }
 
-        public Linje(Nod n)
+        public Linje(Nod sn, Nod en)
         {
-            StartNode = n;
-            EndNode = new Nod(n.Canvas, this, new Point(StartNode.PositionRelativeCanvas().X + 20-n.Width/2, StartNode.PositionRelativeCanvas().Y + 20-n.Height/2));
+            StartNod = sn;
+            EndNod = en;
 
-            X1 = StartNode.PositionRelativeCanvas().X;
-            Y1 = StartNode.PositionRelativeCanvas().Y;
-            X2 = StartNode.PositionRelativeCanvas().X+20;
-            Y2 = StartNode.PositionRelativeCanvas().Y+20;
+            X1 = StartNod.PositionRelativeCanvas().X;
+            Y1 = StartNod.PositionRelativeCanvas().Y;
+            X2 = EndNod.PositionRelativeCanvas().X;
+            Y2 = EndNod.PositionRelativeCanvas().Y;
 
             Stroke = Brushes.Black;
             StrokeThickness = 2;
+
+            Canvas.SetZIndex(this, 2);
+
+            MouseEnter += Linje_MouseEnter;
+            MouseLeave += Linje_MouseLeave;
+        }
+
+        void Linje_MouseLeave(object sender, MouseEventArgs e)
+        {
+            StartNod.OuterEllipse.Visibility = Visibility.Hidden;
+            EndNod.OuterEllipse.Visibility = Visibility.Hidden;
+        }
+
+        void Linje_MouseEnter(object sender, MouseEventArgs e)
+        {
+            StartNod.OuterEllipse.Visibility = Visibility.Visible;
+            EndNod.OuterEllipse.Visibility = Visibility.Visible;
         }
 
         public void UpdatePosition(Nod node, Point p)
         {
-            if (node == StartNode)
+            if (node == StartNod)
             {
                 X1 = p.X;
                 Y1 = p.Y;

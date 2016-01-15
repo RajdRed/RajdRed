@@ -37,30 +37,24 @@ namespace RajdRed
         private Point _nodPos;
         private bool _isSelected = false;
         public Canvas Canvas { get; set; }
+        private Nod _siblingNod = null;
 
         public Nod(Canvas c) 
         {
             InitializeComponent();
-
             Canvas = c;
-            TurnToNode();
-            OuterGrid.Children.Add(_shape);
+            Canvas.SetZIndex(this, 3);
         }
 
-        public Nod(Canvas c, Linje l, Point p) 
+        /// <summary>
+        /// Konstruktor med linje
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="l"></param>
+        /// <param name="p"></param>
+        public Nod(Nod n) : this(n.Canvas)
         {
-            InitializeComponent();
-
-            Canvas = c;
-            TurnToNode();
-            _linje = l;
-
-            this.OuterGrid.Children.Add(_shape);
-
-            Canvas.SetLeft(this, p.X);
-            Canvas.SetTop(this, p.Y);
-
-            c.Children.Add(this);
+            TurnToAssociation();
         }
 
         /// <summary>
@@ -69,15 +63,13 @@ namespace RajdRed
         /// <param name="k"></param>
         /// <param name="os"></param>
         /// <param name="p"></param>
-        public Nod(Klass k, OnSide os, Point p)
+        public Nod(Klass k, OnSide os, Point p) : this(k.MainWindow().getCanvas())
         {
-            InitializeComponent();
-            Canvas = k.MainWindow().getCanvas();
             _onSide = os;
             _klass = k;
 
             TurnToNode();
-            this.OuterGrid.Children.Add(_shape);
+            OuterGrid.Children.Add(_shape);
 
             PositionOfNod(p);
             SetPositionWithMargin();
@@ -183,8 +175,11 @@ namespace RajdRed
         /// </summary>
         public void TurnToAssociation()
         {
-            _shape = new Ellipse() {Stroke = Brushes.Black, StrokeThickness = 1};
-
+            _shape = new Ellipse() {
+                Stroke = Brushes.Black, 
+                StrokeThickness = 1, 
+                Fill = Brushes.Transparent
+            };
         }
 
         /// <summary>
@@ -274,13 +269,21 @@ namespace RajdRed
             {
                 _klass.SetNode(this);
                 _klass.NodeGrid.Visibility = Visibility.Hidden;
-                _linje = new Linje(this);
+
+                _siblingNod = new Nod(this);
+                _linje = new Linje(this, _siblingNod);
+                _siblingNod.BindLinje(_linje);
+
+                TurnToAssociation();
+
                 Canvas.Children.Add(_linje);
             }
             else if (!IsBindToKlass() && IsBindToLinje())
             {
                 CaptureMouse();
                 _isSelected = true;
+            } else if (IsBindToKlass() && IsBindToKlass()) {
+
             }
         }
 
@@ -311,6 +314,11 @@ namespace RajdRed
             {
                 _linje.UpdatePosition(this, PositionRelativeCanvas());
             }
+        }
+
+        public void BindLinje(Linje l)
+        {
+            _linje = l;
         }
 
     }

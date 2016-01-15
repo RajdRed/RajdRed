@@ -38,6 +38,7 @@ namespace RajdRed
 
 			setKlassColors();
 
+            Canvas.SetZIndex(this, 1);
 			Canvas.SetLeft(this, pt.X - 50);
 			Canvas.SetTop(this, pt.Y - 10);
 
@@ -343,6 +344,18 @@ namespace RajdRed
             {
                 NodeSetGrid.Children.Remove(n);
                 NodeGrid.Children.Add(n);
+            }
+        }
+
+        public void LooseNodFromKlass(Nod n)
+        {
+            if (NodeGrid.Children.Contains(n))
+            {
+                NodeGrid.Children.Remove(n);
+                _canvas.Children.Add(n);
+            } else if (NodeSetGrid.Children.Contains(n)) {
+                NodeSetGrid.Children.Remove(n);
+                _canvas.Children.Add(n);
             }
         }
     }
