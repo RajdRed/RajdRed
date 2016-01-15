@@ -43,7 +43,7 @@
 					</TextBlock.Style>
 				</TextBlock>
             </Button>
-            <Button Background="White" Grid.Row="2" FontSize="11" HorizontalContentAlignment="Left">
+            <Button Click="saveButton_click" Background="White" Grid.Row="2" FontSize="11" HorizontalContentAlignment="Left">
 				<TextBlock Text="Save" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">

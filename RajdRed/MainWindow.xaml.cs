@@ -23,11 +23,11 @@ namespace RajdRed
     {
 		private ArchiveMenu archiveMenu = new ArchiveMenu();
 		private SettingsMenu settingsMenu = new SettingsMenu();
-        private bool isArchiveMenuActive = false;
-		private bool isSettingsMenuActive = false;
-		private bool darkColorTheme = false;
+        public bool isArchiveMenuActive = false;
+		public bool isSettingsMenuActive = false;
 		private List<Klass> _klassList = new List<Klass>();
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
+		private bool darkMode = false;
 		
         public MainWindow()
         {
@@ -38,10 +38,16 @@ namespace RajdRed
 		public void changeColors(bool dark)
 		{
 			if (!dark)
+			{
 				Colors = RajdColorScheme.Dark;
+				darkMode = true;
+			}
 
 			else
+			{
 				Colors = RajdColorScheme.Light;
+				darkMode = false;
+			}
 		} 
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -64,6 +70,11 @@ namespace RajdRed
         {
             return theCanvas;
         }
+
+		public bool getDarkMode()
+		{
+			return darkMode;
+		}
 
         private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
         {
@@ -96,82 +107,70 @@ namespace RajdRed
 
         private void Button_ArchiveMenu_MouseDown(object sender, MouseButtonEventArgs e)
         {
-			if (!isArchiveMenuActive) {
+			if (!isArchiveMenuActive) 
+			{
 				Canvas.SetLeft(archiveMenu, 0);
 				Canvas.SetTop(archiveMenu, 100);
 				theCanvas.Children.Add(archiveMenu);
 				isArchiveMenuActive = true;
 
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 			}
 
-			else {
+			else 
+			{
 				theCanvas.Children.Remove(archiveMenu);
 				isArchiveMenuActive = false;
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
         }
 
 		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (isArchiveMenuActive) {
+			if (isArchiveMenuActive) 
+			{
 				theCanvas.Children.Remove(archiveMenu);
 				isArchiveMenuActive = false;
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 
-			if (isSettingsMenuActive)
+			if (isSettingsMenuActive) 
 			{
 				theCanvas.Children.Remove(settingsMenu);
 				isSettingsMenuActive = false;
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 		}
-
-        //private void theCanvas_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    if (isArchiveMenuActive) {
-        //        Point pt = e.GetPosition(theCanvas);
-
-        //        ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
-        //    }
-
-        //    if (isSettingsMenuActive)
-        //    {
-        //        Point pt = e.GetPosition(theCanvas);
-
-        //        SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
-        //    }
-        //}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
 		{
 			Point pt = e.GetPosition(theCanvas);
 
-			if (pt.X > 150 || pt.Y > 220) {
+			if ( (pt.X > 150 || pt.Y > 220) || (pt.X > 78 && pt.Y < 96)) 
+			{
 				theCanvas.Children.Remove(archiveMenu);
 				isArchiveMenuActive = false;
-				ArchiveButtonGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 		}
 
 		private void Button_SettingsMenu_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (!isSettingsMenuActive)
+			if (!isSettingsMenuActive) 
 			{
 				Canvas.SetLeft(settingsMenu, theCanvas.ActualWidth - 150);
 				Canvas.SetTop(settingsMenu, 100);
 				theCanvas.Children.Add(settingsMenu);
 				isSettingsMenuActive = true;
 
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 			}
 
-			else
+			else 
 			{
 				theCanvas.Children.Remove(settingsMenu);
 				isSettingsMenuActive = false;
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 		}
 
@@ -179,24 +178,25 @@ namespace RajdRed
 		{
 			Point pt = e.GetPosition(theCanvas);
 
-			if (pt.X < theCanvas.ActualWidth - 150 || pt.Y > 220) {
+			if ((pt.X < theCanvas.ActualWidth - 150 || pt.Y > 220) || (pt.X < theCanvas.ActualWidth - 78 && pt.Y < theCanvas.ActualWidth - 96)) 
+			{
 				theCanvas.Children.Remove(settingsMenu);
 				isSettingsMenuActive = false;
-				SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 		}
 
 		public void ChangeColorTheme(bool dark)
 		{
-			if (dark) {
-				this.darkColorTheme = true;
+			if (dark) 
+			{
 				var uri = new Uri("pack://application:,,,/img/createClassBg-Dark.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;
 			}
 
-			else {
-				this.darkColorTheme = false;
+			else 
+			{
 				var uri = new Uri("pack://application:,,,/img/createClassBg.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;
@@ -206,7 +206,12 @@ namespace RajdRed
 			menuBot.Background = Colors.MenuBotBg;
 			menuTopRight.Background = Colors.KlassNameBg;
 			menuTopLeft.Fill = Colors.KlassNameBg;
-			SettingsMenuGrid.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
+			
+			if (isArchiveMenuActive)
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
+
+			if (isSettingsMenuActive)
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 
 			foreach (Klass k in _klassList)
 				k.setKlassColors();
