@@ -43,6 +43,7 @@ namespace RajdRed
 
             MouseMove += Klass_MouseMove;
             MouseUp += Klass_MouseUp;
+            SizeChanged += Klass_SizeChanged;
 
             _canvas.Children.Add(this);
 
@@ -54,53 +55,38 @@ namespace RajdRed
 			return _mainWindow;
 		}
 
+        /// <summary>
+        /// Skapar alla noder tillhörande klassen
+        /// </summary>
         private void createNodes()
-        {
-            for (int i = 1; i <= 16; i++)
-            {
-                if (i <= 4)
-                {
-                    Nod n = new Nod(this) { 
-                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
-                        Margin = new Thickness(0, 20*i, 0, 0)
-                    };
-                    _noder.Add(n);
-                    this.NodeGrid.Children.Add(n);
-                }
-                else if (i > 4 && i <= 8)
-                {
-                    Nod n = new Nod(this)
-                    {
-                        HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
-                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
-                        Margin = new Thickness(0, 20 * (i-4), 0, 0)
-                    };
-                    _noder.Add(n);
-                    this.NodeGrid.Children.Add(n);
-                }
-                else if (i > 8 && i <= 12)
-                {
-                    Nod n = new Nod(this)
-                    {
-                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
-                        Margin = new Thickness(20 * (i-8), 0, 0, 0)
-                    };
-                    _noder.Add(n);
-                    this.NodeGrid.Children.Add(n);
-                }
-                else
-                {
-                    Nod n = new Nod(this)
-                    {
-                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                        VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
-                        Margin = new Thickness(20 * (i - 12), 0, 0, 0)
-                    };
-                    _noder.Add(n);
-                    this.NodeGrid.Children.Add(n);
-                }
+        {   
+            int[] intervall = new int[4] { 20, 40, 60, 80};
+            //Left
+            _noder.Add(new Nod(this, OnSide.Left, new Point(0, intervall[0])));
+            _noder.Add(new Nod(this, OnSide.Left, new Point(0, intervall[1])));
+            _noder.Add(new Nod(this, OnSide.Left, new Point(0, intervall[2])));
+            _noder.Add(new Nod(this, OnSide.Left, new Point(0, intervall[3])));
+
+            //Right
+            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[0])));
+            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[1])));
+            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[2])));
+            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[3])));
+            
+            //Top
+            _noder.Add(new Nod(this, OnSide.Top, new Point(intervall[0], 0)));
+            _noder.Add(new Nod(this, OnSide.Top, new Point(intervall[1], 0)));
+            _noder.Add(new Nod(this, OnSide.Top, new Point(intervall[2], 0)));
+            _noder.Add(new Nod(this, OnSide.Top, new Point(intervall[3], 0)));
+            
+            //Bottom
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[0], 0)));
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[1], 0)));
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[2], 0)));
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[3], 0)));
+
+            foreach (Nod node in _noder) {
+                NodeGrid.Children.Add(node);
             }
         }
 
@@ -132,6 +118,15 @@ namespace RajdRed
                 _posOfShapeOnHit.Y = Canvas.GetTop(this);
             }
         }
+
+        private void Klass_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            foreach (var nod in _noder)
+            {
+                nod.SetPositionWithMargin();
+            }
+        }
+
 
         /// <summary>
         /// Öppnar egenskapsfönster
