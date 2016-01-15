@@ -13,20 +13,37 @@ namespace RajdRed
 {
     public class Linje : Shape
     {
-        public double X1 { get; set; }
-        public double Y1 { get; set; }
-        public double X2 { get; set; }
-        public double Y2 { get; set; }
-
         public Nod StartNode { get; set; }
         public Nod EndNode { get; set; }
 
-        private bool _isSelected = false;
+        private LineGeometry line = new LineGeometry();
+        private Point start = new Point(0, 0);
+        private Point end = new Point(0, 0);
+
+        public double X1
+        { set { start.X = value; } }
+        public double Y1
+        { set { start.Y = value; } }
+        public double X2
+        { set { end.X = value; } }
+        public double Y2
+        { set { end.Y = value; } }
+
+        protected override Geometry DefiningGeometry
+        {
+            get
+            {
+                line.StartPoint = start;
+                line.EndPoint = end;
+
+                return line;
+            }
+        }
 
         public Linje(Nod n)
         {
             StartNode = n;
-            EndNode = new Nod(n.Canvas, this, new Point(StartNode.PositionRelativeCanvas().X + 20, StartNode.PositionRelativeCanvas().Y + 20));
+            EndNode = new Nod(n.Canvas, this, new Point(StartNode.PositionRelativeCanvas().X + 20-n.Width/2, StartNode.PositionRelativeCanvas().Y + 20-n.Height/2));
 
             X1 = StartNode.PositionRelativeCanvas().X;
             Y1 = StartNode.PositionRelativeCanvas().Y;
@@ -46,22 +63,11 @@ namespace RajdRed
             }
             else
             {
-                X2 = 10;
-                Y2 = 10;
+                X2 = p.X;
+                Y2 = p.Y;
             }
-        }
 
-        protected override Geometry DefiningGeometry
-        {
-            get
-            {
-                LineGeometry line = new LineGeometry(
-                   new Point(X1, Y1), 
-                    new Point(X2, Y2)
-                );
-
-                return line;
-            }
+            InvalidateVisual();
         }
     }
 }

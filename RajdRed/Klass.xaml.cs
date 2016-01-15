@@ -182,6 +182,11 @@ namespace RajdRed
                 if (posOnCanvas.X <= 0)
                     Canvas.SetLeft(this, 0.1);
 
+                foreach (Nod n in _noder)
+                {
+                    n.UpdateLinjePosition();
+                }
+
             }
         }
 

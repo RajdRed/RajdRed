@@ -305,6 +305,13 @@ namespace RajdRed
             ReleaseMouseCapture();
         }
 
+        public void UpdateLinjePosition()
+        {
+            if (IsBindToLinje())
+            {
+                _linje.UpdatePosition(this, PositionRelativeCanvas());
+            }
+        }
 
     }
 }
