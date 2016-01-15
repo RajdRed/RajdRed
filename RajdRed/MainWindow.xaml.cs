@@ -147,7 +147,7 @@ namespace RajdRed
 		{
 			Point pt = e.GetPosition(theCanvas);
 
-			if ( (pt.X > 150 || pt.Y > 220) || (pt.X > 78 && pt.Y < 96)) 
+			if ( (pt.X > 150 || pt.Y > 190) || (pt.X > 78 && pt.Y < 96)) 
 			{
 				theCanvas.Children.Remove(archiveMenu);
 				isArchiveMenuActive = false;

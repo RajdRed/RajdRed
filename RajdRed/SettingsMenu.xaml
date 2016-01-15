@@ -31,7 +31,7 @@
 				</TextBlock>
 			</Button>
 			<Button Background="#f9f9f9" Grid.Row="1" FontSize="11" HorizontalContentAlignment="Left">
-				<TextBlock Text="Open" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
+				<TextBlock Text="What should be here?" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
 							<Style.Triggers>
@@ -44,7 +44,7 @@
 				</TextBlock>
 			</Button>
 			<Button Background="White" Grid.Row="2" FontSize="11" HorizontalContentAlignment="Left">
-				<TextBlock Text="Save" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
+				<TextBlock Text="Help" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
 							<Style.Triggers>
