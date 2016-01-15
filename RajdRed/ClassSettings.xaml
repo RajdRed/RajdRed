@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             Height="500" Width="580" >
+             Height="500" Width="580"
+			 Loaded="ClassSettings_Loaded">
+	
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="UserControl.Loaded">
             <BeginStoryboard>
@@ -82,7 +84,7 @@
         </Style>
     </UserControl.Resources>
     <Canvas Name="Canvas_Settings">
-        <Grid Height="500" Width="580">
+        <Grid Name="gridAnimate" Height="500" Width="580">
             <Grid.RowDefinitions>
                 <RowDefinition Height="125*"/>
                 <RowDefinition Height="82*"/>
