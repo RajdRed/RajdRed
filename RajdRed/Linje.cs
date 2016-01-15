@@ -18,23 +18,37 @@ namespace RajdRed
         public double X2 { get; set; }
         public double Y2 { get; set; }
 
-        private Nod _startNode = new Nod();
-        private Nod _endNode = new Nod();
+        public Nod StartNode { get; set; }
+        public Nod EndNode { get; set; }
 
         private bool _isSelected = false;
 
         public Linje(Nod n)
         {
-            _startNode = n;
-            _endNode = new Nod(this);
+            StartNode = n;
+            EndNode = new Nod(n.Canvas, this, new Point(StartNode.PositionRelativeCanvas().X + 20, StartNode.PositionRelativeCanvas().Y + 20));
 
-            X1 = _startNode.Position().X;
-            Y1 = _startNode.Position().Y;
-            X2 = _endNode.Position().X;
-            Y2 = _endNode.Position().Y;
+            X1 = StartNode.PositionRelativeCanvas().X;
+            Y1 = StartNode.PositionRelativeCanvas().Y;
+            X2 = StartNode.PositionRelativeCanvas().X+20;
+            Y2 = StartNode.PositionRelativeCanvas().Y+20;
 
             Stroke = Brushes.Black;
-            StrokeThickness = 5;
+            StrokeThickness = 2;
+        }
+
+        public void UpdatePosition(Nod node, Point p)
+        {
+            if (node == StartNode)
+            {
+                X1 = p.X;
+                Y1 = p.Y;
+            }
+            else
+            {
+                X2 = 10;
+                Y2 = 10;
+            }
         }
 
         protected override Geometry DefiningGeometry

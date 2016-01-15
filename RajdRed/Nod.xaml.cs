@@ -35,18 +35,32 @@ namespace RajdRed
         private Shape _shape;
         private OnSide _onSide;
         private Point _nodPos;
+        private bool _isSelected = false;
+        public Canvas Canvas { get; set; }
 
-        public Nod() 
+        public Nod(Canvas c) 
         {
             InitializeComponent();
+
+            Canvas = c;
             TurnToNode();
             OuterGrid.Children.Add(_shape);
         }
 
-        public Nod(Linje l) {
+        public Nod(Canvas c, Linje l, Point p) 
+        {
             InitializeComponent();
+
+            Canvas = c;
             TurnToNode();
             _linje = l;
+
+            this.OuterGrid.Children.Add(_shape);
+
+            Canvas.SetLeft(this, p.X);
+            Canvas.SetTop(this, p.Y);
+
+            c.Children.Add(this);
         }
 
         /// <summary>
@@ -58,6 +72,7 @@ namespace RajdRed
         public Nod(Klass k, OnSide os, Point p)
         {
             InitializeComponent();
+            Canvas = k.MainWindow().getCanvas();
             _onSide = os;
             _klass = k;
 
@@ -74,10 +89,39 @@ namespace RajdRed
         /// <returns></returns>
         public Point Position()
         {
-            return new Point(
-                    Canvas.GetLeft(_klass.MainWindow().getCanvas()), 
-                    Canvas.GetTop(_klass.MainWindow().getCanvas())
-                );
+            return new Point();
+        }
+
+        public Point PositionRelativeCanvas()
+        {
+            if (IsBindToKlass())
+            {
+                if (_onSide == OnSide.Left || _onSide == OnSide.Top) {
+                    return new Point(
+                        Canvas.GetLeft(_klass) + (_nodPos.X * _klass.ActualWidth) + Width/2,
+                        Canvas.GetTop(_klass) + (_nodPos.Y * _klass.ActualHeight) + Height/2
+                        );
+                }
+                else if (_onSide == OnSide.Right) {
+                    return new Point(
+                        Canvas.GetLeft(_klass) + (_nodPos.X * _klass.ActualWidth) - Width / 2,
+                        Canvas.GetTop(_klass) + (_nodPos.Y * _klass.ActualHeight) + Height / 2
+                        );
+                }
+                else {
+                    return new Point(
+                        Canvas.GetLeft(_klass) + (_nodPos.X * _klass.ActualWidth) + Width / 2,
+                        Canvas.GetTop(_klass) + (_nodPos.Y * _klass.ActualHeight) - Height / 2
+                        );
+                }
+            }
+            else
+            {
+                return new Point(
+                    Canvas.GetLeft(this),
+                    Canvas.GetTop(this)
+                    );
+            }
         }
 
         public void PositionOfNod(Point p)
@@ -131,8 +175,7 @@ namespace RajdRed
         /// <returns></returns>
         public bool IsBindToLinje()
         {
-            //return (_linje != null ? true : false);
-            return false;
+            return (_linje != null ? true : false);
         }
 
         /// <summary>
@@ -215,27 +258,51 @@ namespace RajdRed
             return _onSide;
         }
 
-        private void OuterGrid_MouseEnter(object sender, MouseEventArgs e)
+        private void Nod_MouseEnter(object sender, MouseEventArgs e)
         {
             OuterEllipse.Visibility = Visibility.Visible;
         }
 
-        private void OuterGrid_MouseLeave(object sender, MouseEventArgs e)
+        private void Nod_MouseLeave(object sender, MouseEventArgs e)
         {
             OuterEllipse.Visibility = Visibility.Hidden;
         }
 
-        private void OuterGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Nod_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            _klass.SetNode(this);
-            _klass.NodeGrid.Visibility = Visibility.Hidden;
-            _linje = new Linje(this);
-            _klass.MainWindow().getCanvas().Children.Add(_linje);
+            if (!IsBindToLinje() && IsBindToKlass())
+            {
+                _klass.SetNode(this);
+                _klass.NodeGrid.Visibility = Visibility.Hidden;
+                _linje = new Linje(this);
+                Canvas.Children.Add(_linje);
+            }
+            else if (!IsBindToKlass() && IsBindToLinje())
+            {
+                CaptureMouse();
+                _isSelected = true;
+            }
         }
 
         public Klass GetKlass()
         {
             return _klass;
+        }
+
+        private void Nod_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isSelected && IsMouseCaptured)
+            {
+                _linje.UpdatePosition(this, e.GetPosition(Canvas));
+                Canvas.SetLeft(this, e.GetPosition(Canvas).X - Width/2);
+                Canvas.SetTop(this, e.GetPosition(Canvas).Y - Height/2);
+            }
+        }
+
+        private void Nod_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _isSelected = false;
+            ReleaseMouseCapture();
         }
 
 

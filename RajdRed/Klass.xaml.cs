@@ -68,10 +68,10 @@ namespace RajdRed
             _noder.Add(new Nod(this, OnSide.Left, new Point(0, intervall[3])));
 
             //Right
-            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[0])));
-            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[1])));
-            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[2])));
-            _noder.Add(new Nod(this, OnSide.Right, new Point(0, intervall[3])));
+            _noder.Add(new Nod(this, OnSide.Right, new Point(MinWidth, intervall[0])));
+            _noder.Add(new Nod(this, OnSide.Right, new Point(MinWidth, intervall[1])));
+            _noder.Add(new Nod(this, OnSide.Right, new Point(MinWidth, intervall[2])));
+            _noder.Add(new Nod(this, OnSide.Right, new Point(MinWidth, intervall[3])));
             
             //Top
             _noder.Add(new Nod(this, OnSide.Top, new Point(intervall[0], 0)));
@@ -80,10 +80,10 @@ namespace RajdRed
             _noder.Add(new Nod(this, OnSide.Top, new Point(intervall[3], 0)));
             
             //Bottom
-            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[0], 0)));
-            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[1], 0)));
-            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[2], 0)));
-            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[3], 0)));
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[0], MinHeight)));
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[1], MinHeight)));
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[2], MinHeight)));
+            _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[3], MinHeight)));
 
             foreach (Nod node in _noder) {
                 NodeGrid.Children.Add(node);

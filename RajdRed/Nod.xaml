@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Height="10" Width="10">
-    <Grid Name="OuterGrid" MouseEnter="OuterGrid_MouseEnter" MouseDown="OuterGrid_MouseDown" Background="Transparent" MouseLeave="OuterGrid_MouseLeave">
+             Height="10" Width="10" 
+             MouseDown="Nod_MouseDown" 
+             MouseMove="Nod_MouseMove" 
+             MouseUp="Nod_MouseUp"
+             MouseEnter="Nod_MouseEnter"
+             MouseLeave="Nod_MouseLeave">
+    <Grid Name="OuterGrid" IsEnabled="True"  Background="Transparent">
         <Ellipse Name="OuterEllipse" Visibility="Hidden" Fill="Red" Opacity="0.5" ></Ellipse>
     </Grid>
 </UserControl>
