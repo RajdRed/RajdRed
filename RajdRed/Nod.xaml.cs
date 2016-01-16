@@ -38,16 +38,16 @@ namespace RajdRed
         private Point _nodPos;
         private bool _isSelected;
         public Canvas Canvas { get; set; }
+        private Nod _siblingNod = null;
 
         public Nod(Canvas c) 
         {
             InitializeComponent();
-
             Canvas = c;
-            TurnToNode();
-            OuterGrid.Children.Add(_shape);
+            Canvas.SetZIndex(this, 3);
         }
 
+<<<<<<< HEAD
         public Nod(Canvas c, Linje l, MouseButtonEventArgs e) : this(c)
         {
             
@@ -58,6 +58,17 @@ namespace RajdRed
             
 
             c.Children.Add(this);
+=======
+        /// <summary>
+        /// Konstruktor med linje
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="l"></param>
+        /// <param name="p"></param>
+        public Nod(Nod n) : this(n.Canvas)
+        {
+            TurnToAssociation();
+>>>>>>> refs/remotes/origin/Master-NodLinje
         }
 
         /// <summary>
@@ -71,6 +82,12 @@ namespace RajdRed
             _onSide = os;
             _klass = k;
 
+<<<<<<< HEAD
+=======
+            TurnToNode();
+            OuterGrid.Children.Add(_shape);
+
+>>>>>>> refs/remotes/origin/Master-NodLinje
             PositionOfNod(p);
             SetPositionWithMargin();
         }
@@ -175,8 +192,11 @@ namespace RajdRed
         /// </summary>
         public void TurnToAssociation()
         {
-            _shape = new Ellipse() {Stroke = Brushes.Black, StrokeThickness = 1};
-
+            _shape = new Ellipse() {
+                Stroke = Brushes.Black, 
+                StrokeThickness = 1, 
+                Fill = Brushes.Transparent
+            };
         }
 
         /// <summary>
@@ -266,13 +286,25 @@ namespace RajdRed
             {
                 _klass.SetNode(this);
                 _klass.NodeGrid.Visibility = Visibility.Hidden;
+<<<<<<< HEAD
                 _linje = new Linje(this, _siblingNod);
+=======
+
+                _siblingNod = new Nod(this);
+                _linje = new Linje(this, _siblingNod);
+                _siblingNod.BindLinje(_linje);
+
+                TurnToAssociation();
+
+>>>>>>> refs/remotes/origin/Master-NodLinje
                 Canvas.Children.Add(_linje);
             }
             else if (!IsBindToKlass() && IsBindToLinje())
             {
                 CaptureMouse();
                 _isSelected = true;
+            } else if (IsBindToKlass() && IsBindToKlass()) {
+
             }
         }
 
@@ -303,6 +335,11 @@ namespace RajdRed
             {
                 _linje.UpdatePosition(this, PositionRelativeCanvas());
             }
+        }
+
+        public void BindLinje(Linje l)
+        {
+            _linje = l;
         }
 
     }
