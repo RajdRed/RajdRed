@@ -33,12 +33,11 @@ namespace RajdRed
         private Klass _klass = null;
         private Linje _linje = null;
         private Nod _siblingNod = null;
-        private Shape _shape;
+        private Shape _shape = null;
         private OnSide _onSide;
         private Point _nodPos;
         private bool _isSelected;
         public Canvas Canvas { get; set; }
-        private Nod _siblingNod = null;
 
         public Nod(Canvas c) 
         {
@@ -47,18 +46,7 @@ namespace RajdRed
             Canvas.SetZIndex(this, 3);
         }
 
-<<<<<<< HEAD
-        public Nod(Canvas c, Linje l, MouseButtonEventArgs e) : this(c)
-        {
-            
-            _linje = l;
 
-            Canvas.SetLeft(this, e.GetPosition(c).X);
-            Canvas.SetTop(this, e.GetPosition(c).Y);
-            
-
-            c.Children.Add(this);
-=======
         /// <summary>
         /// Konstruktor med linje
         /// </summary>
@@ -67,8 +55,14 @@ namespace RajdRed
         /// <param name="p"></param>
         public Nod(Nod n) : this(n.Canvas)
         {
+            _onSide = n._onSide;
+            _nodPos = n._nodPos;
+            _klass = n._klass;
+            _klass._noder.Add(this);
+
             TurnToAssociation();
->>>>>>> refs/remotes/origin/Master-NodLinje
+            _klass.NodeSetGrid.Children.Add(this);
+            SetPositionWithMargin();
         }
 
         /// <summary>
@@ -82,12 +76,7 @@ namespace RajdRed
             _onSide = os;
             _klass = k;
 
-<<<<<<< HEAD
-=======
             TurnToNode();
-            OuterGrid.Children.Add(_shape);
-
->>>>>>> refs/remotes/origin/Master-NodLinje
             PositionOfNod(p);
             SetPositionWithMargin();
         }
@@ -192,11 +181,17 @@ namespace RajdRed
         /// </summary>
         public void TurnToAssociation()
         {
+            if (_shape != null)
+            {
+                OuterGrid.Children.Remove(_shape);
+            }
+            
             _shape = new Ellipse() {
                 Stroke = Brushes.Black, 
                 StrokeThickness = 1, 
                 Fill = Brushes.Transparent
             };
+            OuterGrid.Children.Add(_shape);
         }
 
         /// <summary>
@@ -206,6 +201,10 @@ namespace RajdRed
         {
             if (_onSide == OnSide.Bottom)
             {
+                if (_shape != null)
+                {
+                    OuterGrid.Children.Remove(_shape);
+                }
                 _shape = new Polygon()
                 {
                     Stroke = Brushes.Black,
@@ -216,6 +215,7 @@ namespace RajdRed
                     new Point(0, this.Height) 
                     }
                 };
+                OuterGrid.Children.Add(_shape);
             }
             
         }
@@ -226,6 +226,10 @@ namespace RajdRed
         /// <param name="filled"></param>
         public void TurnToAggregation(bool filled)
         {
+            if (_shape != null)
+            {
+                OuterGrid.Children.Remove(_shape);
+            }
             _shape = new Polygon() { 
                 Stroke=Brushes.Black, 
                 StrokeThickness = 1,
@@ -242,11 +246,16 @@ namespace RajdRed
             {
                 _shape.Fill = Brushes.Black;
             }
+            OuterGrid.Children.Add(_shape);
 
         }
 
         public void TurnToNode()
         {
+            if (_shape != null)
+            {
+                OuterGrid.Children.Remove(_shape);
+            }
             _shape = new Polygon()
             {
                 Points = new PointCollection() {
@@ -259,6 +268,7 @@ namespace RajdRed
                 StrokeThickness = 1,
                 Stroke = Brushes.Gray
             };
+            OuterGrid.Children.Add(_shape);
         }
 
         /// <summary>
@@ -284,26 +294,31 @@ namespace RajdRed
         {
             if (!IsBindToLinje() && IsBindToKlass())
             {
-                _klass.SetNode(this);
-                _klass.NodeGrid.Visibility = Visibility.Hidden;
-<<<<<<< HEAD
-                _linje = new Linje(this, _siblingNod);
-=======
+
 
                 _siblingNod = new Nod(this);
-                _linje = new Linje(this, _siblingNod);
+                _linje = new Linje(_siblingNod, this);
                 _siblingNod.BindLinje(_linje);
 
                 TurnToAssociation();
 
->>>>>>> refs/remotes/origin/Master-NodLinje
+                _klass.LooseNodFromKlass(this);
+                _klass._noder.Remove(this);
+                _klass = null;
+                _onSide = 0;
+                _nodPos.X = 0;
+                _nodPos.Y = 0;
+                CaptureMouse();
+                _isSelected = true;
+
                 Canvas.Children.Add(_linje);
             }
             else if (!IsBindToKlass() && IsBindToLinje())
             {
                 CaptureMouse();
                 _isSelected = true;
-            } else if (IsBindToKlass() && IsBindToKlass()) {
+            } 
+            else if (IsBindToKlass() && IsBindToLinje()) {
 
             }
         }

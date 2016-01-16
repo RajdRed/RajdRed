@@ -353,7 +353,8 @@ namespace RajdRed
             {
                 NodeGrid.Children.Remove(n);
                 _canvas.Children.Add(n);
-            } else if (NodeSetGrid.Children.Contains(n)) {
+            } 
+            else if (NodeSetGrid.Children.Contains(n)) {
                 NodeSetGrid.Children.Remove(n);
                 _canvas.Children.Add(n);
             }

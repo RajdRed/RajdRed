@@ -42,15 +42,7 @@ namespace RajdRed
 
         public Linje(Nod sn, Nod en)
         {
-<<<<<<< HEAD
-            StartNode = sn;
-            EndNode = en;
-            
-            X1 = StartNode.PositionRelativeCanvas().X;
-            Y1 = StartNode.PositionRelativeCanvas().Y;
-            X2 = EndNode.PositionRelativeCanvas().X;
-            Y2 = EndNode.PositionRelativeCanvas().Y;
-=======
+
             StartNod = sn;
             EndNod = en;
 
@@ -58,7 +50,7 @@ namespace RajdRed
             Y1 = StartNod.PositionRelativeCanvas().Y;
             X2 = EndNod.PositionRelativeCanvas().X;
             Y2 = EndNod.PositionRelativeCanvas().Y;
->>>>>>> refs/remotes/origin/Master-NodLinje
+
 
             Stroke = Brushes.Black;
             StrokeThickness = 2;
