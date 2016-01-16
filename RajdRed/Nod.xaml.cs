@@ -32,10 +32,11 @@ namespace RajdRed
     {
         private Klass _klass = null;
         private Linje _linje = null;
+        private Nod _siblingNod = null;
         private Shape _shape;
         private OnSide _onSide;
         private Point _nodPos;
-        private bool _isSelected = false;
+        private bool _isSelected;
         public Canvas Canvas { get; set; }
 
         public Nod(Canvas c) 
@@ -47,18 +48,14 @@ namespace RajdRed
             OuterGrid.Children.Add(_shape);
         }
 
-        public Nod(Canvas c, Linje l, Point p) 
+        public Nod(Canvas c, Linje l, MouseButtonEventArgs e) : this(c)
         {
-            InitializeComponent();
-
-            Canvas = c;
-            TurnToNode();
+            
             _linje = l;
 
-            this.OuterGrid.Children.Add(_shape);
-
-            Canvas.SetLeft(this, p.X);
-            Canvas.SetTop(this, p.Y);
+            Canvas.SetLeft(this, e.GetPosition(c).X);
+            Canvas.SetTop(this, e.GetPosition(c).Y);
+            
 
             c.Children.Add(this);
         }
@@ -69,15 +66,10 @@ namespace RajdRed
         /// <param name="k"></param>
         /// <param name="os"></param>
         /// <param name="p"></param>
-        public Nod(Klass k, OnSide os, Point p)
+        public Nod(Klass k, OnSide os, Point p) : this(k.MainWindow().getCanvas())
         {
-            InitializeComponent();
-            Canvas = k.MainWindow().getCanvas();
             _onSide = os;
             _klass = k;
-
-            TurnToNode();
-            this.OuterGrid.Children.Add(_shape);
 
             PositionOfNod(p);
             SetPositionWithMargin();
@@ -274,7 +266,7 @@ namespace RajdRed
             {
                 _klass.SetNode(this);
                 _klass.NodeGrid.Visibility = Visibility.Hidden;
-                _linje = new Linje(this);
+                _linje = new Linje(this, _siblingNod);
                 Canvas.Children.Add(_linje);
             }
             else if (!IsBindToKlass() && IsBindToLinje())

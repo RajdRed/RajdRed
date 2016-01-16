@@ -40,15 +40,15 @@ namespace RajdRed
             }
         }
 
-        public Linje(Nod n)
+        public Linje(Nod sn, Nod en)
         {
-            StartNode = n;
-            EndNode = new Nod(n.Canvas, this, new Point(StartNode.PositionRelativeCanvas().X + 20-n.Width/2, StartNode.PositionRelativeCanvas().Y + 20-n.Height/2));
-
+            StartNode = sn;
+            EndNode = en;
+            
             X1 = StartNode.PositionRelativeCanvas().X;
             Y1 = StartNode.PositionRelativeCanvas().Y;
-            X2 = StartNode.PositionRelativeCanvas().X+20;
-            Y2 = StartNode.PositionRelativeCanvas().Y+20;
+            X2 = EndNode.PositionRelativeCanvas().X;
+            Y2 = EndNode.PositionRelativeCanvas().Y;
 
             Stroke = Brushes.Black;
             StrokeThickness = 2;
