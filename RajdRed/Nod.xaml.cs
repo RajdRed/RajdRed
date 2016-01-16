@@ -300,14 +300,8 @@ namespace RajdRed
                 _linje = new Linje(_siblingNod, this);
                 _siblingNod.BindLinje(_linje);
 
-                TurnToAssociation();
-
-                _klass.LooseNodFromKlass(this);
-                _klass._noder.Remove(this);
-                _klass = null;
-                _onSide = 0;
-                _nodPos.X = 0;
-                _nodPos.Y = 0;
+                resetNodFromKlass();
+                
                 CaptureMouse();
                 _isSelected = true;
 
@@ -355,6 +349,18 @@ namespace RajdRed
         public void BindLinje(Linje l)
         {
             _linje = l;
+        }
+
+        private void resetNodFromKlass()
+        {
+            TurnToAssociation();
+            _onSide = 0;
+            _nodPos.X = 0;
+            _nodPos.Y = 0;
+            this.Margin = new Thickness(0);
+            _klass._noder.Remove(this);
+            _klass.LooseNodFromKlass(this);
+            _klass = null;
         }
 
     }
