@@ -34,7 +34,7 @@ namespace RajdRed
             InitializeComponent();
 
             _mainWindow = w;
-            _canvas = w.getCanvas();
+            _canvas = w.GetCanvas();
 
 			setKlassColors();
 
@@ -51,7 +51,7 @@ namespace RajdRed
             createNodes();
         }
 
-		public MainWindow MainWindow()
+		public MainWindow GetMainWindow()
 		{
 			return _mainWindow;
 		}
@@ -311,9 +311,9 @@ namespace RajdRed
 
 		public void setKlassColors()
 		{
-			bgTopRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassNameBg);
-			bgMidRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassAttributesBg);
-			bgBotRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassMethodsBg);
+			bgTopRow.SetCurrentValue(Control.BackgroundProperty, GetMainWindow().Colors.KlassNameBg);
+			bgMidRow.SetCurrentValue(Control.BackgroundProperty, GetMainWindow().Colors.KlassAttributesBg);
+			bgBotRow.SetCurrentValue(Control.BackgroundProperty, GetMainWindow().Colors.KlassMethodsBg);
 		}
 
         private void InnerGrid_MouseLeave(object sender, MouseEventArgs e)
@@ -325,7 +325,7 @@ namespace RajdRed
         /// Fastställer nod: nod försvinner ej vid klass_mouseleave 
         /// </summary>
         /// <param name="n"></param>
-        public void SetNode(Nod n)
+        public void SetNod(Nod n)
         {
             if (NodeGrid.Children.Contains(n))
             {
@@ -334,11 +334,16 @@ namespace RajdRed
             }
         }
 
+        public void SetNodToKlass(Nod n)
+        {
+
+        }
+
         /// <summary>
         /// Lossar nod: nod försvinner vid klass_mouseleave
         /// </summary>
         /// <param name="n"></param>
-        public void LooseNode(Nod n)
+        public void LooseNod(Nod n)
         {
             if (NodeSetGrid.Children.Contains(n))
             {

@@ -28,7 +28,7 @@ namespace RajdRed
             InitializeComponent();
             _klass = k;
 
-            PolygonAggregate.Fill = k.MainWindow().Colors.KlassAttributesBg;
+            PolygonAggregate.Fill = k.GetMainWindow().Colors.KlassAttributesBg;
         }
     }
 }

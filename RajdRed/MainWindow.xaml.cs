@@ -66,7 +66,7 @@ namespace RajdRed
 			_klassList.Remove(klass);
         }
 
-        public Canvas getCanvas()
+        public Canvas GetCanvas()
         {
             return theCanvas;
         }
@@ -216,5 +216,20 @@ namespace RajdRed
 			foreach (Klass k in _klassList)
 				k.setKlassColors();
 		}
+
+        public void ShowAllNodes(bool show)
+        {
+            foreach (var k in _klassList)
+            {
+                if (show)
+                {
+                    k.NodeGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    k.NodeGrid.Visibility = Visibility.Hidden;
+                }
+            }
+        }
     }
 }

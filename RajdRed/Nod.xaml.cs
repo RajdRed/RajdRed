@@ -30,6 +30,7 @@ namespace RajdRed
 
     public partial class Nod : UserControl
     {
+        private MainWindow _mainWindow;
         private Klass _klass = null;
         private Linje _linje = null;
         private Nod _siblingNod = null;
@@ -39,10 +40,11 @@ namespace RajdRed
         private bool _isSelected;
         public Canvas Canvas { get; set; }
 
-        public Nod(Canvas c) 
+        public Nod(MainWindow m) 
         {
             InitializeComponent();
-            Canvas = c;
+            _mainWindow = m;
+            Canvas = m.GetCanvas();
             Canvas.SetZIndex(this, 3);
         }
 
@@ -53,15 +55,23 @@ namespace RajdRed
         /// <param name="c"></param>
         /// <param name="l"></param>
         /// <param name="p"></param>
-        public Nod(Nod n) : this(n.Canvas)
+        public Nod(Nod n, bool ass) : this(n._mainWindow)
         {
             _onSide = n._onSide;
             _nodPos = n._nodPos;
             _klass = n._klass;
             _klass._noder.Add(this);
 
-            TurnToAssociation();
             _klass.NodeSetGrid.Children.Add(this);
+            if (ass)
+            {
+                TurnToAssociation();
+            }
+            else
+            {
+                _klass.LooseNod(this);
+                TurnToNode();
+            }
             SetPositionWithMargin();
         }
 
@@ -71,7 +81,7 @@ namespace RajdRed
         /// <param name="k"></param>
         /// <param name="os"></param>
         /// <param name="p"></param>
-        public Nod(Klass k, OnSide os, Point p) : this(k.MainWindow().getCanvas())
+        public Nod(Klass k, OnSide os, Point p) : this(k.GetMainWindow())
         {
             _onSide = os;
             _klass = k;
@@ -294,9 +304,7 @@ namespace RajdRed
         {
             if (!IsBindToLinje() && IsBindToKlass())
             {
-
-
-                _siblingNod = new Nod(this);
+                _siblingNod = new Nod(this, true);
                 _linje = new Linje(_siblingNod, this);
                 _siblingNod.BindLinje(_linje);
 
@@ -312,9 +320,14 @@ namespace RajdRed
                 CaptureMouse();
                 _isSelected = true;
             } 
-            else if (IsBindToKlass() && IsBindToLinje()) {
-
+            else if (IsBindToKlass() && IsBindToLinje()) 
+            {
+                _siblingNod = new Nod(this, false);
+                resetNodFromKlass();
+                CaptureMouse();
+                _isSelected = true;
             }
+            _mainWindow.ShowAllNodes(true);
         }
 
         public Klass GetKlass()
@@ -336,6 +349,7 @@ namespace RajdRed
         {
             _isSelected = false;
             ReleaseMouseCapture();
+            _mainWindow.ShowAllNodes(false);
         }
 
         public void UpdateLinjePosition()
