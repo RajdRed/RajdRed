@@ -341,6 +341,7 @@ namespace RajdRed
             _isSelected = false;
             ReleaseMouseCapture();
             _mainWindow.ShowAllNodes(false);
+            setExternNodToKlass();
         }
 
         public void UpdateLinjePosition()
@@ -364,31 +365,41 @@ namespace RajdRed
         private void setExternNodToKlass()
         {
             Point pt = new Point(Canvas.GetLeft(this), Canvas.GetTop(this));
-            foreach (var k in _mainWindow._klassList)
+            Action check = delegate
             {
-                foreach (Nod n in k._noder)
+                foreach (var k in _mainWindow._klassList)
                 {
-                    //Kollar om noden man släpper är innanför någon nod på någon klass (alltså fett många noder)
-                    if (((pt.X > n.PositionRelativeCanvas().X && pt.Y > n.PositionRelativeCanvas().Y) &&
-                        (pt.X < n.PositionRelativeCanvas().X + n.Width && pt.Y < n.PositionRelativeCanvas().Y + n.Height))
-                        || ((pt.X + Width > n.PositionRelativeCanvas().X && pt.Y > n.PositionRelativeCanvas().Y) &&
-                        (pt.X + Width < n.PositionRelativeCanvas().X + n.Width && pt.Y < n.PositionRelativeCanvas().Y + n.Height))
-                        || ((pt.X > n.PositionRelativeCanvas().X && pt.Y + Height > n.PositionRelativeCanvas().Y) &&
-                        (pt.X < n.PositionRelativeCanvas().X + n.Width && pt.Y + Height < n.PositionRelativeCanvas().Y + n.Height))
-                        || ((pt.X + Width > n.PositionRelativeCanvas().X && pt.Y + Height > n.PositionRelativeCanvas().Y) &&
-                        (pt.X + Width < n.PositionRelativeCanvas().X + n.Width && pt.Y + Height < n.PositionRelativeCanvas().Y + n.Height)))
+                    foreach (Nod n in k._noder)
                     {
-                        if (n.IsBindToLinje() == false)
+                        //Kollar om noden man släpper är innanför någon nod på någon klass (alltså fett många noder)
+                        if (((pt.X > n.PositionRelativeCanvas().X && pt.Y > n.PositionRelativeCanvas().Y) &&
+                            (pt.X < n.PositionRelativeCanvas().X + n.Width && pt.Y < n.PositionRelativeCanvas().Y + n.Height))
+                            || ((pt.X + Width > n.PositionRelativeCanvas().X && pt.Y > n.PositionRelativeCanvas().Y) &&
+                            (pt.X + Width < n.PositionRelativeCanvas().X + n.Width && pt.Y < n.PositionRelativeCanvas().Y + n.Height))
+                            || ((pt.X > n.PositionRelativeCanvas().X && pt.Y + Height > n.PositionRelativeCanvas().Y) &&
+                            (pt.X < n.PositionRelativeCanvas().X + n.Width && pt.Y + Height < n.PositionRelativeCanvas().Y + n.Height))
+                            || ((pt.X + Width > n.PositionRelativeCanvas().X && pt.Y + Height > n.PositionRelativeCanvas().Y) &&
+                            (pt.X + Width < n.PositionRelativeCanvas().X + n.Width && pt.Y + Height < n.PositionRelativeCanvas().Y + n.Height)))
                         {
-                            Klass = n.Klass;
-                            _nodPos = n._nodPos;
-                            _onSide = n._onSide;
-                            
+                            if (n.IsBindToLinje() == false)
+                            {
+                                Klass = n.Klass;
+                                _nodPos = n._nodPos;
+                                _onSide = n._onSide;
+                                n.Klass._noder.Remove(n);
+                                Canvas.Children.Remove(this);
+                                Klass.AttachNodToKlass(Klass, this, true);
+                                SetPositionWithMargin();
+                                return;
+
+                            }
+
                         }
-                       
                     }
                 }
-            }
+            };
+            check();
+            
         }
 
     }
