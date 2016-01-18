@@ -16,9 +16,8 @@ using System.Windows.Shapes;
 namespace RajdRed
 {
     /// <summary>
-    /// Interaction logic for Nod.xaml
+    /// Vilken sida av en klass
     /// </summary>
-    /// 
     public enum OnSide
     {
         Left,
@@ -28,68 +27,128 @@ namespace RajdRed
         Corner
     }
 
+
+    public struct NodTypes
+    {
+        private Nod _n;
+        public Ellipse Assosiation;
+        public Polygon Generalization;
+        public Polygon Aggregation;
+        public Polygon Node;
+
+        public NodTypes(Nod n)
+        {
+            _n = n;
+            Assosiation = new Ellipse() 
+            {
+                Stroke = Brushes.Black, 
+                StrokeThickness = 1, 
+                Fill = Brushes.Transparent
+            };
+
+            Generalization = new Polygon()
+            {
+                Stroke = Brushes.Black,
+                StrokeThickness = 1,
+                Points = new PointCollection() { 
+                        new Point(_n.Width/2, 0), 
+                        new Point(_n.Width, _n.Height), 
+                        new Point(0, _n.Height) 
+                    }
+            };
+
+            Aggregation = new Polygon()
+            {
+                Stroke = Brushes.Black,
+                StrokeThickness = 1,
+                Points = new PointCollection()
+                {
+                    new Point(_n.Width/2, 0),
+                    new Point(_n.Width, _n.Height/2),
+                    new Point(_n.Width/2, _n.Height),
+                    new Point(0, _n.Height/2)
+                }
+            };
+
+            Node = new Polygon()
+            {
+                Points = new PointCollection() {
+                    new Point(2,5),
+                    new Point(8,5),
+                    new Point(5,5),
+                    new Point(5,2),
+                    new Point(5,8)
+                },
+                StrokeThickness = 1,
+                Stroke = Brushes.Gray
+            };
+        }
+        
+    }
+
     public partial class Nod : UserControl
     {
-        private Klass _klass = null;
-        private Linje _linje = null;
+        public Klass Klass { get; set; }
+        public Linje Linje { get; set; }
         private Shape _shape;
         private OnSide _onSide;
         private Point _nodPos;
         private bool _isSelected = false;
         public Canvas Canvas { get; set; }
+        private Nod _siblingNod = null;
+        private NodTypes _nodTypes;
 
+        /// <summary>
+        /// Baskonstruktor. 
+        /// </summary>
+        /// <param name="c"></param>
         public Nod(Canvas c) 
         {
             InitializeComponent();
-
             Canvas = c;
-            TurnToNode();
-            OuterGrid.Children.Add(_shape);
-        }
+            _nodTypes = new NodTypes(this);
+            _shape = _nodTypes.Node;
+            _shape.DataContext = _shape;
 
-        public Nod(Canvas c, Linje l, Point p) 
-        {
-            InitializeComponent();
+            Canvas.SetZIndex(this, 3);
 
-            Canvas = c;
-            TurnToNode();
-            _linje = l;
-
-            this.OuterGrid.Children.Add(_shape);
-
-            Canvas.SetLeft(this, p.X);
-            Canvas.SetTop(this, p.Y);
-
-            c.Children.Add(this);
+            Stackpanel.Children.Add(_shape);
         }
 
         /// <summary>
-        /// Nodens konstruktor om den skapas bunden till en klass
+        /// Kopieringskonstruktor. Från fristående nod till klassbunden nod
         /// </summary>
-        /// <param name="k"></param>
-        /// <param name="os"></param>
+        /// <param name="c"></param>
+        /// <param name="l"></param>
         /// <param name="p"></param>
-        public Nod(Klass k, OnSide os, Point p)
+        public Nod(Nod n) : this(n.Canvas)
         {
-            InitializeComponent();
-            Canvas = k.MainWindow().getCanvas();
-            _onSide = os;
-            _klass = k;
+            _onSide = n._onSide;
+            _nodPos = n._nodPos;
 
-            TurnToNode();
-            this.OuterGrid.Children.Add(_shape);
+            if (n.Klass != null)
+                Klass = n.Klass;
 
-            PositionOfNod(p);
+            HorizontalAlignment = n.HorizontalAlignment;
+            VerticalAlignment = n.VerticalAlignment;
+
+            Klass.SetNodOnKlass(this, true);
             SetPositionWithMargin();
         }
 
         /// <summary>
-        /// Position relativt Canvas:en
+        /// Konstruktor om den från början är bunden till en klass
         /// </summary>
-        /// <returns></returns>
-        public Point Position()
+        /// <param name="k"></param>
+        /// <param name="os"></param>
+        /// <param name="p"></param>
+        public Nod(Klass k, OnSide os, Point p) : this(k.MainWindow().getCanvas())
         {
-            return new Point();
+            _onSide = os;
+            Klass = k;
+
+            PositionOfNod(p);
+            SetPositionWithMargin();
         }
 
         public Point PositionRelativeCanvas()
@@ -98,20 +157,20 @@ namespace RajdRed
             {
                 if (_onSide == OnSide.Left || _onSide == OnSide.Top) {
                     return new Point(
-                        Canvas.GetLeft(_klass) + (_nodPos.X * _klass.ActualWidth) + Width/2,
-                        Canvas.GetTop(_klass) + (_nodPos.Y * _klass.ActualHeight) + Height/2
+                        Canvas.GetLeft(Klass) + (_nodPos.X * Klass.ActualWidth) + Width/2,
+                        Canvas.GetTop(Klass) + (_nodPos.Y * Klass.ActualHeight) + Height/2
                         );
                 }
                 else if (_onSide == OnSide.Right) {
                     return new Point(
-                        Canvas.GetLeft(_klass) + (_nodPos.X * _klass.ActualWidth) - Width / 2,
-                        Canvas.GetTop(_klass) + (_nodPos.Y * _klass.ActualHeight) + Height / 2
+                        Canvas.GetLeft(Klass) + (_nodPos.X * Klass.ActualWidth) - Width / 2,
+                        Canvas.GetTop(Klass) + (_nodPos.Y * Klass.ActualHeight) + Height / 2
                         );
                 }
                 else {
                     return new Point(
-                        Canvas.GetLeft(_klass) + (_nodPos.X * _klass.ActualWidth) + Width / 2,
-                        Canvas.GetTop(_klass) + (_nodPos.Y * _klass.ActualHeight) - Height / 2
+                        Canvas.GetLeft(Klass) + (_nodPos.X * Klass.ActualWidth) + Width / 2,
+                        Canvas.GetTop(Klass) + (_nodPos.Y * Klass.ActualHeight) - Height / 2
                         );
                 }
             }
@@ -126,8 +185,8 @@ namespace RajdRed
 
         public void PositionOfNod(Point p)
         {
-            _nodPos.X = p.X / _klass.MinWidth;
-            _nodPos.Y = p.Y / _klass.MinHeight;
+            _nodPos.X = p.X / Klass.MinWidth;
+            _nodPos.Y = p.Y / Klass.MinHeight;
         }
 
          //<summary>
@@ -138,22 +197,22 @@ namespace RajdRed
         {
             switch (_onSide) {
                 case OnSide.Left:
-                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
+                    this.Margin = new Thickness(0, _nodPos.Y * Klass.ActualHeight, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Right:
-                    this.Margin = new Thickness(0, _nodPos.Y * _klass.ActualHeight, 0, 0);
+                    this.Margin = new Thickness(0, _nodPos.Y * Klass.ActualHeight, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Right;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Top:
-                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
+                    this.Margin = new Thickness(_nodPos.X * Klass.ActualWidth, 0, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case OnSide.Bottom:
-                    this.Margin = new Thickness(_nodPos.X * _klass.ActualWidth, 0, 0, 0);
+                    this.Margin = new Thickness(_nodPos.X * Klass.ActualWidth, 0, 0, 0);
                     this.HorizontalAlignment = HorizontalAlignment.Left;
                     this.VerticalAlignment = VerticalAlignment.Bottom;
                     break;
@@ -166,7 +225,7 @@ namespace RajdRed
         /// <returns></returns>
         public bool IsBindToKlass()
         {
-            return (_klass != null ? true : false);
+            return (Klass != null ? true : false);
         }
 
         /// <summary>
@@ -175,7 +234,7 @@ namespace RajdRed
         /// <returns></returns>
         public bool IsBindToLinje()
         {
-            return (_linje != null ? true : false);
+            return (Linje != null ? true : false);
         }
 
         /// <summary>
@@ -183,8 +242,7 @@ namespace RajdRed
         /// </summary>
         public void TurnToAssociation()
         {
-            _shape = new Ellipse() {Stroke = Brushes.Black, StrokeThickness = 1};
-
+            _shape = _nodTypes.Assosiation;
         }
 
         /// <summary>
@@ -192,20 +250,7 @@ namespace RajdRed
         /// </summary>
         public void TurnToGeneralization()
         {
-            if (_onSide == OnSide.Bottom)
-            {
-                _shape = new Polygon()
-                {
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 1,
-                    Points = new PointCollection() { 
-                    new Point(this.Width/2, 0), 
-                    new Point(this.Width, this.Height), 
-                    new Point(0, this.Height) 
-                    }
-                };
-            }
-            
+            _shape = _nodTypes.Generalization;
         }
 
         /// <summary>
@@ -214,17 +259,7 @@ namespace RajdRed
         /// <param name="filled"></param>
         public void TurnToAggregation(bool filled)
         {
-            _shape = new Polygon() { 
-                Stroke=Brushes.Black, 
-                StrokeThickness = 1,
-                Points = new PointCollection()
-                {
-                    new Point(this.Width/2, 0),
-                    new Point(this.Width, this.Height/2),
-                    new Point(this.Width/2, this.Height),
-                    new Point(0, this.Height/2)
-                }
-            };
+            _shape = _nodTypes.Aggregation;
 
             if (filled)
             {
@@ -235,18 +270,7 @@ namespace RajdRed
 
         public void TurnToNode()
         {
-            _shape = new Polygon()
-            {
-                Points = new PointCollection() {
-                    new Point(2,5),
-                    new Point(8,5),
-                    new Point(5,5),
-                    new Point(5,2),
-                    new Point(5,8)
-                },
-                StrokeThickness = 1,
-                Stroke = Brushes.Gray
-            };
+            _shape = _nodTypes.Node;
         }
 
         /// <summary>
@@ -272,28 +296,35 @@ namespace RajdRed
         {
             if (!IsBindToLinje() && IsBindToKlass())
             {
-                _klass.SetNode(this);
-                _klass.NodeGrid.Visibility = Visibility.Hidden;
-                _linje = new Linje(this);
-                Canvas.Children.Add(_linje);
+                //Klass.NodeGrid.Visibility = Visibility.Hidden;
+
+                _siblingNod = new Nod(this);
+                Linje = new Linje(_siblingNod, this);
+                _siblingNod.Linje = Linje;
+                Point p = e.GetPosition(Canvas);
+
+                TurnToAssociation();
+
+                Klass.LooseNodFromKlass(this, p);
+                Canvas.Children.Add(Linje);
+
+                CaptureMouse();
+                _isSelected = true;
             }
             else if (!IsBindToKlass() && IsBindToLinje())
             {
                 CaptureMouse();
                 _isSelected = true;
-            }
-        }
+            } else if (IsBindToKlass() && IsBindToKlass()) {
 
-        public Klass GetKlass()
-        {
-            return _klass;
+            }
         }
 
         private void Nod_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isSelected && IsMouseCaptured)
             {
-                _linje.UpdatePosition(this, e.GetPosition(Canvas));
+                Linje.UpdatePosition(this, e.GetPosition(Canvas));
                 Canvas.SetLeft(this, e.GetPosition(Canvas).X - Width/2);
                 Canvas.SetTop(this, e.GetPosition(Canvas).Y - Height/2);
             }
@@ -301,10 +332,18 @@ namespace RajdRed
 
         private void Nod_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            _siblingNod.Klass.NodeGrid.Visibility = Visibility.Hidden;
             _isSelected = false;
             ReleaseMouseCapture();
         }
 
+        public void UpdateLinjePosition()
+        {
+            if (IsBindToLinje())
+            {
+                Linje.UpdatePosition(this, PositionRelativeCanvas());
+            }
+        }
 
     }
 }

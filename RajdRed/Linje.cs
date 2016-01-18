@@ -13,55 +13,78 @@ namespace RajdRed
 {
     public class Linje : Shape
     {
-        public double X1 { get; set; }
-        public double Y1 { get; set; }
-        public double X2 { get; set; }
-        public double Y2 { get; set; }
+        public Nod StartNod { get; set; }
+        public Nod EndNod { get; set; }
 
-        public Nod StartNode { get; set; }
-        public Nod EndNode { get; set; }
+        private LineGeometry line = new LineGeometry();
+        private Point start = new Point(0, 0);
+        private Point end = new Point(0, 0);
 
-        private bool _isSelected = false;
+        public double X1
+        { set { start.X = value; } }
+        public double Y1
+        { set { start.Y = value; } }
+        public double X2
+        { set { end.X = value; } }
+        public double Y2
+        { set { end.Y = value; } }
 
-        public Linje(Nod n)
+        protected override Geometry DefiningGeometry
         {
-            StartNode = n;
-            EndNode = new Nod(n.Canvas, this, new Point(StartNode.PositionRelativeCanvas().X + 20, StartNode.PositionRelativeCanvas().Y + 20));
+            get
+            {
+                line.StartPoint = start;
+                line.EndPoint = end;
 
-            X1 = StartNode.PositionRelativeCanvas().X;
-            Y1 = StartNode.PositionRelativeCanvas().Y;
-            X2 = StartNode.PositionRelativeCanvas().X+20;
-            Y2 = StartNode.PositionRelativeCanvas().Y+20;
+                return line;
+            }
+        }
+
+        public Linje(Nod sn, Nod en)
+        {
+            StartNod = sn;
+            EndNod = en;
+
+            X1 = StartNod.PositionRelativeCanvas().X;
+            Y1 = StartNod.PositionRelativeCanvas().Y;
+            X2 = EndNod.PositionRelativeCanvas().X;
+            Y2 = EndNod.PositionRelativeCanvas().Y;
 
             Stroke = Brushes.Black;
             StrokeThickness = 2;
+
+            Canvas.SetZIndex(this, 2);
+
+            MouseEnter += Linje_MouseEnter;
+            MouseLeave += Linje_MouseLeave;
+        }
+
+        void Linje_MouseLeave(object sender, MouseEventArgs e)
+        {
+            StartNod.OuterEllipse.Visibility = Visibility.Hidden;
+            EndNod.OuterEllipse.Visibility = Visibility.Hidden;
+        }
+
+        void Linje_MouseEnter(object sender, MouseEventArgs e)
+        {
+            StartNod.OuterEllipse.Visibility = Visibility.Visible;
+            EndNod.OuterEllipse.Visibility = Visibility.Visible;
         }
 
         public void UpdatePosition(Nod node, Point p)
         {
-            if (node == StartNode)
+            if (node == StartNod)
             {
                 X1 = p.X;
                 Y1 = p.Y;
             }
             else
             {
-                X2 = 10;
-                Y2 = 10;
+                X2 = p.X;
+                Y2 = p.Y;
             }
-        }
 
-        protected override Geometry DefiningGeometry
-        {
-            get
-            {
-                LineGeometry line = new LineGeometry(
-                   new Point(X1, Y1), 
-                    new Point(X2, Y2)
-                );
-
-                return line;
-            }
+            InvalidateVisual();
         }
     }
 }

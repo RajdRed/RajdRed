@@ -12,5 +12,6 @@
              MouseLeave="Nod_MouseLeave">
     <Grid Name="OuterGrid" IsEnabled="True"  Background="Transparent">
         <Ellipse Name="OuterEllipse" Visibility="Hidden" Fill="Red" Opacity="0.5" ></Ellipse>
+        <StackPanel Name="Stackpanel"></StackPanel>
     </Grid>
 </UserControl>
