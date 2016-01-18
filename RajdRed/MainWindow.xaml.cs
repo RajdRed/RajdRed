@@ -128,6 +128,8 @@ namespace RajdRed
 
 		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
 		{
+			Keyboard.ClearFocus();
+
 			if (isArchiveMenuActive) 
 			{
 				theCanvas.Children.Remove(archiveMenu);
