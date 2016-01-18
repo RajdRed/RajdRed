@@ -141,7 +141,7 @@ namespace RajdRed
             }
             else
             {
-                Klass.LooseNod(this);
+                Klass.SetNodOnKlass(this, false);
             }
 
             SetPositionWithMargin();
@@ -323,8 +323,10 @@ namespace RajdRed
             } 
             else if (IsBindToKlass() && IsBindToLinje()) 
             {
-                _siblingNod = new Nod(this, false);
+                new Nod(this, false);
+
                 resetNodFromKlass();
+                
                 CaptureMouse();
                 _isSelected = true;
             }
