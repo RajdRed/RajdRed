@@ -55,7 +55,7 @@ namespace RajdRed
             }
         }
 
-        private void Btn_Abort_Click(object sender, RoutedEventArgs e)
+        public void Btn_Abort_Click(object sender, RoutedEventArgs e)
         {
             _klass.CloseSettings(this, _backgroundGrid);
         }

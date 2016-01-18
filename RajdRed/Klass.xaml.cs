@@ -112,6 +112,7 @@ namespace RajdRed
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Cursor = Cursors.SizeAll;
+
             if (e.ClickCount == 2)
             {
                 if (_onField)
@@ -144,6 +145,8 @@ namespace RajdRed
             Canvas.SetTop(g, 0);
 
             ClassSettings cs = new ClassSettings(this, g);
+			g.MouseDown += (sender, eventArgs) => { CloseSettings(cs, g); };	//Skapar ett mouseDown-event för Grid g som anropar CloseSettings
+
             Point posOnCanvas = e.GetPosition(_canvas) - _posOfMouseOnHit + _posOfShapeOnHit;
             double x = (posOnCanvas.X + ActualWidth / 2) - cs.Width / 2;
             double y = (posOnCanvas.Y + ActualHeight / 2) - cs.Height / 2;
@@ -186,7 +189,6 @@ namespace RajdRed
 
                 if (posOnCanvas.X <= 0)
                     Canvas.SetLeft(this, 0.1);
-
             }
         }
 
