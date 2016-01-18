@@ -29,6 +29,8 @@ namespace RajdRed
             _klass = k;
             _backgroundGrid = g;
 
+            Canvas.SetZIndex(this, 4);
+
             ClassName.Text = _klass.ClassName.Content.ToString();
             Attributes.Text = _klass.Attributes.Text;
             Methods.Text = _klass.Methods.Text;

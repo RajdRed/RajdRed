@@ -120,6 +120,11 @@ namespace RajdRed
             }
         }
 
+        /// <summary>
+        /// När storlek på klass ändras, ändra förhållandet mellan noder.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Klass_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             foreach (var nod in _noder)
@@ -223,6 +228,12 @@ namespace RajdRed
         /// </summary>
         public void Delete()
         {
+            foreach (Nod n in _noder) {
+                if (n.IsBindToLinje())
+                {
+                    LooseNodFromKlass(n, n.PositionRelativeCanvas());
+                }
+            }
             _mainWindow.DeleteKlass(this);
         }
 
@@ -309,6 +320,9 @@ namespace RajdRed
             return OnSide.Corner;
         }
 
+        /// <summary>
+        /// Sätter klassens färger
+        /// </summary>
 		public void setKlassColors()
 		{
 			bgTopRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassNameBg);
@@ -322,7 +336,7 @@ namespace RajdRed
         }
 
         /// <summary>
-        /// Fastställer nod: nod försvinner ej vid klass_mouseleave 
+        /// Fastställer nod på grid. Nod "försvinner ej vid klass_mouseleave" (se LooseNode)
         /// </summary>
         /// <param name="n"></param>
         public void SetNode(Nod n)
@@ -335,7 +349,7 @@ namespace RajdRed
         }
 
         /// <summary>
-        /// Lossar nod: nod försvinner vid klass_mouseleave
+        /// Lossar nod från grid. Nod "försvinner vid klass_mouseleave" (se SetNode)
         /// </summary>
         /// <param name="n"></param>
         public void LooseNode(Nod n)
@@ -347,16 +361,46 @@ namespace RajdRed
             }
         }
 
-        public void LooseNodFromKlass(Nod n)
-        {
+        /// <summary>
+        /// Lossar nod från klass och sätts på canvas
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="p"></param>
+        public void LooseNodFromKlass(Nod n, Point p)
+        {   
             if (NodeGrid.Children.Contains(n))
             {
                 NodeGrid.Children.Remove(n);
-                _canvas.Children.Add(n);
-            } else if (NodeSetGrid.Children.Contains(n)) {
+            } 
+            else if (NodeSetGrid.Children.Contains(n)) 
+            {
                 NodeSetGrid.Children.Remove(n);
-                _canvas.Children.Add(n);
             }
+
+            n.Margin = new Thickness(0,0,0,0);
+            Canvas.SetLeft(n, p.X-n.Width/2);
+            Canvas.SetTop(n, p.Y-n.Height/2);
+            _canvas.Children.Add(n);
+            _noder.Remove(n);
+            n.Klass = null;
+        }
+
+        /// <summary>
+        /// Nod lossar från canvas och sätts på Klass
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="set"></param>
+        public void SetNodOnKlass(Nod n, bool set)
+        {
+            if (set)
+            {
+                NodeSetGrid.Children.Add(n);
+            }
+            else
+            {
+                NodeGrid.Children.Add(n);
+            }
+            _noder.Add(n);
         }
     }
 }
