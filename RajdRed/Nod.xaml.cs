@@ -350,6 +350,7 @@ namespace RajdRed
             _isSelected = false;
             ReleaseMouseCapture();
             _mainWindow.ShowAllNodes(false);
+
         }
 
         public void UpdateLinjePosition()
@@ -375,6 +376,18 @@ namespace RajdRed
             _klass._noder.Remove(this);
             _klass.LooseNodFromKlass(this);
             _klass = null;
+        }
+
+        private void setExternNodToKlass()
+        {
+            Point pt = new Point(Canvas.GetLeft(this), Canvas.GetTop(this));
+            foreach (var k in _mainWindow._klassList)
+            {
+                foreach (var n in k._noder)
+                {
+                    
+                }
+            }
         }
 
     }

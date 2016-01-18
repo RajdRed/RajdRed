@@ -25,7 +25,7 @@ namespace RajdRed
 		private SettingsMenu settingsMenu = new SettingsMenu();
         public bool isArchiveMenuActive = false;
 		public bool isSettingsMenuActive = false;
-		private List<Klass> _klassList = new List<Klass>();
+		public List<Klass> _klassList = new List<Klass>();
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 		private bool darkMode = false;
 		
