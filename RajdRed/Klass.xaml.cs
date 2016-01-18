@@ -27,7 +27,8 @@ namespace RajdRed
         private Point _posOfMouseOnHit;
         private Point _posOfShapeOnHit;
 
-        public List<Nod> _noder = new List<Nod>(); 
+        public List<Nod> _noder = new List<Nod>();
+        public Nod[] _nodArr = new Nod[16];
 
         public Klass(MainWindow w, Point pt)
         {
@@ -223,7 +224,12 @@ namespace RajdRed
         /// </summary>
         public void Delete()
         {
+            //foreach (var n in _noder)
+            //{
+            //    n.resetNodFromKlass();
+            //}
             _mainWindow.DeleteKlass(this);
+            
         }
 
         /// <summary>

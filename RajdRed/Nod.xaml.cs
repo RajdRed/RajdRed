@@ -366,7 +366,7 @@ namespace RajdRed
             _linje = l;
         }
 
-        private void resetNodFromKlass()
+        public void resetNodFromKlass()
         {
             TurnToAssociation();
             _onSide = 0;
@@ -385,7 +385,25 @@ namespace RajdRed
             {
                 foreach (var n in k._noder)
                 {
-                    
+                    //Kollar om noden man släpper är innanför någon nod på någon klass (alltså fett många noder)
+                    if (((pt.X > n.PositionRelativeCanvas().X && pt.Y > n.PositionRelativeCanvas().Y) &&
+                        (pt.X < n.PositionRelativeCanvas().X + n.Width && pt.Y < n.PositionRelativeCanvas().Y + n.Height))
+                        || ((pt.X + Width > n.PositionRelativeCanvas().X && pt.Y > n.PositionRelativeCanvas().Y) &&
+                        (pt.X + Width < n.PositionRelativeCanvas().X + n.Width && pt.Y < n.PositionRelativeCanvas().Y + n.Height))
+                        || ((pt.X > n.PositionRelativeCanvas().X && pt.Y + Height > n.PositionRelativeCanvas().Y) &&
+                        (pt.X < n.PositionRelativeCanvas().X + n.Width && pt.Y + Height < n.PositionRelativeCanvas().Y + n.Height))
+                        || ((pt.X + Width > n.PositionRelativeCanvas().X && pt.Y + Height > n.PositionRelativeCanvas().Y) &&
+                        (pt.X + Width < n.PositionRelativeCanvas().X + n.Width && pt.Y + Height < n.PositionRelativeCanvas().Y + n.Height)))
+                    {
+                        if (n.IsBindToLinje() == false)
+                        {
+                            _klass = n._klass;
+                            _nodPos = n._nodPos;
+                            _onSide = n._onSide;
+                            
+                        }
+                       
+                    }
                 }
             }
         }
