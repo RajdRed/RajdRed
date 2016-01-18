@@ -60,7 +60,7 @@ namespace RajdRed
             _onSide = n._onSide;
             _nodPos = n._nodPos;
             _klass = n._klass;
-            _klass._noder.Add(this);
+            _klass._noder[_klass._noder.IndexOf(n)] = this;
 
             _klass.NodeSetGrid.Children.Add(this);
             if (ass)
@@ -373,7 +373,6 @@ namespace RajdRed
             _nodPos.X = 0;
             _nodPos.Y = 0;
             this.Margin = new Thickness(0);
-            _klass._noder.Remove(this);
             _klass.LooseNodFromKlass(this);
             _klass = null;
         }

@@ -28,7 +28,7 @@ namespace RajdRed
         private Point _posOfShapeOnHit;
 
         public List<Nod> _noder = new List<Nod>();
-        public Nod[] _nodArr = new Nod[16];
+        
 
         public Klass(MainWindow w, Point pt)
         {
@@ -87,8 +87,8 @@ namespace RajdRed
             _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[2], MinHeight)));
             _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[3], MinHeight)));
 
-            foreach (Nod node in _noder) {
-                NodeGrid.Children.Add(node);
+            foreach (Nod nod in _noder) {
+                NodeGrid.Children.Add(nod);
             }
         }
 
@@ -126,6 +126,7 @@ namespace RajdRed
             foreach (var nod in _noder)
             {
                 nod.SetPositionWithMargin();
+                nod.UpdateLinjePosition();
             }
         }
 
@@ -224,10 +225,13 @@ namespace RajdRed
         /// </summary>
         public void Delete()
         {
-            //foreach (var n in _noder)
-            //{
-            //    n.resetNodFromKlass();
-            //}
+            foreach (var n in _noder)
+            {
+                if (n.IsBindToLinje())
+                {
+                    n.resetNodFromKlass(); 
+                }
+            }
             _mainWindow.DeleteKlass(this);
             
         }
@@ -360,15 +364,19 @@ namespace RajdRed
 
         public void LooseNodFromKlass(Nod n)
         {
+
             if (NodeGrid.Children.Contains(n))
             {
                 NodeGrid.Children.Remove(n);
                 _canvas.Children.Add(n);
-            } 
-            else if (NodeSetGrid.Children.Contains(n)) {
+            }
+            else if (NodeSetGrid.Children.Contains(n))
+            {
                 NodeSetGrid.Children.Remove(n);
                 _canvas.Children.Add(n);
             }
+            
+            
         }
     }
 }
