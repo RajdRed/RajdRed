@@ -35,9 +35,9 @@ namespace RajdRed
             Attributes.Text = _klass.Attributes.Text;
             Methods.Text = _klass.Methods.Text;
 
-            ClassName.Background = _klass.MainWindow().Colors.KlassNameBg;
-            Attributes.Background = _klass.MainWindow().Colors.KlassAttributesBg;
-			Methods.Background = _klass.MainWindow().Colors.KlassMethodsBg;
+            ClassName.Background = _klass.GetMainWindow().Colors.KlassNameBg;
+            Attributes.Background = _klass.GetMainWindow().Colors.KlassAttributesBg;
+			Methods.Background = _klass.GetMainWindow().Colors.KlassMethodsBg;
 			
             drawNodes();
         }

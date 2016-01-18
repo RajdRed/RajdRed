@@ -27,14 +27,15 @@ namespace RajdRed
         private Point _posOfMouseOnHit;
         private Point _posOfShapeOnHit;
 
-        public List<Nod> _noder = new List<Nod>(); 
+        public List<Nod> _noder = new List<Nod>();
+        
 
         public Klass(MainWindow w, Point pt)
         {
             InitializeComponent();
 
             _mainWindow = w;
-            _canvas = w.getCanvas();
+            _canvas = w.GetCanvas();
 
 			setKlassColors();
 
@@ -51,7 +52,7 @@ namespace RajdRed
             createNodes();
         }
 
-		public MainWindow MainWindow()
+		public MainWindow GetMainWindow()
 		{
 			return _mainWindow;
 		}
@@ -86,8 +87,8 @@ namespace RajdRed
             _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[2], MinHeight)));
             _noder.Add(new Nod(this, OnSide.Bottom, new Point(intervall[3], MinHeight)));
 
-            foreach (Nod node in _noder) {
-                NodeGrid.Children.Add(node);
+            foreach (Nod nod in _noder) {
+                NodeGrid.Children.Add(nod);
             }
         }
 
@@ -130,6 +131,7 @@ namespace RajdRed
             foreach (var nod in _noder)
             {
                 nod.SetPositionWithMargin();
+                nod.UpdateLinjePosition();
             }
         }
 
@@ -228,13 +230,15 @@ namespace RajdRed
         /// </summary>
         public void Delete()
         {
-            foreach (Nod n in _noder) {
+            foreach (Nod n in _noder)
+            {
                 if (n.IsBindToLinje())
                 {
-                    LooseNodFromKlass(n, n.PositionRelativeCanvas());
+                    n.resetNodFromKlass(); 
                 }
             }
             _mainWindow.DeleteKlass(this);
+            
         }
 
         /// <summary>
@@ -325,9 +329,9 @@ namespace RajdRed
         /// </summary>
 		public void setKlassColors()
 		{
-			bgTopRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassNameBg);
-			bgMidRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassAttributesBg);
-			bgBotRow.SetCurrentValue(Control.BackgroundProperty, MainWindow().Colors.KlassMethodsBg);
+			bgTopRow.SetCurrentValue(Control.BackgroundProperty, GetMainWindow().Colors.KlassNameBg);
+			bgMidRow.SetCurrentValue(Control.BackgroundProperty, GetMainWindow().Colors.KlassAttributesBg);
+			bgBotRow.SetCurrentValue(Control.BackgroundProperty, GetMainWindow().Colors.KlassMethodsBg);
 		}
 
         private void InnerGrid_MouseLeave(object sender, MouseEventArgs e)
@@ -339,7 +343,7 @@ namespace RajdRed
         /// Fastställer nod på grid. Nod "försvinner ej vid klass_mouseleave" (se LooseNode)
         /// </summary>
         /// <param name="n"></param>
-        public void SetNode(Nod n)
+        public void SetNod(Nod n)
         {
             if (NodeGrid.Children.Contains(n))
             {
@@ -348,11 +352,16 @@ namespace RajdRed
             }
         }
 
+        public void SetNodToKlass(Nod n)
+        {
+
+        }
+
         /// <summary>
         /// Lossar nod från grid. Nod "försvinner vid klass_mouseleave" (se SetNode)
         /// </summary>
         /// <param name="n"></param>
-        public void LooseNode(Nod n)
+        public void LooseNod(Nod n)
         {
             if (NodeSetGrid.Children.Contains(n))
             {
@@ -361,28 +370,18 @@ namespace RajdRed
             }
         }
 
-        /// <summary>
-        /// Lossar nod från klass och sätts på canvas
-        /// </summary>
-        /// <param name="n"></param>
-        /// <param name="p"></param>
-        public void LooseNodFromKlass(Nod n, Point p)
-        {   
+        public void LooseNodFromKlass(Nod n)
+        {
+
             if (NodeGrid.Children.Contains(n))
             {
                 NodeGrid.Children.Remove(n);
-            } 
-            else if (NodeSetGrid.Children.Contains(n)) 
+                _canvas.Children.Add(n);
+            }
+            else if (NodeSetGrid.Children.Contains(n))
             {
                 NodeSetGrid.Children.Remove(n);
             }
-
-            n.Margin = new Thickness(0,0,0,0);
-            Canvas.SetLeft(n, p.X-n.Width/2);
-            Canvas.SetTop(n, p.Y-n.Height/2);
-            _canvas.Children.Add(n);
-            _noder.Remove(n);
-            n.Klass = null;
         }
 
         /// <summary>

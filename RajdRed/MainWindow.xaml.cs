@@ -25,7 +25,7 @@ namespace RajdRed
 		private SettingsMenu settingsMenu = new SettingsMenu();
         public bool isArchiveMenuActive = false;
 		public bool isSettingsMenuActive = false;
-		private List<Klass> _klassList = new List<Klass>();
+		public List<Klass> _klassList = new List<Klass>();
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 		private bool darkMode = false;
 		
@@ -66,7 +66,7 @@ namespace RajdRed
 			_klassList.Remove(klass);
         }
 
-        public Canvas getCanvas()
+        public Canvas GetCanvas()
         {
             return theCanvas;
         }
@@ -216,5 +216,20 @@ namespace RajdRed
 			foreach (Klass k in _klassList)
 				k.setKlassColors();
 		}
+
+        public void ShowAllNodes(bool show)
+        {
+            foreach (var k in _klassList)
+            {
+                if (show)
+                {
+                    k.NodeGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    k.NodeGrid.Visibility = Visibility.Hidden;
+                }
+            }
+        }
     }
 }

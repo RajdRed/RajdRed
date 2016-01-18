@@ -42,6 +42,7 @@ namespace RajdRed
 
         public Linje(Nod sn, Nod en)
         {
+
             StartNod = sn;
             EndNod = en;
 
@@ -49,6 +50,7 @@ namespace RajdRed
             Y1 = StartNod.PositionRelativeCanvas().Y;
             X2 = EndNod.PositionRelativeCanvas().X;
             Y2 = EndNod.PositionRelativeCanvas().Y;
+
 
             Stroke = Brushes.Black;
             StrokeThickness = 2;
