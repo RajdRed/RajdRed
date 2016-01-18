@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace RajdRed
 {
@@ -56,7 +57,7 @@ namespace RajdRed
             }
         }
 
-        private void Btn_Abort_Click(object sender, RoutedEventArgs e)
+        public void Btn_Abort_Click(object sender, RoutedEventArgs e)
         {
             _klass.CloseSettings(this, _backgroundGrid);
         }
@@ -66,5 +67,16 @@ namespace RajdRed
             _klass.Save(this);
             _klass.CloseSettings(this, _backgroundGrid);
         }
+
+		private void ClassSettings_Loaded(object sender, RoutedEventArgs e)
+		{
+			Random rnd = new Random();
+			ScaleTransform sct = new ScaleTransform(0, 0);
+			gridAnimate.RenderTransformOrigin = new Point(0.5, 0.5);
+			gridAnimate.RenderTransform = sct;
+			DoubleAnimation da = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.17)));
+			sct.BeginAnimation(ScaleTransform.ScaleXProperty, da);
+			sct.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+		}
     }
 }

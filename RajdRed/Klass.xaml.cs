@@ -100,6 +100,7 @@ namespace RajdRed
         public void Klass_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Cursor = Cursors.SizeAll;
+
             if (e.ClickCount == 2)
             {
                 if (_onField)
@@ -147,6 +148,8 @@ namespace RajdRed
             Canvas.SetTop(g, 0);
 
             ClassSettings cs = new ClassSettings(this, g);
+			g.MouseDown += (sender, eventArgs) => { CloseSettings(cs, g); };	//Skapar ett mouseDown-event för Grid g som anropar CloseSettings
+
             Point posOnCanvas = e.GetPosition(_canvas) - _posOfMouseOnHit + _posOfShapeOnHit;
             double x = (posOnCanvas.X + ActualWidth / 2) - cs.Width / 2;
             double y = (posOnCanvas.Y + ActualHeight / 2) - cs.Height / 2;
@@ -194,7 +197,6 @@ namespace RajdRed
                 {
                     n.UpdateLinjePosition();
                 }
-
             }
         }
 
@@ -343,63 +345,61 @@ namespace RajdRed
         /// Fastställer nod på grid. Nod "försvinner ej vid klass_mouseleave" (se LooseNode)
         /// </summary>
         /// <param name="n"></param>
-        public void SetNod(Nod n)
+        public void MakeNodAlwaysVisable(Nod n)
         {
             if (NodeGrid.Children.Contains(n))
             {
                 NodeGrid.Children.Remove(n);
-                NodeSetGrid.Children.Add(n);
+                NodeAttachedGrid.Children.Add(n);
             }
-        }
-
-        public void SetNodToKlass(Nod n)
-        {
-
         }
 
         /// <summary>
         /// Lossar nod från grid. Nod "försvinner vid klass_mouseleave" (se SetNode)
         /// </summary>
         /// <param name="n"></param>
-        public void LooseNod(Nod n)
+        public void MakeNodToggle(Nod n)
         {
-            if (NodeSetGrid.Children.Contains(n))
+            if (NodeAttachedGrid.Children.Contains(n))
             {
-                NodeSetGrid.Children.Remove(n);
+                NodeAttachedGrid.Children.Remove(n);
                 NodeGrid.Children.Add(n);
             }
         }
 
-        public void LooseNodFromKlass(Nod n)
+        public static void LooseNodFromKlass(Klass k, Nod n)
         {
 
-            if (NodeGrid.Children.Contains(n))
+            if (k.NodeGrid.Children.Contains(n))
             {
-                NodeGrid.Children.Remove(n);
-                _canvas.Children.Add(n);
+                k.NodeGrid.Children.Remove(n);
             }
-            else if (NodeSetGrid.Children.Contains(n))
+            else if (k.NodeAttachedGrid.Children.Contains(n))
             {
-                NodeSetGrid.Children.Remove(n);
+                k.NodeAttachedGrid.Children.Remove(n);
             }
+
+            k._canvas.Children.Add(n);
+            k._noder.Remove(n);
         }
 
         /// <summary>
-        /// Nod lossar från canvas och sätts på Klass
+        /// Nod lossar från canvas och sätts på Klass. Om "attached": MakeNodAlwaysVisible()
         /// </summary>
         /// <param name="n"></param>
         /// <param name="set"></param>
-        public void SetNodOnKlass(Nod n, bool set)
+        public static void AttachNodToKlass(Klass k, Nod n, bool attached)
         {
-            if (set)
+            if (attached)
             {
-                NodeSetGrid.Children.Add(n);
+                k.NodeAttachedGrid.Children.Add(n);
             }
             else
             {
-                NodeGrid.Children.Add(n);
+                k.NodeGrid.Children.Add(n);
             }
-            _noder.Add(n);
+
+            k._noder.Add(n);
         }
     }
 }

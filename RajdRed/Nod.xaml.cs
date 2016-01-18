@@ -122,27 +122,15 @@ namespace RajdRed
         /// <summary>
         /// Kopieringskonstruktor. Från fristående nod till klassbunden nod
         /// </summary>
-        /// <param name="c"></param>
-        /// <param name="l"></param>
-        /// <param name="p"></param>
-        public Nod(Nod n, bool ass) : this(n._mainWindow)
+        /// <param name="n"></param>
+        /// <param name="ass"></param>
+        public Nod(Nod n) : this(n._mainWindow)
         {
             _onSide = n._onSide;
             _nodPos = n._nodPos;
+            _siblingNod = n;
 
             Klass = n.Klass;
-            Klass._noder[Klass._noder.IndexOf(n)] = this;
-
-
-            if (ass)
-            {
-                TurnToAssociation();
-                Klass.SetNodOnKlass(this, true);
-            }
-            else
-            {
-                Klass.SetNodOnKlass(this, false);
-            }
 
             SetPositionWithMargin();
         }
@@ -306,9 +294,13 @@ namespace RajdRed
         {
             if (!IsBindToLinje() && IsBindToKlass())
             {
-                _siblingNod = new Nod(this, true);
+                _siblingNod = new Nod(this);
                 Linje = new Linje(_siblingNod, this);
                 _siblingNod.Linje = Linje;
+
+                Klass.AttachNodToKlass(Klass, _siblingNod, true);
+                Klass.LooseNodFromKlass(Klass, this);
+                
                 resetNodFromKlass();
                 
                 CaptureMouse();
@@ -323,8 +315,8 @@ namespace RajdRed
             } 
             else if (IsBindToKlass() && IsBindToLinje()) 
             {
-                new Nod(this, false);
-
+                Klass.AttachNodToKlass(Klass, new Nod(this), false);
+                Klass.LooseNodFromKlass(Klass, this);
                 resetNodFromKlass();
                 
                 CaptureMouse();
@@ -346,11 +338,9 @@ namespace RajdRed
 
         private void Nod_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            _siblingNod.Klass.NodeGrid.Visibility = Visibility.Hidden;
             _isSelected = false;
             ReleaseMouseCapture();
             _mainWindow.ShowAllNodes(false);
-
         }
 
         public void UpdateLinjePosition()
@@ -368,7 +358,6 @@ namespace RajdRed
             _nodPos.X = 0;
             _nodPos.Y = 0;
             this.Margin = new Thickness(0);
-            Klass.LooseNodFromKlass(this);
             Klass = null;
         }
 
@@ -377,7 +366,7 @@ namespace RajdRed
             Point pt = new Point(Canvas.GetLeft(this), Canvas.GetTop(this));
             foreach (var k in _mainWindow._klassList)
             {
-                foreach (var n in k._noder)
+                foreach (Nod n in k._noder)
                 {
                     //Kollar om noden man släpper är innanför någon nod på någon klass (alltså fett många noder)
                     if (((pt.X > n.PositionRelativeCanvas().X && pt.Y > n.PositionRelativeCanvas().Y) &&

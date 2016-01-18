@@ -5,6 +5,15 @@
         Name="RajdRedMainWindow"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
+	<Window.Resources>
+		<Storyboard x:Key="ScaleImageStoryboard">
+			<DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True"
+                             Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleX"/>
+			<DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True" 
+                             Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleY"/>
+		</Storyboard>
+	</Window.Resources>
+
 	<Canvas MouseDown="theCanvas_MouseDown" Name="theCanvas" Background="#EAEDF2">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
@@ -33,7 +42,8 @@
             <Grid Grid.Row="1" Background="Transparent">
                 <!-- Detta är UNDRE delen av menyn -->
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="447*" />
+                    <ColumnDefinition Width="78*" />
+					<ColumnDefinition Width="369*" />
                     <ColumnDefinition Width="130*" />
                     <ColumnDefinition Width="447*" />
                 </Grid.ColumnDefinitions>
@@ -50,10 +60,23 @@
 					</Grid.Style>
 					<Button Name="archiveMenuBtn" Background="Transparent" PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
 				</Grid>
-				<Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="1">
-					<Image Name="addClassButton"  Source="img/createClassBg.png" />
-					</Button>
-					<Grid Grid.Column="2" HorizontalAlignment="Right">
+				<Grid Grid.Column="1">
+					<Border Margin="10, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" CornerRadius="6, 6, 0, 0" BorderThickness="1" BorderBrush="#EAEDF2" SnapsToDevicePixels="True" Background="#EAEDF2">
+						<TextBox 
+							Name="TitleTextBox"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							Background="Transparent" 
+							BorderThickness="0"
+							Padding="0, 2, 0, 0"
+							Height="23" 
+							Width="100">Untitled</TextBox>
+					</Border>
+				</Grid>
+				<Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="2">
+					<Image Margin="5" MouseEnter="addClassButton_MouseEnter" MouseLeave="addClassButton_MouseLeave" Name="addClassButton"  Source="img/createClassBg.png" />
+				</Button>
+				<Grid Grid.Column="3" HorizontalAlignment="Right">
 					<Grid.Style>
 						<Style TargetType="Grid">
 							<Style.Triggers>

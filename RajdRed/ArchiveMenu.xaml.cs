@@ -40,8 +40,9 @@ namespace RajdRed
 
 		private void saveButton_click(object sender, RoutedEventArgs e)
 		{
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
 			Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-			dlg.FileName = "UMLDiagram"; // Default file name
+			dlg.FileName = mw.TitleTextBox.Text; // Default file name
 			dlg.DefaultExt = ".pdf"; // Default file extension
 			dlg.Filter = "PDF documents (.pdf)|*.pdf"; // Filter files by extension
 

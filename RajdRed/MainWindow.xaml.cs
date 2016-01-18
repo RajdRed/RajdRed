@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace RajdRed
 {
@@ -127,6 +128,8 @@ namespace RajdRed
 
 		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
 		{
+			Keyboard.ClearFocus();
+
 			if (isArchiveMenuActive) 
 			{
 				theCanvas.Children.Remove(archiveMenu);
@@ -146,7 +149,7 @@ namespace RajdRed
 		{
 			Point pt = e.GetPosition(theCanvas);
 
-			if ( (pt.X > 150 || pt.Y > 220) || (pt.X > 78 && pt.Y < 96)) 
+			if ( (pt.X > 150 || pt.Y > 190) || (pt.X > 78 && pt.Y < 96)) 
 			{
 				theCanvas.Children.Remove(archiveMenu);
 				isArchiveMenuActive = false;
@@ -231,5 +234,17 @@ namespace RajdRed
                 }
             }
         }
+
+		private void addClassButton_MouseEnter(object sender, MouseEventArgs e)
+		{
+			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(0), TimeSpan.FromSeconds(0.2));
+			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
+		}
+
+		private void addClassButton_MouseLeave(object sender, MouseEventArgs e)
+		{
+			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(5), TimeSpan.FromSeconds(0.2));
+			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
+		}
     }
 }
