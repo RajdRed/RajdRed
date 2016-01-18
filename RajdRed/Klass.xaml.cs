@@ -232,11 +232,17 @@ namespace RajdRed
         /// </summary>
         public void Delete()
         {
-            foreach (Nod n in _noder)
+            for (int i = 0; i < _noder.Count; ++i)
             {
+                Nod n = _noder[i];
                 if (n.IsBindToLinje())
                 {
-                    n.resetNodFromKlass(); 
+                    Point pt = new Point(n.PositionRelativeCanvas().X, n.PositionRelativeCanvas().Y);
+                    LooseNodFromKlass(this, n);
+                    n.resetNodFromKlass();
+                    Canvas.SetLeft(n, pt.X - n.Width/2);
+                    Canvas.SetTop(n, pt.Y - n.Height/2);
+                    i = 0;
                 }
             }
             _mainWindow.DeleteKlass(this);
