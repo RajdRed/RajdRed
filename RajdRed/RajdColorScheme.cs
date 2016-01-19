@@ -15,7 +15,8 @@ namespace RajdRed
             KlassMethodsBg = Convert("#151515"),
             TheCanvasBg = Convert("#333"),
             MenuBotBg = Convert("#222"),
-            MenuButtonBg = Convert("#191919")
+            MenuButtonBg = Convert("#191919"),
+			TitleText = Convert("#EAEDF2")
 		};
 
 		public static RajdColors Light = new RajdColors()
@@ -25,7 +26,8 @@ namespace RajdRed
 			KlassMethodsBg = Convert("#222931"),
 			TheCanvasBg = Convert("#EAEDF2"),
 			MenuBotBg = Convert("#4f5b6d"),
-			MenuButtonBg = Convert("#323a45")
+			MenuButtonBg = Convert("#323a45"),
+			TitleText = Convert("#000000")
 		};
 
         public static Brush Convert(string colorcode)

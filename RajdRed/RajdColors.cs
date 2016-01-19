@@ -15,6 +15,7 @@ namespace RajdRed
         public Brush TheCanvasBg;
         public Brush MenuBotBg;
         public Brush MenuButtonBg;
+		public Brush TitleText;
 
 		public RajdColors() {
  			
@@ -28,6 +29,7 @@ namespace RajdRed
 			TheCanvasBg = r.TheCanvasBg;
 			MenuBotBg = r.MenuBotBg;
 			MenuButtonBg = r.MenuButtonBg;
+			TitleText = r.TitleText;
 		}
 	}
 }

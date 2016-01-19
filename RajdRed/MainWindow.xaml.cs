@@ -196,6 +196,7 @@ namespace RajdRed
 				var uri = new Uri("pack://application:,,,/img/createClassBg-Dark.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;
+				TitleTextBox.SetCurrentValue(Control.ForegroundProperty, Colors.TitleText);
 			}
 
 			else 
@@ -203,15 +204,18 @@ namespace RajdRed
 				var uri = new Uri("pack://application:,,,/img/createClassBg.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;
+				TitleTextBox.SetCurrentValue(Control.ForegroundProperty, Colors.TitleText);
 			}
 
 			theCanvas.Background = Colors.TheCanvasBg;
 			menuBot.Background = Colors.MenuBotBg;
 			menuTopRight.Background = Colors.KlassNameBg;
 			menuTopLeft.Fill = Colors.KlassNameBg;
+			titleBorder.Background = Colors.TheCanvasBg;
+			titleBorder.BorderBrush = Colors.TheCanvasBg;
 			
 			if (isArchiveMenuActive)
-				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors);
 
 			if (isSettingsMenuActive)
 				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);

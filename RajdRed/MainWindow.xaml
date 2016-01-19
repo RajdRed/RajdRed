@@ -61,7 +61,7 @@
 					<Button Name="archiveMenuBtn" Background="Transparent" PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
 				</Grid>
 				<Grid Grid.Column="1">
-					<Border Margin="10, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" CornerRadius="6, 6, 0, 0" BorderThickness="1" BorderBrush="#EAEDF2" SnapsToDevicePixels="True" Background="#EAEDF2">
+					<Border Margin="10, 0, 0, 0" Name="titleBorder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" CornerRadius="6, 6, 0, 0" BorderThickness="1" BorderBrush="#EAEDF2" SnapsToDevicePixels="True" Background="#EAEDF2">
 						<TextBox 
 							Name="TitleTextBox"
 							HorizontalContentAlignment="Center"
