@@ -237,16 +237,22 @@ namespace RajdRed
                 Nod n = _noder[i];
                 if (n.IsBindToLinje())
                 {
+<<<<<<< HEAD
                     Point pt = new Point(n.PositionRelativeCanvas().X, n.PositionRelativeCanvas().Y);
                     LooseNodFromKlass(this, n);
                     n.resetNodFromKlass();
                     Canvas.SetLeft(n, pt.X - n.Width/2);
                     Canvas.SetTop(n, pt.Y - n.Height/2);
                     i = 0;
+=======
+                    Nod cn = new Nod(_mainWindow);
+                    cn = n;
+                    cn.AttachNodToCanvas();
+>>>>>>> origin/master-temp
                 }
             }
+
             _mainWindow.DeleteKlass(this);
-            
         }
 
         /// <summary>

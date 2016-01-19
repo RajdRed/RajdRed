@@ -123,7 +123,6 @@ namespace RajdRed
         /// Kopieringskonstruktor. Från fristående nod till klassbunden nod
         /// </summary>
         /// <param name="n"></param>
-        /// <param name="ass"></param>
         public Nod(Nod n) : this(n._mainWindow)
         {
             _onSide = n._onSide;
@@ -400,6 +399,12 @@ namespace RajdRed
             };
             check();
             
+        }
+
+        public void AttachNodToCanvas()
+        {
+            if (!Canvas.Children.Contains(this))
+                Canvas.Children.Add(this);
         }
 
     }
