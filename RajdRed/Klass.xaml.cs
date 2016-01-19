@@ -236,11 +236,13 @@ namespace RajdRed
             {
                 if (n.IsBindToLinje())
                 {
-                    n.resetNodFromKlass(); 
+                    Nod cn = new Nod(_mainWindow);
+                    cn = n;
+                    cn.AttachNodToCanvas();
                 }
             }
+
             _mainWindow.DeleteKlass(this);
-            
         }
 
         /// <summary>
