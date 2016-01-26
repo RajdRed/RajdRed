@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="RajdRed.Views.CanvasNodView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="10" Width="10"
+             MouseDown="UserControl_MouseDown"
+             MouseMove="UserControl_MouseMove"
+             MouseUp="UserControl_MouseUp">
+    <Path
+        Stroke="Black" 
+        StrokeThickness="1" 
+        Width="9"
+        Height="9"
+        Fill="Black" 
+        Data="{Binding CanvasNodModel.Geometry}">
+    </Path>
+</UserControl>

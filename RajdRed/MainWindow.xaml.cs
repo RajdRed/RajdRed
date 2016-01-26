@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using RajdRed.Models.Adds;
+using RajdRed.Repositories;
+using RajdRed.Models;
+using RajdRed.ViewModels;
 
 namespace RajdRed
 {
@@ -26,14 +22,16 @@ namespace RajdRed
 		private SettingsMenu settingsMenu = new SettingsMenu();
         public bool isArchiveMenuActive = false;
 		public bool isSettingsMenuActive = false;
-		public List<Klass> _klassList = new List<Klass>();
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 		private bool darkMode = false;
+
+        MainRepository _mainRepository = new MainRepository();
 		
         public MainWindow()
         {
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            DataContext = _mainRepository;
         }
 
 		public void changeColors(bool dark)
@@ -53,24 +51,14 @@ namespace RajdRed
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Point pt = e.GetPosition(theCanvas);
-
-            Klass klass = new Klass(this, pt);
-			_klassList.Add(klass);
-
-            klass.Klass_MouseDown(sender, e);
+            _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
         }
 
-        public void DeleteKlass(Klass klass)
-        {
-            theCanvas.Children.Remove(klass);
-			_klassList.Remove(klass);
-        }
-
-        public Canvas GetCanvas()
-        {
-            return theCanvas;
-        }
+        //public void DeleteKlass(KlassView klass)
+        //{
+        //    theCanvas.Children.Remove(klass);
+        //    _klassList.Remove(klass);
+        //}
 
 		public bool getDarkMode()
 		{
@@ -219,24 +207,9 @@ namespace RajdRed
 			if (isSettingsMenuActive)
 				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
 
-			foreach (Klass k in _klassList)
-				k.setKlassColors();
+            //foreach (KlassView k in _klassList)
+            //    k.setKlassColors();
 		}
-
-        public void ShowAllNodes(bool show)
-        {
-            foreach (var k in _klassList)
-            {
-                if (show)
-                {
-                    k.NodeGrid.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    k.NodeGrid.Visibility = Visibility.Hidden;
-                }
-            }
-        }
 
 		private void addClassButton_MouseEnter(object sender, MouseEventArgs e)
 		{

@@ -34,6 +34,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.2.0.37226, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PdfSharp-WPF">
       <HintPath>PdfSharpXpsBin\PdfSharp-WPF.dll</HintPath>
     </Reference>
@@ -46,6 +78,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,6 +99,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Adds\NodTypesModel.cs" />
+    <Compile Include="Models\Base\BaseModel.cs" />
+    <Compile Include="Models\Base\NodModelBase.cs" />
+    <Compile Include="Models\Base\RajdElement.cs" />
+    <Compile Include="Models\CanvasNodModel.cs" />
+    <Compile Include="Models\KlassModel.cs" />
+    <Compile Include="Models\KlassNodModel.cs" />
+    <Compile Include="Models\LinjeModel.cs" />
+    <Compile Include="Repositories\CanvasNodRepository.cs" />
+    <Compile Include="Repositories\KlassRepository.cs" />
+    <Compile Include="Repositories\LinjeRepository.cs" />
+    <Compile Include="Repositories\MainRepository.cs" />
+    <Compile Include="TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CanvasNodViewModel.cs" />
+    <Compile Include="ViewModels\Commands\KlassCommands.cs" />
+    <Compile Include="ViewModels\KlassNodViewModel.cs" />
+    <Compile Include="ViewModels\KlassViewModel.cs" />
+    <Compile Include="ViewModels\LinjeViewModel.cs" />
+    <Compile Include="Views\CanvasNodView.xaml.cs">
+      <DependentUpon>CanvasNodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KlassView.xaml.cs">
+      <DependentUpon>KlassView.xaml</DependentUpon>
+    </Compile>
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -74,15 +136,12 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Klass.xaml.cs">
-      <DependentUpon>Klass.xaml</DependentUpon>
+    <Compile Include="Models\Klass.cs" />
+    <Compile Include="Views\KlassNodView.xaml.cs">
+      <DependentUpon>KlassNodView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Linje.cs" />
-    <Compile Include="Nod.xaml.cs">
-      <DependentUpon>Nod.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RajdColors.cs" />
-    <Compile Include="RajdColorScheme.cs" />
+    <Compile Include="Models\Adds\RajdColors.cs" />
+    <Compile Include="Models\Adds\RajdColorScheme.cs" />
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
@@ -90,7 +149,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Klass.xaml">
+    <Page Include="Views\CanvasNodView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KlassNodView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,11 +175,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Nod.xaml">
+    <Page Include="SettingsMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsMenu.xaml">
+    <Page Include="TestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KlassView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,7 +206,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="fonts\fontawesome.ttf" />
+    <Resource Include="Fonts\fontawesome.ttf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,13 +218,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\createClassBg-Dark.png" />
+    <Resource Include="Images\createClassBg-Dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\createClassBg.png" />
+    <Resource Include="Images\createClassBg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\avatar.png" />
+    <Resource Include="Images\avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Old\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

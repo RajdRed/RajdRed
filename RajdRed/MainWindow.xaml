@@ -1,6 +1,11 @@
 ﻿<Window x:Class="RajdRed.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:RajdRed.ViewModels"
+        xmlns:v="clr-namespace:RajdRed.Views"
+        xmlns:m="clr-namespace:RajdRed.Models"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         Title="MainWindow" Height="720" Width="1024"
         Name="RajdRedMainWindow"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
@@ -9,9 +14,36 @@
 		<Storyboard x:Key="ScaleImageStoryboard">
 			<DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True"
                              Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleX"/>
-			<DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True" 
+            <DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True" 
                              Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleY"/>
-		</Storyboard>
+        </Storyboard>
+        <vm:KlassViewModel x:Key="klassViewModel"/>
+        <m:KlassModel x:Key="klassModel"/>
+        <DataTemplate DataType="{x:Type vm:KlassViewModel}">
+            <Canvas>
+                <v:KlassView DataContext="{Binding}"
+                             Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Canvas>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CanvasNodViewModel}">
+            <Canvas>
+                <v:CanvasNodView DataContext="{Binding}" 
+                            Canvas.Left="{Binding CanvasNodModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            Canvas.Top="{Binding CanvasNodModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Canvas>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
+            <Canvas>
+                <Line DataContext="{Binding}" 
+                      X1="{Binding LinjeModel.X1}" 
+                      Y1="{Binding LinjeModel.Y1}"
+                      X2="{Binding LinjeModel.X2}"
+                      Y2="{Binding LinjeModel.Y2}"
+                      Stroke="Black"
+                      StrokeThickness="2"/>
+            </Canvas>
+        </DataTemplate>
 	</Window.Resources>
 
 	<Canvas MouseDown="theCanvas_MouseDown" Name="theCanvas" Background="#EAEDF2">
@@ -74,8 +106,8 @@
 					</Border>
 				</Grid>
 				<Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="2">
-					<Image Margin="5" MouseEnter="addClassButton_MouseEnter" MouseLeave="addClassButton_MouseLeave" Name="addClassButton"  Source="img/createClassBg.png" />
-				</Button>
+                    <Image Margin="5" MouseEnter="addClassButton_MouseEnter" MouseLeave="addClassButton_MouseLeave" Name="addClassButton"  Source="Images/createClassBg.png" />
+                </Button>
 				<Grid Grid.Column="3" HorizontalAlignment="Right">
 					<Grid.Style>
 						<Style TargetType="Grid">
@@ -90,5 +122,12 @@
 				</Grid>
 			</Grid>
         </Grid>
+        <ItemsControl ItemsSource="{Binding Collection}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Canvas>
 </Window>
