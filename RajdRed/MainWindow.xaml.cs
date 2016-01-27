@@ -52,6 +52,7 @@ namespace RajdRed
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
+
         }
 
         //public void DeleteKlass(KlassView klass)

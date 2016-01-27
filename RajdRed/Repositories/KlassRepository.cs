@@ -16,7 +16,8 @@ namespace RajdRed.Repositories
                 {
                     Header = "Ny Klass *",
                     PositionLeft = startPosition.X,
-                    PositionTop = startPosition.Y
+                    PositionTop = startPosition.Y,
+					IsSelected = true
                 },
                 KlassRepository = this
             });
