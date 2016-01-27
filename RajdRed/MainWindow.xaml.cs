@@ -27,7 +27,7 @@ namespace RajdRed
 		private Point mouseDownPos;
 		private bool rightMouseDown = false; //för selectionbox
 
-        MainRepository _mainRepository = new MainRepository();
+        public MainRepository _mainRepository = new MainRepository();
 		
         public MainWindow()
         {

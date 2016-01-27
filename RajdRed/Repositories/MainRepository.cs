@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace RajdRed.Repositories
 {
-    class MainRepository
+    public class MainRepository
     {
         private KlassRepository _klassRepository = new KlassRepository();
         public KlassRepository KlassRepository

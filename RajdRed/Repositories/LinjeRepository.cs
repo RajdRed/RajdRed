@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RajdRed.Repositories
 {
-    class LinjeRepository : ObservableCollection<LinjeViewModel>
+    public class LinjeRepository : ObservableCollection<LinjeViewModel>
     {
         public LinjeRepository()
         {
