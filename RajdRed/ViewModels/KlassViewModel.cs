@@ -1,18 +1,23 @@
 ﻿using RajdRed.Models;
 using RajdRed.Repositories;
+using RajdRed.ViewModells.Add;
 using RajdRed.ViewModels.Commands;
 using RajdRed.Views;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace RajdRed.ViewModels
 {
     public class KlassViewModel
-    {   
+    {
+        AdornerLayer aLayer;
+        
         public KlassModel KlassModel { get; set; }
         public KlassView KlassView { get; set; }
         public KlassRepository KlassRepository { get; set; }
         public KlassViewModel()
         {
-            KlassModel = new KlassModel();
+            
         }
 
         public KlassViewModel(KlassModel km)
@@ -22,6 +27,7 @@ namespace RajdRed.ViewModels
 
         public void Delete()
         {
+            
             KlassRepository.Remove(this);
         }
 
@@ -29,6 +35,11 @@ namespace RajdRed.ViewModels
         {
             KlassView = kv;
         }
-
+        public void SetAdornerLayer(KlassView k)
+        {
+            aLayer = AdornerLayer.GetAdornerLayer(k);
+            aLayer.Add(new ResizingAdorner(k));
+            this.KlassModel.IsSelected = true;
+        }
     }
 }

@@ -48,6 +48,9 @@ namespace RajdRed.Views
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ReleaseMouseCapture();
+            if(!this.KlassViewModel.KlassModel.IsSelected)
+                this.KlassViewModel.SetAdornerLayer(this);
+            
         }
 
         private void OuterBorder_MouseEnter(object sender, MouseEventArgs e)
