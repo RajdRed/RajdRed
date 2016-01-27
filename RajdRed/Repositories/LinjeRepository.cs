@@ -13,20 +13,6 @@ namespace RajdRed.Repositories
     {
         public LinjeRepository()
         {
-            Add(new LinjeViewModel() {
-                LinjeModel = new LinjeModel()
-                {
-                    X1 = 20,
-                    Y1 = 20,
-                    X2 = 400,
-                    Y2 = 400
-                }
-            });
-        }
-
-        public void AddNewLinje()
-        {
-
         }
     }
 }
