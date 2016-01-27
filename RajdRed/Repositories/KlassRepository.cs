@@ -10,16 +10,13 @@ namespace RajdRed.Repositories
         public KlassRepository(){}
         public void AddNewKlass(Point startPosition)
         {
-            Add(new KlassViewModel()
-            {
-                KlassModel = new KlassModel()
-                {
-                    Header = "Ny Klass *",
-                    PositionLeft = startPosition.X,
-                    PositionTop = startPosition.Y
-                },
-                KlassRepository = this
-            });
+            Add(new KlassViewModel(new KlassModel()
+                    {
+                        Header = "Ny Klass *",
+                        PositionLeft = startPosition.X,
+                        PositionTop = startPosition.Y
+                    }, this)
+                );
         }
     }
 }

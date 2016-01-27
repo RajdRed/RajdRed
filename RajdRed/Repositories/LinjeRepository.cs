@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models;
+using RajdRed.Models.Base;
 using RajdRed.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,18 @@ namespace RajdRed.Repositories
     {
         public LinjeRepository()
         {
-            Add(new LinjeViewModel() {
-                LinjeModel = new LinjeModel()
-                {
-                    X1 = 20,
-                    Y1 = 20,
-                    X2 = 400,
-                    Y2 = 400
-                }
-            });
         }
 
-        public void AddNewLinje()
+        public void AddNewLinje(NodModelBase n1, NodModelBase n2)
         {
-
+            Add(new LinjeViewModel()
+            {
+                LinjeModel = new LinjeModel(n1, n2)
+                {
+                    Nod1 = n1,
+                    Nod2 = n2
+                }
+            });
         }
     }
 }

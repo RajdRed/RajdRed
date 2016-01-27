@@ -12,8 +12,8 @@
              >
     <UserControl.Resources>
         <m:KlassModel x:Key="klassModel"></m:KlassModel>
-        <m:KlassNodModel x:Key="kNodModel"></m:KlassNodModel>
-        <vm:KlassNodViewModel x:Key="kNodViewModel"></vm:KlassNodViewModel>
+        <m:NodKlassModel x:Key="kNodModel"></m:NodKlassModel>
+        <vm:NodKlassViewModel x:Key="kNodViewModel"></vm:NodKlassViewModel>
         <vm:KlassViewModel x:Key="klassViewModel"></vm:KlassViewModel>
     </UserControl.Resources>
 
@@ -34,25 +34,6 @@
             <ColumnDefinition Width="20*"/>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <v:KlassNodView Grid.Column="0" Grid.Row="1" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="0" Grid.Row="2" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="0" Grid.Row="3" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="0" Grid.Row="4" DataContext="{Binding Source={StaticResource kNodModel}}" />
-
-        <v:KlassNodView Grid.Column="5" Grid.Row="1" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="5" Grid.Row="2" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="5" Grid.Row="3" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="5" Grid.Row="4" DataContext="{Binding Source={StaticResource kNodModel}}" />
-
-        <v:KlassNodView Grid.Column="1" Grid.Row="0" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="2" Grid.Row="0" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="3" Grid.Row="0" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="4" Grid.Row="0" DataContext="{Binding Source={StaticResource kNodModel}}" />
-
-        <v:KlassNodView Grid.Column="1" Grid.Row="5" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="2" Grid.Row="5" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="3" Grid.Row="5" DataContext="{Binding Source={StaticResource kNodModel}}" />
-        <v:KlassNodView Grid.Column="4" Grid.Row="5" DataContext="{Binding Source={StaticResource kNodModel}}" />
         <Border Grid.ColumnSpan="6" Grid.RowSpan="6" Visibility="Visible" 
                 MouseEnter="OuterBorder_MouseEnter" Background="Silver" Opacity="0.6" CornerRadius="2,2,2,2" Name="OuterBorder"/>
         <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
@@ -65,7 +46,7 @@
                     </Grid.RowDefinitions>
                     <Border Name="bgTopRow" Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0">
                         <Grid>
-                            <Label Content="Hej" 
+                            <Label Content="{Binding KlassModel.Header}" 
                                    Foreground="White" 
                                    FontSize="6"
                                    VerticalAlignment="Center"></Label>
@@ -82,5 +63,14 @@
                 </Grid>
             </Border>
         </Grid>
+
+        <ItemsControl x:Name="lstItemsClassM" ItemsSource="{Binding NodKlassRepository}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <v:KlassNodView DataContext="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
 </UserControl>

@@ -26,11 +26,11 @@
                              Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Canvas>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:CanvasNodViewModel}">
+        <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">
             <Canvas>
                 <v:CanvasNodView DataContext="{Binding}" 
-                            Canvas.Left="{Binding CanvasNodModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            Canvas.Top="{Binding CanvasNodModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Canvas>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:LinjeViewModel}">

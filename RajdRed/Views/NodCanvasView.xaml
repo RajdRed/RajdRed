@@ -4,16 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Height="10" Width="10"
+             Height="{Binding NodCanvasModel.Height}" 
+             Width="{Binding NodCanvasModel.Width}"
              MouseDown="UserControl_MouseDown"
              MouseMove="UserControl_MouseMove"
              MouseUp="UserControl_MouseUp">
     <Path
         Stroke="Black" 
         StrokeThickness="1" 
-        Width="9"
-        Height="9"
+        Width="10"
+        Height="10"
         Fill="Black" 
-        Data="{Binding CanvasNodModel.Geometry}">
+        Data="{Binding NodCanvasModel.Geometry}">
     </Path>
 </UserControl>

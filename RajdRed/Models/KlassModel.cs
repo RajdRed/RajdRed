@@ -6,7 +6,6 @@ namespace RajdRed.Models
 {
     public class KlassModel : RajdElement
     {
-        public KlassView KlassView;
         private string _header;
         public string Header
         {

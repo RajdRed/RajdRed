@@ -21,12 +21,13 @@ namespace RajdRed.Views
     /// </summary>
     public partial class CanvasNodView : UserControl
     {
-        CanvasNodViewModel CanvasNodViewModel { get { return DataContext as CanvasNodViewModel; } }
+        NodCanvasViewModel NodCanvasViewModel { get { return DataContext as NodCanvasViewModel; } }
         public CanvasNodView()
         {
             InitializeComponent();
             Loaded += (sender, eArgs) => {
-                CanvasNodViewModel.SetCanvasNodView(this);
+                NodCanvasViewModel.SetCanvasNodView(this);
+                CaptureMouse();
             };
         }
 

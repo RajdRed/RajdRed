@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RajdRed.Models;
+using RajdRed.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +18,8 @@ namespace RajdRed.Repositories
             set { _klassRepository = value; }
         }
 
-        private CanvasNodRepository _canvasNodRepository = new CanvasNodRepository();
-        public CanvasNodRepository CanvasNodRepository
+        private NodCanvasRepository _canvasNodRepository = new NodCanvasRepository();
+        public NodCanvasRepository CanvasNodRepository
         {
             get { return _canvasNodRepository; }
             set { _canvasNodRepository = value; }
@@ -42,6 +44,29 @@ namespace RajdRed.Repositories
             Collection.Add(new CollectionContainer() { Collection = KlassRepository });
             Collection.Add(new CollectionContainer() { Collection = CanvasNodRepository });
             Collection.Add(new CollectionContainer() { Collection = LinjeRepository });
+
+            //CanvasNodModel cnm1 = new Models.CanvasNodModel() 
+            //    { 
+            //        PositionTop = 100, 
+            //        PositionLeft = 100 
+            //    };
+            //CanvasNodViewModel cnvm1 = new CanvasNodViewModel() {
+            //    CanvasNodModel = cnm1
+            //};
+
+            //CanvasNodModel cnm2 = new Models.CanvasNodModel()
+            //    {
+            //        PositionTop = 300,
+            //        PositionLeft = 300
+            //    };
+            //CanvasNodViewModel cnvm2 = new CanvasNodViewModel()
+            //{
+            //    CanvasNodModel = cnm2
+            //};
+
+            //CanvasNodRepository.Add(cnvm1);
+            //CanvasNodRepository.Add(cnvm2);
+            //LinjeRepository.AddNewLinje(cnm1, cnm2);
         }
     }
 }

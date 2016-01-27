@@ -1,18 +1,17 @@
 ﻿using RajdRed.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RajdRed.Models.Base;
 
 namespace RajdRed.ViewModels
 {
     public class LinjeViewModel
     {
         public LinjeModel LinjeModel { get; set; }
-        public LinjeViewModel()
+        public LinjeViewModel(NodModelBase n1, NodModelBase n2)
         {
-            LinjeModel = new LinjeModel();
+            LinjeModel = new LinjeModel(n1, n2);
         }
+
+        public LinjeViewModel()
+        {}
     }
 }

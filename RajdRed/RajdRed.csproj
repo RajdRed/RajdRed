@@ -106,24 +106,25 @@
     <Compile Include="Models\Base\BaseModel.cs" />
     <Compile Include="Models\Base\NodModelBase.cs" />
     <Compile Include="Models\Base\RajdElement.cs" />
-    <Compile Include="Models\CanvasNodModel.cs" />
+    <Compile Include="Models\NodCanvasModel.cs" />
     <Compile Include="Models\KlassModel.cs" />
-    <Compile Include="Models\KlassNodModel.cs" />
+    <Compile Include="Models\NodKlassModel.cs" />
     <Compile Include="Models\LinjeModel.cs" />
-    <Compile Include="Repositories\CanvasNodRepository.cs" />
+    <Compile Include="Repositories\NodCanvasRepository.cs" />
+    <Compile Include="Repositories\NodKlassRepository.cs" />
     <Compile Include="Repositories\KlassRepository.cs" />
     <Compile Include="Repositories\LinjeRepository.cs" />
     <Compile Include="Repositories\MainRepository.cs" />
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CanvasNodViewModel.cs" />
+    <Compile Include="ViewModels\NodCanvasViewModel.cs" />
     <Compile Include="ViewModels\Commands\KlassCommands.cs" />
-    <Compile Include="ViewModels\KlassNodViewModel.cs" />
+    <Compile Include="ViewModels\NodKlassViewModel.cs" />
     <Compile Include="ViewModels\KlassViewModel.cs" />
     <Compile Include="ViewModels\LinjeViewModel.cs" />
-    <Compile Include="Views\CanvasNodView.xaml.cs">
-      <DependentUpon>CanvasNodView.xaml</DependentUpon>
+    <Compile Include="Views\NodCanvasView.xaml.cs">
+      <DependentUpon>NodCanvasView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\KlassView.xaml.cs">
       <DependentUpon>KlassView.xaml</DependentUpon>
@@ -139,9 +140,8 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Klass.cs" />
-    <Compile Include="Views\KlassNodView.xaml.cs">
-      <DependentUpon>KlassNodView.xaml</DependentUpon>
+    <Compile Include="Views\NodKlassView.xaml.cs">
+      <DependentUpon>NodKlassView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Adds\RajdColors.cs" />
     <Compile Include="Models\Adds\RajdColorScheme.cs" />
@@ -156,11 +156,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CanvasNodView.xaml">
+    <Page Include="Views\NodCanvasView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\KlassNodView.xaml">
+    <Page Include="Views\NodKlassView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

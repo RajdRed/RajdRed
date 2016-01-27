@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace RajdRed.ViewModels
 {
-    public class CanvasNodViewModel
+    public class NodCanvasViewModel
     {
         public CanvasNodView CanvasNodView { get; set; }
-        public CanvasNodRepository CanvasNodRepository { get; set; }
-        public CanvasNodModel CanvasNodModel { get; set; }
+        public NodCanvasRepository NodCanvasRepository { get; set; }
+        public NodCanvasModel NodCanvasModel { get; set; }
 
-        public CanvasNodViewModel()
+        public NodCanvasViewModel()
         {
-            CanvasNodModel = new CanvasNodModel();
+            NodCanvasModel = new NodCanvasModel();
         }
 
-        public CanvasNodViewModel(CanvasNodModel cnm)
+        public NodCanvasViewModel(NodCanvasModel cnm)
         {
-            CanvasNodModel = cnm;
+            NodCanvasModel = cnm;
         }
 
         public void SetCanvasNodView(CanvasNodView cnv)

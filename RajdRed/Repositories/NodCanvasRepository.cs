@@ -5,32 +5,32 @@ using System.Windows;
 
 namespace RajdRed.Repositories
 {
-    public class CanvasNodRepository : ObservableCollection<CanvasNodViewModel>
+    public class NodCanvasRepository : ObservableCollection<NodCanvasViewModel>
     {
-        public CanvasNodRepository()
+        public NodCanvasRepository()
         {
-            Add(new CanvasNodViewModel()
+            Add(new NodCanvasViewModel()
                 {
-                    CanvasNodModel = new CanvasNodModel()
+                    NodCanvasModel = new NodCanvasModel()
                     {
                         PositionLeft = 200,
                         PositionTop = 200,
                         OnField = true
                     },
-                    CanvasNodRepository = this
+                    NodCanvasRepository = this
                 }
             );
         }
 
         public void AddNewCanvasNod(Point p)
         {
-            Add(new CanvasNodViewModel() {
-                CanvasNodModel = new CanvasNodModel()
+            Add(new NodCanvasViewModel() {
+                NodCanvasModel = new NodCanvasModel()
                 {
                     PositionLeft = p.X,
                     PositionTop = p.Y
                 },
-                CanvasNodRepository = this
+                NodCanvasRepository = this
             });
         }
     }
