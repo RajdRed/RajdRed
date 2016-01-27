@@ -98,6 +98,13 @@ namespace RajdRed
         {
 			if (!isArchiveMenuActive) 
 			{
+				if (isSettingsMenuActive)
+				{
+					theCanvas.Children.Remove(settingsMenu);
+					isSettingsMenuActive = false;
+					settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				}
+
 				Canvas.SetLeft(archiveMenu, 0);
 				Canvas.SetTop(archiveMenu, 100);
 				theCanvas.Children.Add(archiveMenu);
@@ -149,6 +156,13 @@ namespace RajdRed
 		{
 			if (!isSettingsMenuActive) 
 			{
+				if (isArchiveMenuActive)
+				{
+					theCanvas.Children.Remove(archiveMenu);
+					isArchiveMenuActive = false;
+					archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+				}
+
 				Canvas.SetLeft(settingsMenu, theCanvas.ActualWidth - 150);
 				Canvas.SetTop(settingsMenu, 100);
 				theCanvas.Children.Add(settingsMenu);
@@ -169,7 +183,7 @@ namespace RajdRed
 		{
 			Point pt = e.GetPosition(theCanvas);
 
-			if ((pt.X < theCanvas.ActualWidth - 150 || pt.Y > 220) || (pt.X < theCanvas.ActualWidth - 78 && pt.Y < theCanvas.ActualWidth - 96)) 
+			if ((pt.X < theCanvas.ActualWidth - 150 || pt.Y > 190) || (pt.X < theCanvas.ActualWidth - 78 && pt.Y < theCanvas.ActualWidth - 96)) 
 			{
 				theCanvas.Children.Remove(settingsMenu);
 				isSettingsMenuActive = false;
@@ -181,14 +195,14 @@ namespace RajdRed
 		{
 			if (dark) 
 			{
-				var uri = new Uri("pack://application:,,,/img/createClassBg-Dark.png");
+				var uri = new Uri("pack://application:,,,/Images/createClassBg-Dark.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;	
 			}
 
 			else 
 			{
-				var uri = new Uri("pack://application:,,,/img/createClassBg.png");
+				var uri = new Uri("pack://application:,,,/Images/createClassBg.png");
 				var bitmap = new BitmapImage(uri);
 				addClassButton.Source = bitmap;
 			}
