@@ -199,36 +199,6 @@ namespace RajdRed
 			/*Musen har släppts - Kolla om det är finns några element innanför mouseUpPos och mouseDownPos*/
 		}
 
-	/*	private void theCanvas_MouseMove(object sender, MouseEventArgs e)
-		{
-			if (rightMouseDown)
-			{
-				Point mousePos = e.GetPosition(theCanvas);
-
-				if (mouseDownPos.X < mousePos.X)
-				{
-					Canvas.SetLeft(selectionBox, mouseDownPos.X);
-					selectionBox.Width = mousePos.X - mouseDownPos.X;
-				}
-				else
-				{
-					Canvas.SetLeft(selectionBox, mousePos.X);
-					selectionBox.Width = mouseDownPos.X - mousePos.X;
-				}
-
-				if (mouseDownPos.Y < mousePos.Y)
-				{
-					Canvas.SetTop(selectionBox, mouseDownPos.Y);
-					selectionBox.Height = mousePos.Y - mouseDownPos.Y;
-				}
-				else
-				{
-					Canvas.SetTop(selectionBox, mousePos.Y);
-					selectionBox.Height = mouseDownPos.Y - mousePos.Y;
-				}
-			}
-		}*/
-
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
 		{
 			Point pt = e.GetPosition(theCanvas);
