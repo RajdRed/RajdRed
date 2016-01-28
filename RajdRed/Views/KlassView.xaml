@@ -5,12 +5,20 @@
              xmlns:vm="clr-namespace:RajdRed.ViewModels"
              xmlns:v="clr-namespace:RajdRed.Views"
              xmlns:c="clr-namespace:RajdRed.ViewModels.Commands"
-             Height="110" 
-             Width="110"
+             Height="110" Width="110"
              MouseMove="UserControl_MouseMove"
              MouseUp="UserControl_MouseUp"
              Name="theKlassView"
              >
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:NodKlassViewModel}">
+            <Grid>
+                <v:KlassNodView DataContext="{Binding}"
+                                Grid.Column="{Binding NodKlassModel.GridColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Grid.Row="{Binding NodKlassModel.GridRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -28,13 +36,8 @@
             <ColumnDefinition Width="20*"/>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.ColumnSpan="6" Grid.RowSpan="6" 
-                Visibility="Visible" 
-                MouseEnter="OuterBorder_MouseEnter" 
-                Background="Silver" 
-                Opacity="0.6" 
-                CornerRadius="2,2,2,2" 
-                Name="OuterBorder"/>
+        <Border Grid.ColumnSpan="6" Grid.RowSpan="6" Visibility="Visible" 
+                MouseEnter="OuterBorder_MouseEnter" Background="Silver" Opacity="0.6" CornerRadius="2,2,2,2" Name="OuterBorder"/>
         <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
             <Border Name="InnerBorder" CornerRadius="2,2,2,2" BorderBrush="Black" MouseDown="InnerBorder_MouseDown" BorderThickness="1">
                 <Grid Name="InnerGrid" Cursor="SizeAll" Background="Transparent" MouseEnter="InnerGrid_MouseEnter">
@@ -69,13 +72,6 @@
                     <Grid/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type vm:NodKlassViewModel}">
-                    <v:KlassNodView DataContext="{Binding}"
-                                    Grid.Column="{Binding NodKlassModel.GridColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Grid.Row="{Binding NodKlassModel.GridRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Grid>
 </UserControl>
