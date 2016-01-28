@@ -13,7 +13,7 @@ namespace RajdRed.Repositories
                     {
                         GridColumn = 2,
                         GridRow = 0
-                    }, this)
+                    }, kvm, this)
                 );
         }
     }

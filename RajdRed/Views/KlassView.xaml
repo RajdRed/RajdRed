@@ -10,13 +10,6 @@
              MouseUp="UserControl_MouseUp"
              Name="theKlassView"
              >
-    <UserControl.Resources>
-        <m:KlassModel x:Key="klassModel"></m:KlassModel>
-        <m:NodKlassModel x:Key="kNodModel"></m:NodKlassModel>
-        <vm:NodKlassViewModel x:Key="kNodViewModel"></vm:NodKlassViewModel>
-        <vm:KlassViewModel x:Key="klassViewModel"></vm:KlassViewModel>
-    </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -64,10 +57,17 @@
             </Border>
         </Grid>
 
-        <ItemsControl x:Name="lstItemsClassM" ItemsSource="{Binding NodKlassRepository}">
+        <ItemsControl ItemsSource="{Binding NodKlassRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <v:KlassNodView DataContext="{Binding}"/>
+                    <v:KlassNodView DataContext="{Binding}"
+                                    Grid.Column="{Binding NodKlassModel.GridColumn, UpdateSourceTrigger=PropertyChanged}"
+                                    Grid.Row="{Binding NodKlassModel.GridRow, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

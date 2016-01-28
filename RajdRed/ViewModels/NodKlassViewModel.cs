@@ -22,10 +22,11 @@ namespace RajdRed.ViewModels
             set { _nodKlassModel = value; }
         }
 
-        public NodKlassViewModel(NodKlassModel nkm, NodKlassRepository knp)
+        public NodKlassViewModel(NodKlassModel nkm, KlassViewModel kvm ,NodKlassRepository knp)
         {
             NodKlassModel = nkm;
             NodKlassRepository = knp;
+            KlassViewModel = kvm;
         }
 
         public NodKlassViewModel(){}
