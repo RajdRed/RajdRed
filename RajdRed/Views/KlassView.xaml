@@ -42,7 +42,7 @@
                             <Label Content="{Binding KlassModel.Header}" 
                                    Foreground="White" 
                                    FontSize="6"
-                                   VerticalAlignment="Center"></Label>
+                                   VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <Grid Name="bgMidRow" Grid.Row="1" Background="#323a45">
@@ -66,11 +66,10 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <v:KlassNodView DataContext="{Binding}"
-                                    Grid.Column="{Binding NodKlassModel.GridColumn, UpdateSourceTrigger=PropertyChanged}"
-                                    Grid.Row="{Binding NodKlassModel.GridRow, UpdateSourceTrigger=PropertyChanged}"/>
+                                Grid.Column="{Binding NodKlassModel.GridColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Grid.Row="{Binding NodKlassModel.GridRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
     </Grid>
 </UserControl>
