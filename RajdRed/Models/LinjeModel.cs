@@ -12,7 +12,7 @@ namespace RajdRed.Models
         {
             get { return _x1; }
             set { 
-                _x1 = value + _nod1.Width/2; 
+                _x1 = value + _nod1.NodTypesModel.Width/2; 
                 OnPropertyChanged("X1");  
             }
         }
@@ -21,8 +21,8 @@ namespace RajdRed.Models
         public double Y1
         {
             get { return _y1; }
-            set { 
-                _y1 = value + _nod1.Height/2; 
+            set {
+                _y1 = value + _nod1.NodTypesModel.Height / 2; 
                 OnPropertyChanged("Y1"); 
             }
         }
@@ -31,8 +31,8 @@ namespace RajdRed.Models
         public double X2
         {
             get { return _x2; }
-            set { 
-                _x2 = value + _nod2.Width/2; 
+            set {
+                _x2 = value + _nod2.NodTypesModel.Width / 2; 
                 OnPropertyChanged("X2"); 
             }
         }
@@ -41,8 +41,8 @@ namespace RajdRed.Models
         public double Y2
         {
             get { return _y2; }
-            set { 
-                _y2 = value + _nod2.Height/2; 
+            set {
+                _y2 = value + _nod2.NodTypesModel.Height / 2; 
                 OnPropertyChanged("Y2"); 
             }
         }

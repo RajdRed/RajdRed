@@ -10,6 +10,15 @@
              MouseUp="UserControl_MouseUp"
              Name="theKlassView"
              >
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:NodKlassViewModel}">
+            <Grid>
+                <v:KlassNodView DataContext="{Binding}"
+                                Grid.Column="{Binding NodKlassModel.GridColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Grid.Row="{Binding NodKlassModel.GridRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -63,13 +72,6 @@
                     <Grid/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <v:KlassNodView DataContext="{Binding}"
-                                Grid.Column="{Binding NodKlassModel.GridColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Grid.Row="{Binding NodKlassModel.GridRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Grid>
 </UserControl>

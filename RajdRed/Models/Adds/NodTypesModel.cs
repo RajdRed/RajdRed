@@ -1,11 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using RajdRed.Models.Base;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
 namespace RajdRed.Models.Adds
 {
-    class NodTypesModel
+    public class NodTypesModel : RajdElement
     {
+        private double _width = 10;
+        public double Width
+        {
+            get { return _width; }
+            set { _width = value; OnPropertyChanged("Width"); }
+        }
+
+        private double _height = 10;
+        public double Height
+        {
+            get { return _height; }
+            set { _height = value; OnPropertyChanged("Height"); }
+        }
+
         public GeometryGroup Node = new GeometryGroup()
         {
             Children = new GeometryCollection(){
@@ -30,5 +45,8 @@ namespace RajdRed.Models.Adds
                 }, 
                 true) 
             });
+
+        public SolidColorBrush Filled = new SolidColorBrush(Colors.Black);
+        public SolidColorBrush NotFilled = new SolidColorBrush(Colors.Transparent);
     }
 }

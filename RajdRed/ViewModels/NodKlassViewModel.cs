@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace RajdRed.ViewModels
 {
@@ -33,6 +34,26 @@ namespace RajdRed.ViewModels
 
         public void SetView(KlassNodView kv) {
             KlassNodView = kv;
+        }
+
+        public void TurnToAssosiation()
+        {
+            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Association;
+        }
+
+        public void TurnToAggregation(bool filled)
+        {
+            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Aggregation;
+        }
+
+        public void TurnToGeneralization()
+        {
+            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Generalization;
+        }
+
+        public void TurnToNode()
+        {
+            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Node;
         }
     }
 }

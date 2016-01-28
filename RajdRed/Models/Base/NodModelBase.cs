@@ -1,10 +1,12 @@
-﻿using System.Windows.Media;
+﻿using RajdRed.Models.Adds;
+using System.Windows.Media;
 
 namespace RajdRed.Models.Base
 {
     public abstract class NodModelBase : RajdElement
     {
-        private Geometry _geometry = Adds.NodTypesModel.Aggregation();
+        public NodTypesModel NodTypesModel = new NodTypesModel();
+        private Geometry _geometry;
         public Geometry Geometry
         {
             get { return _geometry; }
@@ -17,6 +19,13 @@ namespace RajdRed.Models.Base
             }
         }
 
+        private SolidColorBrush _fill = new SolidColorBrush(Colors.Transparent);
+        public SolidColorBrush Fill
+        {
+            get { return _fill; }
+            set { _fill = value; }
+        }
+        
         private double _positionLeft;
         public double PositionLeft
         {
@@ -37,20 +46,9 @@ namespace RajdRed.Models.Base
             set { _positionTop = value; OnPropertyChanged("PositionTop"); }
         }
 
-        private double _width = 10;
-        public double Width
+        public NodModelBase()
         {
-            get { return _width; }
-            set { _width = value; OnPropertyChanged("Width"); }
+            Geometry = NodTypesModel.Node;
         }
-
-        private double _height = 10;
-        public double Height
-        {
-            get { return _height; }
-            set { _height = value; OnPropertyChanged("Height"); }
-        }
-        
-        
     }
 }

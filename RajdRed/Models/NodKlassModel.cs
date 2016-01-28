@@ -18,11 +18,5 @@ namespace RajdRed.Models
             get { return _gridColumn; }
             set { _gridColumn = value; OnPropertyChanged("GridColumn"); }
         }
-        
-
-        public void TurnToAssociation()
-        {
-            Geometry = NodTypesModel.Association();
-        }
     }
 }
