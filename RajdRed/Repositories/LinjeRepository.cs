@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace RajdRed.Repositories
 {
-    class LinjeRepository : ObservableCollection<LinjeViewModel>
+    public class LinjeRepository : ObservableCollection<LinjeViewModel>
     {
         public LinjeRepository()
         {
+<<<<<<< HEAD
         }
 
         public void AddNewLinje(NodModelBase n1, NodModelBase n2)
@@ -26,6 +27,8 @@ namespace RajdRed.Repositories
                     Nod2 = n2
                 }
             });
+=======
+>>>>>>> refs/remotes/origin/BugFixMVVM-Jocke
         }
     }
 }

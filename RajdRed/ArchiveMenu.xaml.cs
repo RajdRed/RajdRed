@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.IO;
 using System.IO.Packaging;
 using System.Windows.Xps.Packaging;
@@ -36,11 +26,50 @@ namespace RajdRed
 
 		private void newButton_click(object sender, RoutedEventArgs e)
 		{
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+
+			int length = mw._mainRepository.KlassRepository.Count;
+
+			if (length > 0)
+			{
+				MessageBoxResult messageBoxResult = MessageBox.Show("Vill du spara dokumentet \"" + mw.TitleTextBox.Text + "\" till PDF?", "Save current?", System.Windows.MessageBoxButton.YesNoCancel);
+
+				if (messageBoxResult == MessageBoxResult.Yes)
+				{
+					bool didISave = openSaveBox(mw);
+
+					if (didISave)
+					{
+						mw.TitleTextBox.Text = "Untitled";
+						for (int i = 0; i < length; i++)
+							mw._mainRepository.KlassRepository.RemoveAt(0);
+					}
+				}
+
+				else if (messageBoxResult != MessageBoxResult.Cancel)
+				{
+					mw.TitleTextBox.Text = "Untitled";
+					for (int i = 0; i < length; i++)
+						mw._mainRepository.KlassRepository.RemoveAt(0);
+				}
+			}
+
+			else
+				if (mw.TitleTextBox.Text != "Untitled")
+					mw.TitleTextBox.Text = "Untitled";
+
+			mw.theCanvas.Children.Remove(this);
+			mw.isArchiveMenuActive = false;
+			mw.archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 		}
 
 		private void saveButton_click(object sender, RoutedEventArgs e)
 		{
-			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+			openSaveBox((MainWindow)Application.Current.MainWindow);
+		}
+
+		private bool openSaveBox(MainWindow mw)
+		{
 			Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
 			dlg.FileName = mw.TitleTextBox.Text; // Default file name
 			dlg.DefaultExt = ".pdf"; // Default file extension
@@ -55,7 +84,10 @@ namespace RajdRed
 				// Save document
 				string filename = dlg.FileName;
 				writeFile(filename);
+				return true;
 			}
+
+			else return false;
 		}
 
 		private void writeFile(string filename)
