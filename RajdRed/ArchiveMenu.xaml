@@ -16,7 +16,7 @@
                 <RowDefinition Height="30"></RowDefinition>
             </Grid.RowDefinitions>
 
-			<Button Background="White" Click="newButton_click"  Grid.Row="0" FontSize="11" HorizontalContentAlignment="Left">
+			<Button Background="#f9f9f9" Click="newButton_click"  Grid.Row="0" FontSize="11" HorizontalContentAlignment="Left">
 				<TextBlock Text="New" TextAlignment="Left" Width="150" Padding="20, 8, 0, 0" Height="30">
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
