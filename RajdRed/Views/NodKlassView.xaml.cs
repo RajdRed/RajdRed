@@ -16,8 +16,6 @@ namespace RajdRed.Views
             Loaded += (sender, eArgs) =>
             {
                 NodKlassViewModel.SetView(this);
-                SetValue(Grid.ColumnProperty, NodKlassViewModel.NodKlassModel.GridColumn);
-                SetValue(Grid.RowProperty, NodKlassViewModel.NodKlassModel.GridRow);
             };
         }
 
