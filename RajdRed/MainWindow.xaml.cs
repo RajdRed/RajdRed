@@ -7,8 +7,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using RajdRed.Models.Adds;
 using RajdRed.Repositories;
-using RajdRed.Models;
-using RajdRed.ViewModels;
 
 namespace RajdRed
 {
@@ -25,7 +23,6 @@ namespace RajdRed
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 		private bool darkMode = false;
 		private Point mouseDownPos;
-		private bool rightMouseDown = false; //för selectionbox
 
         public MainRepository _mainRepository = new MainRepository();
 		
@@ -151,7 +148,6 @@ namespace RajdRed
 
 			if (mouseDownPos.Y > 100 && Mouse.Captured == null)
 			{
-				rightMouseDown = true;
 				theCanvas.CaptureMouse();
 
 				Canvas.SetLeft(selectionBox, mouseDownPos.X);
