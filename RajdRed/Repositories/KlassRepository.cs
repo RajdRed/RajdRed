@@ -10,14 +10,27 @@ namespace RajdRed.Repositories
         public KlassRepository(){}
         public void AddNewKlass(Point startPosition)
         {
+<<<<<<< HEAD
             Add(new KlassViewModel(new KlassModel()
                     {
                         Header = "Ny Klass *",
                         PositionLeft = startPosition.X,
-                        PositionTop = startPosition.Y,
-                        IsSelected = true
+                        PositionTop = startPosition.Y
                     }, this)
                 );
+=======
+            Add(new KlassViewModel()
+            {
+                KlassModel = new KlassModel()
+                {
+                    Header = "Ny Klass *",
+                    PositionLeft = startPosition.X,
+                    PositionTop = startPosition.Y,
+					IsSelected = true
+                },
+                KlassRepository = this
+            });
+>>>>>>> refs/remotes/origin/BugFixMVVM-Jocke
         }
     }
 }
