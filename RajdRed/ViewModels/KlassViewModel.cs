@@ -16,6 +16,7 @@ namespace RajdRed.ViewModels
         public KlassView KlassView { get; set; }
         public KlassRepository KlassRepository { get; set; }
         public NodKlassRepository NodKlassRepository { get; set; }
+
         public KlassViewModel(KlassModel km, KlassRepository kr)
         {
             KlassModel = km;
