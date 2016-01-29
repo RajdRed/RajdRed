@@ -28,7 +28,7 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">
             <Canvas>
-                <v:CanvasNodView DataContext="{Binding}" 
+                <v:NodCanvasView DataContext="{Binding}" 
                             Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                             Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Canvas>

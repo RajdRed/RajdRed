@@ -82,6 +82,7 @@
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\EventPropertyChangedHandler.cs" />
     <Compile Include="ViewModels\NodCanvasViewModel.cs" />
     <Compile Include="ViewModels\Commands\KlassCommands.cs" />
     <Compile Include="ViewModels\NodKlassViewModel.cs" />

@@ -12,7 +12,7 @@ namespace RajdRed.ViewModels
 {
     public class NodKlassViewModel
     {
-        public KlassNodView KlassNodView { get; set; }
+        public NodKlassView NodKlassView { get; set; }
         public KlassViewModel KlassViewModel { get; set; }
         public NodKlassRepository NodKlassRepository { get; set; }
 
@@ -23,7 +23,7 @@ namespace RajdRed.ViewModels
             set { _nodKlassModel = value; }
         }
 
-        public NodKlassViewModel(NodKlassModel nkm, KlassViewModel kvm ,NodKlassRepository knp)
+        public NodKlassViewModel(NodKlassModel nkm, KlassViewModel kvm, NodKlassRepository knp)
         {
             NodKlassModel = nkm;
             NodKlassRepository = knp;
@@ -32,8 +32,8 @@ namespace RajdRed.ViewModels
 
         public NodKlassViewModel(){}
 
-        public void SetView(KlassNodView kv) {
-            KlassNodView = kv;
+        public void SetView(NodKlassView kv) {
+            NodKlassView = kv;
         }
 
         public void TurnToAssosiation()

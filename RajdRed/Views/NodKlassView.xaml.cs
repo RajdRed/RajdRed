@@ -7,23 +7,21 @@ namespace RajdRed.Views
     /// <summary>
     /// Interaction logic for KlassNodView.xaml
     /// </summary>
-    public partial class KlassNodView : UserControl
+    public partial class NodKlassView : UserControl
     {
         NodKlassViewModel NodKlassViewModel { get { return DataContext as NodKlassViewModel; } }
-        public KlassNodView()
+        public NodKlassView()
         {
             InitializeComponent();
             Loaded += (sender, eArgs) =>
             {
-                NodKlassViewModel.SetView(this);
-                SetValue(Grid.ColumnProperty, NodKlassViewModel.NodKlassModel.GridColumn);
-                SetValue(Grid.RowProperty, NodKlassViewModel.NodKlassModel.GridRow);
+                if (NodKlassViewModel != null)
+                {
+                    NodKlassViewModel.SetView(this);
+                    SetValue(Grid.ColumnProperty, NodKlassViewModel.NodKlassModel.GridColumn);
+                    SetValue(Grid.RowProperty, NodKlassViewModel.NodKlassModel.GridRow);
+                }
             };
-        }
-
-        private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            
         }
     }
 }

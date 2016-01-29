@@ -11,13 +11,7 @@
              Name="theKlassView"
              >
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:NodKlassViewModel}">
-            <Grid>
-                <v:KlassNodView DataContext="{Binding}"
-                                Grid.Column="{Binding NodKlassModel.GridColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Grid.Row="{Binding NodKlassModel.GridRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-        </DataTemplate>
+        <vm:NodKlassViewModel x:Key="nodKlassViewModel"></vm:NodKlassViewModel>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -65,13 +59,25 @@
                 </Grid>
             </Border>
         </Grid>
-
-        <ItemsControl ItemsSource="{Binding NodKlassRepository}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[0]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[1]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[2]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[3]}"/>
+        
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[4]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[5]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[6]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[7]}"/>
+        
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[8]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[9]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[10]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[11]}"/>
+        
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[12]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[13]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[14]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[15]}"/>
     </Grid>
 </UserControl>

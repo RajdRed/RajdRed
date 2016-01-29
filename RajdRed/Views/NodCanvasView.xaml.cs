@@ -19,10 +19,10 @@ namespace RajdRed.Views
     /// <summary>
     /// Interaction logic for CanvasNodView.xaml
     /// </summary>
-    public partial class CanvasNodView : UserControl
+    public partial class NodCanvasView : UserControl
     {
         NodCanvasViewModel NodCanvasViewModel { get { return DataContext as NodCanvasViewModel; } }
-        public CanvasNodView()
+        public NodCanvasView()
         {
             InitializeComponent();
             Loaded += (sender, eArgs) => {

@@ -12,10 +12,7 @@ namespace RajdRed.Repositories
 {
     public class LinjeRepository : ObservableCollection<LinjeViewModel>
     {
-        public LinjeRepository()
-        {
-<<<<<<< HEAD
-        }
+        public LinjeRepository(){}
 
         public void AddNewLinje(NodModelBase n1, NodModelBase n2)
         {
@@ -27,8 +24,6 @@ namespace RajdRed.Repositories
                     Nod2 = n2
                 }
             });
-=======
->>>>>>> refs/remotes/origin/BugFixMVVM-Jocke
         }
     }
 }

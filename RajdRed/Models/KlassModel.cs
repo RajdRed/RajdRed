@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models.Base;
+using RajdRed.ViewModels;
 using RajdRed.Views;
 using System.Windows.Controls;
 
@@ -63,6 +64,6 @@ namespace RajdRed.Models
 
                 OnPropertyChanged("PositionTop");
             }
-        }        
+        }
     }
 }
