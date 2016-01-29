@@ -164,7 +164,7 @@ namespace RajdRed.ViewModells.Add
             // Sätter utseendet
             cornerThumb.Cursor = customizedCursor;
             cornerThumb.Height = cornerThumb.Width = 30;
-            cornerThumb.Opacity = 0.10;
+            cornerThumb.Opacity = 0.01;
             cornerThumb.Background = new SolidColorBrush(Colors.DarkGray);
 
 
