@@ -26,16 +26,9 @@
                              Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Canvas>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">
-            <Canvas>
-                <v:NodCanvasView DataContext="{Binding}" 
-                            Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </Canvas>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
             <Canvas>
-                <Line DataContext="{Binding}" 
+                <Line DataContext="{Binding}"
                       X1="{Binding LinjeModel.X1}" 
                       Y1="{Binding LinjeModel.Y1}"
                       X2="{Binding LinjeModel.X2}"
@@ -44,57 +37,64 @@
                       StrokeThickness="2"/>
             </Canvas>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">
+            <Canvas>
+                <v:NodCanvasView DataContext="{Binding}" 
+                            Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Canvas>
+        </DataTemplate>
 	</Window.Resources>
 
 	<Canvas MouseDown="theCanvas_MouseDown" MouseRightButtonUp="theCanvas_MouseRightButtonUp" MouseRightButtonDown="theCanvas_MouseRightButtonDown" Name="theCanvas" Background="#EAEDF2">
-		<Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="22*" />
-				<RowDefinition Height="78*" />
-			</Grid.RowDefinitions>
-			<Grid Name="menuTopRight" Grid.Row="0" Background="#222931">
-				<!-- Detta är ÖVRE delen av menyn -->
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="956*" />
-					<ColumnDefinition Width="68*" />
-				</Grid.ColumnDefinitions>
-				<Rectangle Name="menuTopLeft" Fill="#222931" MouseDown="WindowDragAndMove" Grid.Column="0"></Rectangle>
-				<Grid Grid.Column="1" HorizontalAlignment="Right">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="22" />
-						<ColumnDefinition Width="22" />
-						<ColumnDefinition Width="22" />
-					</Grid.ColumnDefinitions>
-					<!-- Detta är menyknapparna -->
-					<Ellipse MouseLeftButtonUp="Ellipse_MinimizeWindow" Margin="5" Fill="#FDBD41" Grid.Column="0"></Ellipse>
-					<Ellipse  MouseLeftButtonUp="Ellipse_MaximizeWindow" Margin="5" Fill="#34C749" Grid.Column="1"></Ellipse>
-					<Ellipse MouseLeftButtonUp="Ellipse_CloseWindow" Margin="5" Fill="#FC615D" Grid.Column="2"></Ellipse>
-				</Grid>
-			</Grid>
-			<Grid Grid.Row="1" Background="Transparent">
-				<!-- Detta är UNDRE delen av menyn -->
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="78*" />
-					<ColumnDefinition Width="369*" />
-					<ColumnDefinition Width="130*" />
-					<ColumnDefinition Width="447*" />
-				</Grid.ColumnDefinitions>
-				<!-- Vänstra delen av menyn -->
-				<Grid Grid.Column="0" HorizontalAlignment="Left">
-					<Grid.Style>
-						<Style TargetType="Grid">
-							<Style.Triggers>
-								<Trigger Property="IsMouseOver" Value="True">
-									<Setter Property="Background" Value="#6B7584" />
-								</Trigger>
-							</Style.Triggers>
-						</Style>
-					</Grid.Style>
-					<Button Name="archiveMenuBtn" Background="Transparent" PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
-				</Grid>
-				<Grid Grid.Column="1">
-					<Border Margin="10, 0, 0, 0" Name="titleBorder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" CornerRadius="6, 6, 0, 0" BorderThickness="1" BorderBrush="#EAEDF2" SnapsToDevicePixels="True" Background="#EAEDF2">
-						<TextBox 
+        <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22*" />
+                <RowDefinition Height="78*" />
+            </Grid.RowDefinitions>
+            <Grid Name="menuTopRight" Grid.Row="0" Background="#222931">
+                <!-- Detta är ÖVRE delen av menyn -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="956*" />
+                    <ColumnDefinition Width="68*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Name="menuTopLeft" Fill="#222931" MouseDown="WindowDragAndMove" Grid.Column="0"></Rectangle>
+                <Grid Grid.Column="1" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="22" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Detta är menyknapparna -->
+                    <Ellipse MouseLeftButtonUp="Ellipse_MinimizeWindow" Margin="5" Fill="#FDBD41" Grid.Column="0"></Ellipse>
+                    <Ellipse  MouseLeftButtonUp="Ellipse_MaximizeWindow" Margin="5" Fill="#34C749" Grid.Column="1"></Ellipse>
+                    <Ellipse MouseLeftButtonUp="Ellipse_CloseWindow" Margin="5" Fill="#FC615D" Grid.Column="2"></Ellipse>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Background="Transparent">
+                <!-- Detta är UNDRE delen av menyn -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="78*" />
+                    <ColumnDefinition Width="369*" />
+                    <ColumnDefinition Width="130*" />
+                    <ColumnDefinition Width="447*" />
+                </Grid.ColumnDefinitions>
+                <!-- Vänstra delen av menyn -->
+                <Grid Grid.Column="0" HorizontalAlignment="Left">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#6B7584" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Button Name="archiveMenuBtn" Background="Transparent" PreviewMouseUp="Button_ArchiveMenu_MouseUp" PreviewMouseDown="Button_ArchiveMenu_MouseDown" Content="" Style="{DynamicResource MenuButton}" Width="78"></Button>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Border Margin="10, 0, 0, 0" Name="titleBorder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" CornerRadius="6, 6, 0, 0" BorderThickness="1" BorderBrush="#EAEDF2" SnapsToDevicePixels="True" Background="#EAEDF2">
+                        <TextBox 
 							Name="TitleTextBox"
 							HorizontalContentAlignment="Center"
 							VerticalContentAlignment="Center"
@@ -103,35 +103,28 @@
 							Padding="0, 2, 0, 0"
 							Height="23" 
 							Width="100">Untitled</TextBox>
-					</Border>
-				</Grid>
-				<Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="2">
-					<Image Margin="5" MouseEnter="addClassButton_MouseEnter" MouseLeave="addClassButton_MouseLeave" Name="addClassButton"  Source="Images/createClassBg.png" />
-				</Button>
-				<Grid Grid.Column="3" HorizontalAlignment="Right">
-					<Grid.Style>
-						<Style TargetType="Grid">
-							<Style.Triggers>
-								<Trigger Property="IsMouseOver" Value="True">
-									<Setter Property="Background" Value="#6B7584" />
-								</Trigger>
-							</Style.Triggers>
-						</Style>
-					</Grid.Style>
-					<Button Name="settingsMenuBtn" Background="Transparent" PreviewMouseUp="Button_SettingsMenu_MouseUp" Style="{DynamicResource MenuButton}" PreviewMouseDown="Button_SettingsMenu_MouseDown" Content="" Width="78"></Button>
-				</Grid>
-			</Grid>
-		</Grid>
-		<ItemsControl ItemsSource="{Binding Collection}">
-			<ItemsControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<Canvas/>
-				</ItemsPanelTemplate>
-			</ItemsControl.ItemsPanel>
-		</ItemsControl>
-		<Canvas Name="selectionCanvas">
-			<!-- This canvas is overlaid over the previous canvas and is used to 
-                place the rectangle that implements the drag selection box. -->
+                    </Border>
+                </Grid>
+                <Button HorizontalAlignment="Center" Width="130" Height="72" BorderThickness="0" Background="Transparent" Foreground="White" PreviewMouseDown="Button_PreviewMouseDown" Grid.Column="2">
+                    <Image Margin="5" MouseEnter="addClassButton_MouseEnter" MouseLeave="addClassButton_MouseLeave" Name="addClassButton"  Source="Images/createClassBg.png" />
+                </Button>
+                <Grid Grid.Column="3" HorizontalAlignment="Right">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#6B7584" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Button Name="settingsMenuBtn" Background="Transparent" PreviewMouseUp="Button_SettingsMenu_MouseUp" Style="{DynamicResource MenuButton}" PreviewMouseDown="Button_SettingsMenu_MouseDown" Content="" Width="78"></Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Canvas Name="selectionCanvas">
+			 <!--This canvas is overlaid over the previous canvas and is used to 
+                place the rectangle that implements the drag selection box.--> 
 			<Rectangle
                 x:Name="selectionBox"
 				Fill="#333"
@@ -141,5 +134,12 @@
                 StrokeThickness="1"
                 />
 		</Canvas>
-	</Canvas>
+        <ItemsControl ItemsSource="{Binding Collection}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Canvas>
 </Window>

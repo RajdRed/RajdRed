@@ -52,13 +52,13 @@ namespace RajdRed
         {
             _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
 
-        }
+            //AddNewCanvasNod returnerar den noden som skapas
+            _mainRepository.LinjeRepository.AddNewLinje(
+                    _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(100, 100)).NodCanvasModel,
+                    _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(200, 200)).NodCanvasModel
+                );
 
-        //public void DeleteKlass(KlassView klass)
-        //{
-        //    theCanvas.Children.Remove(klass);
-        //    _klassList.Remove(klass);
-        //}
+        }
 
 		public bool getDarkMode()
 		{

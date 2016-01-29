@@ -14,16 +14,20 @@ namespace RajdRed.Repositories
     {
         public LinjeRepository(){}
 
-        public void AddNewLinje(NodModelBase n1, NodModelBase n2)
+        public LinjeViewModel AddNewLinje(NodModelBase n1, NodModelBase n2)
         {
-            Add(new LinjeViewModel()
+            LinjeViewModel lvm = new LinjeViewModel()
             {
                 LinjeModel = new LinjeModel(n1, n2)
                 {
                     Nod1 = n1,
                     Nod2 = n2
                 }
-            });
+            };
+
+            Add(lvm);
+
+            return lvm;
         }
     }
 }

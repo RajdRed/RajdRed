@@ -9,16 +9,12 @@ namespace RajdRed.Repositories
     {
         public NodCanvasRepository(){}
 
-        public void AddNewCanvasNod(Point p)
+        public NodCanvasViewModel AddNewCanvasNod(Point p)
         {
-            Add(new NodCanvasViewModel() {
-                NodCanvasModel = new NodCanvasModel()
-                {
-                    PositionLeft = p.X,
-                    PositionTop = p.Y
-                },
-                NodCanvasRepository = this
-            });
+            NodCanvasViewModel nkvm = new NodCanvasViewModel(new NodCanvasModel(p), this);
+            Add(nkvm);
+
+            return nkvm;
         }
     }
 }

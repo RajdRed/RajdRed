@@ -18,11 +18,11 @@ namespace RajdRed.Repositories
             set { _klassRepository = value; }
         }
 
-        private NodCanvasRepository _canvasNodRepository = new NodCanvasRepository();
-        public NodCanvasRepository CanvasNodRepository
+        private NodCanvasRepository _nodCanvasRepository = new NodCanvasRepository();
+        public NodCanvasRepository NodCanvasRepository
         {
-            get { return _canvasNodRepository; }
-            set { _canvasNodRepository = value; }
+            get { return _nodCanvasRepository; }
+            set { _nodCanvasRepository = value; }
         }
 
         private LinjeRepository _linjeRepository = new LinjeRepository();
@@ -32,7 +32,6 @@ namespace RajdRed.Repositories
             set { _linjeRepository = value; }
         }
         
-
         private CompositeCollection _collection = new CompositeCollection();
         public CompositeCollection Collection
         {
@@ -42,30 +41,31 @@ namespace RajdRed.Repositories
         public MainRepository()
         {
             Collection.Add(new CollectionContainer() { Collection = KlassRepository });
-            Collection.Add(new CollectionContainer() { Collection = CanvasNodRepository });
+            Collection.Add(new CollectionContainer() { Collection = NodCanvasRepository });
             Collection.Add(new CollectionContainer() { Collection = LinjeRepository });
 
-            //CanvasNodModel cnm1 = new Models.CanvasNodModel() 
-            //    { 
-            //        PositionTop = 100, 
-            //        PositionLeft = 100 
+            //NodCanvasModel cnm1 = new Models.NodCanvasModel()
+            //    {
+            //        PositionTop = 100,
+            //        PositionLeft = 100
             //    };
-            //CanvasNodViewModel cnvm1 = new CanvasNodViewModel() {
-            //    CanvasNodModel = cnm1
+            //NodCanvasViewModel cnvm1 = new NodCanvasViewModel()
+            //{
+            //    NodCanvasModel = cnm1
             //};
 
-            //CanvasNodModel cnm2 = new Models.CanvasNodModel()
+            //NodCanvasModel cnm2 = new Models.NodCanvasModel()
             //    {
             //        PositionTop = 300,
             //        PositionLeft = 300
             //    };
-            //CanvasNodViewModel cnvm2 = new CanvasNodViewModel()
+            //NodCanvasViewModel cnvm2 = new NodCanvasViewModel()
             //{
-            //    CanvasNodModel = cnm2
+            //    NodCanvasModel = cnm2
             //};
 
-            //CanvasNodRepository.Add(cnvm1);
-            //CanvasNodRepository.Add(cnvm2);
+            //NodCanvasRepository.Add(cnvm1);
+            //NodCanvasRepository.Add(cnvm2);
             //LinjeRepository.AddNewLinje(cnm1, cnm2);
         }
     }

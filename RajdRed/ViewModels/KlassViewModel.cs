@@ -3,6 +3,7 @@ using RajdRed.Repositories;
 using RajdRed.ViewModells.Add;
 using RajdRed.ViewModels.Commands;
 using RajdRed.Views;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -21,7 +22,7 @@ namespace RajdRed.ViewModels
         {
             KlassModel = km;
             KlassRepository = kr;
-            
+            NodKlassRepository = new NodKlassRepository(this);
         }
 
         public KlassViewModel(KlassModel km)

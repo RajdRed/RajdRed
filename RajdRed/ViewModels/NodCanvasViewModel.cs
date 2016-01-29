@@ -15,17 +15,15 @@ namespace RajdRed.ViewModels
         public NodCanvasRepository NodCanvasRepository { get; set; }
         public NodCanvasModel NodCanvasModel { get; set; }
 
-        public NodCanvasViewModel()
+        public NodCanvasViewModel(NodCanvasModel ncm, NodCanvasRepository ncr)
         {
-            NodCanvasModel = new NodCanvasModel();
+            NodCanvasModel = ncm;
+            NodCanvasRepository = ncr;
         }
 
-        public NodCanvasViewModel(NodCanvasModel cnm)
-        {
-            NodCanvasModel = cnm;
-        }
+        public NodCanvasViewModel(){}
 
-        public void SetCanvasNodView(NodCanvasView ncv)
+        public void SetNodCanvasView(NodCanvasView ncv)
         {
             NodCanvasView = ncv;
         }

@@ -8,7 +8,8 @@
              Width="{Binding NodCanvasModel.Width}"
              MouseDown="UserControl_MouseDown"
              MouseMove="UserControl_MouseMove"
-             MouseUp="UserControl_MouseUp">
+             MouseUp="UserControl_MouseUp" 
+             Background="Red">
     <Path
         Stroke="Black" 
         StrokeThickness="1" 

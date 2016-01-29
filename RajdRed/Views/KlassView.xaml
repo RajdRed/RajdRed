@@ -11,7 +11,11 @@
              Name="theKlassView"
              >
     <UserControl.Resources>
-        <vm:NodKlassViewModel x:Key="nodKlassViewModel"></vm:NodKlassViewModel>
+        <DataTemplate x:Key="NodTemplate" DataType="{x:Type vm:NodKlassViewModel}">
+            <v:NodKlassView DataContext="{Binding}"
+                            Grid.Column="{Binding NodKlassModel.GridColumn}"
+                            Grid.Row="{Binding NodKlassModel.GridRow}"/>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -60,7 +64,12 @@
             </Border>
         </Grid>
         
-        <v:NodKlassView DataContext="{Binding NodKlassRepository[0]}"/>
+        <ItemsControl ItemsSource="{Binding NodKlassRepository}" Name="ItemsCollection"
+                      ItemTemplate="{StaticResource NodTemplate}" Grid.ColumnSpan="6" Grid.RowSpan="6">
+        </ItemsControl>
+
+
+        <!--<v:NodKlassView DataContext="{Binding NodKlassRepository[0]}"/>
         <v:NodKlassView DataContext="{Binding NodKlassRepository[1]}"/>
         <v:NodKlassView DataContext="{Binding NodKlassRepository[2]}"/>
         <v:NodKlassView DataContext="{Binding NodKlassRepository[3]}"/>
@@ -78,6 +87,6 @@
         <v:NodKlassView DataContext="{Binding NodKlassRepository[12]}"/>
         <v:NodKlassView DataContext="{Binding NodKlassRepository[13]}"/>
         <v:NodKlassView DataContext="{Binding NodKlassRepository[14]}"/>
-        <v:NodKlassView DataContext="{Binding NodKlassRepository[15]}"/>
+        <v:NodKlassView DataContext="{Binding NodKlassRepository[15]}"/>-->
     </Grid>
 </UserControl>

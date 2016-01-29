@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              Height="{Binding NodKlassModel.NodTypesModel.Height}"
-             Width="{Binding NodKlassModel.NodTypesModel.Widht}">
+             Width="{Binding NodKlassModel.NodTypesModel.Widht}"
+             VerticalAlignment="Center"
+             HorizontalAlignment="Center"
+             >
     <Path
         Stroke="Black" 
         StrokeThickness="1"
