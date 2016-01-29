@@ -83,6 +83,7 @@
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\NodCanvasViewModel.cs" />
+    <Compile Include="ViewModels\Adds\ReseizingAdorner.cs" />
     <Compile Include="ViewModels\Commands\KlassCommands.cs" />
     <Compile Include="ViewModels\NodKlassViewModel.cs" />
     <Compile Include="ViewModels\KlassViewModel.cs" />

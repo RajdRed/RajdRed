@@ -26,6 +26,8 @@ namespace RajdRed.Views
 					_posOnUserControlOnHit = new Point(Width / 2, Height / 2);
 					KlassViewModel.KlassModel.PositionLeft = KlassViewModel.KlassModel.PositionLeft - (Width / 2);
 					KlassViewModel.KlassModel.PositionTop = KlassViewModel.KlassModel.PositionTop - (Height / 2);
+
+                    KlassViewModel.SetAdornerLayer();
                 }
             };
         }
