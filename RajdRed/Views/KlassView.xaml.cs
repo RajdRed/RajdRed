@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace RajdRed.Views
 {
@@ -78,6 +79,45 @@ namespace RajdRed.Views
 
         private void OuterBorder_MouseEnter(object sender, MouseEventArgs e)
         {
+        }
+
+		private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+
+			Grid g = new Grid() { Width = mw.theCanvas.ActualWidth, Height = mw.theCanvas.ActualHeight, Background = Brushes.Black, Opacity = 0.2 };
+			Canvas.SetLeft(g, 0);
+			Canvas.SetTop(g, 0);
+
+			ClassSettings cs = new ClassSettings(KlassViewModel, g);
+			g.MouseDown += (sendr, eventArgs) => { CloseSettings(cs, g); };	//Skapar ett mouseDown-event för Grid g som anropar CloseSettings
+
+			double x = (KlassViewModel.KlassModel.PositionLeft + _posOnUserControlOnHit.X - cs.Width / 2.33);
+			double y = (KlassViewModel.KlassModel.PositionTop + _posOnUserControlOnHit.Y - cs.Height / 2);
+
+			if (cs.Width + x > mw.ActualWidth)
+				Canvas.SetLeft(cs, x - (x + cs.Width - mw.ActualWidth));
+			else if (x < 0)
+				Canvas.SetLeft(cs, x - x);
+			else
+				Canvas.SetLeft(cs, x);
+
+			if (cs.Height + y > mw.ActualHeight)
+				Canvas.SetTop(cs, y - (y + cs.Height - mw.ActualHeight));
+			else if (y < 0)
+				Canvas.SetTop(cs, y - y);
+			else
+				Canvas.SetTop(cs, y);
+
+			mw.theCanvas.Children.Add(g);
+			mw.theCanvas.Children.Add(cs);
+		}
+
+		public void CloseSettings(ClassSettings cs, Grid g)
+        {
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+            mw.theCanvas.Children.Remove(cs);
+			mw.theCanvas.Children.Remove(g);
         }
     }
 }

@@ -8,6 +8,7 @@
              Height="110" Width="110"
              MouseMove="UserControl_MouseMove"
              MouseUp="UserControl_MouseUp"
+			 MouseDoubleClick="UserControl_MouseDoubleClick"
              Name="theKlassView"
              >
     <UserControl.Resources>

@@ -86,11 +86,11 @@
     <Canvas Name="Canvas_Settings">
         <Grid Name="gridAnimate" Height="500" Width="580">
             <Grid.RowDefinitions>
-                <RowDefinition Height="125*"/>
+                <RowDefinition Height="142*"/>
                 <RowDefinition Height="82*"/>
                 <RowDefinition Height="83*"/>
-                <RowDefinition Height="52*"/>
-                <RowDefinition Height="158*"/>
+                <RowDefinition Height="82*"/>
+                <RowDefinition Height="110*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="249*"/>
@@ -146,9 +146,9 @@
                             <RowDefinition Height="40*"/>
                             <RowDefinition Height="40*"/>
                         </Grid.RowDefinitions>
-                        <TextBox TextWrapping="Wrap" Grid.Row="0" CaretBrush="White" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="Ny Klass*" Background="#404d5c"/>
-                        <TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="1" BorderThickness="0" Name="Attributes" Background="#768ca5" Foreground="White"></TextBox>
-                        <TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="2" BorderThickness="0" Name="Methods" Background="#404d5c" Foreground="White"></TextBox>
+						<TextBox TextWrapping="Wrap" Grid.Row="0" CaretBrush="White" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="{Binding Header, UpdateSourceTrigger=Explicit}" Background="#404d5c"/>
+						<TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="1" BorderThickness="0" Name="Attributes" Background="#768ca5" Foreground="White"></TextBox>
+						<TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="2" BorderThickness="0" Name="Methods" Background="#404d5c" Foreground="White"></TextBox>
                     </Grid>
                 </Border>
             </Grid>

@@ -20,8 +20,7 @@ namespace RajdRed.ViewModels
         public KlassViewModel(KlassModel km, KlassRepository kr)
         {
             KlassModel = km;
-            KlassRepository = kr;
-            
+            KlassRepository = kr;      
         }
 
         public KlassViewModel(KlassModel km)
