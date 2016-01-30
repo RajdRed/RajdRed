@@ -111,6 +111,7 @@ namespace RajdRed.Views
 
 			mw.theCanvas.Children.Add(g);
 			mw.theCanvas.Children.Add(cs);
+            KlassViewModel.RemoveAdornerLayer();            
 		}
 
 		public void CloseSettings(ClassSettings cs, Grid g)
@@ -118,6 +119,7 @@ namespace RajdRed.Views
 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
             mw.theCanvas.Children.Remove(cs);
 			mw.theCanvas.Children.Remove(g);
+            KlassViewModel.SetAdornerLayer();
         }
     }
 }
