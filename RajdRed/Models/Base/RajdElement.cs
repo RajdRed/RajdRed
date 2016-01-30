@@ -10,10 +10,5 @@ namespace RajdRed.Models.Base
     {
         public bool IsSelected { get; set; }
         public bool OnField { get; set; }
-
-        public void Delete()
-        {
-            this.Delete();
-        }
     }
 }

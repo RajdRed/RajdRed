@@ -18,7 +18,6 @@
                              Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleY"/>
         </Storyboard>
         <vm:KlassViewModel x:Key="klassViewModel"/>
-        <m:KlassModel x:Key="klassModel"/>
         <DataTemplate DataType="{x:Type vm:KlassViewModel}">
             <Canvas>
                 <v:KlassView DataContext="{Binding}"

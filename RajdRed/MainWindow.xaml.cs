@@ -24,11 +24,12 @@ namespace RajdRed
 		private bool darkMode = false;
 		private Point mouseDownPos;
 
-        public MainRepository _mainRepository = new MainRepository();
+        public MainRepository _mainRepository;
 		
         public MainWindow()
         {
             InitializeComponent();
+            _mainRepository = new MainRepository(this);
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             DataContext = _mainRepository;
         }

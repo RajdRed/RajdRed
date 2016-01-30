@@ -4,16 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Height="{Binding NodKlassModel.NodTypesModel.Height}"
-             Width="{Binding NodKlassModel.NodTypesModel.Widht}"
-             VerticalAlignment="Center"
-             HorizontalAlignment="Center"
+             Height="{Binding NodKlassModel.Height}"
+             Width="{Binding NodKlassModel.Width}"
              >
     <Path
         Stroke="Black" 
-        StrokeThickness="1"
+        StrokeThickness="2"
         Fill="{Binding NodKlassModel.Filled}" 
         Data="{Binding NodKlassModel.Geometry}"
+        MouseLeftButtonDown="Path_MouseLeftButtonDown"
         >
     </Path>
 </UserControl>

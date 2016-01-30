@@ -1,22 +1,17 @@
 ﻿using RajdRed.Models.Adds;
 using RajdRed.Models.Base;
+using RajdRed.ViewModels;
+using System.Windows;
 
 namespace RajdRed.Models
 {
     public class NodKlassModel : NodModelBase
     {
-        private int _gridRow;
-        public int GridRow
-        {
-            get { return _gridRow; }
-            set { _gridRow = value; OnPropertyChanged("GridRow"); }
-        }
+        public bool IsSet = false;
+        public int Row { get; set; }
+        public int Column { get; set; }
 
-        private int _gridColumn;
-        public int GridColumn
-        {
-            get { return _gridColumn; }
-            set { _gridColumn = value; OnPropertyChanged("GridColumn"); }
-        }
+        public double RPositionLeft { get; set; }
+        public double RPositionTop { get; set; }
     }
 }

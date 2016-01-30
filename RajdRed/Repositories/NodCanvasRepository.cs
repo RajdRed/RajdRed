@@ -7,7 +7,12 @@ namespace RajdRed.Repositories
 {
     public class NodCanvasRepository : ObservableCollection<NodCanvasViewModel>
     {
-        public NodCanvasRepository(){}
+        MainRepository _mainRepository;
+        MainRepository MainRepository { get { return _mainRepository; } }
+        public NodCanvasRepository(MainRepository mr)
+        {
+            _mainRepository = mr;
+        }
 
         public NodCanvasViewModel AddNewCanvasNod(Point p)
         {

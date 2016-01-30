@@ -18,10 +18,13 @@ namespace RajdRed.Views
                 if (NodKlassViewModel != null)
                 {
                     NodKlassViewModel.SetView(this);
-                    SetValue(Grid.ColumnProperty, NodKlassViewModel.NodKlassModel.GridColumn);
-                    SetValue(Grid.RowProperty, NodKlassViewModel.NodKlassModel.GridRow);
                 }
             };
+        }
+
+        private void Path_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            NodKlassViewModel.CreateAndAttachCanvasNod(e.GetPosition(Application.Current.MainWindow));
         }
     }
 }

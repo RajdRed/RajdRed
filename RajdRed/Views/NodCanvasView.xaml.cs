@@ -16,7 +16,7 @@ namespace RajdRed.Views
             InitializeComponent();
             Loaded += (sender, eArgs) => {
                 NodCanvasViewModel.SetNodCanvasView(this);
-                //CaptureMouse(); Avkommenteras om/när man kan dra nod från klass
+                CaptureMouse(); //Avkommenteras om/när man kan dra nod från klass
             };
         }
 

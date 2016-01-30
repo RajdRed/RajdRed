@@ -23,20 +23,16 @@ namespace RajdRed.Views
                 {
                     CaptureMouse();
                     KlassViewModel.SetKlassView(this);
-					_posOnUserControlOnHit = new Point(Width / 2, Height / 2);
-					KlassViewModel.KlassModel.PositionLeft = KlassViewModel.KlassModel.PositionLeft - (Width / 2);
-					KlassViewModel.KlassModel.PositionTop = KlassViewModel.KlassModel.PositionTop - (Height / 2);
+					_posOnUserControlOnHit = new Point(ActualWidth / 2, ActualHeight / 2);
+					KlassViewModel.KlassModel.PositionLeft = KlassViewModel.KlassModel.PositionLeft - (ActualWidth / 2);
+					KlassViewModel.KlassModel.PositionTop = KlassViewModel.KlassModel.PositionTop - (ActualHeight / 2);
 
                     KlassViewModel.SetAdornerLayer();
                 }
             };
         }
 
-        private void InnerGrid_MouseEnter(object sender, MouseEventArgs e)
-        {
-        }
-
-        public void InnerBorder_MouseDown(object sender, MouseButtonEventArgs e)
+        public void Innerborder_MouseDown(object sender, MouseButtonEventArgs e)
         {
 			CaptureMouse();
 			_posOnUserControlOnHit = Mouse.GetPosition(this);
@@ -74,10 +70,6 @@ namespace RajdRed.Views
 				KlassViewModel.KlassModel.OnField = true;
 
 			KlassViewModel.KlassModel.IsSelected = false;
-        }
-
-        private void OuterBorder_MouseEnter(object sender, MouseEventArgs e)
-        {
         }
     }
 }

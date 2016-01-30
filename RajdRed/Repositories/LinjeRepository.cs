@@ -12,7 +12,13 @@ namespace RajdRed.Repositories
 {
     public class LinjeRepository : ObservableCollection<LinjeViewModel>
     {
-        public LinjeRepository(){}
+        MainRepository _mainRepository;
+        MainRepository MainRepository { get { return _mainRepository; } }
+
+        public LinjeRepository(MainRepository mr)
+        {
+            _mainRepository = mr;
+        }
 
         public LinjeViewModel AddNewLinje(NodModelBase n1, NodModelBase n2)
         {
