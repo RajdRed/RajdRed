@@ -37,10 +37,9 @@ namespace RajdRed.ViewModels
             {
                 if (e.PropertyName == "PositionLeft" || e.PropertyName == "PositionTop")
                 {
-                    double x = Canvas.GetLeft(KlassViewModel.KlassView);
-                    double y = Canvas.GetTop(KlassViewModel.KlassView);
-                    NodKlassModel.PositionLeft = (x + KlassViewModel.KlassView.ActualWidth * NodKlassModel.RPositionLeft) - NodKlassModel.Width / 2;
-                    NodKlassModel.PositionTop = (y + KlassViewModel.KlassView.ActualHeight * NodKlassModel.RPositionTop) - NodKlassModel.Height / 2;
+                    Point p = GetPositionRelativeCanvas();
+                    NodKlassModel.PositionLeft = p.X;
+                    NodKlassModel.PositionTop = p.Y;
                 }
             }
         }
@@ -69,32 +68,53 @@ namespace RajdRed.ViewModels
             NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Node;
         }
 
-        public bool Set(Point p)
+        public bool Set()
         {
+            Point p = GetPositionRelativeCanvas();
             if (!NodKlassModel.IsSet)
             {
-                NodKlassModel.PositionLeft = p.X - NodKlassView.Width / 2;
-                NodKlassModel.PositionTop = p.Y - NodKlassView.Height / 2;
-                NodKlassModel.RPositionLeft = (p.X - Canvas.GetLeft(KlassViewModel.KlassView)) / KlassViewModel.KlassView.ActualWidth;
-                NodKlassModel.RPositionTop = (p.Y - Canvas.GetTop(KlassViewModel.KlassView)) / KlassViewModel.KlassView.ActualHeight;
+                NodKlassModel.PositionLeft = p.X;
+                NodKlassModel.PositionTop = p.Y;
                 NodKlassModel.IsSet = true;
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
-        public void CreateAndAttachCanvasNod(Point p)
+        public void CreateLinje()
         {
-            if (Set(p))
+            Point p = GetPositionRelativeCanvas();
+
+            if (Set())
             {
                 KlassViewModel.KlassRepository.MainRepository.LinjeRepository.AddNewLinje(
                     NodKlassModel,
                     KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.AddNewCanvasNod(p).NodCanvasModel
                 );
             }
+        }
+
+        public void AttachLinje(NodCanvasViewModel ncvm)
+        {
+            if (Set())
+            {
+                this.NodKlassModel.LinjeModel = ncvm.NodCanvasModel.LinjeModel;
+
+                if (ncvm.NodCanvasModel == NodKlassModel.LinjeModel.Nod1)
+                    NodKlassModel.LinjeModel.Nod1 = NodKlassModel;
+                else if (ncvm.NodCanvasModel == NodKlassModel.LinjeModel.Nod2)
+                    NodKlassModel.LinjeModel.Nod2 = NodKlassModel;
+
+                NodKlassModel.LinjeModel.SetOnPropertyChanged();
+
+                ncvm.NodCanvasRepository.Remove(ncvm);
+            };
+        }
+
+        public Point GetPositionRelativeCanvas()
+        {
+            return NodKlassView.TransformToAncestor(Application.Current.MainWindow).Transform(new Point(0, 0));
         }
     }
 }

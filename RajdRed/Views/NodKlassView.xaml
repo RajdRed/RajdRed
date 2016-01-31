@@ -6,6 +6,10 @@
              mc:Ignorable="d" 
              Height="{Binding NodKlassModel.Height}"
              Width="{Binding NodKlassModel.Width}"
+             AllowDrop="True"
+             Background="Transparent"
+             HorizontalAlignment="{Binding NodKlassModel.HorizontalAlignment}"
+             VerticalAlignment="{Binding NodKlassModel.VerticalAlignment}"
              >
     <Path
         Stroke="Black" 

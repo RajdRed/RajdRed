@@ -13,5 +13,29 @@ namespace RajdRed.Models
 
         public double RPositionLeft { get; set; }
         public double RPositionTop { get; set; }
+
+        private HorizontalAlignment _horizontalAlignment;
+        public HorizontalAlignment HorizontalAlignment
+        {
+            get { return _horizontalAlignment; }
+            set 
+            { 
+                _horizontalAlignment = value;
+                OnPropertyChanged("HorizontalAlignment");
+            }
+        }
+
+        private VerticalAlignment _verticalAlignment;
+        public VerticalAlignment VerticalAlignment
+        {
+            get { return _verticalAlignment; }
+            set 
+            {
+                _verticalAlignment = value;
+                OnPropertyChanged("VerticalAlignment");
+            }
+        }
+        
+        
     }
 }

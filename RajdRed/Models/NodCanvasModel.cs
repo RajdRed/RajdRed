@@ -10,7 +10,6 @@ namespace RajdRed.Models
 {
     public class NodCanvasModel : NodModelBase
     {
-        public LinjeModel LinjeModel { get; set; }
         public NodCanvasModel(Point p)
         {
             PositionLeft = p.X;

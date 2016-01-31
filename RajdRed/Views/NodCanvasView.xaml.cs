@@ -29,11 +29,18 @@ namespace RajdRed.Views
         {
             if (IsMouseCaptured)
             {
-                Point p = e.GetPosition(Application.Current.MainWindow);
+                DragDrop.DoDragDrop(this, NodCanvasViewModel, DragDropEffects.All);
+                //Point p = e.GetPosition(Application.Current.MainWindow);
 
-                SetValue(Canvas.LeftProperty, p.X-Width/2);
-                SetValue(Canvas.TopProperty, p.Y-Height/2);
+                //SetValue(Canvas.LeftProperty, p.X - Width / 2);
+                //SetValue(Canvas.TopProperty, p.Y - Height / 2);
             }
+        }
+
+        protected override void OnGiveFeedback(GiveFeedbackEventArgs e)
+        {
+            base.OnGiveFeedback(e);
+            
         }
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)

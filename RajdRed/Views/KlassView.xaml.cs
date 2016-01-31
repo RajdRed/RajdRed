@@ -44,14 +44,12 @@ namespace RajdRed.Views
             if (IsMouseCaptured && KlassViewModel.KlassModel.IsSelected)
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
-				SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
-                SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+				
+                if (!(KlassViewModel.KlassModel.OnField && ((p.Y - _posOnUserControlOnHit.Y) <= 100.5)))
+                    SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
 
-				if (KlassViewModel.KlassModel.OnField && ((p.Y - _posOnUserControlOnHit.Y) <= 100.5))
-					Canvas.SetTop(this, 100.6);
-
-				if ((p.X - _posOnUserControlOnHit.X) <= 0.5)
-					Canvas.SetLeft(this, 0.6);
+				if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
+                    SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
             }
         }
 

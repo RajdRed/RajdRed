@@ -13,7 +13,9 @@ namespace RajdRed.Repositories
             for (int i = 1; i <= 4; i++)
                 Add(new NodKlassViewModel(new NodKlassModel() {
                     Row = i,
-                    Column = 0
+                    Column = 0,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center
                 }, kvm, this));
 
             //right
@@ -21,7 +23,9 @@ namespace RajdRed.Repositories
                 Add(new NodKlassViewModel(new NodKlassModel()
                 {
                     Row = i,
-                    Column = 5
+                    Column = 5,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center
                 }, kvm, this));
 
             //top
@@ -29,7 +33,9 @@ namespace RajdRed.Repositories
                 Add(new NodKlassViewModel(new NodKlassModel()
                 {
                     Row = 0,
-                    Column = i
+                    Column = i,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Top
                 }, kvm, this));
 
             //bottom
@@ -37,7 +43,9 @@ namespace RajdRed.Repositories
                 Add(new NodKlassViewModel(new NodKlassModel()
                 {
                     Row = 5,
-                    Column = i
+                    Column = i,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Bottom
                 }, kvm, this));
         }
     }

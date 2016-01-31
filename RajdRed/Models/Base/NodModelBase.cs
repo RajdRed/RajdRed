@@ -5,6 +5,8 @@ namespace RajdRed.Models.Base
 {
     public abstract class NodModelBase : RajdElement
     {
+        public LinjeModel LinjeModel { get; set; }
+
         private double _width = 10;
         public double Width
         {

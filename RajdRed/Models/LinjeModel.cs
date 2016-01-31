@@ -50,8 +50,13 @@ namespace RajdRed.Models
         private NodModelBase _nod1;
         public NodModelBase Nod1
         {
+            get
+            {
+                return _nod1;
+            }
             set
             {
+                _nod1 = value;
                 X1 = value.PositionLeft;
                 Y1 = value.PositionTop;
                 OnPropertyChanged("X1");
@@ -62,8 +67,13 @@ namespace RajdRed.Models
         private NodModelBase _nod2;
         public NodModelBase Nod2
         {
+            get
+            {
+                return _nod2;
+            }
             set
             {
+                _nod2 = value;
                 X2 = value.PositionLeft;
                 Y2 = value.PositionTop;
                 OnPropertyChanged("X2");
@@ -76,14 +86,26 @@ namespace RajdRed.Models
             _nod1 = n1;
             _nod2 = n2;
 
-            _nod1.PropertyChanged += (sender, eArgs) => {
-                X1 = _nod1.PositionLeft;
-                Y1 = _nod1.PositionTop;
+            SetOnPropertyChanged();
+        }
+
+        public void SetOnPropertyChanged()
+        {
+            _nod1.PropertyChanged += (sender, eArgs) =>
+            {
+                if (eArgs.PropertyName == "PositionLeft" || eArgs.PropertyName == "PositionTop")
+                {
+                    X1 = _nod1.PositionLeft;
+                    Y1 = _nod1.PositionTop;
+                }
             };
             _nod2.PropertyChanged += (sender, eArgs) =>
             {
-                X2 = _nod2.PositionLeft;
-                Y2 = _nod2.PositionTop;
+                if (eArgs.PropertyName == "PositionLeft" || eArgs.PropertyName == "PositionTop")
+                {
+                    X2 = _nod2.PositionLeft;
+                    Y2 = _nod2.PositionTop;
+                }
             };
         }
     }
