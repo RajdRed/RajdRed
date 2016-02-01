@@ -12,23 +12,48 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RajdRed.Models.Adds;
+using RajdRed.ViewModels;
 
 namespace RajdRed
 {
     /// <summary>
     /// Interaction logic for NodSettings.xaml
     /// </summary>
-
     public partial class NodSettings : UserControl
     {
-        private Klass _klass;
-
-        public NodSettings(Klass k)
+        NodTypesModel ntm = new NodTypesModel();
+        NodKlassViewModel NodKlassViewModel;
+        MainWindow mw = (MainWindow)Application.Current.MainWindow;
+        public NodSettings(NodKlassViewModel nkvm)
         {
             InitializeComponent();
-            _klass = k;
+            DataContext = ntm;
+            NodKlassViewModel = nkvm;
+        }
 
-            PolygonAggregate.Fill = k.GetMainWindow().Colors.KlassAttributesBg;
+        private void Association_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NodKlassViewModel.NodKlassModel.Path = ntm.Association;
+            mw.theCanvas.Children.Remove(this);
+        }
+
+        private void Aggregation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NodKlassViewModel.NodKlassModel.Path = ntm.Aggregation;
+            mw.theCanvas.Children.Remove(this);
+        }
+
+        private void Composition_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NodKlassViewModel.NodKlassModel.Path = ntm.Node;
+            mw.theCanvas.Children.Remove(this);
+        }
+
+        private void Generalization_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NodKlassViewModel.NodKlassModel.Path = ntm.Generalization;
+            mw.theCanvas.Children.Remove(this);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models;
+using RajdRed.Models.Base;
 using RajdRed.Repositories;
 using RajdRed.Views;
 using System;
@@ -22,6 +23,18 @@ namespace RajdRed.ViewModels
         }
 
         public NodCanvasViewModel(){}
+
+        public static NodCanvasViewModel CopyNodToNew(NodModelBase nmb, NodCanvasRepository ncr)
+        {
+            NodCanvasModel newNcm = nmb as NodCanvasModel;
+            NodCanvasViewModel newNcvm = new NodCanvasViewModel()
+            {
+                NodCanvasRepository = ncr,
+                NodCanvasModel = newNcm
+            };
+
+            return newNcvm;
+        }
 
         public void SetNodCanvasView(NodCanvasView ncv)
         {

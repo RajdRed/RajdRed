@@ -1,5 +1,6 @@
 ﻿using RajdRed.Models.Adds;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace RajdRed.Models.Base
 {
@@ -22,24 +23,17 @@ namespace RajdRed.Models.Base
         }
 
         public NodTypesModel NodTypesModel;
-        private Geometry _geometry;
-        public Geometry Geometry
+        private Path _path;
+        public Path Path
         {
-            get { return _geometry; }
+            get { return _path; }
             set
             {
-                if (_geometry != value)
-                    _geometry = value;
+                if (_path != value)
+                    _path = value;
 
-                OnPropertyChanged("Geometry");
+                OnPropertyChanged("Path");
             }
-        }
-
-        private SolidColorBrush _fill = new SolidColorBrush(Colors.Transparent);
-        public SolidColorBrush Fill
-        {
-            get { return _fill; }
-            set { _fill = value; }
         }
         
         private double _positionLeft;
@@ -68,8 +62,7 @@ namespace RajdRed.Models.Base
 
         public NodModelBase()
         {
-            NodTypesModel = new NodTypesModel(this);
-            Geometry = NodTypesModel.Node;
+            NodTypesModel = new NodTypesModel();
         }
     }
 }

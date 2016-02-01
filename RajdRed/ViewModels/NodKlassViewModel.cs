@@ -51,22 +51,27 @@ namespace RajdRed.ViewModels
 
         public void TurnToAssosiation()
         {
-            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Association;
+            NodKlassModel.Path = NodKlassModel.NodTypesModel.Association;
         }
 
-        public void TurnToAggregation(bool filled)
+        public void TurnToAggregation()
         {
-            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Aggregation;
+            NodKlassModel.Path = NodKlassModel.NodTypesModel.Aggregation;
+        }
+
+        public void TurnToComposition()
+        {
+            NodKlassModel.Path = NodKlassModel.NodTypesModel.Composition;
         }
 
         public void TurnToGeneralization()
         {
-            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Generalization;
+            NodKlassModel.Path = NodKlassModel.NodTypesModel.Generalization;
         }
 
         public void TurnToNode()
         {
-            NodKlassModel.Geometry = NodKlassModel.NodTypesModel.Node;
+            NodKlassModel.Path = NodKlassModel.NodTypesModel.Node;
         }
 
         public bool Set()
@@ -78,6 +83,8 @@ namespace RajdRed.ViewModels
                 NodKlassModel.PositionLeft = p.X;
                 NodKlassModel.PositionTop = p.Y;
                 NodKlassModel.IsSet = true;
+
+                NodKlassModel.Path = NodKlassModel.NodTypesModel.Association;
 
                 return true;
             }

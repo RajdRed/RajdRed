@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models;
+using RajdRed.Models.Base;
 using RajdRed.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -17,6 +18,14 @@ namespace RajdRed.Repositories
         public NodCanvasViewModel AddNewCanvasNod(Point p)
         {
             NodCanvasViewModel nkvm = new NodCanvasViewModel(new NodCanvasModel(p), this);
+            Add(nkvm);
+
+            return nkvm;
+        }
+
+        public NodCanvasViewModel CreateFromNodModelBase(NodModelBase n)
+        {
+            NodCanvasViewModel nkvm =  NodCanvasViewModel.CopyNodToNew(n, this);
             Add(nkvm);
 
             return nkvm;

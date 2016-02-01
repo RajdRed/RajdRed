@@ -35,6 +35,14 @@ namespace RajdRed.ViewModels
 
         public void Delete()
         {
+            foreach (NodKlassViewModel n in NodKlassRepository)
+            {
+                if (n.NodKlassModel.IsSet)
+                {
+                    KlassRepository.MainRepository.NodCanvasRepository.CreateFromNodModelBase(n.NodKlassModel);
+                }
+            }
+
             KlassRepository.Remove(this);
         }
 

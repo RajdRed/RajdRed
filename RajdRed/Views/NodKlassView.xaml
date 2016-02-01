@@ -10,13 +10,11 @@
              Background="Transparent"
              HorizontalAlignment="{Binding NodKlassModel.HorizontalAlignment}"
              VerticalAlignment="{Binding NodKlassModel.VerticalAlignment}"
+             MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
+             MouseDoubleClick="UserControl_MouseDoubleClick"
+             MouseLeave="UserControl_MouseLeave"
+             MouseUp="UserControl_MouseUp"
+             Content="{Binding NodKlassModel.Path}"
              >
-    <Path
-        Stroke="Black" 
-        StrokeThickness="2"
-        Fill="{Binding NodKlassModel.Filled}" 
-        Data="{Binding NodKlassModel.Geometry}"
-        MouseLeftButtonDown="Path_MouseLeftButtonDown"
-        >
-    </Path>
+   
 </UserControl>
