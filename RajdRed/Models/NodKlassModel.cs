@@ -35,7 +35,11 @@ namespace RajdRed.Models
                 OnPropertyChanged("VerticalAlignment");
             }
         }
-        
+
+        public NodKlassModel()
+        {
+            Path = NodTypesModel.Node;
+        }
         
     }
 }

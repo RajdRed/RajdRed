@@ -14,6 +14,7 @@ namespace RajdRed.Models
         {
             PositionLeft = p.X;
             PositionTop = p.Y;
+            Path = NodTypesModel.Association;
         }
         void SetLinje(LinjeModel lm)
         {
