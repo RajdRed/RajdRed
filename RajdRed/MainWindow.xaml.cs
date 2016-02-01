@@ -26,6 +26,7 @@ namespace RajdRed
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 		private bool darkMode = false;
 		private Point mouseDownPos;
+		public bool anyOneSelected = false;
 
         public MainRepository _mainRepository;
 		
@@ -54,14 +55,15 @@ namespace RajdRed
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+			deselectAllClasses();
             _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
+			anyOneSelected = true;
 
             //AddNewCanvasNod returnerar den noden som skapas
             //_mainRepository.LinjeRepository.AddNewLinje(
             //        _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(100, 100)).NodCanvasModel,
             //        _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(200, 200)).NodCanvasModel
             //    );
-
         }
 
 		public bool getDarkMode()
@@ -129,14 +131,7 @@ namespace RajdRed
 		{
 			Keyboard.ClearFocus();
 
-			/*foreach (KlassViewModel k in _mainRepository.KlassRepository)
-			{
-				if (k.KlassView.IsMouseCaptured && k.KlassModel.IsSelected)
-				{
-					k.KlassModel.IsSelected = false;
-					k.KlassView.ReleaseMouseCapture();
-				}
-			}*/
+			deselectAllClasses();	
 
 			if (isArchiveMenuActive)
 			{
@@ -203,9 +198,39 @@ namespace RajdRed
 			theCanvas.ReleaseMouseCapture();
 			selectionBox.Visibility = Visibility.Collapsed;
 
-			Point moseUpPos = e.GetPosition(theCanvas);
+			Point mouseUpPos = e.GetPosition(theCanvas);
 
 			/*Musen har släppts - Kolla om det är finns några element innanför mouseUpPos och mouseDownPos*/
+
+			if (mouseDownPos.X > mouseUpPos.X)
+			{
+				double temp = mouseDownPos.X;
+				mouseDownPos.X = mouseUpPos.X;
+				mouseUpPos.X = temp;
+			}
+
+			if (mouseDownPos.Y > mouseUpPos.Y)
+			{
+				double temp = mouseDownPos.Y;
+				mouseDownPos.Y = mouseUpPos.Y;
+				mouseUpPos.Y = temp;
+			}
+
+			foreach (KlassViewModel k in _mainRepository.KlassRepository)
+			{
+				Point leftTopCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop);
+				Point rightTopCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop);
+				Point leftBotCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop + k.KlassModel.Height);
+				Point rightBotCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop + k.KlassModel.Height);
+
+				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
+				{
+					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
+					{
+						k.KlassModel.IsSelected = true;
+					}
+				}
+			}
 		}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
@@ -303,6 +328,41 @@ namespace RajdRed
 		{
 			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(2), TimeSpan.FromSeconds(0.1));
 			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
+		}
+
+		public void deselectAllClasses()
+		{
+			foreach (KlassViewModel k in _mainRepository.KlassRepository)
+			{
+				if (k.KlassModel.IsSelected)
+				{
+					k.KlassModel.IsSelected = false;
+					k.KlassView.ReleaseMouseCapture();
+				}
+			}
+
+			anyOneSelected = false;
+		}
+
+		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Delete || e.Key == Key.Back )
+			{
+				if (anyOneSelected)
+				{
+					foreach (KlassViewModel k in _mainRepository.KlassRepository)
+					{
+						if (k.KlassModel.IsSelected)
+						{
+							k.KlassModel.IsSelected = false;
+							k.KlassView.ReleaseMouseCapture();
+							k.Delete();
+						}
+					}
+
+					anyOneSelected = false;
+				}
+			}
 		}
     }
 }
