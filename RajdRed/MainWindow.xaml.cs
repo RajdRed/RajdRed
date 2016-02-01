@@ -283,13 +283,13 @@ namespace RajdRed
 
 		private void addClassButton_MouseEnter(object sender, MouseEventArgs e)
 		{
-			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(0), TimeSpan.FromSeconds(0.2));
+			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(0), TimeSpan.FromSeconds(0.1));
 			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
 		}
 
 		private void addClassButton_MouseLeave(object sender, MouseEventArgs e)
 		{
-			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(5), TimeSpan.FromSeconds(0.2));
+			ThicknessAnimation animate = new ThicknessAnimation(new Thickness(2), TimeSpan.FromSeconds(0.1));
 			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
 		}
     }

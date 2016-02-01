@@ -20,7 +20,7 @@ namespace RajdRed.Models.Adds
                 }
             },
             Stroke = Brushes.Black,
-            StrokeThickness = 0.75,
+            StrokeThickness = 0.8,
 
 
         };

@@ -11,12 +11,6 @@
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
 	<Window.Resources>
-		<Storyboard x:Key="ScaleImageStoryboard">
-			<DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True"
-                             Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleX"/>
-            <DoubleAnimation Duration="0:0:0.2" From="1" To="1.2" AutoReverse="True" 
-                             Storyboard.TargetName="ScaleImage" Storyboard.TargetProperty="ScaleY"/>
-        </Storyboard>
         <vm:KlassViewModel x:Key="klassViewModel"/>
         <DataTemplate DataType="{x:Type vm:KlassViewModel}">
             <Canvas>
