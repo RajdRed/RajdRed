@@ -28,7 +28,7 @@ namespace RajdRed.Views
                     KlassViewModel.KlassModel.PositionLeft = KlassViewModel.KlassModel.PositionLeft - (ActualWidth / 2);
                     KlassViewModel.KlassModel.PositionTop = KlassViewModel.KlassModel.PositionTop - (ActualHeight / 2);
 
-                    KlassViewModel.SetAdornerLayer();
+                    //KlassViewModel.SetAdornerLayer();
                     
                 }
             };
