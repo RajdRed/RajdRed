@@ -10,6 +10,7 @@
              MinWidth="{Binding KlassModel.Width}"
              MouseMove="UserControl_MouseMove"
              MouseUp="UserControl_MouseUp"
+			 MouseDoubleClick="UserControl_MouseDoubleClick"
              Name="theKlassView"
              >
     <UserControl.Resources>
@@ -27,7 +28,7 @@
                         <RowDefinition Height="40*"/>
                         <RowDefinition Height="40*"/>
                     </Grid.RowDefinitions>
-                    <Border Name="bgTopRow" Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0">
+                    <Border Name="bgTopRow" Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0" >
                         <Grid>
                             <Label Padding="5" Foreground="White" FontSize="10" HorizontalContentAlignment="Center" 
                                    FontWeight="Bold" Content="{Binding KlassModel.Header}" />

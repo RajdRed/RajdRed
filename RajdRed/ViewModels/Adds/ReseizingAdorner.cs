@@ -168,7 +168,7 @@ namespace RajdRed.ViewModells.Add
         //och lägger till det till visualtree
         void BuildAdornerCorner(ref Thumb cornerThumb, Cursor customizedCursor)
         {
-            if (cornerThumb != null) return;
+            if (cornerThumb != null ) return;
 
             cornerThumb = new Thumb();
 

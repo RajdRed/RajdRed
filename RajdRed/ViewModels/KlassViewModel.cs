@@ -47,7 +47,13 @@ namespace RajdRed.ViewModels
         public void SetAdornerLayer()
         {
             aLayer = AdornerLayer.GetAdornerLayer(this.KlassView);
-            aLayer.Add(new ResizingAdorner(this.KlassView));
+            if(this.aLayer!=null)
+                aLayer.Add(new ResizingAdorner(this.KlassView));
+        }
+        public void RemoveAdornerLayer()
+        {
+            aLayer.Remove(aLayer.GetAdorners(this.KlassView)[0]);
+            
         }
     }
 }
