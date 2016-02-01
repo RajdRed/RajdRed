@@ -12,7 +12,7 @@ namespace RajdRed.ViewModels
 {
     public class KlassViewModel
     {
-        AdornerLayer aLayer;
+        //AdornerLayer aLayer;
         
         public KlassModel KlassModel { get; set; }
         public KlassView KlassView { get; set; }
@@ -44,7 +44,7 @@ namespace RajdRed.ViewModels
             KlassView = kv;
         }
 
-        public void SetAdornerLayer()
+       /* public void SetAdornerLayer()
         {
             aLayer = AdornerLayer.GetAdornerLayer(this.KlassView);
             if(this.aLayer!=null)
@@ -54,6 +54,6 @@ namespace RajdRed.ViewModels
         {
             aLayer.Remove(aLayer.GetAdorners(this.KlassView)[0]);
             
-        }
+        }*/
     }
 }
