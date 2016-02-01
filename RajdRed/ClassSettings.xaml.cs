@@ -64,8 +64,14 @@ namespace RajdRed
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
-			BindingExpression bindingExpression = BindingOperations.GetBindingExpression(ClassName, TextBox.TextProperty);
-			bindingExpression.UpdateSource();
+			BindingExpression classNameBE = BindingOperations.GetBindingExpression(ClassName, TextBox.TextProperty);
+			BindingExpression attributesBE = BindingOperations.GetBindingExpression(Attributes, TextBox.TextProperty);
+			BindingExpression methodsBE = BindingOperations.GetBindingExpression(Methods, TextBox.TextProperty);
+
+			classNameBE.UpdateSource();
+			attributesBE.UpdateSource();
+			methodsBE.UpdateSource();
+
 			_kvm.KlassView.CloseSettings(this, _backgroundGrid);
         }
 
