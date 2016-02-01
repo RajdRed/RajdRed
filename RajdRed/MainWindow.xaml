@@ -11,6 +11,9 @@
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
 	<Window.Resources>
+
+		
+
         <vm:KlassViewModel x:Key="klassViewModel"/>
         <DataTemplate DataType="{x:Type vm:KlassViewModel}">
             <Canvas>

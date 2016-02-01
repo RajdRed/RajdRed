@@ -20,6 +20,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid Name="OuterGrid">
+        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2,2,2,2" Visibility="{Binding KlassModel.Selected}"></Border>
         <Grid Name="NodeAttachedGrid">
             <Border Name="InnerBorder" Margin="10" CornerRadius="2,2,2,2" BorderBrush="Black" MouseDown="Innerborder_MouseDown" BorderThickness="1">
                 <Grid Name="InnerGrid" Background="Transparent">
