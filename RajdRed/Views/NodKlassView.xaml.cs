@@ -24,9 +24,14 @@ namespace RajdRed.Views
             };
         }
 
-        private void Path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NodKlassViewModel.CreateLinje();
+                NodKlassViewModel.CreateLinje(); 
+        }
+
+        private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("hej");
         }
 
         protected override void OnDragEnter(DragEventArgs e)
@@ -36,7 +41,7 @@ namespace RajdRed.Views
             NodCanvasViewModel ncvm = e.Data.GetData(typeof(NodCanvasViewModel)) as NodCanvasViewModel;
             if (ncvm != null)
             {
-                Background = Brushes.Blue;
+                NodKlassViewModel.NodKlassModel.Path = NodKlassViewModel.NodKlassModel.NodTypesModel.Association;
             }
 
             e.Handled = true;
@@ -63,6 +68,8 @@ namespace RajdRed.Views
             }
 
             e.Handled = true;
-        }       
+        }
+
+              
     }
 }
