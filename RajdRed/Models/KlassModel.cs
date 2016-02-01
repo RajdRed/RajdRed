@@ -69,7 +69,7 @@ namespace RajdRed.Models
             }
         }
 
-        private double _height = 110;
+        private double _height = 135;
         public double Height
         {
             get { return _height; }
@@ -80,7 +80,7 @@ namespace RajdRed.Models
             }
         }
 
-        private double _width = 110;
+        private double _width = 130;
         public double Width
         {
             get { return _width; }
