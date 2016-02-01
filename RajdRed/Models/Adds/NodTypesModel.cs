@@ -21,8 +21,6 @@ namespace RajdRed.Models.Adds
             },
             Stroke = Brushes.Black,
             StrokeThickness = 0.8,
-
-
         };
 
         public Path Association = new Path()

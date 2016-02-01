@@ -3,6 +3,7 @@ using RajdRed.ViewModels;
 using RajdRed.Views;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RajdRed.Models
 {
@@ -98,6 +99,6 @@ namespace RajdRed.Models
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;
             IsSelected = true;
-        }
+		}
     }
 }

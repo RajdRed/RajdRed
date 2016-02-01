@@ -36,21 +36,9 @@ namespace RajdRed.Views
 
         public void Innerborder_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
-            
-            if (!KlassViewModel.KlassModel.IsSelected && (Keyboard.IsKeyDown(Key.RightCtrl) || (Keyboard.IsKeyDown(Key.LeftCtrl))))
-            {
-                KlassViewModel.KlassModel.IsSelected = true;
-                CaptureMouse();
-                _posOnUserControlOnHit = Mouse.GetPosition(this);
-            }
-            else if (KlassViewModel.KlassModel.IsSelected && (Keyboard.IsKeyDown(Key.RightCtrl) || (Keyboard.IsKeyDown(Key.LeftCtrl))))
-                KlassViewModel.KlassModel.IsSelected = false;
-            else if (KlassViewModel.KlassModel.IsSelected && !(Keyboard.IsKeyDown(Key.RightCtrl) || (Keyboard.IsKeyDown(Key.LeftCtrl))))
-            {
-                CaptureMouse();
-                _posOnUserControlOnHit = Mouse.GetPosition(this);
-            }
+			CaptureMouse();
+			_posOnUserControlOnHit = Mouse.GetPosition(this);
+			KlassViewModel.KlassModel.IsSelected = true;
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
@@ -80,7 +68,6 @@ namespace RajdRed.Views
                 KlassViewModel.Delete();
             else
                 KlassViewModel.KlassModel.OnField = true;
-
         }
 
 
@@ -128,6 +115,5 @@ namespace RajdRed.Views
 			mw.theCanvas.Children.Remove(g);
             //KlassViewModel.SetAdornerLayer();
         }
-
     }
 }

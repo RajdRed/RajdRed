@@ -7,6 +7,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using RajdRed.Models.Adds;
 using RajdRed.Repositories;
+using RajdRed.Views;
+using RajdRed.ViewModels;
+using RajdRed.Models;
 
 namespace RajdRed
 {
@@ -126,7 +129,16 @@ namespace RajdRed
 		{
 			Keyboard.ClearFocus();
 
-			if (isArchiveMenuActive) 
+			/*foreach (KlassViewModel k in _mainRepository.KlassRepository)
+			{
+				if (k.KlassView.IsMouseCaptured && k.KlassModel.IsSelected)
+				{
+					k.KlassModel.IsSelected = false;
+					k.KlassView.ReleaseMouseCapture();
+				}
+			}*/
+
+			if (isArchiveMenuActive)
 			{
 				theCanvas.Children.Remove(archiveMenu);
 				isArchiveMenuActive = false;
