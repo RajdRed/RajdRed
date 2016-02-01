@@ -8,7 +8,7 @@ namespace RajdRed.Repositories
     public class NodCanvasRepository : ObservableCollection<NodCanvasViewModel>
     {
         MainRepository _mainRepository;
-        MainRepository MainRepository { get { return _mainRepository; } }
+        public MainRepository MainRepository { get { return _mainRepository; } }
         public NodCanvasRepository(MainRepository mr)
         {
             _mainRepository = mr;

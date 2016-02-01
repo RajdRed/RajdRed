@@ -1,5 +1,6 @@
 ﻿using RajdRed.Models;
 using RajdRed.Repositories;
+using RajdRed.ViewModels.Base;
 using RajdRed.Views;
 using System.ComponentModel;
 using System.Windows;
@@ -70,12 +71,14 @@ namespace RajdRed.ViewModels
 
         public bool Set()
         {
-            Point p = GetPositionRelativeCanvas();
             if (!NodKlassModel.IsSet)
             {
+                Point p = GetPositionRelativeCanvas();
+
                 NodKlassModel.PositionLeft = p.X;
                 NodKlassModel.PositionTop = p.Y;
                 NodKlassModel.IsSet = true;
+
                 return true;
             }
 
@@ -95,20 +98,21 @@ namespace RajdRed.ViewModels
             }
         }
 
-        public void AttachLinje(NodCanvasViewModel ncvm)
+        public void EatNodCanvas(NodCanvasViewModel ncvm)
         {
             if (Set())
             {
-                this.NodKlassModel.LinjeModel = ncvm.NodCanvasModel.LinjeModel;
+                LinjeModel oldLine = ncvm.NodCanvasModel.LinjeModel;
+                LinjeViewModel newLine = KlassViewModel.KlassRepository.MainRepository.LinjeRepository.AddNewLinje(
+                        ncvm.NodCanvasModel,
+                        this.NodKlassModel
+                    );
 
-                if (ncvm.NodCanvasModel == NodKlassModel.LinjeModel.Nod1)
-                    NodKlassModel.LinjeModel.Nod1 = NodKlassModel;
-                else if (ncvm.NodCanvasModel == NodKlassModel.LinjeModel.Nod2)
-                    NodKlassModel.LinjeModel.Nod2 = NodKlassModel;
+                Point newNodPos = NodViewModelBase.CenterBetweenNodes(oldLine.Nod1, oldLine.Nod2);
 
-                NodKlassModel.LinjeModel.SetOnPropertyChanged();
+                ncvm.NodCanvasModel.PositionLeft = newNodPos.X;
+                ncvm.NodCanvasModel.PositionTop = newNodPos.Y;
 
-                ncvm.NodCanvasRepository.Remove(ncvm);
             };
         }
 
@@ -116,5 +120,17 @@ namespace RajdRed.ViewModels
         {
             return NodKlassView.TransformToAncestor(Application.Current.MainWindow).Transform(new Point(0, 0));
         }
+
+        public bool IsInArea(Point p)
+        {
+            Point ThisPosition = GetPositionRelativeCanvas();
+
+            if ((p.X >= ThisPosition.X && p.Y >= ThisPosition.Y)
+                && (p.X <= ThisPosition.X + NodKlassModel.Width && p.Y <= ThisPosition.Y + NodKlassModel.Height))
+                return true;
+
+            return false;
+        }
+
     }
 }

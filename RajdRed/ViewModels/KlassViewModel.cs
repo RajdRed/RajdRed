@@ -35,7 +35,6 @@ namespace RajdRed.ViewModels
 
         public void Delete()
         {
-            
             KlassRepository.Remove(this);
         }
 
@@ -44,16 +43,20 @@ namespace RajdRed.ViewModels
             KlassView = kv;
         }
 
-        public void SetAdornerLayer()
+        public Point PositionOnCanvas()
         {
-            aLayer = AdornerLayer.GetAdornerLayer(this.KlassView);
-            if(this.aLayer!=null)
-                aLayer.Add(new ResizingAdorner(this.KlassView));
+            return new Point(Canvas.GetLeft(KlassView), Canvas.GetTop(KlassView));
         }
-        public void RemoveAdornerLayer()
+
+        public bool IsInArea(Point p)
         {
-            aLayer.Remove(aLayer.GetAdorners(this.KlassView)[0]);
-            
+            Point ThisPosition = PositionOnCanvas();
+
+            if ((p.X >= ThisPosition.X && p.Y >= ThisPosition.Y)
+                && (p.X <= ThisPosition.X + KlassModel.Width && p.Y <= ThisPosition.Y + KlassModel.Height))
+                return true;
+
+            return false;
         }
     }
 }

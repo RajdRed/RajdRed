@@ -27,42 +27,6 @@ namespace RajdRed.Views
         private void Path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NodKlassViewModel.CreateLinje();
-        }
-
-        protected override void OnDragEnter(DragEventArgs e)
-        {
-            base.OnDragEnter(e);
-
-            NodCanvasViewModel ncvm = e.Data.GetData(typeof(NodCanvasViewModel)) as NodCanvasViewModel;
-            if (ncvm != null)
-            {
-                Background = Brushes.Blue;
-            }
-
-            e.Handled = true;
-        }
-
-        protected override void OnDragLeave(DragEventArgs e)
-        {
-            base.OnDragLeave(e);
-
-            if (Background == Brushes.Blue)
-                Background = Brushes.Transparent;
-
-            e.Handled = true;
-        }
-
-        protected override void OnDrop(DragEventArgs e)
-        {
-            base.OnDrop(e);
-
-            NodCanvasViewModel ncvm = e.Data.GetData(typeof(NodCanvasViewModel)) as NodCanvasViewModel;
-            if (ncvm != null)
-            {
-                NodKlassViewModel.AttachLinje(ncvm);
-            }
-
-            e.Handled = true;
-        }       
+        }    
     }
 }

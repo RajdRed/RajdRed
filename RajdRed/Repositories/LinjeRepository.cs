@@ -13,7 +13,7 @@ namespace RajdRed.Repositories
     public class LinjeRepository : ObservableCollection<LinjeViewModel>
     {
         MainRepository _mainRepository;
-        MainRepository MainRepository { get { return _mainRepository; } }
+        public MainRepository MainRepository { get { return _mainRepository; } }
 
         public LinjeRepository(MainRepository mr)
         {

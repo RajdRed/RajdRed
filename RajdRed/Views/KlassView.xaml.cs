@@ -19,56 +19,30 @@ namespace RajdRed.Views
 		public KlassView()
         {
             InitializeComponent();
+
             Loaded += (sender, eArgs) => {
                 if (!KlassViewModel.KlassModel.OnField)
                 {
-                    CaptureMouse();
+                    this.CaptureMouse();
                     KlassViewModel.SetKlassView(this);
 					_posOnUserControlOnHit = new Point(ActualWidth / 2, ActualHeight / 2);
 					KlassViewModel.KlassModel.PositionLeft = KlassViewModel.KlassModel.PositionLeft - (ActualWidth / 2);
 					KlassViewModel.KlassModel.PositionTop = KlassViewModel.KlassModel.PositionTop - (ActualHeight / 2);
 
-                    KlassViewModel.SetAdornerLayer();
+                    Cursor = Cursors.SizeAll;
                 }
             };
         }
 
         public void Innerborder_MouseDown(object sender, MouseButtonEventArgs e)
         {
-			CaptureMouse();
+            this.CaptureMouse();
+
+            Cursor = Cursors.SizeAll;
 			_posOnUserControlOnHit = Mouse.GetPosition(this);
 			KlassViewModel.KlassModel.IsSelected = true;
-        }
 
-        private void UserControl_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (IsMouseCaptured && KlassViewModel.KlassModel.IsSelected)
-            {
-                Point p = e.GetPosition(Application.Current.MainWindow);
-				
-                if (!(KlassViewModel.KlassModel.OnField && ((p.Y - _posOnUserControlOnHit.Y) <= 100.5)))
-                    SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
-
-				if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
-                    SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
-            }
-        }
-
-        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            ReleaseMouseCapture();
-
-			Point p = e.GetPosition(Application.Current.MainWindow);
-			Point posOfUserControlOnCanvas = new Point();
-			posOfUserControlOnCanvas.X = p.X - _posOnUserControlOnHit.X;
-			posOfUserControlOnCanvas.Y = p.Y - _posOnUserControlOnHit.Y;
-
-			if (posOfUserControlOnCanvas.Y <= 100 && !KlassViewModel.KlassModel.OnField)
-				KlassViewModel.Delete();
-			else
-				KlassViewModel.KlassModel.OnField = true;
-
-			KlassViewModel.KlassModel.IsSelected = false;
+            e.Handled = true;
         }
 
         private void OuterBorder_MouseEnter(object sender, MouseEventArgs e)
@@ -104,8 +78,7 @@ namespace RajdRed.Views
 				Canvas.SetTop(cs, y);
 
 			mw.theCanvas.Children.Add(g);
-			mw.theCanvas.Children.Add(cs);
-            KlassViewModel.RemoveAdornerLayer();            
+			mw.theCanvas.Children.Add(cs);         
 		}
 
 		public void CloseSettings(ClassSettings cs, Grid g)
@@ -113,7 +86,51 @@ namespace RajdRed.Views
 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
             mw.theCanvas.Children.Remove(cs);
 			mw.theCanvas.Children.Remove(g);
-            KlassViewModel.SetAdornerLayer();
+        }
+
+        private void InnerBorder_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.IsMouseCaptured && KlassViewModel.KlassModel.IsSelected)
+            {
+                Point p = e.GetPosition(Application.Current.MainWindow);
+
+                if (!(KlassViewModel.KlassModel.OnField && ((p.Y - _posOnUserControlOnHit.Y) <= 100.5)))
+                    SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+
+                if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
+                    SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
+            }
+
+            e.Handled = true;
+        }
+
+        private void InnerBorder_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.ReleaseMouseCapture();
+
+            Point p = e.GetPosition(Application.Current.MainWindow);
+            Point posOfUserControlOnCanvas = new Point();
+            posOfUserControlOnCanvas.X = p.X - _posOnUserControlOnHit.X;
+            posOfUserControlOnCanvas.Y = p.Y - _posOnUserControlOnHit.Y;
+
+            if (posOfUserControlOnCanvas.Y <= 100 && !KlassViewModel.KlassModel.OnField)
+                KlassViewModel.Delete();
+            else
+                KlassViewModel.KlassModel.OnField = true;
+
+            KlassViewModel.KlassModel.IsSelected = false;
+
+            e.Handled = true;
+        }
+
+        private void InnerBorder_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.SizeAll;
+        }
+
+        private void InnerBorder_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
         }
     }
 }

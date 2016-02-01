@@ -59,7 +59,11 @@ namespace RajdRed.Models.Base
         public double PositionTop
         {
             get { return _positionTop; }
-            set { _positionTop = value; OnPropertyChanged("PositionTop"); }
+            set 
+            { 
+                _positionTop = value; 
+                OnPropertyChanged("PositionTop");
+            }
         }
 
         public NodModelBase()
