@@ -74,6 +74,9 @@
     <Compile Include="Models\KlassModel.cs" />
     <Compile Include="Models\NodKlassModel.cs" />
     <Compile Include="Models\LinjeModel.cs" />
+    <Compile Include="NodSettings.xaml.cs">
+      <DependentUpon>NodSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\NodCanvasRepository.cs" />
     <Compile Include="Repositories\NodKlassRepository.cs" />
     <Compile Include="Repositories\KlassRepository.cs" />
@@ -118,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HelpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NodSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

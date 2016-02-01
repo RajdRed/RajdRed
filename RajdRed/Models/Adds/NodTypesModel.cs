@@ -8,8 +8,7 @@ namespace RajdRed.Models.Adds
 {
     public class NodTypesModel : RajdElement
     {
-        private NodModelBase _nodBaseModel { get; set; }
-        public Path Node = new Path()
+        private Path _node = new Path()
         {
             Data = new GeometryGroup()
             {
@@ -19,19 +18,29 @@ namespace RajdRed.Models.Adds
                     new LineGeometry(new Point(1, 5), new Point(9, 5))
                 }
             },
-            Stroke = Brushes.Black,
+            Stroke = Brushes.RoyalBlue,
             StrokeThickness = 0.75,
-
-
         };
+        public Path Node
+        {
+            get{return _node;}
+            set{}
+        }
 
-        public Path Association = new Path()
+        private Path _association = new Path()
         {
             Data = new EllipseGeometry(new Point(5, 5), 4.5, 4.5),
-            Fill = Brushes.Black
+            Stroke = Brushes.Red,
+            StrokeThickness = 0.75
+            //Fill = Brushes.Black
         };
+        public Path Association
+        {
+            get { return _association; }
+            set { }
+        }
 
-        public Path Aggregation = new Path()
+        private Path _aggregation = new Path()
         {
             Data = new PathGeometry(
             new List<PathFigure>() 
@@ -47,11 +56,16 @@ namespace RajdRed.Models.Adds
                 true) 
             }),
             StrokeThickness = 0.75,
-            Stroke = Brushes.Black,
-            Fill = Brushes.White
+            Stroke = Brushes.Magenta,
+            Fill = Brushes.Black //(Brush)new BrushConverter().ConvertFrom("#EAEDF2")
         };
+        public Path Aggregation
+        {
+            get { return _aggregation; }
+            set { }
+        }
 
-        public Path Composition = new Path()
+        private Path _composition = new Path()
         {
             Data = new PathGeometry(
             new List<PathFigure>() 
@@ -70,9 +84,14 @@ namespace RajdRed.Models.Adds
             StrokeThickness = 0.75,
             Stroke = Brushes.Black
         };
+        public Path Composition
+        {
+            get { return _composition; }
+            set { }
+        }
 
 
-        public Path Generalization = new Path()
+        private Path _generalization = new Path()
         {
             Data = new PathGeometry(
             new List<PathFigure>() 
@@ -86,14 +105,14 @@ namespace RajdRed.Models.Adds
                 }, 
                 true) 
             }),
-            Stroke = Brushes.Black,
+            Stroke = Brushes.SeaGreen,
             StrokeThickness = 0.75,
-            Fill = Brushes.White
+            Fill = Brushes.Black //(Brush)new BrushConverter().ConvertFrom("#EAEDF2")
         };
-
-        public NodTypesModel(NodModelBase nmb)
+        public Path Generalization
         {
-            _nodBaseModel = nmb;
+            get { return _generalization; }
+            set { }
         }
     }
 }

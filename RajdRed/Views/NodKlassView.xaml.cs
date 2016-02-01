@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System;
 
 namespace RajdRed.Views
 {
@@ -26,12 +27,36 @@ namespace RajdRed.Views
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-                NodKlassViewModel.CreateLinje(); 
+            NodKlassViewModel.NodKlassModel.IsPressed = true;  
         }
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("hej");
+            if (NodKlassViewModel.NodKlassModel.IsSet)
+            {
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                NodSettings ns = new NodSettings(NodKlassViewModel);
+                Point pt = e.GetPosition(Application.Current.MainWindow);
+
+                Canvas.SetLeft(ns, pt.X - ns.Width / 2);
+                Canvas.SetTop(ns, pt.Y - ns.Height / 2);
+
+                mw.theCanvas.Children.Add(ns);
+            }
+        }
+
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (NodKlassViewModel.NodKlassModel.IsPressed)
+            {
+                NodKlassViewModel.NodKlassModel.IsPressed = false;
+                NodKlassViewModel.CreateLinje();
+            }
+        }
+
+        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            NodKlassViewModel.NodKlassModel.IsPressed = false;
         }
 
         protected override void OnDragEnter(DragEventArgs e)
@@ -51,8 +76,8 @@ namespace RajdRed.Views
         {
             base.OnDragLeave(e);
 
-            if (Background == Brushes.Blue)
-                Background = Brushes.Transparent;
+            if (NodKlassViewModel.NodKlassModel.Path == NodKlassViewModel.NodKlassModel.NodTypesModel.Association)
+                NodKlassViewModel.NodKlassModel.Path = NodKlassViewModel.NodKlassModel.NodTypesModel.Node;
 
             e.Handled = true;
         }
@@ -69,6 +94,10 @@ namespace RajdRed.Views
 
             e.Handled = true;
         }
+
+        
+
+        
 
               
     }

@@ -81,6 +81,7 @@ namespace RajdRed.ViewModels
                 NodKlassModel.PositionLeft = p.X;
                 NodKlassModel.PositionTop = p.Y;
                 NodKlassModel.IsSet = true;
+                NodKlassModel.Path = NodKlassModel.NodTypesModel.Association;
                 return true;
             }
 

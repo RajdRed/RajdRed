@@ -58,7 +58,7 @@ namespace RajdRed.Models.Base
 
         public NodModelBase()
         {
-            NodTypesModel = new NodTypesModel(this);
+            NodTypesModel = new NodTypesModel();
         }
     }
 }

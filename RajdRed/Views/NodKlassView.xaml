@@ -12,6 +12,8 @@
              VerticalAlignment="{Binding NodKlassModel.VerticalAlignment}"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
              MouseDoubleClick="UserControl_MouseDoubleClick"
+             MouseLeave="UserControl_MouseLeave"
+             MouseUp="UserControl_MouseUp"
              Content="{Binding NodKlassModel.Path}"
              >
    
