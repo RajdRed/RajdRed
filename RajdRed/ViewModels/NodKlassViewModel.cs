@@ -105,7 +105,7 @@ namespace RajdRed.ViewModels
             }
         }
 
-        public void EatNodCanvas(NodCanvasViewModel ncvm)
+        public void EatNod(NodCanvasViewModel ncvm)
         {
             if (Set())
             {

@@ -23,9 +23,9 @@ namespace RajdRed.Repositories
             return nkvm;
         }
 
-        public NodCanvasViewModel CreateFromNodModelBase(NodModelBase n)
+        public NodCanvasViewModel CreateFromNodModelBase(NodKlassModel n)
         {
-            NodCanvasViewModel nkvm =  NodCanvasViewModel.CopyNodToNew(n, this);
+            NodCanvasViewModel nkvm = NodCanvasViewModel.CopyNodKlassToNew(n, this);
             Add(nkvm);
 
             return nkvm;

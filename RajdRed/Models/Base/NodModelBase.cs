@@ -4,9 +4,17 @@ using System.Windows.Shapes;
 
 namespace RajdRed.Models.Base
 {
-    public abstract class NodModelBase : RajdElement
+    public class NodModelBase : RajdElement
     {
         public LinjeModel LinjeModel { get; set; }
+
+        private bool _converted = false;
+        public bool Converted
+        {
+            get { return _converted; }
+            set { _converted = value; OnPropertyChanged("Converted"); }
+        }
+        
 
         private double _width = 10;
         public double Width
@@ -63,6 +71,22 @@ namespace RajdRed.Models.Base
         public NodModelBase()
         {
             NodTypesModel = new NodTypesModel();
+        }
+
+        public static NodModelBase CopyNod(NodModelBase n)
+        {
+            return new NodModelBase()
+            {
+                Height = n.Height,
+                Width = n.Width,
+                IsSelected = n.IsSelected,
+                LinjeModel = n.LinjeModel,
+                OnField = n.OnField,
+                Path = n.Path,
+                NodTypesModel = n.NodTypesModel,
+                PositionLeft = n.PositionLeft,
+                PositionTop = n.PositionTop,
+            };
         }
     }
 }

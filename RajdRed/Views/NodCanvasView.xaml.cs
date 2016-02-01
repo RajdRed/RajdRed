@@ -19,9 +19,8 @@ namespace RajdRed.Views
             InitializeComponent();
             Loaded += (sender, eArgs) => {
                 NodCanvasViewModel.SetNodCanvasView(this);
-                CaptureMouse(); //Avkommenteras om/när man kan dra nod från klass
-                
-               
+                if (!NodCanvasViewModel.NodCanvasModel.Converted)
+                    CaptureMouse(); //Avkommenteras om/när man kan dra nod från klass               
             };
         }
 
@@ -45,25 +44,7 @@ namespace RajdRed.Views
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ReleaseMouseCapture();
-
-            Point p = e.GetPosition(Application.Current.MainWindow);
-
-            foreach (KlassViewModel k in NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository)
-            {
-                if (k.IsInArea(p))
-                {
-                    foreach (NodKlassViewModel n in k.NodKlassRepository)
-                    {
-                        if (n.IsInArea(p))
-                        {
-                            n.EatNodCanvas(NodCanvasViewModel);
-                            break;
-                        }
-                    }
-
-                    break;
-                }
-            }
+            NodCanvasViewModel.LookAndAttachCanvasNod(e.GetPosition(Application.Current.MainWindow));
         }
     }
 }
