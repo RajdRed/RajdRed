@@ -55,5 +55,40 @@ namespace RajdRed.ViewModels
             aLayer.Remove(aLayer.GetAdorners(this.KlassView)[0]);
             
         }*/
+        public int OnSide(Point p)
+        {
+            double Top = -1;
+            double Left = -1;
+            double Right = Left + (this.KlassModel.Width);
+            double Bottom = Top + (this.KlassModel.Height);
+
+
+            //bool leftBoarder, topBoarder = 1, rightBoarder, bottomBoarder = false;
+            while (true)
+            {
+                if (p.Y < Top)
+                {
+                    //topBoarder
+                    return 1;
+
+                }
+                else if (p.X < Left)
+                {
+                    //leftBoarder
+                    return 2;
+                }
+                else if (p.X > Left && ((p.Y > Top) && (p.Y < Bottom)))
+                {
+                    //rightBoarder
+                    return 3;
+                }
+                else
+                {
+                    //bottomBoarder = true;
+                    return 4;
+                }
+
+            }
+        }
     }
 }
