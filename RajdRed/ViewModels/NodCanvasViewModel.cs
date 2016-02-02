@@ -106,10 +106,13 @@ namespace RajdRed.ViewModels
         {
             foreach (NodCanvasViewModel n in NodCanvasRepository) 
             {
-                if (n.IsInArea(p))
+                if (n != this) 
                 {
-                    EatNod(n);
-                    return true;
+                    if (n.IsInArea(p))
+                    {
+                        EatNod(n);
+                        return true;
+                    }
                 }
             }
 

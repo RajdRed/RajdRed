@@ -14,7 +14,8 @@
              MouseDoubleClick="UserControl_MouseDoubleClick"
              MouseLeave="UserControl_MouseLeave"
              MouseUp="UserControl_MouseUp"
+			 MouseEnter="UserControl_MouseEnter"
              Content="{Binding NodKlassModel.Path}"
              >
-   
+
 </UserControl>

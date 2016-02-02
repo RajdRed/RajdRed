@@ -19,6 +19,7 @@ namespace RajdRed.Repositories
         {
             KlassViewModel kvm = new KlassViewModel(startPosition, this);
             Add(kvm);
+
             return kvm;
         }
     }

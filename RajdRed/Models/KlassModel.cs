@@ -3,6 +3,7 @@ using RajdRed.ViewModels;
 using RajdRed.Views;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RajdRed.Models
 {
@@ -75,7 +76,7 @@ namespace RajdRed.Models
             get { return _height; }
             set 
             {
-                _height = _klassViewModel.KlassView.ActualHeight; 
+                _height = value; 
                 OnPropertyChanged("Height"); 
             }
         }
@@ -85,8 +86,8 @@ namespace RajdRed.Models
         {
             get { return _width; }
             set 
-            { 
-                _width = _klassViewModel.KlassView.ActualWidth; 
+            {
+                _width = value;// _klassViewModel.KlassView.ActualWidth; 
                 OnPropertyChanged("Width"); 
             }
         }
@@ -98,6 +99,6 @@ namespace RajdRed.Models
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;
             IsSelected = true;
-        }
+		}
     }
 }

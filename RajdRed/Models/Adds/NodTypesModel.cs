@@ -18,8 +18,10 @@ namespace RajdRed.Models.Adds
                     new LineGeometry(new Point(1, 5), new Point(9, 5))
                 }
             },
+
             Stroke = Brushes.RoyalBlue,
             StrokeThickness = 0.75,
+
         };
         public Path Node
         {
