@@ -9,8 +9,8 @@
              MinHeight="{Binding KlassModel.Height}" 
              MinWidth="{Binding KlassModel.Width}"
 			 MouseDoubleClick="UserControl_MouseDoubleClick"
-             MouseMove="InnerBorder_MouseMove"
-             MouseUp="InnerBorder_MouseUp"
+             MouseMove="UserControl_MouseMove"
+             MouseUp="UserControl_MouseUp"
              Name="theKlassView"
              >
     <UserControl.Resources>
