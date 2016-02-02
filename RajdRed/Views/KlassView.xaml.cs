@@ -93,7 +93,6 @@ namespace RajdRed.Views
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            
             ReleaseMouseCapture();
 
             Point p = e.GetPosition(Application.Current.MainWindow);
@@ -106,6 +105,7 @@ namespace RajdRed.Views
             else
                 KlassViewModel.KlassModel.OnField = true;
 
+            _isDown = _resize = false;
         }
 
 

@@ -36,12 +36,9 @@ namespace RajdRed.ViewModels
         {
             if (NodKlassModel.IsSet)
             {
-                if (e.PropertyName == "PositionLeft" || e.PropertyName == "PositionTop")
-                {
-                    Point p = GetPositionRelativeCanvas();
-                    NodKlassModel.PositionLeft = p.X;
-                    NodKlassModel.PositionTop = p.Y;
-                }
+                Point p = GetPositionRelativeCanvas();
+                NodKlassModel.PositionLeft = p.X;
+                NodKlassModel.PositionTop = p.Y;
             }
         }
 
