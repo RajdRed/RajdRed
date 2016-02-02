@@ -80,8 +80,8 @@ namespace RajdRed.Views
             {
                 double _widthChange, _heightChange;
                 Point pos = e.GetPosition(Application.Current.MainWindow);
-                _widthChange = Math.Min((_startPoint.X -pos.X), (KlassViewModel.KlassModel.Width - 134));
-                _heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - 134));
+                _widthChange = Math.Min((_startPoint.X -pos.X), (KlassViewModel.KlassModel.Width - 130));
+                _heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - 135));
                 //_newWidth = _startPoint.X - pos.X;
                 KlassViewModel.KlassModel.Width -= _widthChange;
                 KlassViewModel.KlassModel.Height -= _heightChange;
