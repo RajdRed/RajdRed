@@ -8,6 +8,7 @@
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         Title="MainWindow" Height="720" Width="1024"
         Name="RajdRedMainWindow"
+		KeyDown="RajdRedMainWindow_KeyDown"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
 	<Window.Resources>

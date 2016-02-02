@@ -41,9 +41,27 @@ namespace RajdRed.Views
 
         public void Innerborder_MouseDown(object sender, MouseButtonEventArgs e)
         {
-			CaptureMouse();
-			_posOnUserControlOnHit = Mouse.GetPosition(this);
-			KlassViewModel.KlassModel.IsSelected = true;
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+
+			if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+			{
+				CaptureMouse();
+				_posOnUserControlOnHit = Mouse.GetPosition(this);
+				KlassViewModel.KlassModel.IsSelected = true;
+				mw.anyOneSelected = true;
+			}
+
+			else {
+				if (mw.anyOneSelected)
+					mw.deselectAllClasses();
+		
+				CaptureMouse();
+				_posOnUserControlOnHit = Mouse.GetPosition(this);
+				KlassViewModel.KlassModel.IsSelected = true;
+				mw.anyOneSelected = true;
+			}
+			
+			e.Handled = true;
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
