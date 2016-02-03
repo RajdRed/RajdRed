@@ -10,6 +10,7 @@ using RajdRed.Repositories;
 using RajdRed.Views;
 using RajdRed.ViewModels;
 using RajdRed.Models;
+using System.Collections.Generic;
 
 namespace RajdRed
 {
@@ -228,6 +229,7 @@ namespace RajdRed
 					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
 					{
 						k.KlassModel.IsSelected = true;
+						anyOneSelected = true;
 					}
 				}
 			}
@@ -351,15 +353,14 @@ namespace RajdRed
 				if (anyOneSelected)
 				{
 					int size = _mainRepository.KlassRepository.Count;
+					List<KlassViewModel> deleteEverythingInThisList = new List<KlassViewModel>();
 
 					for (int i = 0; i < size; i++)
-					{
 						if (_mainRepository.KlassRepository[i].KlassModel.IsSelected)
-						{
+							deleteEverythingInThisList.Add(_mainRepository.KlassRepository[i]);
 
-							_mainRepository.KlassRepository[i].Delete();
-						}
-					}
+					foreach (KlassViewModel kvm in deleteEverythingInThisList)
+						kvm.Delete();
 
 					anyOneSelected = false;
 				}
