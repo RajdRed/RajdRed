@@ -44,24 +44,16 @@ namespace RajdRed.Views
         {
             MainWindow mw = (MainWindow)Application.Current.MainWindow;
 
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
-            {
-                CaptureMouse();
-                _posOnUserControlOnHit = Mouse.GetPosition(this);
-                KlassViewModel.KlassModel.IsSelected = true;
-                mw.anyOneSelected = true;
-            }
-
-            else
+            if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
             {
                 if (mw.anyOneSelected)
                     mw.deselectAllClasses();
-
-                CaptureMouse();
-                _posOnUserControlOnHit = Mouse.GetPosition(this);
-                KlassViewModel.KlassModel.IsSelected = true;
-                mw.anyOneSelected = true;
             }
+
+            CaptureMouse();
+            _posOnUserControlOnHit = Mouse.GetPosition(this);
+            KlassViewModel.KlassModel.IsSelected = true;
+            mw.anyOneSelected = true;
 
             e.Handled = true;
         }
@@ -82,8 +74,8 @@ namespace RajdRed.Views
             {
                 double _widthChange, _heightChange;
                 Point pos = e.GetPosition(Application.Current.MainWindow);
-                _widthChange = Math.Min((_startPoint.X - pos.X), (KlassViewModel.KlassModel.Width - 130));
-                _heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - 135));
+                _widthChange = Math.Min((_startPoint.X - pos.X), (KlassViewModel.KlassModel.Width - KlassModel.MinSize));
+                _heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - KlassModel.MinSize));
                 //_newWidth = _startPoint.X - pos.X;
                 KlassViewModel.KlassModel.Width -= _widthChange;
                 KlassViewModel.KlassModel.Height -= _heightChange;
@@ -166,11 +158,9 @@ namespace RajdRed.Views
             switch(boarder)
             {
                 case 1:
-                    //Cursor = Cursors.SizeNS;
                     KlassViewModel.KlassModel.Resize = false;
                     break;
                 case 2:
-                    //Cursor = Cursors.SizeWE;
                     KlassViewModel.KlassModel.Resize = false;
                     break;
                 case 3:
@@ -196,7 +186,6 @@ namespace RajdRed.Views
         {
             if (KlassViewModel.KlassModel.Resize)
             {
-                //ResizeKlass(sender, e);
                 CaptureMouse();
                 _startPoint = e.GetPosition(Application.Current.MainWindow);
                 _isDown = true;

@@ -12,7 +12,7 @@ namespace RajdRed.Models
         {
             get { return _x1; }
             set { 
-                _x1 = value + _nod1.Width/2; 
+                _x1 = value + NodModelBase.MinSize/2; 
                 OnPropertyChanged("X1");  
             }
         }
@@ -22,7 +22,7 @@ namespace RajdRed.Models
         {
             get { return _y1; }
             set {
-                _y1 = value + _nod1.Height / 2; 
+                _y1 = value + NodModelBase.MinSize / 2; 
                 OnPropertyChanged("Y1"); 
             }
         }
@@ -32,7 +32,7 @@ namespace RajdRed.Models
         {
             get { return _x2; }
             set {
-                _x2 = value + _nod2.Width / 2; 
+                _x2 = value + NodModelBase.MinSize / 2; 
                 OnPropertyChanged("X2"); 
             }
         }
@@ -42,7 +42,7 @@ namespace RajdRed.Models
         {
             get { return _y2; }
             set {
-                _y2 = value + _nod2.Height / 2; 
+                _y2 = value + NodModelBase.MinSize / 2; 
                 OnPropertyChanged("Y2"); 
             }
         }

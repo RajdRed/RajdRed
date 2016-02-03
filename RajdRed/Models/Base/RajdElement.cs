@@ -14,6 +14,7 @@ namespace RajdRed.Models.Base
         {
             get { return _isSelected; }
             set { _isSelected = value; OnPropertyChanged("Selected"); } }
+        
         public bool OnField { get; set; }
 
         public Visibility Selected
@@ -26,5 +27,16 @@ namespace RajdRed.Models.Base
                     return Visibility.Hidden; 
             }
         }
+
+        private int _zIndex = 0;
+        public int ZIndex
+        {
+            get { return _zIndex; }
+            set { 
+                _zIndex = value;
+                OnPropertyChanged("ZIndex");
+            }
+        }
+        
     }
 }

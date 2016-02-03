@@ -20,8 +20,7 @@ namespace RajdRed.Models.Adds
             },
 
             Stroke = Brushes.RoyalBlue,
-            StrokeThickness = 0.75,
-
+            StrokeThickness = 0.75
         };
         public Path Node
         {

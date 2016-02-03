@@ -18,6 +18,8 @@ namespace RajdRed.ViewModels
         public NodCanvasRepository NodCanvasRepository { get; set; }
         public NodCanvasModel NodCanvasModel { get; set; }
 
+        public int ZIndex = 0;
+
         public NodCanvasViewModel(NodCanvasModel ncm, NodCanvasRepository ncr)
         {
             NodCanvasModel = ncm;

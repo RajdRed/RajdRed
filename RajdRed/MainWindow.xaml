@@ -4,21 +4,21 @@
         xmlns:vm="clr-namespace:RajdRed.ViewModels"
         xmlns:v="clr-namespace:RajdRed.Views"
         xmlns:m="clr-namespace:RajdRed.Models"
+        xmlns:r="clr-namespace:RajdRed.Repositories"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         Title="MainWindow" Height="720" Width="1024"
         Name="RajdRedMainWindow"
 		KeyDown="RajdRedMainWindow_KeyDown"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
-
     <Window.Resources>
-
         <vm:KlassViewModel x:Key="klassViewModel"/>
         <DataTemplate DataType="{x:Type vm:KlassViewModel}">
             <Canvas>
                 <v:KlassView DataContext="{Binding}"
                              Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Canvas.ZIndex="{Binding LinjeModel.ZIndex}">
                 </v:KlassView>
             </Canvas>
         </DataTemplate>
@@ -29,17 +29,20 @@
                       Y1="{Binding LinjeModel.Y1}"
                       X2="{Binding LinjeModel.X2}"
                       Y2="{Binding LinjeModel.Y2}"
+                      Canvas.ZIndex="{Binding LinjeModel.ZIndex}"
                       StrokeThickness="2"
                       Stroke="Black"
                       MouseDown="Line_MouseDown">
                 </Line>
             </Canvas>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">
+        <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}" >
             <Canvas>
                 <v:NodCanvasView DataContext="{Binding}" 
-                            Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Canvas.ZIndex="{Binding NodCanvasModel.ZIndex}"
+                                 />
             </Canvas>
         </DataTemplate>
     </Window.Resources>

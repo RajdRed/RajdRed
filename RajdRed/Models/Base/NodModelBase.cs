@@ -10,6 +10,7 @@ namespace RajdRed.Models.Base
         public List<LinjeModel> LinjeModelList = new List<LinjeModel>();
 
         public int Number { get; set; }
+        public static int MinSize = 10;
 
         private bool _isSet = false;
         public bool IsSet

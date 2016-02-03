@@ -10,6 +10,9 @@ namespace RajdRed.Models
     public class KlassModel : RajdElement
     {
         private KlassViewModel _klassViewModel { get; set; }
+
+        public static double MinSize = 110;
+
         private bool _resize = false;
         public bool Resize
         {
@@ -83,7 +86,7 @@ namespace RajdRed.Models
             }
         }
 
-        private double _height = 135;
+        private double _height = MinSize;
         public double Height
         {
             get { return _height; }
@@ -94,7 +97,7 @@ namespace RajdRed.Models
             }
         }
 
-        private double _width = 130;
+        private double _width = MinSize;
         public double Width
         {
             get { return _width; }
