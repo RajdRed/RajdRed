@@ -8,7 +8,7 @@
              xmlns:r="clr-namespace:RajdRed.Repositories"
              MinHeight="{Binding KlassModel.Height}" 
              MinWidth="{Binding KlassModel.Width}"
-			 MouseDoubleClick="UserControl_MouseDoubleClick"
+			 
              MouseMove="UserControl_MouseMove"
              MouseUp="UserControl_MouseUp"
              Name="theKlassView"

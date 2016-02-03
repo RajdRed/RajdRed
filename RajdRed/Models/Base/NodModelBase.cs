@@ -1,6 +1,7 @@
 ﻿using RajdRed.Models.Adds;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System;
 
 namespace RajdRed.Models.Base
 {
@@ -30,7 +31,11 @@ namespace RajdRed.Models.Base
             set { _height = value; OnPropertyChanged("Height"); }
         }
 
+
+
         public NodTypesModel NodTypesModel;
+        
+        
         private Path _path;
         public Path Path
         {

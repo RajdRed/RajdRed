@@ -15,7 +15,10 @@
              MouseLeave="UserControl_MouseLeave"
              MouseUp="UserControl_MouseUp"
 			 MouseEnter="UserControl_MouseEnter"
-             Content="{Binding NodKlassModel.Path}"
              >
-
+    <ContentPresenter Content="{Binding NodKlassModel.Path}">
+        <ContentPresenter.LayoutTransform>
+            <RotateTransform Angle="{Binding NodKlassModel.Angle}"/>
+        </ContentPresenter.LayoutTransform>
+    </ContentPresenter>
 </UserControl>

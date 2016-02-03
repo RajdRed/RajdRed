@@ -28,7 +28,7 @@ namespace RajdRed.Views
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NodKlassViewModel.CreateLinje();
+            //NodKlassViewModel.CreateLinje();
             NodKlassViewModel.NodKlassModel.IsPressed = true;  
         }
 
@@ -37,13 +37,24 @@ namespace RajdRed.Views
             if (NodKlassViewModel.NodKlassModel.IsSet)
             {
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
-                NodSettings ns = new NodSettings(NodKlassViewModel);
-                Point pt = e.GetPosition(Application.Current.MainWindow);
+                Grid g = new Grid() { Width = mw.theCanvas.ActualWidth, Height = mw.theCanvas.ActualHeight, Background = Brushes.Black, Opacity = 0.2 };
+                Canvas.SetLeft(g, 0);
+                Canvas.SetTop(g, 0);
+                
+                NodSettings ns = new NodSettings(NodKlassViewModel, g);
+                Point pt = this.TransformToAncestor(Application.Current.MainWindow).Transform(new Point(0, 0));
+                Canvas.SetLeft(ns, pt.X + 6 - ns.Width / 2);
+                Canvas.SetTop(ns, pt.Y + 6 - ns.Height / 2);
 
-                Canvas.SetLeft(ns, pt.X - ns.Width / 2);
-                Canvas.SetTop(ns, pt.Y - ns.Height / 2);
+                g.MouseDown += (sendr, eventArgs) =>
+                {
+                    mw.theCanvas.Children.Remove(g);
+                    mw.theCanvas.Children.Remove(ns);
+                };
 
+                mw.theCanvas.Children.Add(g);
                 mw.theCanvas.Children.Add(ns);
+                
             }
         }
 

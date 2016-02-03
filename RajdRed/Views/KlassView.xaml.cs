@@ -42,8 +42,37 @@ namespace RajdRed.Views
         public void Innerborder_MouseDown(object sender, MouseButtonEventArgs e)
         {
 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+            if (e.ClickCount == 2)
+            {
+                Grid g = new Grid() { Width = mw.theCanvas.ActualWidth, Height = mw.theCanvas.ActualHeight, Background = Brushes.Black, Opacity = 0.2 };
+                Canvas.SetLeft(g, 0);
+                Canvas.SetTop(g, 0);
 
-			if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                ClassSettings cs = new ClassSettings(KlassViewModel, g);
+                g.MouseDown += (sendr, eventArgs) => { CloseSettings(cs, g); };	//Skapar ett mouseDown-event för Grid g som anropar CloseSettings
+
+                double x = (KlassViewModel.KlassModel.PositionLeft + _posOnUserControlOnHit.X - cs.Width / 2.33);
+                double y = (KlassViewModel.KlassModel.PositionTop + _posOnUserControlOnHit.Y - cs.Height / 2);
+
+                if (cs.Width + x > mw.ActualWidth)
+                    Canvas.SetLeft(cs, x - (x + cs.Width - mw.ActualWidth));
+                else if (x < 0)
+                    Canvas.SetLeft(cs, x - x);
+                else
+                    Canvas.SetLeft(cs, x);
+
+                if (cs.Height + y > mw.ActualHeight)
+                    Canvas.SetTop(cs, y - (y + cs.Height - mw.ActualHeight));
+                else if (y < 0)
+                    Canvas.SetTop(cs, y - y);
+                else
+                    Canvas.SetTop(cs, y);
+
+                mw.theCanvas.Children.Add(g);
+                mw.theCanvas.Children.Add(cs);
+            }
+
+			else if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
 			{
 				CaptureMouse();
 				_posOnUserControlOnHit = Mouse.GetPosition(this);
@@ -113,7 +142,7 @@ namespace RajdRed.Views
         {
         }
 
-		private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		/*private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
 
@@ -143,7 +172,7 @@ namespace RajdRed.Views
 
 			mw.theCanvas.Children.Add(g);
 			mw.theCanvas.Children.Add(cs);   
-		}
+		}*/
 
 		public void CloseSettings(ClassSettings cs, Grid g)
         {

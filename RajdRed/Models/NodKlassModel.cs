@@ -37,6 +37,30 @@ namespace RajdRed.Models
             }
         }
 
+
+
+        public double Angle
+        {
+            get 
+            {
+                if (_horizontalAlignment == HorizontalAlignment.Left)
+                {
+                    return 90;
+                }
+                else if (_horizontalAlignment == HorizontalAlignment.Right)
+                {
+                    return 270;
+                }
+                else if (_verticalAlignment == VerticalAlignment.Top)
+                {
+                    return 180;
+                }
+                return 0;
+            }
+            
+        }
+        
+
         public NodKlassModel()
         {
             Path = NodTypesModel.Node;

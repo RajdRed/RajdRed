@@ -5,6 +5,7 @@ using RajdRed.Views;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RajdRed.ViewModels
 {
@@ -135,6 +136,5 @@ namespace RajdRed.ViewModels
 
             return false;
         }
-
     }
 }

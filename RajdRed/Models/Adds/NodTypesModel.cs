@@ -19,7 +19,7 @@ namespace RajdRed.Models.Adds
                 }
             },
 
-            Stroke = Brushes.RoyalBlue,
+            Stroke = Brushes.Black,
             StrokeThickness = 0.75,
 
         };
@@ -32,9 +32,9 @@ namespace RajdRed.Models.Adds
         private Path _association = new Path()
         {
             Data = new EllipseGeometry(new Point(5, 5), 4.5, 4.5),
-            Stroke = Brushes.Red,
-            StrokeThickness = 0.75
-            //Fill = Brushes.Black
+            Stroke = Brushes.Black,
+            StrokeThickness = 0.75,
+            Fill = Brushes.Black
         };
         public Path Association
         {
@@ -58,8 +58,8 @@ namespace RajdRed.Models.Adds
                 true) 
             }),
             StrokeThickness = 0.75,
-            Stroke = Brushes.Magenta,
-            Fill = Brushes.Black //(Brush)new BrushConverter().ConvertFrom("#EAEDF2")
+            Stroke = Brushes.Black,
+            Fill = (Brush)new BrushConverter().ConvertFrom("#EAEDF2")
         };
         public Path Aggregation
         {
@@ -107,9 +107,9 @@ namespace RajdRed.Models.Adds
                 }, 
                 true) 
             }),
-            Stroke = Brushes.SeaGreen,
+            Stroke = Brushes.Black,
             StrokeThickness = 0.75,
-            Fill = Brushes.Black //(Brush)new BrushConverter().ConvertFrom("#EAEDF2")
+            Fill = (Brush)new BrushConverter().ConvertFrom("#EAEDF2")
         };
         public Path Generalization
         {
