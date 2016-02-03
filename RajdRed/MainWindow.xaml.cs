@@ -129,7 +129,7 @@ namespace RajdRed
 
 		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			Keyboard.ClearFocus();
+			//Keyboard.ClearFocus();
 
 			deselectAllClasses();	
 
@@ -344,19 +344,20 @@ namespace RajdRed
 			anyOneSelected = false;
 		}
 
-		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs e)
+		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs k)
 		{
-			if (e.Key == Key.Delete || e.Key == Key.Back )
+			if (k.Key == Key.Delete || k.Key == Key.Back )
 			{
 				if (anyOneSelected)
 				{
-					foreach (KlassViewModel k in _mainRepository.KlassRepository)
+					int size = _mainRepository.KlassRepository.Count;
+
+					for (int i = 0; i < size; i++)
 					{
-						if (k.KlassModel.IsSelected)
+						if (_mainRepository.KlassRepository[i].KlassModel.IsSelected)
 						{
-							k.KlassModel.IsSelected = false;
-							k.KlassView.ReleaseMouseCapture();
-							k.Delete();
+
+							_mainRepository.KlassRepository[i].Delete();
 						}
 					}
 
