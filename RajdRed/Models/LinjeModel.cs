@@ -108,5 +108,15 @@ namespace RajdRed.Models
                 }
             };
         }
+
+        public void ReplaceNod(NodModelBase oldNod, NodModelBase newNod)
+        {
+            if (Nod1 == oldNod)
+                Nod1 = newNod;
+            else
+                Nod2 = newNod;
+
+            SetOnPropertyChanged();
+        }
     }
 }

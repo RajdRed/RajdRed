@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models.Adds;
+using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -6,16 +7,17 @@ namespace RajdRed.Models.Base
 {
     public class NodModelBase : RajdElement
     {
-        public LinjeModel LinjeModel { get; set; }
+        public List<LinjeModel> LinjeModelList = new List<LinjeModel>();
 
-        private bool _converted = false;
-        public bool Converted
+        public int Number { get; set; }
+
+        private bool _isSet = false;
+        public bool IsSet
         {
-            get { return _converted; }
-            set { _converted = value; OnPropertyChanged("Converted"); }
+            get { return _isSet; }
+            set { _isSet = value; OnPropertyChanged("IsSet"); }
         }
         
-
         private double _width = 10;
         public double Width
         {
@@ -80,8 +82,8 @@ namespace RajdRed.Models.Base
                 Height = n.Height,
                 Width = n.Width,
                 IsSelected = n.IsSelected,
-                LinjeModel = n.LinjeModel,
                 OnField = n.OnField,
+                LinjeModelList = n.LinjeModelList,
                 Path = n.Path,
                 NodTypesModel = n.NodTypesModel,
                 PositionLeft = n.PositionLeft,

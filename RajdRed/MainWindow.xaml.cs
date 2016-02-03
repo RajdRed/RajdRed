@@ -10,6 +10,7 @@ using RajdRed.Repositories;
 using RajdRed.Views;
 using RajdRed.ViewModels;
 using RajdRed.Models;
+using System.Windows.Shapes;
 
 namespace RajdRed
 {
@@ -57,13 +58,7 @@ namespace RajdRed
         {
 			deselectAllClasses();
             _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
-			anyOneSelected = true;
-
-            //AddNewCanvasNod returnerar den noden som skapas
-            //_mainRepository.LinjeRepository.AddNewLinje(
-            //        _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(100, 100)).NodCanvasModel,
-            //        _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(200, 200)).NodCanvasModel
-            //    );
+            anyOneSelected = true;
         }
 
 		public bool getDarkMode()
@@ -364,5 +359,12 @@ namespace RajdRed
 				}
 			}
 		}
+
+        private void Line_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Line line = sender as Line;
+            LinjeViewModel l = line.DataContext as LinjeViewModel;
+            l.Split(e.GetPosition(this));
+        }
     }
 }

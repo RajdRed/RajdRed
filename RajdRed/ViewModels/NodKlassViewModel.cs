@@ -106,17 +106,14 @@ namespace RajdRed.ViewModels
         {
             if (Set())
             {
-                LinjeModel oldLine = ncvm.NodCanvasModel.LinjeModel;
-                LinjeViewModel newLine = KlassViewModel.KlassRepository.MainRepository.LinjeRepository.AddNewLinje(
-                        ncvm.NodCanvasModel,
-                        this.NodKlassModel
-                    );
+                foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
+                {
+                    l.ReplaceNod(ncvm.NodCanvasModel, this.NodKlassModel);
+                }
 
-                Point newNodPos = NodViewModelBase.CenterBetweenNodes(oldLine.Nod1, oldLine.Nod2);
+                NodKlassModel.LinjeModelList = ncvm.NodCanvasModel.LinjeModelList;
 
-                ncvm.NodCanvasModel.PositionLeft = newNodPos.X;
-                ncvm.NodCanvasModel.PositionTop = newNodPos.Y;
-
+                KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.Remove(ncvm);
             };
         }
 

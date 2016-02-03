@@ -7,13 +7,9 @@ namespace RajdRed.Models
 {
     public class NodKlassModel : NodModelBase
     {
-        public bool IsSet = false;
         public bool IsPressed = false;
         public int Row { get; set; }
         public int Column { get; set; }
-
-        public double RPositionLeft { get; set; }
-        public double RPositionTop { get; set; }
 
         private HorizontalAlignment _horizontalAlignment;
         public HorizontalAlignment HorizontalAlignment

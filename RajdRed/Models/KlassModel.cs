@@ -10,6 +10,19 @@ namespace RajdRed.Models
     public class KlassModel : RajdElement
     {
         private KlassViewModel _klassViewModel { get; set; }
+        private bool _resize = false;
+        public bool Resize
+        {
+            get
+            {
+                return _resize;
+            }
+            set
+            {
+                _resize = value;
+                OnPropertyChanged("Resize");
+            }
+        }
 
         private string _header;
         public string Header

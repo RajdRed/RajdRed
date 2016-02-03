@@ -29,7 +29,8 @@
                       X2="{Binding LinjeModel.X2}"
                       Y2="{Binding LinjeModel.Y2}"
                       Stroke="Black"
-                      StrokeThickness="2"/>
+                      StrokeThickness="2"
+                      MouseDown="Line_MouseDown"/>
             </Canvas>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">

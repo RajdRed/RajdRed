@@ -45,16 +45,14 @@ namespace RajdRed.ViewModels
 
         public void EatNod(NodCanvasViewModel ncvm)
         {
-            LinjeModel oldLine = ncvm.NodCanvasModel.LinjeModel;
-            LinjeViewModel newLine = NodCanvasRepository.MainRepository.LinjeRepository.AddNewLinje(
-                    ncvm.NodCanvasModel,
-                    this.NodCanvasModel
-                );
+            foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
+            {
+                l.ReplaceNod(ncvm.NodCanvasModel, this.NodCanvasModel);
+            }
 
-            Point newNodPos = NodViewModelBase.CenterBetweenNodes(oldLine.Nod1, oldLine.Nod2);
+            NodCanvasModel.LinjeModelList = ncvm.NodCanvasModel.LinjeModelList;
 
-            ncvm.NodCanvasModel.PositionLeft = newNodPos.X;
-            ncvm.NodCanvasModel.PositionTop = newNodPos.Y;
+            NodCanvasRepository.Remove(ncvm);
         }
 
         public bool IsInArea(Point p)
