@@ -11,14 +11,15 @@
 		KeyDown="RajdRedMainWindow_KeyDown"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
-	<Window.Resources>
+    <Window.Resources>
 
         <vm:KlassViewModel x:Key="klassViewModel"/>
         <DataTemplate DataType="{x:Type vm:KlassViewModel}">
             <Canvas>
                 <v:KlassView DataContext="{Binding}"
                              Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                </v:KlassView>
             </Canvas>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
@@ -28,9 +29,10 @@
                       Y1="{Binding LinjeModel.Y1}"
                       X2="{Binding LinjeModel.X2}"
                       Y2="{Binding LinjeModel.Y2}"
-                      Stroke="Black"
                       StrokeThickness="2"
-                      MouseDown="Line_MouseDown"/>
+                      Stroke="Black"
+                      MouseDown="Line_MouseDown">
+                </Line>
             </Canvas>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">
@@ -40,9 +42,9 @@
                             Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Canvas>
         </DataTemplate>
-	</Window.Resources>
+    </Window.Resources>
 
-	<Canvas MouseDown="theCanvas_MouseDown" MouseRightButtonUp="theCanvas_MouseRightButtonUp" MouseRightButtonDown="theCanvas_MouseRightButtonDown" Name="theCanvas" Background="#EAEDF2">
+    <Canvas MouseDown="theCanvas_MouseDown" MouseRightButtonUp="theCanvas_MouseRightButtonUp" MouseRightButtonDown="theCanvas_MouseRightButtonDown" Name="theCanvas" Background="#EAEDF2">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="22*" />
@@ -119,9 +121,9 @@
             </Grid>
         </Grid>
         <Canvas Name="selectionCanvas">
-			 <!--This canvas is overlaid over the previous canvas and is used to 
-                place the rectangle that implements the drag selection box.--> 
-			<Rectangle
+            <!--This canvas is overlaid over the previous canvas and is used to 
+                place the rectangle that implements the drag selection box.-->
+            <Rectangle
                 x:Name="selectionBox"
 				Fill="#333"
 				Opacity=".30"
@@ -129,7 +131,7 @@
                 Stroke="Black"
                 StrokeThickness="1"
                 />
-		</Canvas>
+        </Canvas>
         <ItemsControl ItemsSource="{Binding Collection}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

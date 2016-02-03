@@ -4,6 +4,8 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace RajdRed.Views
@@ -45,6 +47,31 @@ namespace RajdRed.Views
         {
             ReleaseMouseCapture();
             NodCanvasViewModel.LookAndAttachCanvasNod(e.GetPosition(Application.Current.MainWindow));
+        }
+
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ScaleTransform trans = new ScaleTransform();
+            trans.CenterX = 5;
+            trans.CenterY = 5;
+
+            this.RenderTransform = trans;
+            // if you use the same animation for X & Y you don't need anim1, anim2 
+            DoubleAnimation anim = new DoubleAnimation(1, 1.5, TimeSpan.FromMilliseconds(200));
+            trans.BeginAnimation(ScaleTransform.ScaleXProperty, anim);
+            trans.BeginAnimation(ScaleTransform.ScaleYProperty, anim);
+        }
+
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ScaleTransform trans = new ScaleTransform();
+            trans.CenterX = 6;
+            trans.CenterY = 6;
+            this.RenderTransform = trans;
+            // if you use the same animation for X & Y you don't need anim1, anim2 
+            DoubleAnimation anim = new DoubleAnimation(1.5, 1, TimeSpan.FromMilliseconds(200));
+            trans.BeginAnimation(ScaleTransform.ScaleXProperty, anim);
+            trans.BeginAnimation(ScaleTransform.ScaleYProperty, anim);
         }
     }
 }

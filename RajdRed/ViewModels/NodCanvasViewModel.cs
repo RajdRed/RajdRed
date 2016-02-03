@@ -48,9 +48,8 @@ namespace RajdRed.ViewModels
             foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
             {
                 l.ReplaceNod(ncvm.NodCanvasModel, this.NodCanvasModel);
+                NodCanvasModel.LinjeModelList.Add(l);
             }
-
-            NodCanvasModel.LinjeModelList = ncvm.NodCanvasModel.LinjeModelList;
 
             NodCanvasRepository.Remove(ncvm);
         }

@@ -104,17 +104,15 @@ namespace RajdRed.ViewModels
 
         public void EatNod(NodCanvasViewModel ncvm)
         {
-            if (Set())
+            Set();
+
+            foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
             {
-                foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
-                {
-                    l.ReplaceNod(ncvm.NodCanvasModel, this.NodKlassModel);
-                }
+                l.ReplaceNod(ncvm.NodCanvasModel, this.NodKlassModel);
+                NodKlassModel.LinjeModelList.Add(l);
+            }
 
-                NodKlassModel.LinjeModelList = ncvm.NodCanvasModel.LinjeModelList;
-
-                KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.Remove(ncvm);
-            };
+            KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.Remove(ncvm);
         }
 
         public Point GetPositionRelativeCanvas()
