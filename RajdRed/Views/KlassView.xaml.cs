@@ -190,6 +190,7 @@ namespace RajdRed.Views
         private void InnerBorder_MouseEnter(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.SizeAll;
+			_resize = false;
         }
 
         private void InnerBorder_MouseLeave(object sender, MouseEventArgs e)

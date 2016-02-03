@@ -217,22 +217,124 @@ namespace RajdRed
 				mouseUpPos.Y = temp;
 			}
 
-			foreach (KlassViewModel k in _mainRepository.KlassRepository)
+			/* kontroll för intersection linjen */
+
+			double Y1, Y2, X1, X2, M, Y12, Y22;
+
+			Y1 = mouseDownPos.Y;
+			Y2 = mouseUpPos.Y;
+			X1 = mouseDownPos.X;
+			X2 = mouseUpPos.X;
+			M = mouseDownPos.Y;
+			Y12 = mouseUpPos.Y;
+			Y22 = mouseDownPos.Y;
+
+			if (SelectionLinesHorizontal(X1, X2, Y1, Y2, M))
+				return;
+			else if (SelectionLinesHorizontal(X1, X2, Y12, Y22, M))
+				return;
+			else if (SelectionLinesVertical(X1, Y1, Y2))
+				return;
+			else if (SelectionLinesVertical(X2, Y1, Y2))
+				return;			
+			
+			/************************************/
+
+			foreach (KlassViewModel kvm in _mainRepository.KlassRepository)
 			{
-				Point leftTopCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop);
-				Point rightTopCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop);
-				Point leftBotCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop + k.KlassModel.Height);
-				Point rightBotCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop + k.KlassModel.Height);
+				Point leftTopCorner = new Point(kvm.KlassModel.PositionLeft, kvm.KlassModel.PositionTop);
+				Point rightTopCorner = new Point(kvm.KlassModel.PositionLeft + kvm.KlassModel.Width, kvm.KlassModel.PositionTop);
+				Point leftBotCorner = new Point(kvm.KlassModel.PositionLeft, kvm.KlassModel.PositionTop + kvm.KlassModel.Height);
+				Point rightBotCorner = new Point(kvm.KlassModel.PositionLeft + kvm.KlassModel.Width, kvm.KlassModel.PositionTop + kvm.KlassModel.Height);
 
 				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
 				{
 					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
 					{
-						k.KlassModel.IsSelected = true;
+						kvm.KlassModel.IsSelected = true;
 						anyOneSelected = true;
 					}
 				}
 			}
+		}
+
+		private bool SelectionLinesHorizontal(double rak_X1, double rak_X2, double rak_Y1, double rak_Y2, double rak_M)
+		{
+			foreach (LinjeViewModel lvm in _mainRepository.LinjeRepository)
+			{
+				double sne_Y1, sne_Y2, sne_K, sne_X1, sne_X2, sne_M;
+
+				/*if (lvm.LinjeModel.Nod1.PositionTop > lvm.LinjeModel.Nod2.PositionTop)
+				{
+					double temp = lvm.LinjeModel.Nod1.PositionTop;
+					lvm.LinjeModel.Nod1.PositionTop = lvm.LinjeModel.Nod2.PositionTop;
+					lvm.LinjeModel.Nod1.PositionTop = temp;
+				}*/
+
+				sne_Y1 = (lvm.LinjeModel.Nod1.PositionTop + 5) * -1;
+				sne_X1 = lvm.LinjeModel.Nod1.PositionLeft + 5;
+				sne_Y2 = (lvm.LinjeModel.Nod2.PositionTop + 5) * -1;
+				sne_X2 = lvm.LinjeModel.Nod2.PositionLeft + 5;
+				sne_K = (sne_Y2 - sne_Y1) / (sne_X2 - sne_X1);
+				sne_M = sne_Y1 - sne_K * sne_X1;
+
+				double intersectX, intersectY;
+
+				intersectX = (rak_M - sne_M) / sne_K;
+				intersectY = sne_K * intersectX + sne_M;
+
+				if (rak_X1 <= intersectX && intersectX <= rak_X2)
+				{
+					if (sne_X1 <= intersectX && sne_X2 <= intersectX) 
+					{
+						if (intersectY == rak_Y1)
+						{
+							lvm.LinjeModel.IsSelected = true;
+							return true;
+						}
+					}
+				}
+			}
+
+			return false;
+		}
+
+		private bool SelectionLinesVertical(double rak_X, double rak_Y1, double rak_Y2) 
+		{
+			foreach (LinjeViewModel lvm in _mainRepository.LinjeRepository)
+			{
+				double sne_Y1, sne_Y2, sne_K, sne_X1, sne_X2, sne_M;
+
+				/*if (lvm.LinjeModel.Nod1.PositionTop > lvm.LinjeModel.Nod2.PositionTop)
+				{
+					double temp = lvm.LinjeModel.Nod1.PositionTop;
+					lvm.LinjeModel.Nod1.PositionTop = lvm.LinjeModel.Nod2.PositionTop;
+					lvm.LinjeModel.Nod1.PositionTop = temp;
+				}*/
+
+				sne_Y1 = (lvm.LinjeModel.Nod1.PositionTop + 5) * -1;
+				sne_X1 = lvm.LinjeModel.Nod1.PositionLeft + 5;
+				sne_Y2 = (lvm.LinjeModel.Nod2.PositionTop + 5) * -1;
+				sne_X2 = lvm.LinjeModel.Nod2.PositionLeft + 5;
+				sne_K = (sne_Y2 - sne_Y1) / (sne_X2 - sne_X1);
+				sne_M = sne_Y1 - sne_K * sne_X1;
+
+				double intersectX, intersectY;
+
+				intersectX = rak_X;
+				intersectY = sne_K * rak_X + sne_M;
+
+				if (rak_Y1 <= intersectY && intersectY <= rak_Y2)
+				{
+					if (sne_X1 <= intersectX && intersectX <= sne_X2)
+					{
+						lvm.LinjeModel.IsSelected = true;
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
