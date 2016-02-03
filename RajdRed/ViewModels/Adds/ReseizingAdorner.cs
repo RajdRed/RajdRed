@@ -29,7 +29,7 @@ namespace RajdRed.ViewModells.Add
             BuildAdornerCorner(ref topLeft, Cursors.SizeNWSE);
             BuildAdornerCorner(ref topRight, Cursors.SizeNESW);
             BuildAdornerCorner(ref bottomLeft, Cursors.SizeNESW);
-            BuildAdornerCorner(ref bottomRight, Cursors.SizeNWSE);
+            BuildAdornerCorner(ref bottomRight, Cursors.SizeAll);
 
             //Lägger till handlar för att ändra storlek
             bottomLeft.DragDelta += new DragDeltaEventHandler(HandleBottomLeft);
@@ -54,7 +54,20 @@ namespace RajdRed.ViewModells.Add
             ////Change the size by the amount the user drags the mouse, as long as it's larger 
             //// than the width or height of an adorner, respectively.
             adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange, hitThumb.DesiredSize.Width);
-            adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height, hitThumb.DesiredSize.Height);
+            adornedElement.Height = Math.Max(adornedElement.Height + args.VerticalChange, hitThumb.DesiredSize.Height);
+
+            double width_old = adornedElement.Width;
+            double width_new = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
+            double left_old = Canvas.GetLeft(adornedElement);
+            adornedElement.Width = width_new;
+            Canvas.SetLeft(adornedElement, left_old - (width_new - width_old));
+
+            double height_old = adornedElement.Height;
+            double height_new = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
+            double top_old = Canvas.GetTop(adornedElement);
+            adornedElement.Height = height_new;
+            Canvas.SetTop(adornedElement, top_old - (height_new - height_old));
+            
         }
 
         //Handler för högra övre hörnet
@@ -155,7 +168,7 @@ namespace RajdRed.ViewModells.Add
         //och lägger till det till visualtree
         void BuildAdornerCorner(ref Thumb cornerThumb, Cursor customizedCursor)
         {
-            if (cornerThumb != null) return;
+            if (cornerThumb != null ) return;
 
             cornerThumb = new Thumb();
 

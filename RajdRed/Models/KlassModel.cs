@@ -1,12 +1,16 @@
 ﻿using RajdRed.Models.Base;
 using RajdRed.ViewModels;
 using RajdRed.Views;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace RajdRed.Models
 {
     public class KlassModel : RajdElement
     {
+        private KlassViewModel _klassViewModel { get; set; }
+
         private string _header;
         public string Header
         {
@@ -65,5 +69,36 @@ namespace RajdRed.Models
                 OnPropertyChanged("PositionTop");
             }
         }
+
+        private double _height = 135;
+        public double Height
+        {
+            get { return _height; }
+            set 
+            {
+                _height = value; 
+                OnPropertyChanged("Height"); 
+            }
+        }
+
+        private double _width = 130;
+        public double Width
+        {
+            get { return _width; }
+            set 
+            {
+                _width = value;// _klassViewModel.KlassView.ActualWidth; 
+                OnPropertyChanged("Width"); 
+            }
+        }
+
+        public KlassModel(KlassViewModel kvm, Point startPosition)
+        {
+            _klassViewModel = kvm;
+            Header = "Ny Klass *";
+            PositionLeft = startPosition.X;
+            PositionTop = startPosition.Y;
+            IsSelected = true;
+		}
     }
 }

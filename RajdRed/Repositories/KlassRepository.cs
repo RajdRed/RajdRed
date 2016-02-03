@@ -7,16 +7,17 @@ namespace RajdRed.Repositories
 {
     public class KlassRepository : ObservableCollection<KlassViewModel>
     {
-        public KlassRepository(){}
+
+        private MainRepository _mainRepository;
+        public MainRepository MainRepository { get { return _mainRepository; } }
+        
+        public KlassRepository(MainRepository mr)
+        {
+            _mainRepository = mr;
+        }
         public KlassViewModel AddNewKlass(Point startPosition)
         {
-            KlassViewModel kvm = new KlassViewModel(new KlassModel()
-                    {
-                        Header = "Ny Klass *",
-                        PositionLeft = startPosition.X,
-                        PositionTop = startPosition.Y,
-                        IsSelected = true
-                    }, this);
+            KlassViewModel kvm = new KlassViewModel(startPosition, this);
             Add(kvm);
 
             return kvm;

@@ -74,6 +74,9 @@
     <Compile Include="Models\KlassModel.cs" />
     <Compile Include="Models\NodKlassModel.cs" />
     <Compile Include="Models\LinjeModel.cs" />
+    <Compile Include="NodSettings.xaml.cs">
+      <DependentUpon>NodSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\NodCanvasRepository.cs" />
     <Compile Include="Repositories\NodKlassRepository.cs" />
     <Compile Include="Repositories\KlassRepository.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Base\NodViewModelBase.cs" />
     <Compile Include="ViewModels\NodCanvasViewModel.cs" />
     <Compile Include="ViewModels\Adds\ReseizingAdorner.cs" />
     <Compile Include="ViewModels\Commands\KlassCommands.cs" />
@@ -118,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HelpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NodSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,9 +205,7 @@
   <ItemGroup>
     <Resource Include="Images\avatar.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Old\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

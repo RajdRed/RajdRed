@@ -1,22 +1,46 @@
 ﻿using RajdRed.Models.Adds;
 using RajdRed.Models.Base;
+using RajdRed.ViewModels;
+using System.Windows;
 
 namespace RajdRed.Models
 {
     public class NodKlassModel : NodModelBase
     {
-        private int _gridRow;
-        public int GridRow
+        public bool IsSet = false;
+        public bool IsPressed = false;
+        public int Row { get; set; }
+        public int Column { get; set; }
+
+        public double RPositionLeft { get; set; }
+        public double RPositionTop { get; set; }
+
+        private HorizontalAlignment _horizontalAlignment;
+        public HorizontalAlignment HorizontalAlignment
         {
-            get { return _gridRow; }
-            set { _gridRow = value; OnPropertyChanged("GridRow"); }
+            get { return _horizontalAlignment; }
+            set 
+            { 
+                _horizontalAlignment = value;
+                OnPropertyChanged("HorizontalAlignment");
+            }
         }
 
-        private int _gridColumn;
-        public int GridColumn
+        private VerticalAlignment _verticalAlignment;
+        public VerticalAlignment VerticalAlignment
         {
-            get { return _gridColumn; }
-            set { _gridColumn = value; OnPropertyChanged("GridColumn"); }
+            get { return _verticalAlignment; }
+            set 
+            {
+                _verticalAlignment = value;
+                OnPropertyChanged("VerticalAlignment");
+            }
         }
+
+        public NodKlassModel()
+        {
+            Path = NodTypesModel.Node;
+        }
+        
     }
 }

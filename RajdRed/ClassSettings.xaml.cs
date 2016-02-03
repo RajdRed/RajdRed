@@ -1,6 +1,8 @@
-﻿using System;
+﻿using RajdRed.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -11,13 +13,16 @@ namespace RajdRed
     /// </summary>
     public partial class ClassSettings : UserControl
     {
-        //private KlassView _klass;
-        //private Grid _backgroundGrid;
+		private KlassViewModel _kvm;
+		private Grid _backgroundGrid;
 
-        public ClassSettings()
+        public ClassSettings(KlassViewModel kvm, Grid g)
         {
             InitializeComponent();
-        }
+			_kvm = kvm;
+			_backgroundGrid = g;
+			DataContext = _kvm.KlassModel;
+		}
 
         //public ClassSettings(KlassView k, Grid g)
         //{
@@ -47,20 +52,27 @@ namespace RajdRed
             MessageBoxResult messageBoxResult = MessageBox.Show("Är du säker på att du vill ta bort \"" + ClassName.Text + "\"", "Konfirmera borttagning", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                //_klass.Delete();
-                //_klass.CloseSettings(this, _backgroundGrid);
+				_kvm.Delete();
+				_kvm.KlassView.CloseSettings(this, _backgroundGrid);
             }
         }
 
         public void Btn_Abort_Click(object sender, RoutedEventArgs e)
         {
-            //_klass.CloseSettings(this, _backgroundGrid);
+			_kvm.KlassView.CloseSettings(this, _backgroundGrid);
         }
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
-            //_klass.Save(this);
-            //_klass.CloseSettings(this, _backgroundGrid);
+			BindingExpression classNameBE = BindingOperations.GetBindingExpression(ClassName, TextBox.TextProperty);
+			BindingExpression attributesBE = BindingOperations.GetBindingExpression(Attributes, TextBox.TextProperty);
+			BindingExpression methodsBE = BindingOperations.GetBindingExpression(Methods, TextBox.TextProperty);
+
+			classNameBE.UpdateSource();
+			attributesBE.UpdateSource();
+			methodsBE.UpdateSource();
+
+			_kvm.KlassView.CloseSettings(this, _backgroundGrid);
         }
 
         private void ClassSettings_Loaded(object sender, RoutedEventArgs e)
