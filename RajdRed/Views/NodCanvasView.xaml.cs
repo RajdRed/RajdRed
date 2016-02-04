@@ -16,19 +16,25 @@ namespace RajdRed.Views
     public partial class NodCanvasView : UserControl
     {
         NodCanvasViewModel NodCanvasViewModel { get { return DataContext as NodCanvasViewModel; } }
+        Point _startDragPosition;
         public NodCanvasView()
         {
             InitializeComponent();
             Loaded += (sender, eArgs) => {
                 NodCanvasViewModel.SetNodCanvasView(this);
                 if (!NodCanvasViewModel.NodCanvasModel.IsSet)
-                    CaptureMouse(); //Avkommenteras om/när man kan dra nod från klass               
+                {
+                    CaptureMouse(); //Avkommenteras om/när man kan dra nod från klass   
+                    Point p = Mouse.GetPosition(Application.Current.MainWindow);
+                    _startDragPosition = new Point(p.X-5, p.Y-5);
+                }
             };
         }
 
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CaptureMouse();
+            _startDragPosition = e.GetPosition(Application.Current.MainWindow);
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
@@ -37,8 +43,26 @@ namespace RajdRed.Views
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
 
-                SetValue(Canvas.LeftProperty, p.X - Width / 2);
-                SetValue(Canvas.TopProperty, p.Y - Height / 2);
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                {
+                    double dx = (p.X - _startDragPosition.X) * (p.X - _startDragPosition.X);
+                    double dy = (p.Y - _startDragPosition.Y) * (p.Y - _startDragPosition.Y);
+
+                    if (dx >= dy) {
+                        SetValue(Canvas.LeftProperty, p.X - Width / 2);
+                        SetValue(Canvas.TopProperty, _startDragPosition.Y - Height / 2);
+                    }
+                    else
+                    {
+                        SetValue(Canvas.LeftProperty, _startDragPosition.X - Height / 2);
+                        SetValue(Canvas.TopProperty, p.Y - Height / 2);
+                    }
+                }
+                else
+                {
+                    SetValue(Canvas.LeftProperty, p.X - Width / 2);
+                    SetValue(Canvas.TopProperty, p.Y - Height / 2);
+                }
             }
         }
 

@@ -33,9 +33,9 @@ namespace RajdRed
         public MainWindow()
         {
             InitializeComponent();
-            _mainRepository = new MainRepository(this);
+            DataContext = _mainRepository = new MainRepository(this);
+
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            DataContext = _mainRepository;
         }
 
 		public void changeColors(bool dark)
