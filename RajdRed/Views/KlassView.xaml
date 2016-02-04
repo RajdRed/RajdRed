@@ -78,6 +78,7 @@
                 <Style>
                     <Setter Property="Grid.Row" Value="{Binding NodKlassModel.Row}"></Setter>
                     <Setter Property="Grid.Column" Value="{Binding NodKlassModel.Column}"></Setter>
+                    <Setter Property="Canvas.ZIndex" Value="{Binding NodKlassModel.ZIndex}"></Setter>
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>

@@ -12,6 +12,7 @@ namespace RajdRed.Models
         private KlassViewModel _klassViewModel { get; set; }
 
         public static double MinSize = 110;
+        public static int ZIndex = 1;
 
         private bool _resize = false;
         public bool Resize

@@ -118,15 +118,13 @@
                     <Canvas>
                         <v:KlassView DataContext="{Binding}"
                              Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.ZIndex="{Binding LinjeModel.ZIndex}">
-                        </v:KlassView>
+                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style>
-                    <Setter Property="Canvas.ZIndex" Value="1"></Setter>
+                    <Setter Property="Canvas.ZIndex" Value="{Binding KlassModel.ZIndex}"></Setter>
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
@@ -144,7 +142,6 @@
                               Y1="{Binding LinjeModel.Y1}"
                               X2="{Binding LinjeModel.X2}"
                               Y2="{Binding LinjeModel.Y2}"
-                              Canvas.ZIndex="{Binding LinjeModel.ZIndex}"
                               StrokeThickness="2"
                               Stroke="Black"
                               MouseDown="Line_MouseDown">
@@ -154,7 +151,7 @@
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style>
-                    <Setter Property="Canvas.ZIndex" Value="2"></Setter>
+                    <Setter Property="Canvas.ZIndex" Value="{Binding LinjeModel.ZIndex}"></Setter>
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
@@ -169,15 +166,13 @@
                     <Canvas>
                         <v:NodCanvasView DataContext="{Binding}" 
                         Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                        Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Canvas.ZIndex="{Binding NodCanvasModel.ZIndex}"
-                                 />
+                        Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style>
-                    <Setter Property="Canvas.ZIndex" Value="3"></Setter>
+                    <Setter Property="Canvas.ZIndex" Value="{Binding NodCanvasModel.ZIndex}"></Setter>
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>   

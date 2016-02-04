@@ -6,7 +6,9 @@ using System.Windows.Shapes;
 namespace RajdRed.Models
 {
     public class LinjeModel : RajdElement
-    {        
+    {
+        public static int ZIndex = 2;
+
         private double _x1;
         public double X1
         {
