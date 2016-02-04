@@ -77,21 +77,5 @@ namespace RajdRed.Models.Base
         {
             NodTypesModel = new NodTypesModel();
         }
-
-        public static NodModelBase CopyNod(NodModelBase n)
-        {
-            return new NodModelBase()
-            {
-                Height = n.Height,
-                Width = n.Width,
-                IsSelected = n.IsSelected,
-                LinjeModel = n.LinjeModel,
-                OnField = n.OnField,
-                Path = n.Path,
-                NodTypesModel = n.NodTypesModel,
-                PositionLeft = n.PositionLeft,
-                PositionTop = n.PositionTop,
-            };
-        }
     }
 }

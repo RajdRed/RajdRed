@@ -43,8 +43,25 @@ namespace RajdRed.Views
                 
                 NodSettings ns = new NodSettings(NodKlassViewModel, g);
                 Point pt = this.TransformToAncestor(Application.Current.MainWindow).Transform(new Point(0, 0));
-                Canvas.SetLeft(ns, pt.X + 6 - ns.Width / 2);
-                Canvas.SetTop(ns, pt.Y + 6 - ns.Height / 2);
+                
+                double x = (pt.X + Width/2 - ns.Width / 2);
+                double y = (pt.Y + Height/2 - ns.Height / 2);
+
+                if (ns.Width + x > mw.ActualWidth)
+                    Canvas.SetLeft(ns, x - (x + ns.Width - mw.ActualWidth));
+                else if (x < 0)
+                    Canvas.SetLeft(ns, x - x);
+                else
+                    Canvas.SetLeft(ns, x);
+
+                if (ns.Height + y > mw.ActualWidth)
+                    Canvas.SetTop(ns, y - (y + ns.Height - mw.ActualHeight));
+                else if (y < 0)
+                    Canvas.SetTop(ns, y - y);
+                else
+                    Canvas.SetTop(ns, y);
+                
+                
 
                 g.MouseDown += (sendr, eventArgs) =>
                 {
@@ -65,15 +82,7 @@ namespace RajdRed.Views
 
 		private void UserControl_MouseEnter(object sender, MouseEventArgs e)
 		{
-			ScaleTransform trans = new ScaleTransform();
-			trans.CenterX = 5;
-			trans.CenterY = 5;
 
-			this.RenderTransform = trans;
-			// if you use the same animation for X & Y you don't need anim1, anim2 
-			DoubleAnimation anim = new DoubleAnimation(1, 1.5, TimeSpan.FromMilliseconds(200));
-			trans.BeginAnimation(ScaleTransform.ScaleXProperty, anim);
-			trans.BeginAnimation(ScaleTransform.ScaleYProperty, anim);
 		}
 
 		private void UserControl_MouseLeave(object sender, MouseEventArgs e)
@@ -83,15 +92,6 @@ namespace RajdRed.Views
                 NodKlassViewModel.NodKlassModel.IsPressed = false;
                 NodKlassViewModel.CreateLinje();
             }
-
-			ScaleTransform trans = new ScaleTransform();
-			trans.CenterX = 6;
-			trans.CenterY = 6;
-			this.RenderTransform = trans;
-			// if you use the same animation for X & Y you don't need anim1, anim2 
-			DoubleAnimation anim = new DoubleAnimation(1.5, 1, TimeSpan.FromMilliseconds(200));
-			trans.BeginAnimation(ScaleTransform.ScaleXProperty, anim);
-			trans.BeginAnimation(ScaleTransform.ScaleYProperty, anim);
 		}              
     }
 }

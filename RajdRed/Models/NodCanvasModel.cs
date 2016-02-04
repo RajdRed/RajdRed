@@ -10,6 +10,7 @@ namespace RajdRed.Models
 {
     public class NodCanvasModel : NodModelBase
     {
+
         public NodCanvasModel(){}
 
         public NodCanvasModel(Point p)

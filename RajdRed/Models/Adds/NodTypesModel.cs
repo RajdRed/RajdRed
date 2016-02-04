@@ -14,13 +14,13 @@ namespace RajdRed.Models.Adds
             {
                 Children = new GeometryCollection()
                 {
-                    new LineGeometry(new Point(5, 1), new Point(5, 9)),
-                    new LineGeometry(new Point(1, 5), new Point(9, 5))
+                    new LineGeometry(new Point(5, 0), new Point(5, 10)),
+                    new LineGeometry(new Point(0, 5), new Point(10, 5))
                 }
             },
 
             Stroke = Brushes.Black,
-            StrokeThickness = 0.75,
+            StrokeThickness = 1,
 
         };
         public Path Node
@@ -47,13 +47,13 @@ namespace RajdRed.Models.Adds
             Data = new PathGeometry(
             new List<PathFigure>() 
             { 
-                new PathFigure(new Point(5, 1), 
+                new PathFigure(new Point(7.5, 0), 
                 new List<PathSegment>()
                 {
-                    new LineSegment(new Point(5, 1), true),
-                    new LineSegment(new Point(9, 5), true),
-                    new LineSegment(new Point(5, 9), true),
-                    new LineSegment(new Point(1, 5), true)
+                    new LineSegment(new Point(7.5, 0), true),
+                    new LineSegment(new Point(15, 7.5), true),
+                    new LineSegment(new Point(7.5, 15), true),
+                    new LineSegment(new Point(0, 7.5), true)
                 }, 
                 true) 
             }),
@@ -72,13 +72,13 @@ namespace RajdRed.Models.Adds
             Data = new PathGeometry(
             new List<PathFigure>() 
             { 
-                new PathFigure(new Point(5, 1), 
+                new PathFigure(new Point(7.5, 0), 
                 new List<PathSegment>()
                 {
-                    new LineSegment(new Point(5, 1), true),
-                    new LineSegment(new Point(9, 5), true),
-                    new LineSegment(new Point(5, 9), true),
-                    new LineSegment(new Point(1, 5), true)
+                    new LineSegment(new Point(7.5, 0), true),
+                    new LineSegment(new Point(15, 7.5), true),
+                    new LineSegment(new Point(7.5, 15), true),
+                    new LineSegment(new Point(0, 7.5), true)
                 }, 
                 true) 
             }),
@@ -98,12 +98,12 @@ namespace RajdRed.Models.Adds
             Data = new PathGeometry(
             new List<PathFigure>() 
             { 
-                new PathFigure(new Point(5, 2), 
+                new PathFigure(new Point(7.5, 0), 
                 new List<PathSegment>()
                 {
-                    new LineSegment(new Point(5, 2), true),
-                    new LineSegment(new Point(9, 9), true),
-                    new LineSegment(new Point(1, 9), true)
+                    new LineSegment(new Point(7.5, 0), true),
+                    new LineSegment(new Point(15, 15), true),
+                    new LineSegment(new Point(0, 15), true)
                 }, 
                 true) 
             }),

@@ -119,5 +119,15 @@ namespace RajdRed
                 NodKlassViewModel.NodKlassModel.Path = temp;
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScaleTransform sct = new ScaleTransform(0, 0);
+            this.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.RenderTransform = sct;
+            DoubleAnimation da = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.17)));
+            sct.BeginAnimation(ScaleTransform.ScaleXProperty, da);
+            sct.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+        }
+
     }
 }
