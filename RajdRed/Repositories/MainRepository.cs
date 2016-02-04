@@ -34,12 +34,6 @@ namespace RajdRed.Repositories
         {
             get { return _linjeRepository; }
         }
-        
-        private CompositeCollection _collection = new CompositeCollection();
-        public CompositeCollection Collection
-        {
-            get { return _collection; }
-        }
 
         public MainRepository(MainWindow mw)
         {
@@ -47,10 +41,6 @@ namespace RajdRed.Repositories
             _klassRepository = new KlassRepository(this);
             _linjeRepository = new LinjeRepository(this);
             _nodCanvasRepository = new NodCanvasRepository(this);
-
-            Collection.Add(new CollectionContainer() { Collection = KlassRepository });
-            Collection.Add(new CollectionContainer() { Collection = NodCanvasRepository });
-            Collection.Add(new CollectionContainer() { Collection = LinjeRepository });
         }
     }
 }

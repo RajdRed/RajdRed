@@ -13,38 +13,9 @@
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <vm:KlassViewModel x:Key="klassViewModel"/>
-        <DataTemplate DataType="{x:Type vm:KlassViewModel}">
-            <Canvas>
-                <v:KlassView DataContext="{Binding}"
-                             Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.ZIndex="{Binding LinjeModel.ZIndex}">
-                </v:KlassView>
-            </Canvas>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
-            <Canvas>
-                <Line DataContext="{Binding}"
-                      X1="{Binding LinjeModel.X1}" 
-                      Y1="{Binding LinjeModel.Y1}"
-                      X2="{Binding LinjeModel.X2}"
-                      Y2="{Binding LinjeModel.Y2}"
-                      Canvas.ZIndex="{Binding LinjeModel.ZIndex}"
-                      StrokeThickness="2"
-                      Stroke="Black"
-                      MouseDown="Line_MouseDown">
-                </Line>
-            </Canvas>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}" >
-            <Canvas>
-                <v:NodCanvasView DataContext="{Binding}" 
-                        Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                        Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Canvas.ZIndex="{Binding NodCanvasModel.ZIndex}"
-                                 />
-            </Canvas>
-        </DataTemplate>
+        
+        <!--
+        -->
     </Window.Resources>
 
     <Canvas MouseDown="theCanvas_MouseDown" MouseRightButtonUp="theCanvas_MouseRightButtonUp" MouseRightButtonDown="theCanvas_MouseRightButtonDown" Name="theCanvas" Background="#EAEDF2">
@@ -135,12 +106,80 @@
                 StrokeThickness="1"
                 />
         </Canvas>
-        <ItemsControl ItemsSource="{Binding Collection}">
+        <!-- ItemsCollection (Klass, CanvasNod & Linje)-->
+        <ItemsControl ItemsSource="{Binding KlassRepository}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:KlassViewModel}">
+                    <Canvas>
+                        <v:KlassView DataContext="{Binding}"
+                             Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Canvas.ZIndex="{Binding LinjeModel.ZIndex}">
+                        </v:KlassView>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.ZIndex" Value="1"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
         </ItemsControl>
+        <ItemsControl ItemsSource="{Binding LinjeRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
+                    <Canvas>
+                        <Line DataContext="{Binding}"
+                              X1="{Binding LinjeModel.X1}" 
+                              Y1="{Binding LinjeModel.Y1}"
+                              X2="{Binding LinjeModel.X2}"
+                              Y2="{Binding LinjeModel.Y2}"
+                              Canvas.ZIndex="{Binding LinjeModel.ZIndex}"
+                              StrokeThickness="2"
+                              Stroke="Black"
+                              MouseDown="Line_MouseDown">
+                        </Line>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.ZIndex" Value="2"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding NodCanvasRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}" >
+                    <Canvas>
+                        <v:NodCanvasView DataContext="{Binding}" 
+                        Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Canvas.ZIndex="{Binding NodCanvasModel.ZIndex}"
+                                 />
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.ZIndex" Value="3"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>   
     </Canvas>
 </Window>
