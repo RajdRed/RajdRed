@@ -33,7 +33,7 @@ namespace RajdRed.Repositories
             return lvm;
         }
 
-		public void CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+		public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
 		{
 			double Y1, Y2, X1, X2, M, M2;
 			Y1 = mouseDownPos.Y;
@@ -44,13 +44,16 @@ namespace RajdRed.Repositories
 			M2 = mouseUpPos.Y;
 
 			if (SelectionLinesHorizontal(X1, X2, Y1, M))			//Kollar övre linjen av selektionsrutan
-				return;
+				return true;
 			else if (SelectionLinesHorizontal(X1, X2, Y2, M2))		//Kollar undre linjen av selektionsrutan
-				return;
-			if (SelectionLinesVertical(X1, Y1, Y2))					//Kollar vänstra linjen av selektionsrutan
-				return;
+                return true;
+			
+            if (SelectionLinesVertical(X1, Y1, Y2))					//Kollar vänstra linjen av selektionsrutan
+                return true;
 			else if (SelectionLinesVertical(X2, Y1, Y2))			//Kollar högra linjen av selektionsrutan
-				return;
+                return true;
+
+            return false;
 		}
 
 		private bool SelectionLinesHorizontal(double rak_X1, double rak_X2, double rak_Y1, double rak_M)

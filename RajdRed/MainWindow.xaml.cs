@@ -209,43 +209,10 @@ namespace RajdRed
 				mouseUpPos.Y = temp;
 			}
 
-			/* kontroll för linjer innanför intersection */
-			_mainRepository.LinjeRepository.CheckIfHit(mouseDownPos, mouseUpPos);
 
-			/* kontroll för klasser innanför selection */
-			foreach (KlassViewModel kvm in _mainRepository.KlassRepository)
-			{
-				Point leftTopCorner = new Point(kvm.KlassModel.PositionLeft, kvm.KlassModel.PositionTop);
-				Point rightTopCorner = new Point(kvm.KlassModel.PositionLeft + kvm.KlassModel.Width, kvm.KlassModel.PositionTop);
-				Point leftBotCorner = new Point(kvm.KlassModel.PositionLeft, kvm.KlassModel.PositionTop + kvm.KlassModel.Height);
-				Point rightBotCorner = new Point(kvm.KlassModel.PositionLeft + kvm.KlassModel.Width, kvm.KlassModel.PositionTop + kvm.KlassModel.Height);
+            //Checks if intersect with RajdElements on Canvas
+            anyOneSelected = _mainRepository.CheckIfHit(mouseDownPos, mouseUpPos);
 
-				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
-				{
-					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
-					{
-						kvm.KlassModel.IsSelected = true;
-						anyOneSelected = true;
-					}
-				}
-			}
-			/*Kontroll för canvasnoder inanför selection*/
-			foreach (NodCanvasViewModel ncm in _mainRepository.NodCanvasRepository)
-			{
-				Point leftTopCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop);
-				Point rightTopCorner = new Point(ncm.NodCanvasModel.PositionLeft + ncm.NodCanvasModel.Width, ncm.NodCanvasModel.PositionTop);
-				Point leftBotCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop + ncm.NodCanvasModel.Height);
-				Point rightBotCorner = new Point(ncm.NodCanvasModel.PositionLeft + ncm.NodCanvasModel.Width, ncm.NodCanvasModel.PositionTop + ncm.NodCanvasModel.Height);
-
-				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
-				{
-					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
-					{
-						ncm.NodCanvasModel.IsSelected = true;
-						anyOneSelected = true;
-					}
-				}
-			}
 		}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)

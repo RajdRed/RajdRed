@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace RajdRed.Repositories
@@ -33,6 +34,21 @@ namespace RajdRed.Repositories
         public LinjeRepository LinjeRepository
         {
             get { return _linjeRepository; }
+        }
+
+        public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+        {
+            bool anyOneSelected = false;
+            /* kontroll för linjer innanför intersection */
+            anyOneSelected = LinjeRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+
+            /* kontroll för klasser innanför selection */
+            anyOneSelected = anyOneSelected || KlassRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+
+            /*Kontroll för canvasnoder inanför selection*/
+            anyOneSelected = anyOneSelected || NodCanvasRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+
+            return anyOneSelected;
         }
 
         public MainRepository(MainWindow mw)
