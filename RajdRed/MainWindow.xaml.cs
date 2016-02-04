@@ -236,6 +236,23 @@ namespace RajdRed
 					}
 				}
 			}
+			/*Kontroll för canvasnoder inanför selection*/
+			foreach (NodCanvasViewModel ncm in _mainRepository.NodCanvasRepository)
+			{
+				Point leftTopCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop);
+				Point rightTopCorner = new Point(ncm.NodCanvasModel.PositionLeft + ncm.NodCanvasModel.Width, ncm.NodCanvasModel.PositionTop);
+				Point leftBotCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop + ncm.NodCanvasModel.Height);
+				Point rightBotCorner = new Point(ncm.NodCanvasModel.PositionLeft + ncm.NodCanvasModel.Width, ncm.NodCanvasModel.PositionTop + ncm.NodCanvasModel.Height);
+
+				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
+				{
+					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
+					{
+						ncm.NodCanvasModel.IsSelected = true;
+						anyOneSelected = true;
+					}
+				}
+			}
 		}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
