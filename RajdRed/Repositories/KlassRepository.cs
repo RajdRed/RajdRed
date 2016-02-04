@@ -1,5 +1,6 @@
 ﻿using RajdRed.Models;
 using RajdRed.ViewModels;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -7,6 +8,7 @@ namespace RajdRed.Repositories
 {
     public class KlassRepository : ObservableCollection<KlassViewModel>
     {
+        private bool _hasSelected = false;
 
         private MainRepository _mainRepository;
         public MainRepository MainRepository { get { return _mainRepository; } }
@@ -25,8 +27,6 @@ namespace RajdRed.Repositories
 
         public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
         {
-            bool anyOneSelected = false;
-
             foreach (KlassViewModel kvm in this)
             {
                 Point leftTopCorner = new Point(kvm.KlassModel.PositionLeft, kvm.KlassModel.PositionTop);
@@ -38,24 +38,46 @@ namespace RajdRed.Repositories
                 {
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
-                        kvm.KlassModel.IsSelected = true;
-                        anyOneSelected = true;
+                        _hasSelected = kvm.KlassModel.IsSelected = true;
                     }
                 }
             }
 
-            return anyOneSelected;
+            return _hasSelected;
         }
 
         public void DeselectAllClasses()
         {
-            foreach (KlassViewModel k in this)
+            if (_hasSelected)
             {
-                if (k.KlassModel.IsSelected)
+                foreach (KlassViewModel k in this)
                 {
-                    k.KlassModel.IsSelected = false;
+                    if (k.KlassModel.IsSelected)
+                    {
+                        k.KlassModel.IsSelected = false;
+                    }
                 }
             }
+        }
+
+        public void DeleteSelected()
+        {
+            int size = this.Count;
+            List<KlassViewModel> deleteEverythingInThisList = new List<KlassViewModel>();
+
+            for (int i = 0; i < size; i++)
+                if (this[i].KlassModel.IsSelected)
+                    deleteEverythingInThisList.Add(this[i]);
+
+            foreach (KlassViewModel kvm in deleteEverythingInThisList)
+                kvm.Delete();
+
+            _hasSelected = false;
+        }
+
+        public void Select(KlassModel k)
+        {
+            _hasSelected = k.IsSelected = true;
         }
     }
 }

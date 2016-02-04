@@ -1,6 +1,7 @@
 ﻿using RajdRed.Models;
 using RajdRed.Models.Base;
 using RajdRed.ViewModels;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -8,6 +9,7 @@ namespace RajdRed.Repositories
 {
     public class NodCanvasRepository : ObservableCollection<NodCanvasViewModel>
     {
+        private bool _hasSelected = false;
         MainRepository _mainRepository;
         public MainRepository MainRepository { get { return _mainRepository; } }
         public NodCanvasRepository(MainRepository mr)
@@ -33,7 +35,6 @@ namespace RajdRed.Repositories
 
         public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
         {
-            bool anyOneSelected = false;
             foreach (NodCanvasViewModel ncm in this)
             {
                 Point leftTopCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop);
@@ -45,24 +46,46 @@ namespace RajdRed.Repositories
                 {
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
-                        ncm.NodCanvasModel.IsSelected = true;
-                        anyOneSelected = true;
+                        _hasSelected = ncm.NodCanvasModel.IsSelected = true;
                     }
                 }
             }
 
-            return anyOneSelected;
+            return _hasSelected;
         }
 
         public void DeselectAllCanvasNodes()
         {
-            foreach (NodCanvasViewModel n in this)
+            if (_hasSelected)
             {
-                if (n.NodCanvasModel.IsSelected)
+                foreach (NodCanvasViewModel n in this)
                 {
-                    n.NodCanvasModel.IsSelected = false;
+                    if (n.NodCanvasModel.IsSelected)
+                    {
+                        n.NodCanvasModel.IsSelected = false;
+                    }
                 }
             }
+        }
+
+        public void DeleteSelected()
+        {
+            int size = this.Count;
+            List<NodCanvasViewModel> deleteEverythingInThisList = new List<NodCanvasViewModel>();
+
+            for (int i = 0; i < size; i++)
+                if (this[i].NodCanvasModel.IsSelected)
+                    deleteEverythingInThisList.Add(this[i]);
+
+            foreach (NodCanvasViewModel ncvm in deleteEverythingInThisList)
+                ncvm.Delete();
+
+            _hasSelected = false;
+        }
+
+        public void Select(NodCanvasModel n)
+        {
+            _hasSelected = n.IsSelected = true;
         }
     }
 }

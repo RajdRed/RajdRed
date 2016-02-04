@@ -46,14 +46,12 @@ namespace RajdRed.Views
 
             if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
             {
-                if (mw.anyOneSelected)
-                    mw.DeselectAll();
+                mw.DeselectAll();
             }
 
             CaptureMouse();
             _posOnUserControlOnHit = Mouse.GetPosition(this);
-            KlassViewModel.KlassModel.IsSelected = true;
-            mw.anyOneSelected = true;
+            mw._mainRepository.Select(KlassViewModel.KlassModel);
 
             e.Handled = true;
         }

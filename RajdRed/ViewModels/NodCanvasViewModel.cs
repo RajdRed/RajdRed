@@ -40,6 +40,11 @@ namespace RajdRed.ViewModels
             return newNcvm;
         }
 
+        public void Delete()
+        {
+            NodCanvasRepository.Remove(this);
+        }
+
         public bool HasLines()
         {
             return (NodCanvasModel.LinjeModelList.Count != 0) ? true : false;

@@ -13,6 +13,7 @@ namespace RajdRed.Repositories
 {
     public class LinjeRepository : ObservableCollection<LinjeViewModel>
     {
+        private bool _hasSelected = false;
         MainRepository _mainRepository;
         public MainRepository MainRepository { get { return _mainRepository; } }
 
@@ -43,17 +44,17 @@ namespace RajdRed.Repositories
 			M = mouseDownPos.Y;
 			M2 = mouseUpPos.Y;
 
-			if (SelectionLinesHorizontal(X1, X2, Y1, M))			//Kollar övre linjen av selektionsrutan
-				return true;
-			else if (SelectionLinesHorizontal(X1, X2, Y2, M2))		//Kollar undre linjen av selektionsrutan
-                return true;
+            if (SelectionLinesHorizontal(X1, X2, Y1, M))			//Kollar övre linjen av selektionsrutan
+                _hasSelected = true;
+            else if (SelectionLinesHorizontal(X1, X2, Y2, M2))		//Kollar undre linjen av selektionsrutan
+                _hasSelected = true;
 			
             if (SelectionLinesVertical(X1, Y1, Y2))					//Kollar vänstra linjen av selektionsrutan
-                return true;
+                _hasSelected = true;
 			else if (SelectionLinesVertical(X2, Y1, Y2))			//Kollar högra linjen av selektionsrutan
-                return true;
+                _hasSelected = true;
 
-            return false;
+            return _hasSelected;
 		}
 
 		private bool SelectionLinesHorizontal(double rak_X1, double rak_X2, double rak_Y1, double rak_M)
@@ -159,13 +160,36 @@ namespace RajdRed.Repositories
 
         public void DeselectAllLines()
         {
-            foreach (LinjeViewModel l in this)
+            if (_hasSelected)
             {
-                if (l.LinjeModel.IsSelected)
+                foreach (LinjeViewModel l in this)
                 {
-                    l.LinjeModel.IsSelected = false;
+                    if (l.LinjeModel.IsSelected)
+                    {
+                        l.LinjeModel.IsSelected = false;
+                    }
                 }
             }
+        }
+
+        public void DeleteSelected()
+        {
+            int size = this.Count;
+            List<LinjeViewModel> deleteEverythingInThisList = new List<LinjeViewModel>();
+
+            for (int i = 0; i < size; i++)
+                if (this[i].LinjeModel.IsSelected)
+                    deleteEverythingInThisList.Add(this[i]);
+
+            foreach (LinjeViewModel lvm in deleteEverythingInThisList)
+                lvm.Delete();
+
+            _hasSelected = false;
+        }
+
+        public void Select(LinjeModel l)
+        {
+            _hasSelected = l.IsSelected = true;
         }
     }
 }

@@ -26,5 +26,10 @@ namespace RajdRed.ViewModels
 
             LinjeRepository.Remove(this);
         }
+
+        public void Delete()
+        {
+            LinjeRepository.Remove(this);
+        }
     }
 }

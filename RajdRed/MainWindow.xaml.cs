@@ -10,6 +10,7 @@ using RajdRed.Repositories;
 using RajdRed.ViewModels;
 using System.Collections.Generic;
 using System.Windows.Shapes;
+using RajdRed.Models;
 
 namespace RajdRed
 {
@@ -26,7 +27,6 @@ namespace RajdRed
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 		private bool darkMode = false;
 		private Point mouseDownPos;
-		public bool anyOneSelected = false;
 
         public MainRepository _mainRepository;
 		
@@ -56,8 +56,9 @@ namespace RajdRed
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             _mainRepository.DeselectAll();
-            _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
-            anyOneSelected = true;
+            _mainRepository.Select(
+                _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow)).KlassModel
+                );
         }
 
 		public bool getDarkMode()
@@ -209,9 +210,8 @@ namespace RajdRed
 				mouseUpPos.Y = temp;
 			}
 
-
             //Checks if intersect with RajdElements on Canvas
-            anyOneSelected = _mainRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+            _mainRepository.CheckIfHit(mouseDownPos, mouseUpPos);
 
 		}
 
@@ -316,19 +316,9 @@ namespace RajdRed
 		{
 			if (k.Key == Key.Delete || k.Key == Key.Back )
 			{
-				if (anyOneSelected)
+				if (_mainRepository.HasSelected())
 				{
-					int size = _mainRepository.KlassRepository.Count;
-					List<KlassViewModel> deleteEverythingInThisList = new List<KlassViewModel>();
-
-					for (int i = 0; i < size; i++)
-						if (_mainRepository.KlassRepository[i].KlassModel.IsSelected)
-							deleteEverythingInThisList.Add(_mainRepository.KlassRepository[i]);
-
-					foreach (KlassViewModel kvm in deleteEverythingInThisList)
-						kvm.Delete();
-
-					anyOneSelected = false;
+                    _mainRepository.DeleteSelected();
 				}
 			}
 		}
