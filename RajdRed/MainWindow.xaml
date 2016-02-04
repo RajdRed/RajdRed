@@ -107,27 +107,6 @@
                 />
         </Canvas>
         <!-- ItemsCollection (Klass, CanvasNod & Linje)-->
-        <ItemsControl ItemsSource="{Binding KlassRepository}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type vm:KlassViewModel}">
-                    <Canvas>
-                        <v:KlassView DataContext="{Binding}"
-                             Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Canvas>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Canvas.ZIndex" Value="{Binding KlassModel.ZIndex}"></Setter>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-        </ItemsControl>
         <ItemsControl ItemsSource="{Binding LinjeRepository}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -149,11 +128,22 @@
                     </Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Canvas.ZIndex" Value="{Binding LinjeModel.ZIndex}"></Setter>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding KlassRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:KlassViewModel}">
+                    <Canvas>
+                        <v:KlassView DataContext="{Binding}"
+                             Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
         <ItemsControl ItemsSource="{Binding NodCanvasRepository}">
             <ItemsControl.ItemsPanel>
@@ -170,11 +160,6 @@
                     </Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Canvas.ZIndex" Value="{Binding NodCanvasModel.ZIndex}"></Setter>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-        </ItemsControl>   
+        </ItemsControl>
     </Canvas>
 </Window>

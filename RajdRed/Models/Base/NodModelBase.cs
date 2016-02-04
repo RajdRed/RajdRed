@@ -11,7 +11,6 @@ namespace RajdRed.Models.Base
 
         public int Number { get; set; }
         public static int MinSize = 10;
-        public static int ZIndex = 3;
 
         private bool _isSet = false;
         public bool IsSet
