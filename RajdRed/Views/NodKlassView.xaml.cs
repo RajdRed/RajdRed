@@ -28,8 +28,7 @@ namespace RajdRed.Views
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NodKlassViewModel.CreateLinje();
-            NodKlassViewModel.NodKlassModel.IsPressed = true;  
+             NodKlassViewModel.NodKlassModel.IsPressed = true;  
         }
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -69,8 +68,18 @@ namespace RajdRed.Views
 		{
             if (NodKlassViewModel.NodKlassModel.IsPressed)
             {
+                if (!NodKlassViewModel.NodKlassModel.IsSet)
+                {
+                    //Skapa ny linje
+                    NodKlassViewModel.CreateLinje();
+                }
+                else
+                {
+                    //Lossa linje
+                    NodKlassViewModel.LooseLinje(e.GetPosition(Application.Current.MainWindow));
+                }
+
                 NodKlassViewModel.NodKlassModel.IsPressed = false;
-                NodKlassViewModel.CreateLinje();
             }
 
 			ScaleTransform trans = new ScaleTransform();

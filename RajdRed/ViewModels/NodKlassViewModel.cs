@@ -1,10 +1,9 @@
 ﻿using RajdRed.Models;
 using RajdRed.Repositories;
-using RajdRed.ViewModels.Base;
 using RajdRed.Views;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace RajdRed.ViewModels
 {
@@ -26,8 +25,6 @@ namespace RajdRed.ViewModels
             NodKlassModel = nkm;
             NodKlassRepository = knp;
             KlassViewModel = kvm;
-
-            KlassViewModel.KlassModel.PropertyChanged += new PropertyChangedEventHandler(KlassModel_PropertyChanged);
         }
 
         public NodKlassViewModel(){}
@@ -81,7 +78,25 @@ namespace RajdRed.ViewModels
                 NodKlassModel.PositionTop = p.Y;
                 NodKlassModel.IsSet = true;
 
-                NodKlassModel.Path = NodKlassModel.NodTypesModel.Association;
+                TurnToAssosiation();
+
+                KlassViewModel.KlassModel.PropertyChanged += new PropertyChangedEventHandler(KlassModel_PropertyChanged);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool UnSet()
+        {
+            if (NodKlassModel.IsSet)
+            {
+                NodKlassModel.IsSet = false;
+                NodKlassModel.LinjeModelList = new List<LinjeModel>();
+                TurnToNode();
+
+                KlassViewModel.KlassModel.PropertyChanged -= KlassModel_PropertyChanged;
 
                 return true;
             }
@@ -129,6 +144,21 @@ namespace RajdRed.ViewModels
                 return true;
 
             return false;
+        }
+
+        public void LooseLinje(Point p)
+        {
+            if (NodKlassModel.IsSet)
+            {
+                NodCanvasViewModel ncvm = KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.AddNewCanvasNod(p);
+                foreach (LinjeModel l in NodKlassModel.LinjeModelList)
+                {
+                    l.ReplaceNod(NodKlassModel, ncvm.NodCanvasModel);
+                    ncvm.NodCanvasModel.LinjeModelList.Add(l);
+                }
+
+                UnSet();
+            }
         }
 
     }
