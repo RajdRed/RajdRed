@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models.Base;
+using RajdRed.ViewModels;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -7,6 +8,8 @@ namespace RajdRed.Models
 {
     public class LinjeModel : RajdElement
     {
+        public LinjeViewModel LinjeViewModel { get; set; }
+
         private double _x1;
         public double X1
         {
@@ -81,10 +84,11 @@ namespace RajdRed.Models
             }
         }
 
-        public LinjeModel(NodModelBase n1, NodModelBase n2)
+        public LinjeModel(LinjeViewModel lvm, NodModelBase n1, NodModelBase n2)
         {
-            _nod1 = n1;
-            _nod2 = n2;
+            LinjeViewModel = lvm;
+            Nod1 = n1;
+            Nod2 = n2;
 
             SetOnPropertyChanged();
         }
@@ -117,6 +121,17 @@ namespace RajdRed.Models
                 Nod2 = newNod;
 
             SetOnPropertyChanged();
+        }
+
+        public static LinjeModel GetSharingLinje(NodModelBase n1, NodModelBase n2)
+        {
+            foreach (LinjeModel l in n1.LinjeModelList)
+            {
+                if (l.Nod1 == n2 || l.Nod2 == n2)
+                    return l;
+            }
+
+            return null;
         }
     }
 }

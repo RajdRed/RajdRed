@@ -23,11 +23,10 @@ namespace RajdRed.Repositories
 
         public LinjeViewModel AddNewLinje(NodModelBase n1, NodModelBase n2)
         {
-            LinjeModel lm = new LinjeModel(n1, n2) { Nod1 = n1, Nod2 = n2 };
-            LinjeViewModel lvm = new LinjeViewModel(this) { LinjeModel = lm };
+            LinjeViewModel lvm = new LinjeViewModel(this, n1, n2);
 
-            n1.LinjeModelList.Add(lm);
-            n2.LinjeModelList.Add(lm);
+            n1.LinjeModelList.Add(lvm.LinjeModel);
+            n2.LinjeModelList.Add(lvm.LinjeModel);
 
             Add(lvm);
 

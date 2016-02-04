@@ -40,6 +40,30 @@ namespace RajdRed.ViewModels
             return newNcvm;
         }
 
+        public bool HasLines()
+        {
+            return (NodCanvasModel.LinjeModelList.Count != 0) ? true : false;
+        }
+
+        //public List<NodModelBase> SiblingNodes()
+        //{
+        //    List<NodModelBase> sn = new List<NodModelBase>();
+
+        //    _prePerculate(sn, this.NodCanvasModel);
+                
+        //}
+
+        //private List<NodModelBase> _prePerculate(List<NodModelBase> nodList, NodModelBase nod)
+        //{
+        //    if (nodList.Count == 0)
+        //        return nodList;
+
+        //    foreach (LinjeModel l in nod.LinjeModelList)
+        //    {
+        //        _prePerculate(nodList, l.);
+        //    }
+        //}
+
         public void SetNodCanvasView(NodCanvasView ncv)
         {
             NodCanvasView = ncv;
@@ -47,10 +71,20 @@ namespace RajdRed.ViewModels
 
         public void EatNod(NodCanvasViewModel ncvm)
         {
-            foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
+            if (ncvm.HasLines())
             {
-                l.ReplaceNod(ncvm.NodCanvasModel, this.NodCanvasModel);
-                NodCanvasModel.LinjeModelList.Add(l);
+                LinjeModel share = LinjeModel.GetSharingLinje(this.NodCanvasModel, ncvm.NodCanvasModel);
+                if (share != null)
+                {
+                    ncvm.NodCanvasModel.LinjeModelList.Remove(share);
+                    NodCanvasRepository.MainRepository.LinjeRepository.Remove(share.LinjeViewModel);
+                }
+
+                foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
+                {
+                    l.ReplaceNod(ncvm.NodCanvasModel, this.NodCanvasModel);
+                    NodCanvasModel.LinjeModelList.Add(l);
+                }
             }
 
             NodCanvasRepository.Remove(ncvm);

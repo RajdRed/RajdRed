@@ -9,9 +9,10 @@ namespace RajdRed.ViewModels
     {
         public LinjeModel LinjeModel { get; set; }
         public LinjeRepository LinjeRepository { get; set; }
-        public LinjeViewModel(LinjeRepository lr)
+        public LinjeViewModel(LinjeRepository lr, NodModelBase n1, NodModelBase n2)
         {
             LinjeRepository = lr;
+            LinjeModel = new LinjeModel(this, n1, n2);
         }
 
         public LinjeViewModel()

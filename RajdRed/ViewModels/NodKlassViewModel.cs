@@ -110,7 +110,7 @@ namespace RajdRed.ViewModels
 
             if (Set())
             {
-                KlassViewModel.KlassRepository.MainRepository.LinjeRepository.AddNewLinje(
+                LinjeViewModel l = KlassViewModel.KlassRepository.MainRepository.LinjeRepository.AddNewLinje(
                     NodKlassModel,
                     KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.AddNewCanvasNod(p).NodCanvasModel
                 );
