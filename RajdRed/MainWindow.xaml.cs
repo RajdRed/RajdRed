@@ -7,9 +7,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using RajdRed.Models.Adds;
 using RajdRed.Repositories;
-using RajdRed.Views;
 using RajdRed.ViewModels;
-using RajdRed.Models;
+using System.Collections.Generic;
 using System.Windows.Shapes;
 
 namespace RajdRed
@@ -124,7 +123,7 @@ namespace RajdRed
 
 		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			Keyboard.ClearFocus();
+			//Keyboard.ClearFocus();
 
 			deselectAllClasses();	
 
@@ -196,7 +195,6 @@ namespace RajdRed
 			Point mouseUpPos = e.GetPosition(theCanvas);
 
 			/*Musen har släppts - Kolla om det är finns några element innanför mouseUpPos och mouseDownPos*/
-
 			if (mouseDownPos.X > mouseUpPos.X)
 			{
 				double temp = mouseDownPos.X;
@@ -211,18 +209,40 @@ namespace RajdRed
 				mouseUpPos.Y = temp;
 			}
 
-			foreach (KlassViewModel k in _mainRepository.KlassRepository)
+			/* kontroll för linjer innanför intersection */
+			_mainRepository.LinjeRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+
+			/* kontroll för klasser innanför selection */
+			foreach (KlassViewModel kvm in _mainRepository.KlassRepository)
 			{
-				Point leftTopCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop);
-				Point rightTopCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop);
-				Point leftBotCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop + k.KlassModel.Height);
-				Point rightBotCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop + k.KlassModel.Height);
+				Point leftTopCorner = new Point(kvm.KlassModel.PositionLeft, kvm.KlassModel.PositionTop);
+				Point rightTopCorner = new Point(kvm.KlassModel.PositionLeft + kvm.KlassModel.Width, kvm.KlassModel.PositionTop);
+				Point leftBotCorner = new Point(kvm.KlassModel.PositionLeft, kvm.KlassModel.PositionTop + kvm.KlassModel.Height);
+				Point rightBotCorner = new Point(kvm.KlassModel.PositionLeft + kvm.KlassModel.Width, kvm.KlassModel.PositionTop + kvm.KlassModel.Height);
 
 				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
 				{
 					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
 					{
-						k.KlassModel.IsSelected = true;
+						kvm.KlassModel.IsSelected = true;
+						anyOneSelected = true;
+					}
+				}
+			}
+			/*Kontroll för canvasnoder inanför selection*/
+			foreach (NodCanvasViewModel ncm in _mainRepository.NodCanvasRepository)
+			{
+				Point leftTopCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop);
+				Point rightTopCorner = new Point(ncm.NodCanvasModel.PositionLeft + ncm.NodCanvasModel.Width, ncm.NodCanvasModel.PositionTop);
+				Point leftBotCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop + ncm.NodCanvasModel.Height);
+				Point rightBotCorner = new Point(ncm.NodCanvasModel.PositionLeft + ncm.NodCanvasModel.Width, ncm.NodCanvasModel.PositionTop + ncm.NodCanvasModel.Height);
+
+				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
+				{
+					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
+					{
+						ncm.NodCanvasModel.IsSelected = true;
+						anyOneSelected = true;
 					}
 				}
 			}
@@ -339,21 +359,21 @@ namespace RajdRed
 			anyOneSelected = false;
 		}
 
-		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs e)
+		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs k)
 		{
-			if (e.Key == Key.Delete || e.Key == Key.Back )
+			if (k.Key == Key.Delete || k.Key == Key.Back )
 			{
 				if (anyOneSelected)
 				{
-					foreach (KlassViewModel k in _mainRepository.KlassRepository)
-					{
-						if (k.KlassModel.IsSelected)
-						{
-							k.KlassModel.IsSelected = false;
-							k.KlassView.ReleaseMouseCapture();
-							k.Delete();
-						}
-					}
+					int size = _mainRepository.KlassRepository.Count;
+					List<KlassViewModel> deleteEverythingInThisList = new List<KlassViewModel>();
+
+					for (int i = 0; i < size; i++)
+						if (_mainRepository.KlassRepository[i].KlassModel.IsSelected)
+							deleteEverythingInThisList.Add(_mainRepository.KlassRepository[i]);
+
+					foreach (KlassViewModel kvm in deleteEverythingInThisList)
+						kvm.Delete();
 
 					anyOneSelected = false;
 				}

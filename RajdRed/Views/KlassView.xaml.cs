@@ -171,7 +171,6 @@ namespace RajdRed.Views
                     break;
                 default:
                     break;
-                    
             }
             
         }
