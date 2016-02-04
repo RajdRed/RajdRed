@@ -219,7 +219,7 @@ namespace RajdRed
 
 			/* kontroll för intersection linjen */
 
-			double Y1, Y2, X1, X2, M, Y12, Y22, M2;
+			double Y1, Y2, X1, X2, M, M2;
 
 			Y1 = mouseDownPos.Y;
 			Y2 = mouseUpPos.Y;
