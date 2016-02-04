@@ -7,7 +7,7 @@
              Height="{Binding NodKlassModel.Height}"
              Width="{Binding NodKlassModel.Width}"
              AllowDrop="True"
-             Background="Red"
+             Background="Transparent"
              HorizontalAlignment="{Binding NodKlassModel.HorizontalAlignment}"
              VerticalAlignment="{Binding NodKlassModel.VerticalAlignment}"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
