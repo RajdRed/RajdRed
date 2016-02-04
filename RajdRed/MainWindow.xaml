@@ -122,7 +122,7 @@
                               X2="{Binding LinjeModel.X2}"
                               Y2="{Binding LinjeModel.Y2}"
                               StrokeThickness="2"
-                              Stroke="Black"
+                              Stroke="{Binding LinjeModel.Color, UpdateSourceTrigger=PropertyChanged}"
                               MouseDown="Line_MouseDown">
                         </Line>
                     </Canvas>

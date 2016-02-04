@@ -71,6 +71,30 @@ namespace RajdRed.Models.Base
             }
         }
 
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set 
+            { 
+                _isSelected = value;
+                OnPropertyChanged("IsSelected");
+                OnPropertyChanged("Background");
+            }
+        }
+        
+
+        public Brush Background
+        {
+            get
+            {
+                if (IsSelected)
+                    return Brushes.Red;
+                else
+                    return Brushes.Transparent;
+            }
+        }
+
         public NodModelBase()
         {
             NodTypesModel = new NodTypesModel();

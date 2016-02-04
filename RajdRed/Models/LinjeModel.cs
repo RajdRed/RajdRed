@@ -84,6 +84,34 @@ namespace RajdRed.Models
             }
         }
 
+        private bool _isSelected = false;
+        public bool IsSelected
+        {
+            get
+            {
+                return _isSelected;
+            }
+
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged("IsSelected");
+                OnPropertyChanged("Color");
+            }
+        }
+
+        public Brush Color
+        {
+            get 
+            {
+                if (IsSelected)
+                    return Brushes.Red;
+                else
+                    return Brushes.Black;
+            }
+        }
+        
+
         public LinjeModel(LinjeViewModel lvm, NodModelBase n1, NodModelBase n2)
         {
             LinjeViewModel = lvm;

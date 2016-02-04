@@ -47,7 +47,7 @@ namespace RajdRed.Views
             if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
             {
                 if (mw.anyOneSelected)
-                    mw.deselectAllClasses();
+                    mw.DeselectAll();
             }
 
             CaptureMouse();

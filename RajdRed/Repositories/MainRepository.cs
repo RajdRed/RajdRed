@@ -51,6 +51,13 @@ namespace RajdRed.Repositories
             return anyOneSelected;
         }
 
+        public void DeselectAll()
+        {
+            _klassRepository.DeselectAllClasses();
+            _linjeRepository.DeselectAllLines();
+            _nodCanvasRepository.DeselectAllCanvasNodes();
+        }
+
         public MainRepository(MainWindow mw)
         {
             _mainWindow = mw;

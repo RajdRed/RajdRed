@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="{Binding NodKlassModel.Height}"
              Width="{Binding NodKlassModel.Width}"
-             Background="Transparent"
+             Background="{Binding NodKlassModel.Background}"
              HorizontalAlignment="{Binding NodKlassModel.HorizontalAlignment}"
              VerticalAlignment="{Binding NodKlassModel.VerticalAlignment}"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown"

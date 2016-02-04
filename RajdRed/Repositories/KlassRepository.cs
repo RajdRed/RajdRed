@@ -46,5 +46,16 @@ namespace RajdRed.Repositories
 
             return anyOneSelected;
         }
+
+        public void DeselectAllClasses()
+        {
+            foreach (KlassViewModel k in this)
+            {
+                if (k.KlassModel.IsSelected)
+                {
+                    k.KlassModel.IsSelected = false;
+                }
+            }
+        }
     }
 }

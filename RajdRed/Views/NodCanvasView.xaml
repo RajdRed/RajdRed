@@ -11,6 +11,6 @@
              MouseUp="UserControl_MouseUp"
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
-             Background="Transparent"
+             Background="{Binding NodCanvasModel.Background}"
              Content="{Binding NodCanvasModel.Path}">
 </UserControl>

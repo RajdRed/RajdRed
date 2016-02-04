@@ -53,5 +53,16 @@ namespace RajdRed.Repositories
 
             return anyOneSelected;
         }
+
+        public void DeselectAllCanvasNodes()
+        {
+            foreach (NodCanvasViewModel n in this)
+            {
+                if (n.NodCanvasModel.IsSelected)
+                {
+                    n.NodCanvasModel.IsSelected = false;
+                }
+            }
+        }
     }
 }

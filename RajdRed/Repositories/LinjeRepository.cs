@@ -156,5 +156,16 @@ namespace RajdRed.Repositories
 
 			return false;
 		}
+
+        public void DeselectAllLines()
+        {
+            foreach (LinjeViewModel l in this)
+            {
+                if (l.LinjeModel.IsSelected)
+                {
+                    l.LinjeModel.IsSelected = false;
+                }
+            }
+        }
     }
 }

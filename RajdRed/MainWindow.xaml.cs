@@ -55,7 +55,7 @@ namespace RajdRed
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-			deselectAllClasses();
+            _mainRepository.DeselectAll();
             _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
             anyOneSelected = true;
         }
@@ -125,7 +125,7 @@ namespace RajdRed
 		{
 			//Keyboard.ClearFocus();
 
-			deselectAllClasses();	
+            _mainRepository.DeselectAll();	
 
 			if (isArchiveMenuActive)
 			{
@@ -312,20 +312,6 @@ namespace RajdRed
 			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
 		}
 
-		public void deselectAllClasses()
-		{
-			foreach (KlassViewModel k in _mainRepository.KlassRepository)
-			{
-				if (k.KlassModel.IsSelected)
-				{
-					k.KlassModel.IsSelected = false;
-					k.KlassView.ReleaseMouseCapture();
-				}
-			}
-
-			anyOneSelected = false;
-		}
-
 		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs k)
 		{
 			if (k.Key == Key.Delete || k.Key == Key.Back )
@@ -346,6 +332,11 @@ namespace RajdRed
 				}
 			}
 		}
+
+        public void DeselectAll()
+        {
+            _mainRepository.DeselectAll();
+        }
 
         private void Line_MouseDown(object sender, MouseButtonEventArgs e)
         {
