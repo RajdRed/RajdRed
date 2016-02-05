@@ -13,9 +13,6 @@
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <vm:KlassViewModel x:Key="klassViewModel"/>
-        
-        <!--
-        -->
     </Window.Resources>
 
     <Canvas MouseDown="theCanvas_MouseDown" MouseRightButtonUp="theCanvas_MouseRightButtonUp" MouseRightButtonDown="theCanvas_MouseRightButtonDown" Name="theCanvas" Background="#EAEDF2">
@@ -161,5 +158,27 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <ItemsControl ItemsSource="{Binding TextBoxRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:TextBoxViewModel}">
+                    <Canvas>
+                        <v:TextBoxView DataContext="{Binding}"
+                            Canvas.Left="{Binding TextBoxModel.PositionLeft}"
+                            Canvas.Top="{Binding TextBoxModel.PositionTop}" />
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Canvas>
+    
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Create Textbox / Multiplicity" Click="MenuItem_Click"/>
+        </ContextMenu>
+    </Window.ContextMenu>
 </Window>

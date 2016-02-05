@@ -124,8 +124,7 @@ namespace RajdRed
 
 		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			//Keyboard.ClearFocus();
-
+            Keyboard.ClearFocus();
             _mainRepository.DeselectAll();	
 
 			if (isArchiveMenuActive)
@@ -333,6 +332,11 @@ namespace RajdRed
             Line line = sender as Line;
             LinjeViewModel l = line.DataContext as LinjeViewModel;
             l.Split(e.GetPosition(this));
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+           _mainRepository.Select(_mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).TextBoxModel);
         }
     }
 }

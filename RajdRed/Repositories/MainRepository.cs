@@ -38,12 +38,20 @@ namespace RajdRed.Repositories
             get { return _linjeRepository; }
         }
 
+        private TextBoxRepository _textBoxRepository;
+        public TextBoxRepository TextBoxRepository
+        {
+            get { return _textBoxRepository; }
+        }
+        
+
         public MainRepository(MainWindow mw)
         {
             _mainWindow = mw;
             _klassRepository = new KlassRepository(this);
             _linjeRepository = new LinjeRepository(this);
             _nodCanvasRepository = new NodCanvasRepository(this);
+            _textBoxRepository = new TextBoxRepository(this);
         }
 
 
@@ -69,6 +77,8 @@ namespace RajdRed.Repositories
                 _linjeRepository.Select(re as LinjeModel);
             else if (re is NodCanvasModel)
                 _nodCanvasRepository.Select(re as NodCanvasModel);
+            else if (re is TextBoxModel)
+                _textBoxRepository.Select(re as TextBoxModel);
 
             _hasSelected = true;
         }
@@ -85,6 +95,9 @@ namespace RajdRed.Repositories
                 _klassRepository.DeselectAllClasses();
                 _linjeRepository.DeselectAllLines();
                 _nodCanvasRepository.DeselectAllCanvasNodes();
+                _textBoxRepository.DeselectAllTextBoxes();
+
+                _hasSelected = false;
             }
         }
 

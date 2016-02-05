@@ -17,17 +17,6 @@ namespace RajdRed.Models.Base
         
         public bool OnField { get; set; }
 
-        public Visibility Selected
-        {
-            get 
-            { 
-                if (_isSelected) 
-                    return Visibility.Visible;  
-                else 
-                    return Visibility.Hidden; 
-            }
-        }
-
         private int _zIndex = 0;
         public int ZIndex
         {

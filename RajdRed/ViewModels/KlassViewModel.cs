@@ -1,12 +1,8 @@
 ﻿using RajdRed.Models;
 using RajdRed.Repositories;
-using RajdRed.ViewModells.Add;
-using RajdRed.ViewModels.Commands;
 using RajdRed.Views;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 
 namespace RajdRed.ViewModels
 {

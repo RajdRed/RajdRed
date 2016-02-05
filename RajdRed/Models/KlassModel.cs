@@ -9,7 +9,7 @@ namespace RajdRed.Models
 {
     public class KlassModel : RajdElement
     {
-        private KlassViewModel _klassViewModel { get; set; }
+        public KlassViewModel KlassViewModel { get; set; }
         public static double MinSize = 110;
 
         private bool _resize = false;
@@ -85,6 +85,17 @@ namespace RajdRed.Models
             }
         }
 
+        public Visibility Selected
+        {
+            get
+            {
+                if (IsSelected)
+                    return Visibility.Visible;
+                else
+                    return Visibility.Hidden;
+            }
+        }
+
         private double _height = MinSize;
         public double Height
         {
@@ -109,7 +120,7 @@ namespace RajdRed.Models
 
         public KlassModel(KlassViewModel kvm, Point startPosition)
         {
-            _klassViewModel = kvm;
+            KlassViewModel = kvm;
             Header = "Ny Klass *";
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;
