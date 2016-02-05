@@ -4,6 +4,7 @@ using RajdRed.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using RajdRed.ViewModels;
 
 namespace RajdRed.Repositories
 {
@@ -66,6 +67,12 @@ namespace RajdRed.Repositories
                     {
                         k.KlassModel.IsSelected = false;
                     }
+
+					foreach (NodKlassViewModel nvkm in k.NodKlassRepository)
+					{
+						if (nvkm.NodKlassModel.IsSet)
+							nvkm.NodKlassModel.IsSelected = false;
+					}
                 }
             }
         }
@@ -79,14 +86,26 @@ namespace RajdRed.Repositories
                 if (this[i].KlassModel.IsSelected)
                     deleteEverythingInThisList.Add(this[i]);
 
-            foreach (KlassViewModel kvm in deleteEverythingInThisList)
-                kvm.Delete();
+			foreach (KlassViewModel kvm in deleteEverythingInThisList)
+				kvm.Delete();
 
             _hasSelected = false;
         }
 
         public void Select(KlassModel k)
         {
+			List<NodModelBase> nodList = new List<NodModelBase>();
+
+			foreach (NodKlassViewModel n in k._klassViewModel.NodKlassRepository)
+			{
+				if (n.NodKlassModel.IsSet)
+				{
+					n.NodKlassModel.IsSelected = true;
+					nodList.Add(n.NodKlassModel);
+				}
+			}
+
+			_mainRepository.SelectLinesOfNod(ref nodList);
             _hasSelected = k.IsSelected = true;
         }
     }

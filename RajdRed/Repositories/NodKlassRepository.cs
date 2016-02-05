@@ -7,6 +7,8 @@ namespace RajdRed.Repositories
 {
     public class NodKlassRepository : ObservableCollection<NodKlassViewModel>
     {
+		private bool _hasSelected = false;
+
         public NodKlassRepository(KlassViewModel kvm)
         {
             //left
@@ -48,5 +50,10 @@ namespace RajdRed.Repositories
                     VerticalAlignment = VerticalAlignment.Bottom
                 }, kvm, this));
         }
+
+		public void Select(NodKlassModel n)
+		{
+			_hasSelected = n.IsSelected = true;
+		}
     }
 }
