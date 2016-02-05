@@ -22,6 +22,7 @@ namespace RajdRed.Views
     public partial class TextBoxView : UserControl
     {
         TextBoxViewModel TextBoxViewModel { get { return DataContext as TextBoxViewModel; } }
+        private Point _posOnUserControlOnHit;
         public TextBoxView()
         {
             InitializeComponent();
@@ -31,19 +32,28 @@ namespace RajdRed.Views
             };
         }
 
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        private void TextBoxBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Cursor = Cursors.SizeAll;
+            CaptureMouse();
+            _posOnUserControlOnHit = Mouse.GetPosition(this);
+            e.Handled = true;
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
         {
-            Cursor = Cursors.Arrow;
+            if (IsMouseCaptured)
+            {
+                Point p = e.GetPosition(Application.Current.MainWindow);
+
+                SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
+                SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+            }
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            TextBoxViewModel.TextBoxRepository.MainRepository.Select(TextBoxViewModel.TextBoxModel);
+            ReleaseMouseCapture();
         }
+
     }
 }

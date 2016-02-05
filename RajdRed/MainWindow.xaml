@@ -168,8 +168,8 @@
                 <DataTemplate DataType="{x:Type vm:TextBoxViewModel}">
                     <Canvas>
                         <v:TextBoxView DataContext="{Binding}"
-                            Canvas.Left="{Binding TextBoxModel.PositionLeft}"
-                            Canvas.Top="{Binding TextBoxModel.PositionTop}" />
+                            Canvas.Left="{Binding TextBoxModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Canvas.Top="{Binding TextBoxModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Canvas>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -5,19 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="10" d:DesignWidth="30"
-             MouseEnter="UserControl_MouseEnter"
+             Background="Transparent"
              MouseMove="UserControl_MouseMove"
+             MouseUp="UserControl_MouseUp"
              >
     <Grid>
-        <Border Name="TextBoxBorder" BorderThickness="2" 
+        <Border Name="TextBoxBorder" 
+                BorderThickness="3" 
+                Opacity="0.3"
                 BorderBrush="Black"
-                Padding="5"
-                Visibility="{Binding TextBoxModel.Visible}"/>
-        <TextBox DataContext="{Binding}" 
+                PreviewMouseLeftButtonDown="TextBoxBorder_MouseDown"
+                >
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Setter Property="Cursor" Value="Arrow"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="SizeAll"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding ElementName=TextBoxField, Path=IsKeyboardFocused}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        <TextBox Name="TextBoxField"
+                 Margin="2"
+                 DataContext="{Binding}"
                  BorderThickness="0"
                  Background="Transparent"
-                 TextWrapping="Wrap"
-                 Text="{Binding TextBoxModel.Text}"
-                 GotFocus="TextBox_GotFocus"/>
+                 Text="{Binding TextBoxModel.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 />
     </Grid>
 </UserControl>
