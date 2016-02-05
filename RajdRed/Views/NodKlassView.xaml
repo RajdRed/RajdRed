@@ -10,6 +10,7 @@
              Background="{Binding NodKlassModel.Background}"
              HorizontalAlignment="{Binding NodKlassModel.HorizontalAlignment}"
              VerticalAlignment="{Binding NodKlassModel.VerticalAlignment}"
+             Visibility="{Binding NodKlassModel.Visible}"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
              MouseDoubleClick="UserControl_MouseDoubleClick"
              MouseLeave="UserControl_MouseLeave"
@@ -42,7 +43,6 @@
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-
     <ContentPresenter Content="{Binding NodKlassModel.Path}"
                       VerticalAlignment="{Binding NodKlassModel.VerticalContentAlignment}"
                       HorizontalAlignment="{Binding NodKlassModel.HorizontalContentAlignment}"

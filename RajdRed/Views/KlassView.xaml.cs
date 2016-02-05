@@ -109,6 +109,8 @@ namespace RajdRed.Views
                 _startPoint = pos;
 
             }
+
+            e.Handled = true;
         }
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
@@ -220,5 +222,19 @@ namespace RajdRed.Views
             e.Handled = true;
         }
 
+        private void InnerGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() => {
+                KlassViewModel.ShowNodes();
+            }));
+        }
+
+        private void OuterGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                KlassViewModel.HideNodes();
+            }));
+        }
     }
 }

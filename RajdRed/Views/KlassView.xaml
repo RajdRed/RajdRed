@@ -15,18 +15,30 @@
     <UserControl.Resources>
         <vm:KlassViewModel x:Key="klassVM"></vm:KlassViewModel>
         <DataTemplate x:Key="NodTemplate" DataType="{x:Type vm:NodKlassViewModel}">
-            <v:NodKlassView DataContext="{Binding}"/>
+            <v:NodKlassView/>
         </DataTemplate>
+        
+        <Style TargetType="v:NodKlassView" x:Key="NodKlassViewStyle">
+            <Setter Property="Visibility" Value="Hidden"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=InnerBorder, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
-    <Grid Name="OuterGrid">
-        <Border BorderThickness="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" BorderBrush="Black" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Margin="-7" CornerRadius="2,2,2,2" Visibility="{Binding KlassModel.Selected}"></Border>
+    <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave">
+        <Border BorderThickness="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" 
+                BorderBrush="Black" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" 
+                Margin="-7" CornerRadius="2,2,2,2" 
+                Visibility="{Binding KlassModel.Selected}"></Border>
         <Grid Name="NodeAttachedGrid">
             <Border Name="InnerBorder" Margin="15" CornerRadius="2,2,2,2" BorderBrush="Black" 
                     MouseDown="KlassGrid_MouseDown"
                     MouseEnter="InnerBorder_MouseEnter"
                     MouseLeave="InnerBorder_MouseLeave"
                     BorderThickness="1">
-                <Grid Name="InnerGrid" Background="Transparent">
+                <Grid Name="InnerGrid" MouseEnter="InnerGrid_MouseEnter" Background="Transparent">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
                         <RowDefinition Height="40*"/>

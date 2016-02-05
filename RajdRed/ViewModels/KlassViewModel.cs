@@ -98,5 +98,23 @@ namespace RajdRed.ViewModels
 
             }
         }
+
+        public void ShowNodes()
+        {
+            foreach (NodKlassViewModel n in NodKlassRepository)
+            {
+                if (!n.NodKlassModel.IsSet)
+                    n.Show();
+            }
+        }
+
+        public void HideNodes()
+        {
+            foreach (NodKlassViewModel n in NodKlassRepository)
+            {
+                if (!n.NodKlassModel.IsSet)
+                    n.Hide();
+            }
+        }
     }
 }

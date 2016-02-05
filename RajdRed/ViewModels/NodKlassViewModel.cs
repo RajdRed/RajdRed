@@ -110,10 +110,13 @@ namespace RajdRed.ViewModels
 
             if (Set())
             {
+                NodCanvasModel n = KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.AddNewCanvasNod(p).NodCanvasModel;
                 LinjeViewModel l = KlassViewModel.KlassRepository.MainRepository.LinjeRepository.AddNewLinje(
                     NodKlassModel,
-                    KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.AddNewCanvasNod(p).NodCanvasModel
+                    n
                 );
+
+                KlassViewModel.KlassRepository.MainRepository.Select(n);
             }
         }
 
@@ -159,6 +162,16 @@ namespace RajdRed.ViewModels
 
                 UnSet();
             }
+        }
+
+        public void Show()
+        {
+            NodKlassModel.Visible = Visibility.Visible;
+        }
+
+        public void Hide()
+        {
+            NodKlassModel.Visible = Visibility.Hidden;
         }
     }
 }

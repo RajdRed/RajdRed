@@ -99,6 +99,18 @@ namespace RajdRed.Models
                 return VerticalAlignment.Center;
             }
         }
+
+        private Visibility _visible = Visibility.Hidden;
+        public Visibility Visible
+        {
+            get { return _visible; }
+            set 
+            { 
+                _visible = value;
+                OnPropertyChanged("Visible");
+            }
+        }
+        
         
         public NodKlassModel()
         {

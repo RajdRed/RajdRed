@@ -79,5 +79,31 @@ namespace RajdRed.Repositories
         {
             _hasSelected = k.IsSelected = true;
         }
+
+        public void ShowAllKlassNodes()
+        {
+            foreach (KlassViewModel k in this)
+                k.ShowNodes();
+        }
+
+        public void HideAllKlassNodes()
+        {
+            foreach (KlassViewModel k in this)
+                k.HideNodes();
+        }
+
+        public KlassViewModel GetKlassByPoint(Point p)
+        {
+            foreach (KlassViewModel k in this) {
+                if (k.KlassModel.PositionLeft <= p.X && k.KlassModel.PositionTop <= p.Y
+                    && (k.KlassModel.PositionLeft + k.KlassModel.Width) >= p.X
+                    && (k.KlassModel.PositionTop + k.KlassModel.Height) >= p.Y)
+                {
+                    return k;
+                }
+            }
+
+            return null;
+        }
     }
 }

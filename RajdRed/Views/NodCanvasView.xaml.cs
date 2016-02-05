@@ -26,7 +26,14 @@ namespace RajdRed.Views
                 {
                     CaptureMouse(); //Avkommenteras om/när man kan dra nod från klass   
                     Point p = Mouse.GetPosition(Application.Current.MainWindow);
-                    _startDragPosition = new Point(p.X-5, p.Y-5);
+                    _startDragPosition = new Point(p.X-NodCanvasViewModel.NodCanvasModel.Width, p.Y-NodCanvasViewModel.NodCanvasModel.Height);
+
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
+                    }));
+
+                    //NodCanvasViewModel.LookForAttachableNodes();
                 }
             };
         }
@@ -35,6 +42,10 @@ namespace RajdRed.Views
         {
             CaptureMouse();
             _startDragPosition = e.GetPosition(Application.Current.MainWindow);
+
+            Dispatcher.Invoke(new Action(() => {
+                NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
+            }));
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
@@ -71,6 +82,11 @@ namespace RajdRed.Views
         {
             ReleaseMouseCapture();
             NodCanvasViewModel.LookAndAttachCanvasNod(e.GetPosition(Application.Current.MainWindow));
+
+            Dispatcher.Invoke(new Action(() =>
+            {
+                NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.HideAllKlassNodes();
+            }));
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
