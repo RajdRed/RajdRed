@@ -7,8 +7,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using RajdRed.Models.Adds;
 using RajdRed.Repositories;
-using RajdRed.Views;
 using RajdRed.ViewModels;
+using System.Collections.Generic;
+using System.Windows.Shapes;
 using RajdRed.Models;
 
 namespace RajdRed
@@ -26,16 +27,15 @@ namespace RajdRed
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
 		private bool darkMode = false;
 		private Point mouseDownPos;
-		public bool anyOneSelected = false;
 
         public MainRepository _mainRepository;
 		
         public MainWindow()
         {
             InitializeComponent();
-            _mainRepository = new MainRepository(this);
+            DataContext = _mainRepository = new MainRepository(this);
+
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            DataContext = _mainRepository;
         }
 
 		public void changeColors(bool dark)
@@ -55,15 +55,10 @@ namespace RajdRed
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-			deselectAllClasses();
-            _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
-			anyOneSelected = true;
-
-            //AddNewCanvasNod returnerar den noden som skapas
-            //_mainRepository.LinjeRepository.AddNewLinje(
-            //        _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(100, 100)).NodCanvasModel,
-            //        _mainRepository.NodCanvasRepository.AddNewCanvasNod(new Point(200, 200)).NodCanvasModel
-            //    );
+            _mainRepository.DeselectAll();
+            _mainRepository.Select(
+                _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow)).KlassModel
+                );
         }
 
 		public bool getDarkMode()
@@ -129,9 +124,8 @@ namespace RajdRed
 
 		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			Keyboard.ClearFocus();
-
-			deselectAllClasses();	
+            Keyboard.ClearFocus();
+            _mainRepository.DeselectAll();	
 
 			if (isArchiveMenuActive)
 			{
@@ -201,7 +195,6 @@ namespace RajdRed
 			Point mouseUpPos = e.GetPosition(theCanvas);
 
 			/*Musen har släppts - Kolla om det är finns några element innanför mouseUpPos och mouseDownPos*/
-
 			if (mouseDownPos.X > mouseUpPos.X)
 			{
 				double temp = mouseDownPos.X;
@@ -216,21 +209,9 @@ namespace RajdRed
 				mouseUpPos.Y = temp;
 			}
 
-			foreach (KlassViewModel k in _mainRepository.KlassRepository)
-			{
-				Point leftTopCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop);
-				Point rightTopCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop);
-				Point leftBotCorner = new Point(k.KlassModel.PositionLeft, k.KlassModel.PositionTop + k.KlassModel.Height);
-				Point rightBotCorner = new Point(k.KlassModel.PositionLeft + k.KlassModel.Width, k.KlassModel.PositionTop + k.KlassModel.Height);
+            //Checks if intersect with RajdElements on Canvas
+            _mainRepository.CheckIfHit(mouseDownPos, mouseUpPos);
 
-				if (rightTopCorner.X >= mouseDownPos.X && leftTopCorner.X <= mouseUpPos.X)
-				{
-					if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
-					{
-						k.KlassModel.IsSelected = true;
-					}
-				}
-			}
 		}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
@@ -330,39 +311,32 @@ namespace RajdRed
 			addClassButton.BeginAnimation(Canvas.MarginProperty, animate);
 		}
 
-		public void deselectAllClasses()
+		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs k)
 		{
-			foreach (KlassViewModel k in _mainRepository.KlassRepository)
+			if (k.Key == Key.Delete || k.Key == Key.Back )
 			{
-				if (k.KlassModel.IsSelected)
+				if (_mainRepository.HasSelected())
 				{
-					k.KlassModel.IsSelected = false;
-					k.KlassView.ReleaseMouseCapture();
-				}
-			}
-
-			anyOneSelected = false;
-		}
-
-		private void RajdRedMainWindow_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Delete || e.Key == Key.Back )
-			{
-				if (anyOneSelected)
-				{
-					foreach (KlassViewModel k in _mainRepository.KlassRepository)
-					{
-						if (k.KlassModel.IsSelected)
-						{
-							k.KlassModel.IsSelected = false;
-							k.KlassView.ReleaseMouseCapture();
-							k.Delete();
-						}
-					}
-
-					anyOneSelected = false;
+                    _mainRepository.DeleteSelected();
 				}
 			}
 		}
+
+        public void DeselectAll()
+        {
+            _mainRepository.DeselectAll();
+        }
+
+        private void Line_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Line line = sender as Line;
+            LinjeViewModel l = line.DataContext as LinjeViewModel;
+            l.Split(e.GetPosition(this));
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+           _mainRepository.Select(_mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).TextBoxModel);
+        }
     }
 }

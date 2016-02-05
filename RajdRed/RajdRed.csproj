@@ -74,6 +74,7 @@
     <Compile Include="Models\KlassModel.cs" />
     <Compile Include="Models\NodKlassModel.cs" />
     <Compile Include="Models\LinjeModel.cs" />
+    <Compile Include="Models\TextBoxModel.cs" />
     <Compile Include="NodSettings.xaml.cs">
       <DependentUpon>NodSettings.xaml</DependentUpon>
     </Compile>
@@ -82,21 +83,25 @@
     <Compile Include="Repositories\KlassRepository.cs" />
     <Compile Include="Repositories\LinjeRepository.cs" />
     <Compile Include="Repositories\MainRepository.cs" />
+    <Compile Include="Repositories\TextBoxRepository.cs" />
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Base\NodViewModelBase.cs" />
     <Compile Include="ViewModels\NodCanvasViewModel.cs" />
-    <Compile Include="ViewModels\Adds\ReseizingAdorner.cs" />
     <Compile Include="ViewModels\Commands\KlassCommands.cs" />
     <Compile Include="ViewModels\NodKlassViewModel.cs" />
     <Compile Include="ViewModels\KlassViewModel.cs" />
     <Compile Include="ViewModels\LinjeViewModel.cs" />
+    <Compile Include="ViewModels\TextBoxViewModel.cs" />
     <Compile Include="Views\NodCanvasView.xaml.cs">
       <DependentUpon>NodCanvasView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\KlassView.xaml.cs">
       <DependentUpon>KlassView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TextBoxView.xaml.cs">
+      <DependentUpon>TextBoxView.xaml</DependentUpon>
     </Compile>
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
@@ -167,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TextBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -205,7 +214,9 @@
   <ItemGroup>
     <Resource Include="Images\avatar.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Adds\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,18 +10,33 @@ namespace RajdRed.Models
 {
     public class NodCanvasModel : NodModelBase
     {
-        public NodCanvasModel(){}
+        private double _width = 10;
+        public override double Width
+        {
+            get { return _width; }
+            set { _width = value; OnPropertyChanged("Width"); }
+        }
 
+        private double _height = 10;
+        public override double Height
+        {
+            get { return _height; }
+            set { _height = value; OnPropertyChanged("Height"); }
+        }
+
+        public NodCanvasModel(){}
         public NodCanvasModel(Point p)
         {
             PositionLeft = p.X;
             PositionTop = p.Y;
             Path = NodTypesModel.Association;
+
+            ZIndex = 99;
         }
 
         void SetLinje(LinjeModel lm)
         {
-            LinjeModel = lm;
+            LinjeModelList.Add(lm);
         }
 
         public static NodCanvasModel CopyNod(NodKlassModel n)
@@ -31,7 +46,7 @@ namespace RajdRed.Models
                 Height = n.Height,
                 Width = n.Width,
                 IsSelected = n.IsSelected,
-                LinjeModel = n.LinjeModel,
+                LinjeModelList = n.LinjeModelList,
                 OnField = n.OnField,
                 Path = n.Path,
                 NodTypesModel = n.NodTypesModel,
@@ -39,14 +54,15 @@ namespace RajdRed.Models
                 PositionTop = n.PositionTop
             };
 
-            if (n.LinjeModel.Nod1 == n)
-                n.LinjeModel.Nod1 = ncm;
-            else
-                n.LinjeModel.Nod2 = ncm;
+            foreach (LinjeModel l in n.LinjeModelList)
+            {
+                if (l.Nod1 == n)
+                    l.Nod1 = ncm;
+                else
+                    l.Nod2 = ncm;
 
-            n.LinjeModel.SetOnPropertyChanged();
-
-            ncm.Converted = true;
+                l.SetOnPropertyChanged();
+            }
 
             return ncm;
         }

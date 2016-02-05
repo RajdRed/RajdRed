@@ -14,17 +14,18 @@ namespace RajdRed.Models.Base
         {
             get { return _isSelected; }
             set { _isSelected = value; OnPropertyChanged("Selected"); } }
+        
         public bool OnField { get; set; }
 
-        public Visibility Selected
+        private int _zIndex = 0;
+        public int ZIndex
         {
-            get 
-            { 
-                if (_isSelected) 
-                    return Visibility.Visible;  
-                else 
-                    return Visibility.Hidden; 
+            get { return _zIndex; }
+            set { 
+                _zIndex = value;
+                OnPropertyChanged("ZIndex");
             }
         }
+        
     }
 }

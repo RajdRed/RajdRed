@@ -9,7 +9,22 @@ namespace RajdRed.Models
 {
     public class KlassModel : RajdElement
     {
-        private KlassViewModel _klassViewModel { get; set; }
+        public KlassViewModel KlassViewModel { get; set; }
+        public static double MinSize = 110;
+
+        private bool _resize = false;
+        public bool Resize
+        {
+            get
+            {
+                return _resize;
+            }
+            set
+            {
+                _resize = value;
+                OnPropertyChanged("Resize");
+            }
+        }
 
         private string _header;
         public string Header
@@ -70,7 +85,18 @@ namespace RajdRed.Models
             }
         }
 
-        private double _height = 135;
+        public Visibility Selected
+        {
+            get
+            {
+                if (IsSelected)
+                    return Visibility.Visible;
+                else
+                    return Visibility.Hidden;
+            }
+        }
+
+        private double _height = MinSize;
         public double Height
         {
             get { return _height; }
@@ -81,7 +107,7 @@ namespace RajdRed.Models
             }
         }
 
-        private double _width = 130;
+        private double _width = MinSize;
         public double Width
         {
             get { return _width; }
@@ -94,7 +120,7 @@ namespace RajdRed.Models
 
         public KlassModel(KlassViewModel kvm, Point startPosition)
         {
-            _klassViewModel = kvm;
+            KlassViewModel = kvm;
             Header = "Ny Klass *";
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;

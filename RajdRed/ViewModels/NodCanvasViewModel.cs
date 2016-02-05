@@ -18,6 +18,8 @@ namespace RajdRed.ViewModels
         public NodCanvasRepository NodCanvasRepository { get; set; }
         public NodCanvasModel NodCanvasModel { get; set; }
 
+        public int ZIndex = 0;
+
         public NodCanvasViewModel(NodCanvasModel ncm, NodCanvasRepository ncr)
         {
             NodCanvasModel = ncm;
@@ -38,6 +40,16 @@ namespace RajdRed.ViewModels
             return newNcvm;
         }
 
+        public void Delete()
+        {
+            NodCanvasRepository.Remove(this);
+        }
+
+        public bool HasLines()
+        {
+            return (NodCanvasModel.LinjeModelList.Count != 0) ? true : false;
+        }
+
         public void SetNodCanvasView(NodCanvasView ncv)
         {
             NodCanvasView = ncv;
@@ -45,16 +57,23 @@ namespace RajdRed.ViewModels
 
         public void EatNod(NodCanvasViewModel ncvm)
         {
-            LinjeModel oldLine = ncvm.NodCanvasModel.LinjeModel;
-            LinjeViewModel newLine = NodCanvasRepository.MainRepository.LinjeRepository.AddNewLinje(
-                    ncvm.NodCanvasModel,
-                    this.NodCanvasModel
-                );
+            if (ncvm.HasLines())
+            {
+                LinjeModel share = LinjeModel.GetSharingLinje(this.NodCanvasModel, ncvm.NodCanvasModel);
+                if (share != null)
+                {
+                    ncvm.NodCanvasModel.LinjeModelList.Remove(share);
+                    NodCanvasRepository.MainRepository.LinjeRepository.Remove(share.LinjeViewModel);
+                }
 
-            Point newNodPos = NodViewModelBase.CenterBetweenNodes(oldLine.Nod1, oldLine.Nod2);
+                foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
+                {
+                    l.ReplaceNod(ncvm.NodCanvasModel, this.NodCanvasModel);
+                    NodCanvasModel.LinjeModelList.Add(l);
+                }
+            }
 
-            ncvm.NodCanvasModel.PositionLeft = newNodPos.X;
-            ncvm.NodCanvasModel.PositionTop = newNodPos.Y;
+            NodCanvasRepository.Remove(ncvm);
         }
 
         public bool IsInArea(Point p)

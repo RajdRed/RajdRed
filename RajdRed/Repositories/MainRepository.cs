@@ -1,16 +1,19 @@
 ﻿using RajdRed.Models;
+using RajdRed.Models.Base;
 using RajdRed.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace RajdRed.Repositories
 {
     public class MainRepository
     {
+        private bool _hasSelected = false;
         private MainWindow _mainWindow;
         public MainWindow MainWindow
         {
@@ -34,12 +37,13 @@ namespace RajdRed.Repositories
         {
             get { return _linjeRepository; }
         }
-        
-        private CompositeCollection _collection = new CompositeCollection();
-        public CompositeCollection Collection
+
+        private TextBoxRepository _textBoxRepository;
+        public TextBoxRepository TextBoxRepository
         {
-            get { return _collection; }
+            get { return _textBoxRepository; }
         }
+        
 
         public MainRepository(MainWindow mw)
         {
@@ -47,10 +51,66 @@ namespace RajdRed.Repositories
             _klassRepository = new KlassRepository(this);
             _linjeRepository = new LinjeRepository(this);
             _nodCanvasRepository = new NodCanvasRepository(this);
+            _textBoxRepository = new TextBoxRepository(this);
+        }
 
-            Collection.Add(new CollectionContainer() { Collection = KlassRepository });
-            Collection.Add(new CollectionContainer() { Collection = NodCanvasRepository });
-            Collection.Add(new CollectionContainer() { Collection = LinjeRepository });
+
+        public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+        {
+            /* kontroll för linjer innanför intersection */
+            _hasSelected = LinjeRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+
+            /* kontroll för klasser innanför selection */
+            _hasSelected = KlassRepository.CheckIfHit(mouseDownPos, mouseUpPos) || _hasSelected;
+
+            /*Kontroll för canvasnoder inanför selection*/
+            _hasSelected = NodCanvasRepository.CheckIfHit(mouseDownPos, mouseUpPos) || _hasSelected;
+
+            return _hasSelected;
+        }
+
+        public void Select(RajdElement re)
+        {
+            if (re is KlassModel)
+                _klassRepository.Select(re as KlassModel);
+            else if (re is LinjeModel)
+                _linjeRepository.Select(re as LinjeModel);
+            else if (re is NodCanvasModel)
+                _nodCanvasRepository.Select(re as NodCanvasModel);
+            else if (re is TextBoxModel)
+                _textBoxRepository.Select(re as TextBoxModel);
+
+            _hasSelected = true;
+        }
+
+        public bool HasSelected()
+        {
+            return _hasSelected;
+        }
+
+        public void DeselectAll()
+        {
+            if (_hasSelected)
+            {
+                _klassRepository.DeselectAllClasses();
+                _linjeRepository.DeselectAllLines();
+                _nodCanvasRepository.DeselectAllCanvasNodes();
+                _textBoxRepository.DeselectAllTextBoxes();
+
+                _hasSelected = false;
+            }
+        }
+
+        public void DeleteSelected()
+        {
+            if (_hasSelected)
+            {
+                _klassRepository.DeleteSelected();
+                _linjeRepository.DeleteSelected();
+                _nodCanvasRepository.DeleteSelected();
+
+                _hasSelected = false;
+            }
         }
     }
 }

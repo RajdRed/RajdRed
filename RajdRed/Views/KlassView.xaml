@@ -8,7 +8,6 @@
              xmlns:r="clr-namespace:RajdRed.Repositories"
              MinHeight="{Binding KlassModel.Height}" 
              MinWidth="{Binding KlassModel.Width}"
-			 MouseDoubleClick="UserControl_MouseDoubleClick"
              MouseMove="UserControl_MouseMove"
              MouseUp="UserControl_MouseUp"
              Name="theKlassView"
@@ -22,10 +21,10 @@
     <Grid Name="OuterGrid">
         <Border BorderThickness="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" BorderBrush="Black" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Margin="-7" CornerRadius="2,2,2,2" Visibility="{Binding KlassModel.Selected}"></Border>
         <Grid Name="NodeAttachedGrid">
-            <Border Name="InnerBorder" Margin="10" CornerRadius="2,2,2,2" BorderBrush="Black" 
+            <Border Name="InnerBorder" Margin="15" CornerRadius="2,2,2,2" BorderBrush="Black" 
+                    MouseDown="KlassGrid_MouseDown"
                     MouseEnter="InnerBorder_MouseEnter"
                     MouseLeave="InnerBorder_MouseLeave"
-                    MouseDown="Innerborder_MouseDown"
                     BorderThickness="1">
                 <Grid Name="InnerGrid" Background="Transparent">
                     <Grid.RowDefinitions>
@@ -50,8 +49,7 @@
                 </Grid>
             </Border>
         </Grid>
-        <ItemsControl ItemsSource="{Binding NodKlassRepository}"
-                        ItemTemplate="{StaticResource NodTemplate}" >
+        <ItemsControl ItemsSource="{Binding NodKlassRepository}" ItemTemplate="{StaticResource NodTemplate}" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>

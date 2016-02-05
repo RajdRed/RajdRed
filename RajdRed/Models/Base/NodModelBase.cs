@@ -1,36 +1,44 @@
 ﻿using RajdRed.Models.Adds;
+using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System;
 
 namespace RajdRed.Models.Base
 {
     public class NodModelBase : RajdElement
     {
-        public LinjeModel LinjeModel { get; set; }
+        public List<LinjeModel> LinjeModelList = new List<LinjeModel>();
 
-        private bool _converted = false;
-        public bool Converted
+        public int Number { get; set; }
+        public static int MinSize = 10;
+
+        private bool _isSet = false;
+        public bool IsSet
         {
-            get { return _converted; }
-            set { _converted = value; OnPropertyChanged("Converted"); }
+            get { return _isSet; }
+            set { _isSet = value; OnPropertyChanged("IsSet"); }
         }
         
-
-        private double _width = 10;
-        public double Width
+        private double _width;
+        public virtual double Width
         {
             get { return _width; }
             set { _width = value; OnPropertyChanged("Width"); }
         }
 
-        private double _height = 10;
-        public double Height
+        private double _height;
+        public virtual double Height
         {
             get { return _height; }
             set { _height = value; OnPropertyChanged("Height"); }
         }
 
+
+
         public NodTypesModel NodTypesModel;
+        
+        
         private Path _path;
         public Path Path
         {
@@ -68,25 +76,33 @@ namespace RajdRed.Models.Base
             }
         }
 
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set 
+            { 
+                _isSelected = value;
+                OnPropertyChanged("IsSelected");
+                OnPropertyChanged("Background");
+            }
+        }
+
+        public Brush Background
+        {
+            get
+            {
+                if (IsSelected)
+                    return Brushes.Red;
+                else
+                    return Brushes.Transparent;
+            }
+        }
+
         public NodModelBase()
         {
             NodTypesModel = new NodTypesModel();
         }
 
-        public static NodModelBase CopyNod(NodModelBase n)
-        {
-            return new NodModelBase()
-            {
-                Height = n.Height,
-                Width = n.Width,
-                IsSelected = n.IsSelected,
-                LinjeModel = n.LinjeModel,
-                OnField = n.OnField,
-                Path = n.Path,
-                NodTypesModel = n.NodTypesModel,
-                PositionLeft = n.PositionLeft,
-                PositionTop = n.PositionTop,
-            };
-        }
     }
 }

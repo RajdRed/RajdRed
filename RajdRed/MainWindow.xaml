@@ -4,44 +4,18 @@
         xmlns:vm="clr-namespace:RajdRed.ViewModels"
         xmlns:v="clr-namespace:RajdRed.Views"
         xmlns:m="clr-namespace:RajdRed.Models"
+        xmlns:r="clr-namespace:RajdRed.Repositories"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         Title="MainWindow" Height="720" Width="1024"
         Name="RajdRedMainWindow"
 		KeyDown="RajdRedMainWindow_KeyDown"
         MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
-
-	<Window.Resources>
-
+    <Window.Resources>
         <vm:KlassViewModel x:Key="klassViewModel"/>
-        <DataTemplate DataType="{x:Type vm:KlassViewModel}">
-            <Canvas>
-                <v:KlassView DataContext="{Binding}"
-                             Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </Canvas>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
-            <Canvas>
-                <Line DataContext="{Binding}"
-                      X1="{Binding LinjeModel.X1}" 
-                      Y1="{Binding LinjeModel.Y1}"
-                      X2="{Binding LinjeModel.X2}"
-                      Y2="{Binding LinjeModel.Y2}"
-                      Stroke="Black"
-                      StrokeThickness="2"/>
-            </Canvas>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}">
-            <Canvas>
-                <v:NodCanvasView DataContext="{Binding}" 
-                            Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </Canvas>
-        </DataTemplate>
-	</Window.Resources>
+    </Window.Resources>
 
-	<Canvas MouseDown="theCanvas_MouseDown" MouseRightButtonUp="theCanvas_MouseRightButtonUp" MouseRightButtonDown="theCanvas_MouseRightButtonDown" Name="theCanvas" Background="#EAEDF2">
+    <Canvas MouseDown="theCanvas_MouseDown" MouseRightButtonUp="theCanvas_MouseRightButtonUp" MouseRightButtonDown="theCanvas_MouseRightButtonDown" Name="theCanvas" Background="#EAEDF2">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="22*" />
@@ -118,9 +92,9 @@
             </Grid>
         </Grid>
         <Canvas Name="selectionCanvas">
-			 <!--This canvas is overlaid over the previous canvas and is used to 
-                place the rectangle that implements the drag selection box.--> 
-			<Rectangle
+            <!--This canvas is overlaid over the previous canvas and is used to 
+                place the rectangle that implements the drag selection box.-->
+            <Rectangle
                 x:Name="selectionBox"
 				Fill="#333"
 				Opacity=".30"
@@ -128,13 +102,83 @@
                 Stroke="Black"
                 StrokeThickness="1"
                 />
-		</Canvas>
-        <ItemsControl ItemsSource="{Binding Collection}">
+        </Canvas>
+        <!-- ItemsCollection (Klass, CanvasNod & Linje)-->
+        <ItemsControl ItemsSource="{Binding LinjeRepository}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
+                    <Canvas>
+                        <Line DataContext="{Binding}"
+                              X1="{Binding LinjeModel.X1}" 
+                              Y1="{Binding LinjeModel.Y1}"
+                              X2="{Binding LinjeModel.X2}"
+                              Y2="{Binding LinjeModel.Y2}"
+                              StrokeThickness="2"
+                              Stroke="{Binding LinjeModel.Color, UpdateSourceTrigger=PropertyChanged}"
+                              MouseDown="Line_MouseDown">
+                        </Line>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding KlassRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:KlassViewModel}">
+                    <Canvas>
+                        <v:KlassView DataContext="{Binding}"
+                             Canvas.Left="{Binding KlassModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Canvas.Top="{Binding KlassModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding NodCanvasRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:NodCanvasViewModel}" >
+                    <Canvas>
+                        <v:NodCanvasView DataContext="{Binding}" 
+                        Canvas.Left="{Binding NodCanvasModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Canvas.Top="{Binding NodCanvasModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding TextBoxRepository}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:TextBoxViewModel}">
+                    <Canvas>
+                        <v:TextBoxView DataContext="{Binding}"
+                            Canvas.Left="{Binding TextBoxModel.PositionLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Canvas.Top="{Binding TextBoxModel.PositionTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Canvas>
+    
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Create Textbox / Multiplicity" Click="MenuItem_Click"/>
+        </ContextMenu>
+    </Window.ContextMenu>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models.Base;
+using RajdRed.ViewModels;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -6,13 +7,15 @@ using System.Windows.Shapes;
 namespace RajdRed.Models
 {
     public class LinjeModel : RajdElement
-    {        
+    {
+        public LinjeViewModel LinjeViewModel { get; set; }
+
         private double _x1;
         public double X1
         {
             get { return _x1; }
             set { 
-                _x1 = value + _nod1.Width/2; 
+                _x1 = value + NodModelBase.MinSize/2; 
                 OnPropertyChanged("X1");  
             }
         }
@@ -22,7 +25,7 @@ namespace RajdRed.Models
         {
             get { return _y1; }
             set {
-                _y1 = value + _nod1.Height / 2; 
+                _y1 = value + NodModelBase.MinSize / 2; 
                 OnPropertyChanged("Y1"); 
             }
         }
@@ -32,7 +35,7 @@ namespace RajdRed.Models
         {
             get { return _x2; }
             set {
-                _x2 = value + _nod2.Width / 2; 
+                _x2 = value + NodModelBase.MinSize / 2; 
                 OnPropertyChanged("X2"); 
             }
         }
@@ -42,7 +45,7 @@ namespace RajdRed.Models
         {
             get { return _y2; }
             set {
-                _y2 = value + _nod2.Height / 2; 
+                _y2 = value + NodModelBase.MinSize / 2; 
                 OnPropertyChanged("Y2"); 
             }
         }
@@ -81,10 +84,39 @@ namespace RajdRed.Models
             }
         }
 
-        public LinjeModel(NodModelBase n1, NodModelBase n2)
+        private bool _isSelected = false;
+        public bool IsSelected
         {
-            _nod1 = n1;
-            _nod2 = n2;
+            get
+            {
+                return _isSelected;
+            }
+
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged("IsSelected");
+                OnPropertyChanged("Color");
+            }
+        }
+
+        public Brush Color
+        {
+            get 
+            {
+                if (IsSelected)
+                    return Brushes.Red;
+                else
+                    return Brushes.Black;
+            }
+        }
+        
+
+        public LinjeModel(LinjeViewModel lvm, NodModelBase n1, NodModelBase n2)
+        {
+            LinjeViewModel = lvm;
+            Nod1 = n1;
+            Nod2 = n2;
 
             SetOnPropertyChanged();
         }
@@ -107,6 +139,27 @@ namespace RajdRed.Models
                     Y2 = _nod2.PositionTop;
                 }
             };
+        }
+
+        public void ReplaceNod(NodModelBase oldNod, NodModelBase newNod)
+        {
+            if (Nod1 == oldNod)
+                Nod1 = newNod;
+            else
+                Nod2 = newNod;
+
+            SetOnPropertyChanged();
+        }
+
+        public static LinjeModel GetSharingLinje(NodModelBase n1, NodModelBase n2)
+        {
+            foreach (LinjeModel l in n1.LinjeModelList)
+            {
+                if (l.Nod1 == n2 || l.Nod2 == n2)
+                    return l;
+            }
+
+            return null;
         }
     }
 }
