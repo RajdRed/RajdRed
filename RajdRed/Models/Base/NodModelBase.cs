@@ -18,14 +18,14 @@ namespace RajdRed.Models.Base
         
 
         private double _width;
-        public double Width
+        public virtual double Width
         {
             get { return _width; }
             set { _width = value; OnPropertyChanged("Width"); }
         }
 
         private double _height;
-        public double Height
+        public virtual double Height
         {
             get { return _height; }
             set { _height = value; OnPropertyChanged("Height"); }
