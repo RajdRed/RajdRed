@@ -50,25 +50,6 @@ namespace RajdRed.ViewModels
             return (NodCanvasModel.LinjeModelList.Count != 0) ? true : false;
         }
 
-        //public List<NodModelBase> SiblingNodes()
-        //{
-        //    List<NodModelBase> sn = new List<NodModelBase>();
-
-        //    _prePerculate(sn, this.NodCanvasModel);
-                
-        //}
-
-        //private List<NodModelBase> _prePerculate(List<NodModelBase> nodList, NodModelBase nod)
-        //{
-        //    if (nodList.Count == 0)
-        //        return nodList;
-
-        //    foreach (LinjeModel l in nod.LinjeModelList)
-        //    {
-        //        _prePerculate(nodList, l.);
-        //    }
-        //}
-
         public void SetNodCanvasView(NodCanvasView ncv)
         {
             NodCanvasView = ncv;

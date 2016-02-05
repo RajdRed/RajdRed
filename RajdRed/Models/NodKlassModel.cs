@@ -11,14 +11,14 @@ namespace RajdRed.Models
         public int Row { get; set; }
         public int Column { get; set; }
 
-        private double _width = 20;
+        private double _width = 15;
         public override double Width
         {
             get { return _width; }
             set { _width = value; OnPropertyChanged("Width"); }
         }
 
-        private double _height = 20;
+        private double _height = 15;
         public override double Height
         {
             get { return _height; }
@@ -67,8 +67,39 @@ namespace RajdRed.Models
                 return 0;
             }
         }
-        
 
+        public HorizontalAlignment HorizontalContentAlignment
+        {
+            get
+            {
+                if (_horizontalAlignment == HorizontalAlignment.Left)
+                {
+                    return HorizontalAlignment.Right;
+                }
+                else if (_horizontalAlignment == HorizontalAlignment.Right)
+                {
+                    return HorizontalAlignment.Left;
+                }
+                return HorizontalAlignment.Center;
+            }
+        }
+
+        public VerticalAlignment VerticalContentAlignment
+        {
+            get
+            {
+                if (_verticalAlignment == VerticalAlignment.Bottom)
+                {
+                    return VerticalAlignment.Top;
+                }
+                else if (_verticalAlignment == VerticalAlignment.Top)
+                {
+                    return VerticalAlignment.Bottom;
+                }
+                return VerticalAlignment.Center;
+            }
+        }
+        
         public NodKlassModel()
         {
             Path = NodTypesModel.Node;

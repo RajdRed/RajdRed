@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -25,35 +26,108 @@ namespace RajdRed
         NodTypesModel ntm = new NodTypesModel();
         NodKlassViewModel NodKlassViewModel;
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
-        public NodSettings(NodKlassViewModel nkvm)
+        Grid _backGroundGrid;
+        Path temp;
+        bool test;
+        public NodSettings(NodKlassViewModel nkvm, Grid g)
         {
             InitializeComponent();
-            DataContext = ntm;
             NodKlassViewModel = nkvm;
+            _backGroundGrid = g;
+            DataContext = ntm; 
         }
 
-        private void Association_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Association_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NodKlassViewModel.NodKlassModel.Path = ntm.Association;
+            NodKlassViewModel.TurnToAssosiation();
+            mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
+            test = true;
+            
         }
 
         private void Aggregation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NodKlassViewModel.NodKlassModel.Path = ntm.Aggregation;
+            NodKlassViewModel.TurnToAggregation();
+            mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
+            test = true;
         }
 
         private void Composition_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NodKlassViewModel.NodKlassModel.Path = ntm.Node;
+            NodKlassViewModel.TurnToComposition();
+            mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
+            test = true;
         }
 
         private void Generalization_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NodKlassViewModel.NodKlassModel.Path = ntm.Generalization;
+            NodKlassViewModel.TurnToGeneralization();
+            mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
+            test = true;
         }
+
+        private void Association_MouseEnter(object sender, MouseEventArgs e)
+        {
+            temp = NodKlassViewModel.NodKlassModel.Path;
+            NodKlassViewModel.TurnToAssosiation();
+            
+        }
+
+        private void Association_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if(!test)
+                NodKlassViewModel.NodKlassModel.Path = temp;
+        }
+
+        private void Aggregation_MouseEnter(object sender, MouseEventArgs e)
+        {
+            temp = NodKlassViewModel.NodKlassModel.Path;
+            NodKlassViewModel.TurnToAggregation();
+        }
+
+        private void Aggregation_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!test)
+                NodKlassViewModel.NodKlassModel.Path = temp;
+        }
+
+        private void Composition_MouseEnter(object sender, MouseEventArgs e)
+        {
+            temp = NodKlassViewModel.NodKlassModel.Path;
+            NodKlassViewModel.TurnToComposition();
+        }
+
+        private void Composition_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!test)
+                NodKlassViewModel.NodKlassModel.Path = temp;
+        }
+
+        private void Generalization_MouseEnter(object sender, MouseEventArgs e)
+        {
+            temp = NodKlassViewModel.NodKlassModel.Path;
+            NodKlassViewModel.TurnToGeneralization();
+        }
+
+        private void Generalization_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!test)
+                NodKlassViewModel.NodKlassModel.Path = temp;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScaleTransform sct = new ScaleTransform(0, 0);
+            this.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.RenderTransform = sct;
+            DoubleAnimation da = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.17)));
+            sct.BeginAnimation(ScaleTransform.ScaleXProperty, da);
+            sct.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+        }
+
     }
 }

@@ -16,9 +16,42 @@
              MouseUp="UserControl_MouseUp"
 			 MouseEnter="UserControl_MouseEnter"
              >
-    <ContentPresenter Content="{Binding NodKlassModel.Path}">
-        <ContentPresenter.LayoutTransform>
-            <RotateTransform Angle="{Binding NodKlassModel.Angle}"/>
-        </ContentPresenter.LayoutTransform>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleX" 
+                                         To="1.5" Duration="0:0:0.2"/>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleY" 
+                                         To="1.5" Duration="0:0:0.2"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleX" 
+                                         Duration="0:0:0.2"/>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleY" 
+                                         Duration="0:0:0.2"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <ContentPresenter Content="{Binding NodKlassModel.Path}"
+                      VerticalAlignment="{Binding NodKlassModel.VerticalContentAlignment}"
+                      HorizontalAlignment="{Binding NodKlassModel.HorizontalContentAlignment}"
+                      RenderTransformOrigin="0.5 0.5">
+        <ContentPresenter.RenderTransform>
+            <TransformGroup>
+                <RotateTransform Angle="{Binding NodKlassModel.Angle}"/>
+                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
+            </TransformGroup>
+        </ContentPresenter.RenderTransform>
     </ContentPresenter>
 </UserControl>

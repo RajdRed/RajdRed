@@ -160,6 +160,5 @@ namespace RajdRed.ViewModels
                 UnSet();
             }
         }
-
     }
 }

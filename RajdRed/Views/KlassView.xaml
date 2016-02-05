@@ -8,7 +8,6 @@
              xmlns:r="clr-namespace:RajdRed.Repositories"
              MinHeight="{Binding KlassModel.Height}" 
              MinWidth="{Binding KlassModel.Width}"
-			 MouseDoubleClick="UserControl_MouseDoubleClick"
              MouseMove="UserControl_MouseMove"
              MouseUp="UserControl_MouseUp"
              Name="theKlassView"
@@ -20,10 +19,10 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid Name="OuterGrid">
-        <Border BorderThickness="2" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" BorderBrush="Red" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Margin="-7" CornerRadius="2,2,2,2" Visibility="{Binding KlassModel.Selected}">
-        </Border>
-        <Grid Name="KlassGrid" Margin="10" MouseDown="KlassGrid_MouseDown">
-            <Border Name="InnerBorder" CornerRadius="3,3,3,3" BorderBrush="Black" Background="White"
+        <Border BorderThickness="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" BorderBrush="Black" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" Margin="-7" CornerRadius="2,2,2,2" Visibility="{Binding KlassModel.Selected}"></Border>
+        <Grid Name="NodeAttachedGrid">
+            <Border Name="InnerBorder" Margin="15" CornerRadius="2,2,2,2" BorderBrush="Black" 
+                    MouseDown="KlassGrid_MouseDown"
                     MouseEnter="InnerBorder_MouseEnter"
                     MouseLeave="InnerBorder_MouseLeave"
                     BorderThickness="1">

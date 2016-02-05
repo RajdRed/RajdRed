@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System;
 
 namespace RajdRed.Models.Base
 {
@@ -33,7 +34,11 @@ namespace RajdRed.Models.Base
             set { _height = value; OnPropertyChanged("Height"); }
         }
 
+
+
         public NodTypesModel NodTypesModel;
+        
+        
         private Path _path;
         public Path Path
         {
@@ -82,7 +87,6 @@ namespace RajdRed.Models.Base
                 OnPropertyChanged("Background");
             }
         }
-        
 
         public Brush Background
         {
@@ -99,5 +103,6 @@ namespace RajdRed.Models.Base
         {
             NodTypesModel = new NodTypesModel();
         }
+
     }
 }

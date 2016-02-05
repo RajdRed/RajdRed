@@ -92,14 +92,13 @@ namespace RajdRed.Repositories
 					{
 						if (intersectY == rak_M)
 						{
-							lvm.LinjeModel.IsSelected = true;
-							return true;
+                            _hasSelected = lvm.LinjeModel.IsSelected = true;
 						}
 					}
 				}
 			}
 
-			return false;
+			return _hasSelected;
 		}
 
 		private bool SelectionLinesVertical(double rak_X, double rak_Y1, double rak_Y2)
@@ -139,8 +138,7 @@ namespace RajdRed.Repositories
 					{
 						if (sne_Y2 <= intersectY && intersectY <= sne_Y1)
 						{
-							lvm.LinjeModel.IsSelected = true;
-							return true;
+                            _hasSelected = lvm.LinjeModel.IsSelected = true;
 						}
 					}
 
@@ -148,14 +146,15 @@ namespace RajdRed.Repositories
 					{
 						if (sne_Y1 <= intersectY && intersectY <= sne_Y2)
 						{
-							lvm.LinjeModel.IsSelected = true;
-							return true;
+                            _hasSelected = lvm.LinjeModel.IsSelected = true;
 						}
 					}
 				}
 			}
 
-			return false;
+			_hasSelected = false;
+
+            return _hasSelected;
 		}
 
         public void DeselectAllLines()
