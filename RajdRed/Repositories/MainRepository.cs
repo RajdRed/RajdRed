@@ -49,14 +49,29 @@ namespace RajdRed.Repositories
 
         public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
         {
-            /* kontroll för linjer innanför intersection */
-            _hasSelected = LinjeRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+			List<NodModelBase> nmbList = new List<NodModelBase>();
+			List<LinjeModel> linjeList = new List<LinjeModel>();
 
             /* kontroll för klasser innanför selection */
-            _hasSelected = KlassRepository.CheckIfHit(mouseDownPos, mouseUpPos) || _hasSelected;
+            _hasSelected = KlassRepository.CheckIfHit(mouseDownPos, mouseUpPos, ref nmbList);
 
             /*Kontroll för canvasnoder inanför selection*/
-            _hasSelected = NodCanvasRepository.CheckIfHit(mouseDownPos, mouseUpPos) || _hasSelected;
+            _hasSelected = NodCanvasRepository.CheckIfHit(mouseDownPos, mouseUpPos, ref nmbList) || _hasSelected;
+
+			/* selektera alla linjer som hör till noden */
+			foreach (NodModelBase n in nmbList)
+			{
+				foreach (LinjeModel l in n.LinjeModelList)
+				{
+					l.IsSelected = true;
+					linjeList.Add(l);
+				}
+			}
+
+			foreach (LinjeModel li in linjeList)
+			{
+
+			}
 
             return _hasSelected;
         }

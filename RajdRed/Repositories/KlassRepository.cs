@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models;
+using RajdRed.Models.Base;
 using RajdRed.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +26,7 @@ namespace RajdRed.Repositories
             return kvm;
         }
 
-        public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+		public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
         {
             foreach (KlassViewModel kvm in this)
             {
@@ -39,6 +40,15 @@ namespace RajdRed.Repositories
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
                         _hasSelected = kvm.KlassModel.IsSelected = true;
+
+						foreach (NodKlassViewModel nod in kvm.NodKlassRepository)
+						{
+							if (nod.NodKlassModel.IsSet)
+							{
+								nod.NodKlassModel.IsSelected = true;
+								nodList.Add(nod.NodKlassModel);
+							}
+						}
                     }
                 }
             }

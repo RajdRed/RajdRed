@@ -33,8 +33,9 @@ namespace RajdRed.Repositories
             return nkvm;
         }
 
-        public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+		public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
         {
+			//Nummer 1 - Markera alla noder
             foreach (NodCanvasViewModel ncm in this)
             {
                 Point leftTopCorner = new Point(ncm.NodCanvasModel.PositionLeft, ncm.NodCanvasModel.PositionTop);
@@ -47,6 +48,7 @@ namespace RajdRed.Repositories
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
                         _hasSelected = ncm.NodCanvasModel.IsSelected = true;
+						nodList.Add(ncm.NodCanvasModel);
                     }
                 }
             }
