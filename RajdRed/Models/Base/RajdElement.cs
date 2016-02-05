@@ -10,7 +10,7 @@ namespace RajdRed.Models.Base
     public abstract class RajdElement : BaseModel
     {
         private bool _isSelected = false;
-        public bool IsSelected
+        public virtual bool IsSelected
         {
             get { return _isSelected; }
             set { _isSelected = value; OnPropertyChanged("Selected"); } }

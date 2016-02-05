@@ -76,13 +76,15 @@ namespace RajdRed.Models.Base
             }
         }
 
-        private bool _isSelected;
-        public bool IsSelected
+        public override bool IsSelected
         {
-            get { return _isSelected; }
-            set 
-            { 
-                _isSelected = value;
+            get
+            {
+                return base.IsSelected;
+            }
+            set
+            {
+                base.IsSelected = value;
                 OnPropertyChanged("IsSelected");
                 OnPropertyChanged("Background");
             }

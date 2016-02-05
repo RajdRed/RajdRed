@@ -28,13 +28,18 @@ namespace RajdRed.Models
             set { _positionTop = value; OnPropertyChanged("PositionTop"); }
         }
 
-        private bool _isSelected;
-        public bool IsSelected
+        public override bool IsSelected
         {
-            get { return _isSelected; }
-            set { _isSelected = value; 
+            get
+            {
+                return base.IsSelected;
+            }
+            set
+            {
+                base.IsSelected = value;
                 OnPropertyChanged("IsSelected"); 
-                OnPropertyChanged("Visible"); }
+                OnPropertyChanged("Visible");
+            }
         }
 
         public Visibility Visible

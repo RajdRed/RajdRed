@@ -26,6 +26,18 @@ namespace RajdRed.Models
             }
         }
 
+        public override bool IsSelected
+        {
+            get
+            {
+                return base.IsSelected;
+            }
+            set
+            {
+                base.IsSelected = value;
+            }
+        }
+
         private string _header;
         public string Header
         {
@@ -121,7 +133,7 @@ namespace RajdRed.Models
         public KlassModel(KlassViewModel kvm, Point startPosition)
         {
             KlassViewModel = kvm;
-            Header = "Ny Klass *";
+            Header = "New Class *";
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;
             IsSelected = true;
