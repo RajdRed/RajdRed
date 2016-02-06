@@ -29,6 +29,7 @@ namespace RajdRed.Views
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NodKlassViewModel.NodKlassModel.IsPressed = true;
+            e.Handled = true;
         }
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)

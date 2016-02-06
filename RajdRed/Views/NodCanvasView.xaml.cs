@@ -33,6 +33,8 @@ namespace RajdRed.Views
                         NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
                     }));
                 }
+
+                eArgs.Handled = true;
             };
         }
 
@@ -44,6 +46,8 @@ namespace RajdRed.Views
             Dispatcher.Invoke(new Action(() => {
                 NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
             }));
+
+            e.Handled = true;
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)

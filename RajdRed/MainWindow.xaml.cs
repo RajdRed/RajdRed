@@ -122,10 +122,53 @@ namespace RajdRed
 			}
         }
 
-		private void theCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+		private void theCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
             Keyboard.ClearFocus();
-            _mainRepository.DeselectAll();	
+            _mainRepository.DeselectAll();
+
+            /************  För selectionverktyget  ***************/
+
+            mouseDownPos = e.GetPosition(theCanvas);
+
+            if (mouseDownPos.Y > 100 && Mouse.Captured == null)
+            {
+                theCanvas.CaptureMouse();
+
+                Canvas.SetLeft(selectionBox, mouseDownPos.X);
+                Canvas.SetTop(selectionBox, mouseDownPos.Y);
+                selectionBox.Width = 0;
+                selectionBox.Height = 0;
+
+                selectionBox.Visibility = Visibility.Visible;
+
+                theCanvas.MouseMove += (sendr, eventArgs) =>
+                {
+                    Point mousePos = e.GetPosition(theCanvas);
+
+                    if (mouseDownPos.X < mousePos.X)
+                    {
+                        Canvas.SetLeft(selectionBox, mouseDownPos.X);
+                        selectionBox.Width = mousePos.X - mouseDownPos.X;
+                    }
+                    else
+                    {
+                        Canvas.SetLeft(selectionBox, mousePos.X);
+                        selectionBox.Width = mouseDownPos.X - mousePos.X;
+                    }
+
+                    if (mouseDownPos.Y < mousePos.Y)
+                    {
+                        Canvas.SetTop(selectionBox, mouseDownPos.Y);
+                        selectionBox.Height = mousePos.Y - mouseDownPos.Y;
+                    }
+                    else
+                    {
+                        Canvas.SetTop(selectionBox, mousePos.Y);
+                        selectionBox.Height = mouseDownPos.Y - mousePos.Y;
+                    }
+                };
+            }
 
 			if (isArchiveMenuActive)
 			{
@@ -144,52 +187,7 @@ namespace RajdRed
             e.Handled = true;
 		}
 
-		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-		{
-			/************  För selectionverktyget  ***************/
-
-			mouseDownPos = e.GetPosition(theCanvas);
-
-			if (mouseDownPos.Y > 100 && Mouse.Captured == null)
-			{
-				theCanvas.CaptureMouse();
-
-				Canvas.SetLeft(selectionBox, mouseDownPos.X);
-				Canvas.SetTop(selectionBox, mouseDownPos.Y);
-				selectionBox.Width = 0;
-				selectionBox.Height = 0;
-
-				selectionBox.Visibility = Visibility.Visible;
-
-				theCanvas.MouseMove += (sendr, eventArgs) => {
-					Point mousePos = e.GetPosition(theCanvas);
-
-					if (mouseDownPos.X < mousePos.X)
-					{
-						Canvas.SetLeft(selectionBox, mouseDownPos.X);
-						selectionBox.Width = mousePos.X - mouseDownPos.X;
-					}
-					else
-					{
-						Canvas.SetLeft(selectionBox, mousePos.X);
-						selectionBox.Width = mouseDownPos.X - mousePos.X;
-					}
-
-					if (mouseDownPos.Y < mousePos.Y)
-					{
-						Canvas.SetTop(selectionBox, mouseDownPos.Y);
-						selectionBox.Height = mousePos.Y - mouseDownPos.Y;
-					}
-					else
-					{
-						Canvas.SetTop(selectionBox, mousePos.Y);
-						selectionBox.Height = mouseDownPos.Y - mousePos.Y;
-					}
-				};
-			}
-		}
-
-		private void theCanvas_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        private void theCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
 		{
 			theCanvas.ReleaseMouseCapture();
 			selectionBox.Visibility = Visibility.Collapsed;
@@ -334,6 +332,8 @@ namespace RajdRed
             Line line = sender as Line;
             LinjeViewModel l = line.DataContext as LinjeViewModel;
             l.Split(e.GetPosition(this));
+
+            e.Handled = true;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

@@ -16,9 +16,8 @@
     </Window.Resources>
 
     <Canvas 
-        MouseDown="theCanvas_MouseDown" 
-        MouseRightButtonUp="theCanvas_MouseRightButtonUp" 
-        MouseRightButtonDown="theCanvas_MouseRightButtonDown"
+        MouseLeftButtonDown="theCanvas_MouseLeftButtonDown" 
+        MouseLeftButtonUp="theCanvas_MouseLeftButtonUp" 
         Name="theCanvas" Background="#EAEDF2">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
@@ -125,6 +124,9 @@
                               StrokeThickness="2"
                               Stroke="{Binding LinjeModel.Color, UpdateSourceTrigger=PropertyChanged}"
                               MouseDown="Line_MouseDown">
+                            <Line.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="8" Color="Blue"/>
+                            </Line.Effect>
                         </Line>
                     </Canvas>
                 </DataTemplate>
