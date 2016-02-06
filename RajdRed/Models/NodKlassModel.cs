@@ -11,20 +11,6 @@ namespace RajdRed.Models
         public int Row { get; set; }
         public int Column { get; set; }
 
-        private double _width = 15;
-        public override double Width
-        {
-            get { return _width; }
-            set { _width = value; OnPropertyChanged("Width"); }
-        }
-
-        private double _height = 15;
-        public override double Height
-        {
-            get { return _height; }
-            set { _height = value; OnPropertyChanged("Height"); }
-        }
-
         private HorizontalAlignment _horizontalAlignment;
         public HorizontalAlignment HorizontalAlignment
         {

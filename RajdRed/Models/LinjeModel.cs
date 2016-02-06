@@ -14,8 +14,8 @@ namespace RajdRed.Models
         public double X1
         {
             get { return _x1; }
-            set { 
-                _x1 = value + NodModelBase.MinSize/2; 
+            set {
+                _x1 = value + NodModelBase.MinSize / 2;
                 OnPropertyChanged("X1");  
             }
         }

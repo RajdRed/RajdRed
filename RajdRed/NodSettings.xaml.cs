@@ -27,8 +27,8 @@ namespace RajdRed
         NodKlassViewModel NodKlassViewModel;
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
         Grid _backGroundGrid;
-        Path temp;
-        bool test;
+        Path tempPath;
+        bool isClosed;
         public NodSettings(NodKlassViewModel nkvm, Grid g)
         {
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace RajdRed
             NodKlassViewModel.TurnToAssosiation();
             mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
-            test = true;
+            isClosed = true;
             
         }
 
@@ -51,7 +51,7 @@ namespace RajdRed
             NodKlassViewModel.TurnToAggregation();
             mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
-            test = true;
+            isClosed = true;
         }
 
         private void Composition_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -59,7 +59,7 @@ namespace RajdRed
             NodKlassViewModel.TurnToComposition();
             mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
-            test = true;
+            isClosed = true;
         }
 
         private void Generalization_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -67,56 +67,56 @@ namespace RajdRed
             NodKlassViewModel.TurnToGeneralization();
             mw.theCanvas.Children.Remove(_backGroundGrid);
             mw.theCanvas.Children.Remove(this);
-            test = true;
+            isClosed = true;
         }
 
         private void Association_MouseEnter(object sender, MouseEventArgs e)
         {
-            temp = NodKlassViewModel.NodKlassModel.Path;
+            tempPath = NodKlassViewModel.NodKlassModel.Path;
             NodKlassViewModel.TurnToAssosiation();
             
         }
 
         private void Association_MouseLeave(object sender, MouseEventArgs e)
         {
-            if(!test)
-                NodKlassViewModel.NodKlassModel.Path = temp;
+            if(!isClosed)
+                NodKlassViewModel.NodKlassModel.Path = tempPath;
         }
 
         private void Aggregation_MouseEnter(object sender, MouseEventArgs e)
         {
-            temp = NodKlassViewModel.NodKlassModel.Path;
+            tempPath = NodKlassViewModel.NodKlassModel.Path;
             NodKlassViewModel.TurnToAggregation();
         }
 
         private void Aggregation_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (!test)
-                NodKlassViewModel.NodKlassModel.Path = temp;
+            if (!isClosed)
+                NodKlassViewModel.NodKlassModel.Path = tempPath;
         }
 
         private void Composition_MouseEnter(object sender, MouseEventArgs e)
         {
-            temp = NodKlassViewModel.NodKlassModel.Path;
+            tempPath = NodKlassViewModel.NodKlassModel.Path;
             NodKlassViewModel.TurnToComposition();
         }
 
         private void Composition_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (!test)
-                NodKlassViewModel.NodKlassModel.Path = temp;
+            if (!isClosed)
+                NodKlassViewModel.NodKlassModel.Path = tempPath;
         }
 
         private void Generalization_MouseEnter(object sender, MouseEventArgs e)
         {
-            temp = NodKlassViewModel.NodKlassModel.Path;
+            tempPath = NodKlassViewModel.NodKlassModel.Path;
             NodKlassViewModel.TurnToGeneralization();
         }
 
         private void Generalization_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (!test)
-                NodKlassViewModel.NodKlassModel.Path = temp;
+            if (!isClosed)
+                NodKlassViewModel.NodKlassModel.Path = tempPath;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

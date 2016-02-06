@@ -10,19 +10,6 @@ namespace RajdRed.Models
 {
     public class NodCanvasModel : NodModelBase
     {
-        private double _width = 10;
-        public override double Width
-        {
-            get { return _width; }
-            set { _width = value; OnPropertyChanged("Width"); }
-        }
-
-        private double _height = 10;
-        public override double Height
-        {
-            get { return _height; }
-            set { _height = value; OnPropertyChanged("Height"); }
-        }
 
         public NodCanvasModel(){}
         public NodCanvasModel(Point p)

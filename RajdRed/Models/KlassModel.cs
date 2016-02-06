@@ -97,17 +97,6 @@ namespace RajdRed.Models
             }
         }
 
-        public Visibility Selected
-        {
-            get
-            {
-                if (IsSelected)
-                    return Visibility.Visible;
-                else
-                    return Visibility.Hidden;
-            }
-        }
-
         private double _height = MinSize;
         public double Height
         {

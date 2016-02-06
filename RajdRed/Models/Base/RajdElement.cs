@@ -13,7 +13,7 @@ namespace RajdRed.Models.Base
         public virtual bool IsSelected
         {
             get { return _isSelected; }
-            set { _isSelected = value; OnPropertyChanged("Selected"); } }
+            set { _isSelected = value; OnPropertyChanged("IsSelected"); } }
         
         public bool OnField { get; set; }
 
