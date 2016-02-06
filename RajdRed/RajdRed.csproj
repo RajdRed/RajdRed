@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>umlicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PdfSharp-WPF">
       <HintPath>PdfSharpXpsBin\PdfSharp-WPF.dll</HintPath>
@@ -216,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Adds\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="umlicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

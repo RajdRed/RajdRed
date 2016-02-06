@@ -25,23 +25,6 @@
  			InitializeComponent();
  		}
  
- 		private void darkModeButton_Click(object sender, RoutedEventArgs e)
- 		{
- 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
- 
- 			if (txtBlockColor.Text == "Dark Mode") {
- 				mw.changeColors(false);
- 				mw.ChangeColorTheme(true);
- 				txtBlockColor.Text = "Light Mode";
- 			}
- 
- 			else {
- 				mw.changeColors(true);
- 				mw.ChangeColorTheme(false);
- 				txtBlockColor.Text = "Dark Mode";
- 			}
- 		}
- 
  		private void AboutProgram_Click(object sender, RoutedEventArgs e)
  		{
  			MainWindow mw = (MainWindow)Application.Current.MainWindow;

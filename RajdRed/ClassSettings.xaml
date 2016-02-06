@@ -105,21 +105,14 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-			<Button Name="Btn_Abort" Click="Btn_Abort_Click" Content="" Foreground="#EAEDF2" Style="{DynamicResource AbortStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="3" Grid.Row="2" Margin="0,0,19,38">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <TextBlock Text="{TemplateBinding Content}" />
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-			<Button Name="Btn_Delete" Content="" Foreground="#FC615D" Click="Btn_Delete_Click" Style="{DynamicResource DeleteStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,29,4">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <TextBlock Text="{TemplateBinding Content}" />
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Grid Name="InnerGrid" Grid.Column="0" Grid.RowSpan="5">
+			<Button Name="Btn_Abort" Click="Btn_Abort_Click" Content="" Foreground="#EAEDF2" Style="{DynamicResource AbortStyleButton}" FontSize="50" FontFamily="./fonts/#FontAwesome" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,0,29,4">
+				<Button.Template>
+					<ControlTemplate TargetType="Button">
+						<TextBlock Text="{TemplateBinding Content}" />
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+			<Grid Name="InnerGrid" Grid.Column="0" Grid.RowSpan="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*"/>
                     <ColumnDefinition Width="20*"/>
@@ -146,9 +139,9 @@
                             <RowDefinition Height="40*"/>
                             <RowDefinition Height="40*"/>
                         </Grid.RowDefinitions>
-						<TextBox TextWrapping="Wrap" Grid.Row="0" CaretBrush="White" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="{Binding Header, UpdateSourceTrigger=Explicit}" Background="#404d5c"/>
-						<TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="1" BorderThickness="0" Name="Attributes" Background="#768ca5" Foreground="White" Text="{Binding Attributes, UpdateSourceTrigger=Explicit}" />
-						<TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="2" BorderThickness="0" Name="Methods" Background="#404d5c" Foreground="White" Text="{Binding Methods, UpdateSourceTrigger=Explicit}" />
+						<TextBox TextWrapping="Wrap" Grid.Row="0" CaretBrush="White" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="18" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Name="ClassName" Foreground="White" Text="{Binding Header, UpdateSourceTrigger=Explicit}" Background="#222931"/>
+						<TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="1" BorderThickness="0" Name="Attributes" Background="#323a45" Foreground="White" Text="{Binding Attributes, UpdateSourceTrigger=Explicit}" />
+						<TextBox TextWrapping="Wrap" CaretBrush="White" FontSize="14" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Row="2" BorderThickness="0" Name="Methods" Background="#222931" Foreground="White" Text="{Binding Methods, UpdateSourceTrigger=Explicit}" />
                     </Grid>
                 </Border>
             </Grid>

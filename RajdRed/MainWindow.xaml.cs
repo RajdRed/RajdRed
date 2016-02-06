@@ -38,21 +38,6 @@ namespace RajdRed
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
-		public void changeColors(bool dark)
-		{
-			if (!dark)
-			{
-				Colors = RajdColorScheme.Dark;
-				darkMode = true;
-			}
-
-			else
-			{
-				Colors = RajdColorScheme.Light;
-				darkMode = false;
-			}
-		} 
-
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             _mainRepository.DeselectAll();
@@ -60,11 +45,6 @@ namespace RajdRed
                 _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow)).KlassModel
                 );
         }
-
-		public bool getDarkMode()
-		{
-			return darkMode;
-		}
 
         private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
         {
@@ -265,40 +245,6 @@ namespace RajdRed
 				isSettingsMenuActive = false;
 				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
-		}
-
-		public void ChangeColorTheme(bool dark)
-		{
-			if (dark) 
-			{
-				var uri = new Uri("pack://application:,,,/Images/createClassBg-Dark.png");
-				var bitmap = new BitmapImage(uri);
-				addClassButton.Source = bitmap;	
-			}
-
-			else 
-			{
-				var uri = new Uri("pack://application:,,,/Images/createClassBg.png");
-				var bitmap = new BitmapImage(uri);
-				addClassButton.Source = bitmap;
-			}
-
-			theCanvas.Background = Colors.TheCanvasBg;
-			menuBot.Background = Colors.MenuBotBg;
-			//menuTopRight.Background = Colors.KlassNameBg;
-			//menuTopLeft.Fill = Colors.KlassNameBg;
-			titleBorder.Background = Colors.TheCanvasBg;
-			titleBorder.BorderBrush = Colors.TheCanvasBg;
-			TitleTextBox.SetCurrentValue(Control.ForegroundProperty, Colors.TitleText);
-
-			if (isArchiveMenuActive)
-				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors);
-
-			if (isSettingsMenuActive)
-				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Colors.MenuButtonBg);
-
-            //foreach (KlassView k in _klassList)
-            //    k.setKlassColors();
 		}
 
 		private void addClassButton_MouseEnter(object sender, MouseEventArgs e)
