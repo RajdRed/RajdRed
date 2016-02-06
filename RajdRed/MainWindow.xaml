@@ -34,7 +34,7 @@
                 <RowDefinition Height="78*" />
             </Grid.RowDefinitions>
             <Grid Name="menuTopRight" Grid.Row="0" Background="#222931">
-                 <!--Detta är ÖVRE delen av menyn--> 
+                <!--Detta är ÖVRE delen av menyn-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="956*" />
                     <ColumnDefinition Width="68*" />
@@ -46,7 +46,7 @@
                         <ColumnDefinition Width="22" />
                         <ColumnDefinition Width="22" />
                     </Grid.ColumnDefinitions>
-                     <!--Detta är menyknapparna-->
+                    <!--Detta är menyknapparna-->
                     <Rectangle MouseLeftButtonUp="Ellipse_MinimizeWindow" Fill="#FDBD41"  Margin="5" Grid.Column="0" Style="{StaticResource MenuRectangleOpacity}"/>
                     <Rectangle  MouseLeftButtonUp="Ellipse_MaximizeWindow" Margin="5" Fill="#34C749" Grid.Column="1" Style="{StaticResource MenuRectangleOpacity}"/>
                     <Rectangle MouseLeftButtonUp="Ellipse_CloseWindow" Margin="5" Fill="#FC615D" Grid.Column="2" Style="{StaticResource MenuRectangleOpacity}"/>
@@ -132,7 +132,7 @@
                               Y2="{Binding LinjeModel.Y2}"
                               StrokeThickness="3"
                               Stroke="Black"
-                              MouseDown="Line_MouseDown">
+                              MouseDown="Line_MouseDown" StrokeLineJoin="Round">
                         </Line>
                     </Canvas>
                 </DataTemplate>
@@ -187,7 +187,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Canvas>
-    
+
     <Window.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Create Textbox / Multiplicity" Click="MenuItem_Click"/>
