@@ -129,6 +129,7 @@ namespace RajdRed.Views
                 KlassViewModel.KlassModel.OnField = true;
 
             _isDown = KlassViewModel.KlassModel.Resize = false;
+            e.Handled = true;
         }
 
 		public void CloseSettings(ClassSettings cs, Grid g)
