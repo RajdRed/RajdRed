@@ -34,7 +34,12 @@ namespace RajdRed.Repositories
             return lvm;
         }
 
-		public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+		public void SelectLinesOfNode(NodModelBase node) 
+		{
+
+		}
+
+		/*public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
 		{
 			double Y1, Y2, X1, X2, M, M2;
 			Y1 = mouseDownPos.Y;
@@ -55,9 +60,9 @@ namespace RajdRed.Repositories
                 _hasSelected = true;
 
             return _hasSelected;
-		}
+		}*/
 
-		private bool SelectionLinesHorizontal(double rak_X1, double rak_X2, double rak_Y1, double rak_M)
+		/*private bool SelectionLinesHorizontal(double rak_X1, double rak_X2, double rak_Y1, double rak_M)
 		{
 			foreach (LinjeViewModel lvm in _mainRepository.LinjeRepository)
 			{
@@ -99,9 +104,9 @@ namespace RajdRed.Repositories
 			}
 
 			return _hasSelected;
-		}
+		}*/
 
-		private bool SelectionLinesVertical(double rak_X, double rak_Y1, double rak_Y2)
+		/*private bool SelectionLinesVertical(double rak_X, double rak_Y1, double rak_Y2)
 		{
 			foreach (LinjeViewModel lvm in _mainRepository.LinjeRepository)
 			{
@@ -155,7 +160,7 @@ namespace RajdRed.Repositories
 			_hasSelected = false;
 
             return _hasSelected;
-		}
+		}*/
 
         public void DeselectAllLines()
         {

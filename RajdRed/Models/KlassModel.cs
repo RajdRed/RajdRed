@@ -9,7 +9,11 @@ namespace RajdRed.Models
 {
     public class KlassModel : RajdElement
     {
+<<<<<<< HEAD
         public KlassViewModel KlassViewModel { get; set; }
+=======
+        public KlassViewModel _klassViewModel { get; set; }
+>>>>>>> refs/remotes/origin/SelectFix-SnartÄrViFramme-Jocke
         public static double MinSize = 110;
 
         private bool _resize = false;
