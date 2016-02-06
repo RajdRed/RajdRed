@@ -11,7 +11,7 @@ namespace RajdRed.Models.Base
         public List<LinjeModel> LinjeModelList = new List<LinjeModel>();
 
         public int Number { get; set; }
-        public static int MinSize = 10;
+        public static int MinSize = 15;
 
         private bool _isSet = false;
         public bool IsSet
@@ -33,8 +33,6 @@ namespace RajdRed.Models.Base
             get { return _height; }
             set { _height = value; OnPropertyChanged("Height"); }
         }
-
-
 
         public NodTypesModel NodTypesModel;
         
