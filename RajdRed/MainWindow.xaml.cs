@@ -105,9 +105,10 @@ namespace RajdRed
 		private void theCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
             Keyboard.ClearFocus();
-            _mainRepository.DeselectAll();
 
             /************  För selectionverktyget  ***************/
+			if (!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl))
+				_mainRepository.DeselectAll();
 
             mouseDownPos = e.GetPosition(theCanvas);
 
