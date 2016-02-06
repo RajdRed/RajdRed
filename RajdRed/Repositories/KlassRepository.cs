@@ -96,7 +96,7 @@ namespace RajdRed.Repositories
         {
 			List<NodModelBase> nodList = new List<NodModelBase>();
 
-			foreach (NodKlassViewModel n in k._klassViewModel.NodKlassRepository)
+			foreach (NodKlassViewModel n in k.KlassViewModel.NodKlassRepository)
 			{
 				if (n.NodKlassModel.IsSet)
 				{
