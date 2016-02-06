@@ -65,6 +65,9 @@ namespace RajdRed.Repositories
             /*Kontroll för canvasnoder inanför selection*/
             _hasSelected = NodCanvasRepository.CheckIfHit(mouseDownPos, mouseUpPos, ref nmbList) || _hasSelected;
 
+            /*Kontroll för canvasnoder inanför selection*/
+            _hasSelected = TextBoxRepository.CheckIfHit(mouseDownPos, mouseUpPos) || _hasSelected;
+
 			SelectLinesOfNod(ref nmbList);
 
             return _hasSelected;
@@ -109,6 +112,7 @@ namespace RajdRed.Repositories
                 _klassRepository.DeleteSelected();
                 _linjeRepository.DeleteSelected();
                 _nodCanvasRepository.DeleteSelected();
+                _textBoxRepository.DeleteSelected();
 
                 _hasSelected = false;
             }

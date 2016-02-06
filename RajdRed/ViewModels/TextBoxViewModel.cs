@@ -28,5 +28,9 @@ namespace RajdRed.ViewModels
         {
             TextBoxView = t;
         }
+        public void Delete()
+        {        
+            TextBoxRepository.Remove(this);
+        }
     }
 }
