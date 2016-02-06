@@ -16,6 +16,7 @@ namespace RajdRed.Views
     public partial class NodCanvasView : UserControl
     {
         NodCanvasViewModel NodCanvasViewModel { get { return DataContext as NodCanvasViewModel; } }
+        Point _posOnUserControlOnHit;
         Point _startDragPosition;
         public NodCanvasView()
         {
@@ -41,7 +42,7 @@ namespace RajdRed.Views
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CaptureMouse();
-            _startDragPosition = e.GetPosition(Application.Current.MainWindow);
+            _startDragPosition = _posOnUserControlOnHit = Mouse.GetPosition(this);
 
             Dispatcher.Invoke(new Action(() => {
                 NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
@@ -62,19 +63,19 @@ namespace RajdRed.Views
                     double dy = (p.Y - _startDragPosition.Y) * (p.Y - _startDragPosition.Y);
 
                     if (dx >= dy) {
-                        SetValue(Canvas.LeftProperty, p.X - Width / 2);
-                        SetValue(Canvas.TopProperty, _startDragPosition.Y - Height / 2);
+                        SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
+                        SetValue(Canvas.TopProperty, _startDragPosition.Y - _posOnUserControlOnHit.Y);
                     }
                     else
                     {
-                        SetValue(Canvas.LeftProperty, _startDragPosition.X - Height / 2);
-                        SetValue(Canvas.TopProperty, p.Y - Height / 2);
+                        SetValue(Canvas.LeftProperty, _startDragPosition.X - _posOnUserControlOnHit.X);
+                        SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
                     }
                 }
                 else
                 {
-                    SetValue(Canvas.LeftProperty, p.X - Width / 2);
-                    SetValue(Canvas.TopProperty, p.Y - Height / 2);
+                    SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
+                    SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
                 }
             }
         }

@@ -41,6 +41,9 @@ namespace RajdRed.ViewModels
                 n.NodKlassViewModel.UnSet();
             }
 
+            LinjeModel.Nod1.LinjeModelList.Remove(LinjeModel);
+            LinjeModel.Nod2.LinjeModelList.Remove(LinjeModel);
+
             LinjeRepository.Remove(this);
         }
     }

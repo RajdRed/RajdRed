@@ -189,6 +189,7 @@ namespace RajdRed
 
         private void theCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
 		{
+            Keyboard.Focus(this);
 			theCanvas.ReleaseMouseCapture();
 			selectionBox.Visibility = Visibility.Collapsed;
 
@@ -212,6 +213,7 @@ namespace RajdRed
             //Checks if intersect with RajdElements on Canvas
             _mainRepository.CheckIfHit(mouseDownPos, mouseUpPos);
 
+            e.Handled = true;
 		}
 
 		private void Button_ArchiveMenu_MouseUp(object sender, MouseButtonEventArgs e)
