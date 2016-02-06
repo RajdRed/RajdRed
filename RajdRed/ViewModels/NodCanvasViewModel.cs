@@ -137,22 +137,5 @@ namespace RajdRed.ViewModels
 
             return false;
         }
-
-        //public void LookForAttachableNodes()
-        //{
-        //    if (NodCanvasView != null)
-        //    {
-        //        NodCanvasView.Dispatcher.Invoke(new Action(() => {
-        //            while (NodCanvasModel.IsSelected) {
-        //                Point p = new Point(NodCanvasModel.PositionLeft, NodCanvasModel.PositionTop);
-
-        //                if (NodCanvasRepository.MainRepository.KlassRepository.GetKlassByPoint(p) != null)
-        //                {
-        //                    KlassViewModel k = NodCanvasRepository.MainRepository.KlassRepository.GetKlassByPoint(p);
-        //                }
-        //            }
-        //        }));
-        //    }
-        //}
     }
 }

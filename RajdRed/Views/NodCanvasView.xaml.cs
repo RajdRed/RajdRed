@@ -32,8 +32,6 @@ namespace RajdRed.Views
                     {
                         NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
                     }));
-
-                    //NodCanvasViewModel.LookForAttachableNodes();
                 }
             };
         }
