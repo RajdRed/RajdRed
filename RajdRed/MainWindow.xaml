@@ -10,9 +10,18 @@
         Title="MainWindow" Height="720" Width="1024"
         Name="RajdRedMainWindow"
 		KeyDown="RajdRedMainWindow_KeyDown"
-        MinHeight="720" MinWidth="1024" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
+        MinHeight="720" MinWidth="1024" WindowStyle="None" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <vm:KlassViewModel x:Key="klassViewModel"/>
+
+        <Style TargetType="Rectangle" x:Key="MenuRectangleOpacity">
+            <Setter Property="Opacity" Value="1"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.6"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <Canvas 
@@ -25,7 +34,7 @@
                 <RowDefinition Height="78*" />
             </Grid.RowDefinitions>
             <Grid Name="menuTopRight" Grid.Row="0" Background="#222931">
-                <!-- Detta är ÖVRE delen av menyn -->
+                 <!--Detta är ÖVRE delen av menyn--> 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="956*" />
                     <ColumnDefinition Width="68*" />
@@ -37,10 +46,10 @@
                         <ColumnDefinition Width="22" />
                         <ColumnDefinition Width="22" />
                     </Grid.ColumnDefinitions>
-                    <!-- Detta är menyknapparna -->
-                    <Ellipse MouseLeftButtonUp="Ellipse_MinimizeWindow" Margin="5" Fill="#FDBD41" Grid.Column="0"></Ellipse>
-                    <Ellipse  MouseLeftButtonUp="Ellipse_MaximizeWindow" Margin="5" Fill="#34C749" Grid.Column="1"></Ellipse>
-                    <Ellipse MouseLeftButtonUp="Ellipse_CloseWindow" Margin="5" Fill="#FC615D" Grid.Column="2"></Ellipse>
+                     <!--Detta är menyknapparna-->
+                    <Rectangle MouseLeftButtonUp="Ellipse_MinimizeWindow" Fill="#FDBD41"  Margin="5" Grid.Column="0" Style="{StaticResource MenuRectangleOpacity}"/>
+                    <Rectangle  MouseLeftButtonUp="Ellipse_MaximizeWindow" Margin="5" Fill="#34C749" Grid.Column="1" Style="{StaticResource MenuRectangleOpacity}"/>
+                    <Rectangle MouseLeftButtonUp="Ellipse_CloseWindow" Margin="5" Fill="#FC615D" Grid.Column="2" Style="{StaticResource MenuRectangleOpacity}"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Background="Transparent">

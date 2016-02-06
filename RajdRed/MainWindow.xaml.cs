@@ -285,8 +285,8 @@ namespace RajdRed
 
 			theCanvas.Background = Colors.TheCanvasBg;
 			menuBot.Background = Colors.MenuBotBg;
-			menuTopRight.Background = Colors.KlassNameBg;
-			menuTopLeft.Fill = Colors.KlassNameBg;
+			//menuTopRight.Background = Colors.KlassNameBg;
+			//menuTopLeft.Fill = Colors.KlassNameBg;
 			titleBorder.Background = Colors.TheCanvasBg;
 			titleBorder.BorderBrush = Colors.TheCanvasBg;
 			TitleTextBox.SetCurrentValue(Control.ForegroundProperty, Colors.TitleText);

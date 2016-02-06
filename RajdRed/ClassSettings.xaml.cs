@@ -24,35 +24,12 @@ namespace RajdRed
 			DataContext = _kvm.KlassModel;
 		}
 
-        //public ClassSettings(KlassView k, Grid g)
-        //{
-        //    InitializeComponent();
-        //    _klass = k;
-        //    _backgroundGrid = g;
-
-        //    Canvas.SetZIndex(this, 4);
-
-        //    ClassName.Text = _klass.ClassName.Content.ToString();
-        //    Attributes.Text = _klass.Attributes.Text;
-        //    Methods.Text = _klass.Methods.Text;
-
-        //    ClassName.Background = _klass.GetMainWindow().Colors.KlassNameBg;
-        //    Attributes.Background = _klass.GetMainWindow().Colors.KlassAttributesBg;
-        //    Methods.Background = _klass.GetMainWindow().Colors.KlassMethodsBg;
-
-        //    drawNodes();
-        //}
-
-        private void drawNodes()
-        {
-        }
-
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("Är du säker på att du vill ta bort \"" + ClassName.Text + "\"", "Konfirmera borttagning", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-				_kvm.Delete();
+                _kvm.KlassRepository.MainRepository.DeleteSelected();
 				_kvm.KlassView.CloseSettings(this, _backgroundGrid);
             }
         }
