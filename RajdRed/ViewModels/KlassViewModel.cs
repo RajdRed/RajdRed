@@ -42,6 +42,19 @@ namespace RajdRed.ViewModels
             KlassRepository.Remove(this);
         }
 
+
+        public void Select()
+        {
+            KlassModel.IsSelected = true;
+            KlassRepository.IncreaseSelected();
+        }
+
+        public void Deselect()
+        {
+            KlassModel.IsSelected = false;
+            KlassRepository.DecreaseSelected();
+        }
+
         public void SetKlassView(KlassView kv)
         {
             KlassView = kv;

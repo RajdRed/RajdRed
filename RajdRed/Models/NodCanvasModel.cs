@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models.Base;
+using RajdRed.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,15 @@ namespace RajdRed.Models
 {
     public class NodCanvasModel : NodModelBase
     {
+        public NodCanvasViewModel NodCanvasViewModel { get; set; }
         public NodCanvasModel(){}
-        public NodCanvasModel(Point p)
+
+        public NodCanvasModel(Point p, NodCanvasViewModel n)
         {
             PositionLeft = p.X;
             PositionTop = p.Y;
             Path = NodTypesModel.Association;
+            NodCanvasViewModel = n;
 
             ZIndex = 99;
         }

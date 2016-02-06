@@ -29,6 +29,16 @@ namespace RajdRed.Views
             Loaded += (sender, args) =>
             {
                 TextBoxViewModel.SetView(this);
+
+                GotKeyboardFocus += (s,e) =>
+                {
+                    TextBoxViewModel.TextBoxRepository.MainRepository.Select(TextBoxViewModel.TextBoxModel);
+                };
+
+                LostKeyboardFocus += (s, e) =>
+                {
+                    TextBoxViewModel.TextBoxModel.IsSelected = false;
+                };
             };
         }
 

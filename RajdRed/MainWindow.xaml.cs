@@ -25,7 +25,6 @@ namespace RajdRed
         public bool isArchiveMenuActive = false;
 		public bool isSettingsMenuActive = false;
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
-		private bool darkMode = false;
 		private Point mouseDownPos;
 
         public MainRepository _mainRepository;
@@ -147,6 +146,8 @@ namespace RajdRed
                         Canvas.SetTop(selectionBox, mousePos.Y);
                         selectionBox.Height = mouseDownPos.Y - mousePos.Y;
                     }
+
+                    eventArgs.Handled = true;
                 };
             }
 

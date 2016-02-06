@@ -20,9 +20,9 @@ namespace RajdRed.ViewModels
 
         public int ZIndex = 0;
 
-        public NodCanvasViewModel(NodCanvasModel ncm, NodCanvasRepository ncr)
+        public NodCanvasViewModel(Point p, NodCanvasRepository ncr)
         {
-            NodCanvasModel = ncm;
+            NodCanvasModel = new NodCanvasModel(p, this);
             NodCanvasRepository = ncr;
         }
 
@@ -136,6 +136,18 @@ namespace RajdRed.ViewModels
             }
 
             return false;
+        }
+
+        public void Select()
+        {
+            NodCanvasModel.IsSelected = true;
+            NodCanvasRepository.IncreaseSelected();
+        }
+
+        public void Deselect()
+        {
+            NodCanvasModel.IsSelected = false;
+            NodCanvasRepository.DecreaseSelected();
         }
     }
 }

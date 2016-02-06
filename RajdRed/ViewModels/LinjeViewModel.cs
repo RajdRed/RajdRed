@@ -46,5 +46,17 @@ namespace RajdRed.ViewModels
 
             LinjeRepository.Remove(this);
         }
+
+        public void Select()
+        {
+            LinjeModel.IsSelected = true;
+            LinjeRepository.IncreaseSelected();
+        }
+
+        public void Deselect()
+        {
+            LinjeModel.IsSelected = false;
+            LinjeRepository.DecreaseSelected();
+        }
     }
 }

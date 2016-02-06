@@ -9,7 +9,7 @@ namespace RajdRed.Repositories
 {
     public class KlassRepository : ObservableCollection<KlassViewModel>
     {
-        private bool _hasSelected = false;
+        private int _numberOfSelected = 0;
 
         private MainRepository _mainRepository;
         public MainRepository MainRepository { get { return _mainRepository; } }
@@ -26,7 +26,7 @@ namespace RajdRed.Repositories
             return kvm;
         }
 
-		public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
+		public int CheckIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
         {
             foreach (KlassViewModel kvm in this)
             {
@@ -39,7 +39,8 @@ namespace RajdRed.Repositories
                 {
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
-                        _hasSelected = kvm.KlassModel.IsSelected = true;
+                        kvm.KlassModel.IsSelected = true;
+                        _numberOfSelected++;
 
 						foreach (NodKlassViewModel nod in kvm.NodKlassRepository)
 						{
@@ -53,27 +54,29 @@ namespace RajdRed.Repositories
                 }
             }
 
-            return _hasSelected;
+            return _numberOfSelected;
         }
 
         public void DeselectAllClasses()
         {
-            if (_hasSelected)
+            if (HasSelected())
             {
                 foreach (KlassViewModel k in this)
                 {
                     if (k.KlassModel.IsSelected)
                     {
-                        k.KlassModel.IsSelected = false;
+                        k.Deselect();
                     }
 
 					foreach (NodKlassViewModel nvkm in k.NodKlassRepository)
 					{
-						if (nvkm.NodKlassModel.IsSet)
-							nvkm.NodKlassModel.IsSelected = false;
+                        if (nvkm.NodKlassModel.IsSet)
+                            nvkm.Deselect();
 					}
                 }
             }
+
+            _numberOfSelected = 0;
         }
 
         public void DeleteSelected()
@@ -88,25 +91,8 @@ namespace RajdRed.Repositories
 			foreach (KlassViewModel kvm in deleteEverythingInThisList)
 				kvm.Delete();
 
-            _hasSelected = false;
-        }
-
-        public void Select(KlassModel k)
-        {
-			List<NodModelBase> nodList = new List<NodModelBase>();
-
-			foreach (NodKlassViewModel n in k.KlassViewModel.NodKlassRepository)
-			{
-				if (n.NodKlassModel.IsSet)
-				{
-					n.NodKlassModel.IsSelected = true;
-					nodList.Add(n.NodKlassModel);
-				}
-			}
-
-			_mainRepository.SelectLinesOfNod(ref nodList);
-            _hasSelected = k.IsSelected = true;
-        }
+            _numberOfSelected = 0;
+        }        
 
         public void ShowAllKlassNodes()
         {
@@ -132,6 +118,55 @@ namespace RajdRed.Repositories
             }
 
             return null;
+        }
+
+        public bool HasSelected()
+        {
+            return (_numberOfSelected != 0 ? true : false);
+        }
+
+        public void IncreaseSelected()
+        {
+            _numberOfSelected++;
+        }
+
+        public void DecreaseSelected()
+        {
+            _numberOfSelected--;
+        }
+
+        public void Select(KlassModel k)
+        {
+            List<NodModelBase> nodList = new List<NodModelBase>();
+
+            foreach (NodKlassViewModel n in k.KlassViewModel.NodKlassRepository)
+            {
+                if (n.IsSet())
+                {
+                    n.Select();
+                    nodList.Add(n.NodKlassModel);
+                }
+            }
+
+            _mainRepository.SelectLinesOfNod(ref nodList);
+            k.KlassViewModel.Select();
+        }
+
+        public void Deselect(KlassModel k)
+        {
+            List<NodModelBase> nodList = new List<NodModelBase>();
+
+            foreach (NodKlassViewModel n in k.KlassViewModel.NodKlassRepository)
+            {
+                if (n.IsSet())
+                {
+                    n.Deselect();
+                    nodList.Add(n.NodKlassModel);
+                }
+            }
+
+            _mainRepository.DeselectLinesOfNod(ref nodList);
+            k.KlassViewModel.Deselect();
         }
     }
 }

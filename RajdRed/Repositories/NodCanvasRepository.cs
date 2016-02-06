@@ -9,7 +9,7 @@ namespace RajdRed.Repositories
 {
     public class NodCanvasRepository : ObservableCollection<NodCanvasViewModel>
     {
-        private bool _hasSelected = false;
+        private int _numberOfSelected = 0;
         MainRepository _mainRepository;
         public MainRepository MainRepository { get { return _mainRepository; } }
         public NodCanvasRepository(MainRepository mr)
@@ -19,7 +19,7 @@ namespace RajdRed.Repositories
 
         public NodCanvasViewModel AddNewCanvasNod(Point p)
         {
-            NodCanvasViewModel nkvm = new NodCanvasViewModel(new NodCanvasModel(p), this);
+            NodCanvasViewModel nkvm = new NodCanvasViewModel(p, this);
             Add(nkvm);
 
             return nkvm;
@@ -33,7 +33,7 @@ namespace RajdRed.Repositories
             return nkvm;
         }
 
-		public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
+		public int CheckIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
         {
 			//Nummer 1 - Markera alla noder
             foreach (NodCanvasViewModel ncm in this)
@@ -47,24 +47,24 @@ namespace RajdRed.Repositories
                 {
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
-                        _hasSelected = ncm.NodCanvasModel.IsSelected = true;
+                        ncm.Select();
 						nodList.Add(ncm.NodCanvasModel);
                     }
                 }
             }
 
-            return _hasSelected;
+            return _numberOfSelected;
         }
 
         public void DeselectAllCanvasNodes()
         {
-            if (_hasSelected)
+            if (HasSelected())
             {
                 foreach (NodCanvasViewModel n in this)
                 {
                     if (n.NodCanvasModel.IsSelected)
                     {
-                        n.NodCanvasModel.IsSelected = false;
+                        n.Select();
                     }
                 }
             }
@@ -82,12 +82,32 @@ namespace RajdRed.Repositories
             foreach (NodCanvasViewModel ncvm in deleteEverythingInThisList)
                 ncvm.Delete();
 
-            _hasSelected = false;
+            _numberOfSelected = 0;
+        }
+
+        public bool HasSelected()
+        {
+            return (_numberOfSelected != 0 ? true : false);
+        }
+
+        public void IncreaseSelected()
+        {
+            _numberOfSelected++;
+        }
+
+        public void DecreaseSelected()
+        {
+            _numberOfSelected--;
         }
 
         public void Select(NodCanvasModel n)
         {
-            _hasSelected = n.IsSelected = true;
+            n.NodCanvasViewModel.Select();
+        }
+
+        public void Deselect(NodCanvasModel n)
+        {
+            n.NodCanvasViewModel.Deselect();
         }
     }
 }

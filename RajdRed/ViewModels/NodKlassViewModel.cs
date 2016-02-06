@@ -107,6 +107,23 @@ namespace RajdRed.ViewModels
             return false;
         }
 
+        public bool IsSet()
+        {
+            return NodKlassModel.IsSet;
+        }
+
+        public void Select()
+        {
+            NodKlassModel.IsSelected = true;
+            NodKlassRepository.IncreaseSelected();
+        }
+
+        public void Deselect()
+        {
+            NodKlassModel.IsSelected = false;
+            NodKlassRepository.DecreaseSelected();
+        }
+
         public void CreateLinje()
         {
             Point p = GetPositionRelativeCanvas();

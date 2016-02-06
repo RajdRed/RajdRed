@@ -7,7 +7,7 @@ namespace RajdRed.Repositories
 {
     public class NodKlassRepository : ObservableCollection<NodKlassViewModel>
     {
-		private bool _hasSelected = false;
+		private int _numberOfSelected = 0;
 
         public NodKlassRepository(KlassViewModel kvm)
         {
@@ -53,7 +53,22 @@ namespace RajdRed.Repositories
 
 		public void Select(NodKlassModel n)
 		{
-			_hasSelected = n.IsSelected = true;
+            n.NodKlassViewModel.Select();
 		}
+
+        public void Deselect(NodKlassModel n)
+        {
+            n.NodKlassViewModel.Deselect();
+        }
+
+        public void IncreaseSelected()
+        {
+            _numberOfSelected++;
+        }
+
+        public void DecreaseSelected()
+        {
+            _numberOfSelected--;
+        }
     }
 }
