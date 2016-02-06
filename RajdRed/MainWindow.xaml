@@ -122,10 +122,13 @@
                               X2="{Binding LinjeModel.X2}"
                               Y2="{Binding LinjeModel.Y2}"
                               StrokeThickness="2"
-                              Stroke="{Binding LinjeModel.Color, UpdateSourceTrigger=PropertyChanged}"
+                              Stroke="Black"
                               MouseDown="Line_MouseDown">
                             <Line.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="8" Color="Blue"/>
+                                <DropShadowEffect 
+                                    ShadowDepth="0"    
+                                    BlurRadius="8" 
+                                    Color="{Binding LinjeModel.Color, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                             </Line.Effect>
                         </Line>
                     </Canvas>

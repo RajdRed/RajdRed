@@ -105,7 +105,7 @@ namespace RajdRed.Models
                 if (IsSelected)
                     return Brushes.Red;
                 else
-                    return Brushes.Black;
+                    return Brushes.Transparent;
             }
         }
         
