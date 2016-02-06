@@ -20,14 +20,14 @@ namespace RajdRed.Models.Base
             set { _isSet = value; OnPropertyChanged("IsSet"); }
         }
         
-        private double _width;
+        private double _width = MinSize;
         public virtual double Width
         {
             get { return _width; }
             set { _width = value; OnPropertyChanged("Width"); }
         }
 
-        private double _height;
+        private double _height = MinSize;
         public virtual double Height
         {
             get { return _height; }

@@ -28,10 +28,20 @@
         </Style>
     </UserControl.Resources>
     <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave">
-        <Border BorderThickness="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" 
-                BorderBrush="Black" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" 
-                Margin="-7" CornerRadius="2,2,2,2" 
-                Visibility="{Binding KlassModel.Selected}"></Border>
+        <Border PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" 
+                MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" 
+                CornerRadius="2,2,2,2" BorderThickness="1">
+            <Border.Resources>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding KlassModel.IsSelected}" Value="true">
+                            <Setter Property="Background" Value="#CCE8FE"/>
+                            <Setter Property="BorderBrush" Value="#99D1FF"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Resources>
+        </Border>
         <Grid Name="NodeAttachedGrid">
             <Border Name="InnerBorder" Margin="15" CornerRadius="2,2,2,2" BorderBrush="Black" 
                     MouseDown="KlassGrid_MouseDown"

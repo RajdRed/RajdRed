@@ -12,5 +12,40 @@
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
              Background="{Binding NodCanvasModel.Background}"
-             Content="{Binding NodCanvasModel.Path}">
+             HorizontalContentAlignment="Center"
+             VerticalContentAlignment="Center">
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleX" 
+                                         To="1.5" Duration="0:0:0.2"/>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleY" 
+                                         To="1.5" Duration="0:0:0.2"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleX" 
+                                         Duration="0:0:0.2"/>
+                    <DoubleAnimation Storyboard.TargetName="ContentScale"
+                                         Storyboard.TargetProperty="ScaleY" 
+                                         Duration="0:0:0.2"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <ContentPresenter Content="{Binding NodCanvasModel.Path}"
+                      RenderTransformOrigin="0.5 0.5">
+        <ContentPresenter.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
+            </TransformGroup>
+        </ContentPresenter.RenderTransform>
+    </ContentPresenter>
 </UserControl>
