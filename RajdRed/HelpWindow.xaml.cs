@@ -24,26 +24,6 @@ using System.Windows.Shapes;
  			InitializeComponent();
  		}
  
- 		private void setColors(object sender, RoutedEventArgs e)
- 		{
- 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
- 			bool dark = mw.getDarkMode();
- 
- 			if (dark)
- 			{
- 				menuTopLeft.Fill = (Brush)new BrushConverter().ConvertFrom("#151515");
- 				menuBtnsBg.SetCurrentValue(Control.BackgroundProperty, (Brush)new BrushConverter().ConvertFrom("#151515"));
- 				menuBot.SetCurrentValue(Control.BackgroundProperty, (Brush)new BrushConverter().ConvertFrom("#333"));
- 			}
- 
- 			else
- 			{
- 				menuTopLeft.Fill = (Brush)new BrushConverter().ConvertFrom("#222931");
- 				menuBtnsBg.SetCurrentValue(Control.BackgroundProperty, (Brush)new BrushConverter().ConvertFrom("#222931"));
- 				menuBot.SetCurrentValue(Control.BackgroundProperty, (Brush)new BrushConverter().ConvertFrom("#4f5b6d"));
- 			}
- 		}
- 
  		private void Ellipse_CloseWindow(object sender, MouseButtonEventArgs e)
  		{
  			this.Close();

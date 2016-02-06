@@ -28,9 +28,12 @@ namespace RajdRed
 		{
 			MainWindow mw = (MainWindow)Application.Current.MainWindow;
 
-			int length = mw._mainRepository.KlassRepository.Count;
+			int classlength = mw._mainRepository.KlassRepository.Count;
+			int linjelength = mw._mainRepository.LinjeRepository.Count;
+			int nodlength = mw._mainRepository.NodCanvasRepository.Count;
+			int textlength = mw._mainRepository.TextBoxRepository.Count;
 
-			if (length > 0)
+			if (classlength > 0 || linjelength > 0 || nodlength > 0 || textlength > 0)
 			{
 				MessageBoxResult messageBoxResult = MessageBox.Show("Vill du spara dokumentet \"" + mw.TitleTextBox.Text + "\" till PDF?", "Save current?", System.Windows.MessageBoxButton.YesNoCancel);
 
@@ -41,16 +44,34 @@ namespace RajdRed
 					if (didISave)
 					{
 						mw.TitleTextBox.Text = "Untitled";
-						for (int i = 0; i < length; i++)
+						for (int i = 0; i < classlength; i++)
 							mw._mainRepository.KlassRepository.RemoveAt(0);
+
+						for (int i = 0; i < linjelength; i++)
+							mw._mainRepository.LinjeRepository.RemoveAt(0);
+
+						for (int i = 0; i < nodlength; i++)
+							mw._mainRepository.NodCanvasRepository.RemoveAt(0);
+
+						for (int i = 0; i < textlength; i++)
+							mw._mainRepository.TextBoxRepository.RemoveAt(0);
 					}
 				}
 
 				else if (messageBoxResult != MessageBoxResult.Cancel)
 				{
 					mw.TitleTextBox.Text = "Untitled";
-					for (int i = 0; i < length; i++)
+					for (int i = 0; i < classlength; i++)
 						mw._mainRepository.KlassRepository.RemoveAt(0);
+
+					for (int i = 0; i < linjelength; i++)
+						mw._mainRepository.LinjeRepository.RemoveAt(0);
+
+					for (int i = 0; i < nodlength; i++)
+						mw._mainRepository.NodCanvasRepository.RemoveAt(0);
+
+					for (int i = 0; i < textlength; i++)
+						mw._mainRepository.TextBoxRepository.RemoveAt(0);
 				}
 			}
 
