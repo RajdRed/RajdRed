@@ -140,6 +140,8 @@ namespace RajdRed
 				isSettingsMenuActive = false;
 				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
+
+            e.Handled = true;
 		}
 
 		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

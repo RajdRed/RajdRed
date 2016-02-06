@@ -11,6 +11,8 @@ namespace RajdRed.Models
         public int Row { get; set; }
         public int Column { get; set; }
 
+        public NodKlassViewModel NodKlassViewModel { get; set; }
+
         private double _width = 15;
         public override double Width
         {

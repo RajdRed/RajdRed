@@ -23,6 +23,8 @@ namespace RajdRed.ViewModels
         public NodKlassViewModel(NodKlassModel nkm, KlassViewModel kvm ,NodKlassRepository knp)
         {
             NodKlassModel = nkm;
+            nkm.NodKlassViewModel = this;
+
             NodKlassRepository = knp;
             KlassViewModel = kvm;
         }
@@ -92,7 +94,8 @@ namespace RajdRed.ViewModels
         {
             if (NodKlassModel.IsSet)
             {
-                NodKlassModel.IsSet = false;
+                NodKlassModel.IsSet = NodKlassModel.IsSelected = false;
+                NodKlassModel.Visible = Visibility.Hidden;
                 NodKlassModel.LinjeModelList = new List<LinjeModel>();
                 TurnToNode();
 

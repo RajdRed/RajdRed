@@ -29,6 +29,18 @@ namespace RajdRed.ViewModels
 
         public void Delete()
         {
+            if (LinjeModel.Nod1 is NodKlassModel && LinjeModel.Nod1.IsSelected)
+            {
+                NodKlassModel n = LinjeModel.Nod1 as NodKlassModel;
+                n.NodKlassViewModel.UnSet();
+            }
+
+            if (LinjeModel.Nod2 is NodKlassModel && LinjeModel.Nod2.IsSelected) 
+            {
+                NodKlassModel n = LinjeModel.Nod2 as NodKlassModel;
+                n.NodKlassViewModel.UnSet();
+            }
+
             LinjeRepository.Remove(this);
         }
     }

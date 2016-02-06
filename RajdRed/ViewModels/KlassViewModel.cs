@@ -33,7 +33,7 @@ namespace RajdRed.ViewModels
         {
             foreach (NodKlassViewModel n in NodKlassRepository)
             {
-                if (n.NodKlassModel.IsSet)
+                if (n.NodKlassModel.IsSet && !n.NodKlassModel.IsSelected)
                 {
                     KlassRepository.MainRepository.NodCanvasRepository.CreateFromNodModelBase(n.NodKlassModel);
                 }
