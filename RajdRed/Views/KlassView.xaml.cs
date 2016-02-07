@@ -88,7 +88,7 @@ namespace RajdRed.Views
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (IsMouseCaptured && KlassViewModel.KlassModel.IsSelected && !KlassViewModel.KlassModel.Resize)
+            if (IsMouseCaptured && KlassViewModel.KlassModel.IsSelected && (KlassViewModel.KlassModel.Resize=="arrow"))
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
 
@@ -98,7 +98,7 @@ namespace RajdRed.Views
                 if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
                     SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
             }
-            if (KlassViewModel.KlassModel.Resize && _isDown)
+            if (KlassViewModel.KlassModel.Resize == "NSWSE" && _isDown)
             {
                 double _widthChange, _heightChange;
                 Point pos = e.GetPosition(Application.Current.MainWindow);
@@ -128,7 +128,8 @@ namespace RajdRed.Views
             else
                 KlassViewModel.KlassModel.OnField = true;
 
-            _isDown = KlassViewModel.KlassModel.Resize = false;
+            _isDown = false;
+            KlassViewModel.KlassModel.Resize = "arrow";
             e.Handled = true;
         }
 
@@ -142,7 +143,7 @@ namespace RajdRed.Views
         private void InnerBorder_MouseEnter(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.SizeAll;
-            KlassViewModel.KlassModel.Resize = false;
+            KlassViewModel.KlassModel.Resize = "arrow";
         }
 
         private void InnerBorder_MouseLeave(object sender, MouseEventArgs e)
@@ -153,20 +154,22 @@ namespace RajdRed.Views
         {
             _selectedElement = KlassViewModel;
             int boarder = KlassViewModel.OnSide(e.GetPosition(this));
-            KlassViewModel.KlassModel.Resize = true;
+            KlassViewModel.KlassModel.Resize = "arrow";
             switch(boarder)
             {
                 case 1:
-                    KlassViewModel.KlassModel.Resize = false;
+                    KlassViewModel.KlassModel.Resize = "arrow";
                     break;
                 case 2:
-                    KlassViewModel.KlassModel.Resize = false;
+                    KlassViewModel.KlassModel.Resize = "arrow";
                     break;
                 case 3:
                     Cursor = Cursors.SizeNWSE;
+                    KlassViewModel.KlassModel.Resize = "NWSE";
                     break;
                 case 4:
-                    Cursor = Cursors.SizeNWSE;
+                    Cursor = Cursors.SizeNS;
+                    KlassViewModel.KlassModel.Resize = "NS";
                     break;
                 default:
                     break;
@@ -182,7 +185,7 @@ namespace RajdRed.Views
 
         private void Border_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (KlassViewModel.KlassModel.Resize)
+            if (!(KlassViewModel.KlassModel.Resize == "arrow"))
             {
                 CaptureMouse();
                 _startPoint = e.GetPosition(Application.Current.MainWindow);
