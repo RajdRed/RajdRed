@@ -136,10 +136,8 @@ namespace RajdRed.ViewModels
             }
         }
 
-        public void CreateLinje()
+        public void CreateLinje(Point p)
         {
-            Point p = GetPositionRelativeCanvas();
-
             if (Set())
             {
                 NodCanvasModel n = KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.AddNewCanvasNod(p).NodCanvasModel;

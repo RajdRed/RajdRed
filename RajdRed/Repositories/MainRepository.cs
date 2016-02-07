@@ -43,7 +43,6 @@ namespace RajdRed.Repositories
             get { return _textBoxRepository; }
         }
         
-
         public MainRepository(MainWindow mw)
         {
             _mainWindow = mw;
@@ -52,7 +51,6 @@ namespace RajdRed.Repositories
             _nodCanvasRepository = new NodCanvasRepository(this);
             _textBoxRepository = new TextBoxRepository(this);
         }
-
 
         public void SelectIfHit(Point mouseDownPos, Point mouseUpPos)
         {

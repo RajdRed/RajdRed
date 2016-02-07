@@ -101,7 +101,7 @@ namespace RajdRed.Views
                 if (!NodKlassViewModel.NodKlassModel.IsSet)
                 {
                     //Skapa ny linje
-                    NodKlassViewModel.CreateLinje();
+                    NodKlassViewModel.CreateLinje(e.GetPosition(Application.Current.MainWindow));
                 }
                 else
                 {

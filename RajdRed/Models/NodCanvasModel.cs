@@ -16,12 +16,10 @@ namespace RajdRed.Models
 
         public NodCanvasModel(Point p, NodCanvasViewModel n)
         {
-            PositionLeft = p.X;
-            PositionTop = p.Y;
+            PositionLeft = p.X - Width / 2;
+            PositionTop = p.Y - Height / 2;
             Path = NodTypesModel.Association;
             NodCanvasViewModel = n;
-
-            ZIndex = 99;
         }
 
         void SetLinje(LinjeModel lm)
