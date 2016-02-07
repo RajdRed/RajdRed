@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models;
+using RajdRed.Models.Adds;
 using RajdRed.Repositories;
 using RajdRed.Views;
 using System.Collections.Generic;
@@ -96,7 +97,7 @@ namespace RajdRed.ViewModels
             {
                 NodKlassModel.IsSet = NodKlassModel.IsSelected = false;
                 NodKlassModel.Visible = Visibility.Hidden;
-                NodKlassModel.LinjeModelList = new List<LinjeModel>();
+                NodKlassModel.LinjeListModel = new LinjeListModel();
                 TurnToNode();
 
                 KlassViewModel.KlassModel.PropertyChanged -= KlassModel_PropertyChanged;
@@ -105,6 +106,34 @@ namespace RajdRed.ViewModels
             }
 
             return false;
+        }
+
+        public bool IsSet()
+        {
+            return NodKlassModel.IsSet;
+        }
+
+        public void Select()
+        {
+            if (!IsSelected())
+            {
+                NodKlassModel.IsSelected = true;
+                NodKlassRepository.IncreaseSelected();
+
+                foreach (LinjeModel l in NodKlassModel.LinjeListModel)
+                {
+                    l.LinjeViewModel.Select();
+                }
+            }
+        }
+
+        public void Deselect()
+        {
+            if (IsSelected())
+            {
+                NodKlassModel.IsSelected = false;
+                NodKlassRepository.DecreaseSelected();
+            }
         }
 
         public void CreateLinje()
@@ -118,8 +147,6 @@ namespace RajdRed.ViewModels
                     NodKlassModel,
                     n
                 );
-
-                KlassViewModel.KlassRepository.MainRepository.Select(n);
             }
         }
 
@@ -127,13 +154,13 @@ namespace RajdRed.ViewModels
         {
             Set();
 
-            foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
+            foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeListModel)
             {
                 l.ReplaceNod(ncvm.NodCanvasModel, this.NodKlassModel);
-                NodKlassModel.LinjeModelList.Add(l);
+                NodKlassModel.LinjeListModel.Add(l);
             }
 
-            KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.Remove(ncvm);
+            ncvm.Delete();
         }
 
         public Point GetPositionRelativeCanvas()
@@ -154,15 +181,16 @@ namespace RajdRed.ViewModels
 
         public void LooseLinje(Point p)
         {
-            if (NodKlassModel.IsSet)
+            if (IsSet())
             {
                 NodCanvasViewModel ncvm = KlassViewModel.KlassRepository.MainRepository.NodCanvasRepository.AddNewCanvasNod(p);
-                foreach (LinjeModel l in NodKlassModel.LinjeModelList)
+                foreach (LinjeModel l in NodKlassModel.LinjeListModel)
                 {
                     l.ReplaceNod(NodKlassModel, ncvm.NodCanvasModel);
-                    ncvm.NodCanvasModel.LinjeModelList.Add(l);
+                    ncvm.NodCanvasModel.LinjeListModel.Add(l);
                 }
 
+                ncvm.Select();
                 UnSet();
             }
         }
@@ -175,6 +203,11 @@ namespace RajdRed.ViewModels
         public void Hide()
         {
             NodKlassModel.Visible = Visibility.Hidden;
+        }
+
+        public bool IsSelected()
+        {
+            return (NodKlassModel.IsSelected ? true : false);
         }
     }
 }

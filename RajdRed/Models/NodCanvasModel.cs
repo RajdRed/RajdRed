@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models.Base;
+using RajdRed.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,22 @@ namespace RajdRed.Models
 {
     public class NodCanvasModel : NodModelBase
     {
+        public NodCanvasViewModel NodCanvasViewModel { get; set; }
         public NodCanvasModel(){}
-        public NodCanvasModel(Point p)
+
+        public NodCanvasModel(Point p, NodCanvasViewModel n)
         {
             PositionLeft = p.X;
             PositionTop = p.Y;
             Path = NodTypesModel.Association;
+            NodCanvasViewModel = n;
 
             ZIndex = 99;
         }
 
         void SetLinje(LinjeModel lm)
         {
-            LinjeModelList.Add(lm);
+            LinjeListModel.Add(lm);
         }
 
         public static NodCanvasModel CopyNod(NodKlassModel n)
@@ -32,7 +36,7 @@ namespace RajdRed.Models
                 Height = n.Height,
                 Width = n.Width,
                 IsSelected = n.IsSelected,
-                LinjeModelList = n.LinjeModelList,
+                LinjeListModel = n.LinjeListModel,
                 OnField = n.OnField,
                 Path = n.Path,
                 NodTypesModel = n.NodTypesModel,
@@ -40,7 +44,7 @@ namespace RajdRed.Models
                 PositionTop = n.PositionTop
             };
 
-            foreach (LinjeModel l in n.LinjeModelList)
+            foreach (LinjeModel l in n.LinjeListModel)
             {
                 if (l.Nod1 == n)
                     l.Nod1 = ncm;

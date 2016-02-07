@@ -7,19 +7,20 @@ using System.Windows.Controls;
 namespace RajdRed.ViewModels
 {
     public class KlassViewModel
-    {
-        //AdornerLayer aLayer;
-        
+    {  
+        //Standard properties
         public KlassModel KlassModel { get; set; }
         public KlassView KlassView { get; set; }
         public KlassRepository KlassRepository { get; set; }
+
+        //Extra properties
         public NodKlassRepository NodKlassRepository { get; set; }
 
         public KlassViewModel(Point startPosition, KlassRepository kr)
         {
             KlassRepository = kr;
             KlassModel = new KlassModel(this, startPosition);
-            NodKlassRepository = new NodKlassRepository(this);
+            NodKlassRepository = new NodKlassRepository(KlassRepository.MainRepository, this);
         }
 
         public KlassViewModel(KlassModel km)
@@ -28,6 +29,11 @@ namespace RajdRed.ViewModels
         }
 
         public KlassViewModel(){}
+
+        public bool IsSelected()
+        {
+            return (KlassModel.IsSelected ? true : false);
+        }
 
         public void Delete()
         {
@@ -39,7 +45,33 @@ namespace RajdRed.ViewModels
                 }
             }
 
+            Deselect();
             KlassRepository.Remove(this);
+        }
+
+
+        public void Select()
+        {
+            if (!IsSelected())
+            {
+                KlassModel.IsSelected = true;
+                KlassRepository.IncreaseSelected();
+
+                foreach (NodKlassViewModel n in NodKlassRepository)
+                {
+                    if (n.IsSet())
+                        n.Select();
+                }
+            }
+        }
+
+        public void Deselect()
+        {
+            if (IsSelected())
+            {
+                KlassModel.IsSelected = false;
+                KlassRepository.DecreaseSelected();
+            }
         }
 
         public void SetKlassView(KlassView kv)
@@ -65,8 +97,8 @@ namespace RajdRed.ViewModels
 
         public int OnSide(Point p)
         {
-            double Top = -1;
-            double Left = -1;
+            double Top = 3;
+            double Left = 1;
             double Right = Left + (this.KlassModel.Width);
             double Bottom = Top + (this.KlassModel.Height);
 
@@ -85,16 +117,26 @@ namespace RajdRed.ViewModels
                     //leftBoarder
                     return 2;
                 }
-                else if (p.X > Left && ((p.Y > Top) && (p.Y < Bottom)))
+                else if ((p.X > Left && ((p.Y > (Top + (Bottom - 20))) && (p.Y < Bottom))) && (p.Y > Top && ((p.X > (Left + Right - 20))) && (p.X < Right)))
+
                 {
-                    //rightBoarder
+                    //rightBoarder och leftboarder -> nere i hörnet
                     return 3;
                 }
-                else
+
+                else if ( (p.X > Left && p.X < (Right - 20) ) && p.Y > (Bottom -5))
                 {
                     //bottomBoarder = true;
                     return 4;
                 }
+                else if ((p.Y > Top && p.Y < (Bottom - 20)) && p.X > (Right - 5))
+                {
+                    //bottomBoarder = true;
+                    return 5;
+                }
+
+                else
+                    return 1; //skapar ingen förändring
 
             }
         }
@@ -116,5 +158,6 @@ namespace RajdRed.ViewModels
                     n.Hide();
             }
         }
+
     }
 }

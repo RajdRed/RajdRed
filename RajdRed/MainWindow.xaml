@@ -122,7 +122,7 @@
                     <Canvas/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+            <ItemsControl.ItemTemplate >
                 <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
                     <Canvas>
                         <Line DataContext="{Binding}"
@@ -131,8 +131,19 @@
                               X2="{Binding LinjeModel.X2}"
                               Y2="{Binding LinjeModel.Y2}"
                               StrokeThickness="3"
-                              Stroke="Black"
-                              MouseDown="Line_MouseDown" StrokeLineJoin="Round">
+                              MouseDown="Line_MouseDown"
+                              MouseEnter="Line_MouseEnter"
+                              MouseLeave="Line_MouseLeave">
+                            <Line.Style>
+                                <Style TargetType="Line">
+                                    <Setter Property="Stroke" Value="Black"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LinjeModel.IsSelected}" Value="True">
+                                            <Setter Property="Stroke" Value="Red"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Line.Style>
                         </Line>
                     </Canvas>
                 </DataTemplate>
