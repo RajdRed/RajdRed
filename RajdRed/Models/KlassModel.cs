@@ -124,7 +124,7 @@ namespace RajdRed.Models
         public KlassModel(KlassViewModel kvm, Point startPosition)
         {
             KlassViewModel = kvm;
-            Header = "New Class *";
+            Header = "New Class";
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;
             IsSelected = true;
