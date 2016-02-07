@@ -6,7 +6,7 @@ namespace RajdRed.Models
 {
     public class TextBoxModel : RajdElement
     {
-        TextBoxViewModel TextBoxViewModel { get; set; }
+        public TextBoxViewModel TextBoxViewModel { get; set; }
         private string _text;
         public string Text
         {

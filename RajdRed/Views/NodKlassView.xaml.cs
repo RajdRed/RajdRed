@@ -28,7 +28,16 @@ namespace RajdRed.Views
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                NodKlassViewModel.NodKlassRepository.MainRepository.DeselectAll();
+            }
+
             NodKlassViewModel.NodKlassModel.IsPressed = true;
+            
+            if (NodKlassViewModel.IsSet())
+                NodKlassViewModel.Select();
+            
             e.Handled = true;
         }
 
@@ -37,7 +46,7 @@ namespace RajdRed.Views
             if (NodKlassViewModel.NodKlassModel.IsSet)
             {
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
-                Grid g = new Grid() { Width = mw.theCanvas.ActualWidth, Height = mw.theCanvas.ActualHeight, Background = Brushes.Black, Opacity = 0.2 };
+                Grid g = new Grid() { Width = mw.theCanvas.ActualWidth, Height = mw.theCanvas.ActualHeight, Background = Brushes.Black, Opacity = 0 };
                 Canvas.SetLeft(g, 0);
                 Canvas.SetTop(g, 0);
                 
@@ -92,7 +101,7 @@ namespace RajdRed.Views
                 if (!NodKlassViewModel.NodKlassModel.IsSet)
                 {
                     //Skapa ny linje
-                    NodKlassViewModel.CreateLinje();
+                    NodKlassViewModel.CreateLinje(e.GetPosition(Application.Current.MainWindow));
                 }
                 else
                 {

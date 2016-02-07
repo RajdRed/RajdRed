@@ -151,7 +151,7 @@ namespace RajdRed.Models
 
         public static LinjeModel GetSharingLinje(NodModelBase n1, NodModelBase n2)
         {
-            foreach (LinjeModel l in n1.LinjeModelList)
+            foreach (LinjeModel l in n1.LinjeListModel)
             {
                 if (l.Nod1 == n2 || l.Nod2 == n2)
                     return l;

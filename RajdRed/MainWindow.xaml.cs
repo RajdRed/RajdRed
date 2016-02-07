@@ -25,7 +25,6 @@ namespace RajdRed
         public bool isArchiveMenuActive = false;
 		public bool isSettingsMenuActive = false;
 		public RajdColors Colors = new RajdColors(RajdColorScheme.Light);
-		private bool darkMode = false;
 		private Point mouseDownPos;
 
         public MainRepository _mainRepository;
@@ -105,9 +104,10 @@ namespace RajdRed
 		private void theCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
             Keyboard.ClearFocus();
-            _mainRepository.DeselectAll();
 
             /************  För selectionverktyget  ***************/
+			if (!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl))
+				_mainRepository.DeselectAll();
 
             mouseDownPos = e.GetPosition(theCanvas);
 
@@ -147,6 +147,8 @@ namespace RajdRed
                         Canvas.SetTop(selectionBox, mousePos.Y);
                         selectionBox.Height = mouseDownPos.Y - mousePos.Y;
                     }
+
+                    eventArgs.Handled = true;
                 };
             }
 
@@ -191,7 +193,7 @@ namespace RajdRed
 			}
 
             //Checks if intersect with RajdElements on Canvas
-            _mainRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+            _mainRepository.SelectIfHit(mouseDownPos, mouseUpPos);
 
             e.Handled = true;
 		}
@@ -286,7 +288,7 @@ namespace RajdRed
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           _mainRepository.Select(_mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).TextBoxModel);
+           _mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).Select();
         }
 
         private void Line_MouseEnter(object sender, MouseEventArgs e)

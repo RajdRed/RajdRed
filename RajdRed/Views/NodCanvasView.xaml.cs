@@ -28,6 +28,7 @@ namespace RajdRed.Views
                     CaptureMouse(); //Avkommenteras om/när man kan dra nod från klass   
                     Point p = Mouse.GetPosition(Application.Current.MainWindow);
                     _startDragPosition = new Point(p.X-NodCanvasViewModel.NodCanvasModel.Width, p.Y-NodCanvasViewModel.NodCanvasModel.Height);
+					_posOnUserControlOnHit = Mouse.GetPosition(this);
 
                     Dispatcher.Invoke(new Action(() =>
                     {
@@ -48,6 +49,13 @@ namespace RajdRed.Views
                 NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
             }));
 
+            if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                NodCanvasViewModel.NodCanvasRepository.MainRepository.DeselectAll();
+            }
+
+            NodCanvasViewModel.Select();
+
             e.Handled = true;
         }
 
@@ -57,7 +65,7 @@ namespace RajdRed.Views
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
 
-                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+               if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
                     double dx = (p.X - _startDragPosition.X) * (p.X - _startDragPosition.X);
                     double dy = (p.Y - _startDragPosition.Y) * (p.Y - _startDragPosition.Y);
@@ -72,10 +80,14 @@ namespace RajdRed.Views
                         SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
                     }
                 }
+
                 else
                 {
-                    SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
-                    SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+					if (!((p.Y - _posOnUserControlOnHit.Y) <= 100.5))
+						SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+
+					if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
+						SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
                 }
             }
         }
@@ -90,16 +102,18 @@ namespace RajdRed.Views
             {
                 NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.HideAllKlassNodes();
             }));
+
+            e.Handled = true;
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-        
+            this.Opacity = 100;
         }
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-           
+            this.Opacity = 0.10;
         }
     }
 }

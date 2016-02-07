@@ -127,7 +127,6 @@ namespace RajdRed.Models
             Header = "New Class";
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;
-            IsSelected = true;
 		}
     }
 }

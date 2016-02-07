@@ -15,8 +15,7 @@ namespace RajdRed.ViewModels
             LinjeModel = new LinjeModel(this, n1, n2);
         }
 
-        public LinjeViewModel()
-        {}
+        public LinjeViewModel(){}
 
         public void Split(Point p)
         {
@@ -24,7 +23,9 @@ namespace RajdRed.ViewModels
             LinjeRepository.AddNewLinje(LinjeModel.Nod1, ncvm.NodCanvasModel);
             LinjeRepository.AddNewLinje(LinjeModel.Nod2, ncvm.NodCanvasModel);
 
-            LinjeRepository.Remove(this);
+            ncvm.Select();
+
+            JustDelete();
         }
 
         public void Delete()
@@ -41,10 +42,77 @@ namespace RajdRed.ViewModels
                 n.NodKlassViewModel.UnSet();
             }
 
-            LinjeModel.Nod1.LinjeModelList.Remove(LinjeModel);
-            LinjeModel.Nod2.LinjeModelList.Remove(LinjeModel);
+            LinjeModel.Nod1.LinjeListModel.Remove(LinjeModel);
+            LinjeModel.Nod2.LinjeListModel.Remove(LinjeModel);
 
+            Deselect();
             LinjeRepository.Remove(this);
+        }
+
+        public void JustDelete()
+        {
+            LinjeModel.Nod1.LinjeListModel.Remove(LinjeModel);
+            LinjeModel.Nod2.LinjeListModel.Remove(LinjeModel);
+
+            Deselect();
+            LinjeRepository.Remove(this);
+        }
+
+        public void Select()
+        {
+            if (!IsSelected())
+            {
+                LinjeModel.IsSelected = true;
+                LinjeRepository.IncreaseSelected();
+
+                if (!LinjeModel.Nod1.IsSelected)
+                {
+                    if (LinjeModel.Nod1.LinjeListModel.Count == 1 || LinjeModel.Nod1.LinjeListModel.AllIsSelected())
+                    {
+                        if (LinjeModel.Nod1 is NodCanvasModel)
+                        {
+                            NodCanvasModel n = LinjeModel.Nod1 as NodCanvasModel;
+                            n.NodCanvasViewModel.Select();
+                        }
+                        else
+                        {
+                            NodKlassModel n = LinjeModel.Nod1 as NodKlassModel;
+                            n.NodKlassViewModel.Select();
+                        }
+                    }
+                }
+
+                if (!LinjeModel.Nod2.IsSelected)
+                {
+                    if (LinjeModel.Nod2.LinjeListModel.Count == 1 || LinjeModel.Nod2.LinjeListModel.AllIsSelected())
+                    {
+                        if (LinjeModel.Nod2 is NodCanvasModel)
+                        {
+                            NodCanvasModel n = LinjeModel.Nod2 as NodCanvasModel;
+                            n.NodCanvasViewModel.Select();
+                        }
+                        else
+                        {
+                            NodKlassModel n = LinjeModel.Nod2 as NodKlassModel;
+                            n.NodKlassViewModel.Select();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Deselect()
+        {
+            if (IsSelected())
+            {
+                LinjeModel.IsSelected = false;
+                LinjeRepository.DecreaseSelected();
+            }
+        }
+
+        public bool IsSelected()
+        {
+            return (LinjeModel.IsSelected ? true : false);
         }
     }
 }

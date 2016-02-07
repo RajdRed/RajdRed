@@ -81,14 +81,16 @@ namespace RajdRed.Views
 
             CaptureMouse();
             _posOnUserControlOnHit = Mouse.GetPosition(this);
-            mw._mainRepository.Select(KlassViewModel.KlassModel);
+
+            KlassViewModel.Select();
 
 			e.Handled = true;
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (IsMouseCaptured && KlassViewModel.KlassModel.IsSelected && (KlassViewModel.KlassModel.Resize=="arrow"))
+
+            if (IsMouseCaptured && KlassViewModel.IsSelected() && (KlassViewModel.KlassModel.Resize=="arrow"))
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
 

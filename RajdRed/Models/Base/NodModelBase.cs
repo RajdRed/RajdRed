@@ -8,7 +8,7 @@ namespace RajdRed.Models.Base
 {
     public class NodModelBase : RajdElement
     {
-        public List<LinjeModel> LinjeModelList = new List<LinjeModel>();
+        public LinjeListModel LinjeListModel = new LinjeListModel();
 
         public int Number { get; set; }
         public static int MinSize = 15;
