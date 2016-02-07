@@ -74,5 +74,12 @@ namespace RajdRed.Repositories
                 }
             }
         }
+
+        public void MoveSelected(double dx, double dy)
+        {
+            if (HasSelected())
+                foreach (TextBoxViewModel t in this)
+                    t.Move(dx, dy);
+        }
     }
 }

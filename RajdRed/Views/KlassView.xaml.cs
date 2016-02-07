@@ -16,6 +16,7 @@ namespace RajdRed.Views
     {
         public KlassViewModel KlassViewModel { get { return DataContext as KlassViewModel; } }
         private Point _posOnUserControlOnHit;
+        private Point _posOnStartDraging;
         private Point _startPoint;
         private bool _isDown = false;
         private KlassViewModel _selectedElement = null;
@@ -81,6 +82,7 @@ namespace RajdRed.Views
 
             CaptureMouse();
             _posOnUserControlOnHit = Mouse.GetPosition(this);
+            _posOnStartDraging = e.GetPosition(Application.Current.MainWindow);
 
             KlassViewModel.Select();
 
@@ -100,6 +102,7 @@ namespace RajdRed.Views
                 if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
                     SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
             }
+
             if (KlassViewModel.KlassModel.Resize == "NWSE" && _isDown)
             {
                 double _widthChange, _heightChange;

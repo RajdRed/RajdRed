@@ -77,6 +77,14 @@ namespace RajdRed.Repositories
 
         // -------------//------------------ Override Base END --------------//------------------------ //
 
+        public void MoveSelected(double dx, double dy)
+        {
+            if (HasSelected())
+            {
+                foreach (NodCanvasViewModel n in this)
+                    n.Move(dx, dy);
+            }
+        }
 
 		public void SelectIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
         {

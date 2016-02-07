@@ -143,6 +143,13 @@ namespace RajdRed.Repositories
             }
         }
 
+        public void MoveSelected(double dx, double dy)
+        {
+            _klassRepository.MoveSelected(dx, dy);
+            _nodCanvasRepository.MoveSelected(dx, dy);
+            _textBoxRepository.MoveSelected(dx, dy);
+        }
+
 		public void SelectLinesOfNod(ref List<NodModelBase> nmbList) 
 		{
 			List<LinjeModel> selectedLinjerList = new List<LinjeModel>();

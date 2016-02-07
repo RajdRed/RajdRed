@@ -57,5 +57,11 @@ namespace RajdRed.ViewModels
         {
             return (TextBoxModel.IsSelected ? true : false);
         }
+
+        public void Move(double dx, double dy)
+        {
+            TextBoxModel.PositionLeft += dx;
+            TextBoxModel.PositionTop += dy;
+        }
     }
 }

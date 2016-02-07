@@ -164,5 +164,11 @@ namespace RajdRed.ViewModels
         {
             return (NodCanvasModel.IsSelected ? true : false);
         }
+
+        public void Move(double dx, double dy)
+        {
+            NodCanvasModel.PositionLeft += dx;
+            NodCanvasModel.PositionTop += dy;
+        }
     }
 }

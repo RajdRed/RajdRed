@@ -105,7 +105,6 @@ namespace RajdRed.Repositories
             }
         }
 
-
         // -------------//------------------ Override Base END --------------//------------------------ //
 
         public bool HasNodeSelected()
@@ -170,6 +169,13 @@ namespace RajdRed.Repositories
             }
 
             return null;
+        }
+
+        public void MoveSelected(double dx, double dy)
+        {
+            if (HasSelected())
+                foreach (KlassViewModel k in this)
+                    k.Move(dx, dy);
         }
     }
 }

@@ -49,7 +49,6 @@ namespace RajdRed.ViewModels
             KlassRepository.Remove(this);
         }
 
-
         public void Select()
         {
             if (!IsSelected())
@@ -159,5 +158,10 @@ namespace RajdRed.ViewModels
             }
         }
 
+        public void Move(double dx, double dy)
+        {
+            KlassModel.PositionLeft += dx;
+            KlassModel.PositionTop += dy;
+        }
     }
 }
