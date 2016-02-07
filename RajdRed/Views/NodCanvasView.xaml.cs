@@ -94,12 +94,12 @@ namespace RajdRed.Views
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-        
+            this.Opacity = 100;
         }
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-           
+            this.Opacity = 0.10;
         }
     }
 }
