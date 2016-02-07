@@ -25,7 +25,7 @@ namespace RajdRed.ViewModels
 
             ncvm.Select();
 
-            Delete();
+            JustDelete();
         }
 
         public void Delete()
@@ -42,6 +42,15 @@ namespace RajdRed.ViewModels
                 n.NodKlassViewModel.UnSet();
             }
 
+            LinjeModel.Nod1.LinjeListModel.Remove(LinjeModel);
+            LinjeModel.Nod2.LinjeListModel.Remove(LinjeModel);
+
+            Deselect();
+            LinjeRepository.Remove(this);
+        }
+
+        public void JustDelete()
+        {
             LinjeModel.Nod1.LinjeListModel.Remove(LinjeModel);
             LinjeModel.Nod2.LinjeListModel.Remove(LinjeModel);
 
