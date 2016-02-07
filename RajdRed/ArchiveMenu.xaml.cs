@@ -130,5 +130,15 @@ namespace RajdRed
 			var pdfXpsDoc = PdfSharp.Xps.XpsModel.XpsDocument.Open(lMemoryStream);
 			PdfSharp.Xps.XpsConverter.Convert(pdfXpsDoc, filename, 0);
 		}
+
+        private void Border_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            MainWindow mw = (MainWindow)Application.Current.MainWindow;
+
+            mw.theCanvas.Children.Remove(this);
+            mw.isArchiveMenuActive = false;
+            mw.archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+            e.Handled = true;
+        }
     }
 }
