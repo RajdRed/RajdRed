@@ -65,8 +65,8 @@ namespace RajdRed.ViewModels
 
         public int OnSide(Point p)
         {
-            double Top = -1;
-            double Left = -1;
+            double Top = 3;
+            double Left = 1;
             double Right = Left + (this.KlassModel.Width);
             double Bottom = Top + (this.KlassModel.Height);
 
@@ -85,16 +85,18 @@ namespace RajdRed.ViewModels
                     //leftBoarder
                     return 2;
                 }
-                else if (p.X > Left && ((p.Y > Top) && (p.Y < Bottom)))
+                else if ((p.X > Left && ((p.Y > (Top + (this.KlassModel.Height - 20))) && (p.Y < Bottom))) && (p.Y > Top && ((p.X > (Left + this.KlassModel.Width - 20))) && (p.X < Right)))
                 {
                     //rightBoarder
                     return 3;
                 }
+                //else if (p.Y > Top && ((p.X > (Left + this.KlassModel.Width - 20))) && (p.X < Right))
+                //{
+                //    //bottomBoarder = true;
+                //    return 4;
+                //}
                 else
-                {
-                    //bottomBoarder = true;
-                    return 4;
-                }
+                    return 1; //skapar ingen förändring
 
             }
         }

@@ -46,7 +46,8 @@ namespace RajdRed.Repositories
                 {
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
-                        _hasSelected = tbvm.TextBoxModel.IsSelected = true;
+                       
+                        MainRepository.Select(tbvm.TextBoxModel);
                         
                     }
                 }
