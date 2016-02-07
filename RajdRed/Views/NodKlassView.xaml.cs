@@ -37,7 +37,7 @@ namespace RajdRed.Views
             if (NodKlassViewModel.NodKlassModel.IsSet)
             {
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
-                Grid g = new Grid() { Width = mw.theCanvas.ActualWidth, Height = mw.theCanvas.ActualHeight, Background = Brushes.Black, Opacity = 0.2 };
+                Grid g = new Grid() { Width = mw.theCanvas.ActualWidth, Height = mw.theCanvas.ActualHeight, Background = Brushes.Black, Opacity = 0 };
                 Canvas.SetLeft(g, 0);
                 Canvas.SetTop(g, 0);
                 
