@@ -98,7 +98,7 @@ namespace RajdRed.Views
                 if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
                     SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
             }
-            if (KlassViewModel.KlassModel.Resize == "NSWSE" && _isDown)
+            if (KlassViewModel.KlassModel.Resize == "NWSE" && _isDown)
             {
                 double _widthChange, _heightChange;
                 Point pos = e.GetPosition(Application.Current.MainWindow);
@@ -107,6 +107,30 @@ namespace RajdRed.Views
                 //_newWidth = _startPoint.X - pos.X;
                 KlassViewModel.KlassModel.Width -= _widthChange;
                 KlassViewModel.KlassModel.Height -= _heightChange;
+                _startPoint = pos;
+
+            }
+            else if (KlassViewModel.KlassModel.Resize == "NS" && _isDown)
+            {
+                double _widthChange, _heightChange;
+                Point pos = e.GetPosition(Application.Current.MainWindow);
+                //_widthChange = Math.Min((_startPoint.X - pos.X), (KlassViewModel.KlassModel.Width - KlassModel.MinSize));
+                _heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - KlassModel.MinSize));
+                //_newWidth = _startPoint.X - pos.X;
+                //KlassViewModel.KlassModel.Width -= _widthChange;
+                KlassViewModel.KlassModel.Height -= _heightChange;
+                _startPoint = pos;
+
+            }
+            else if (KlassViewModel.KlassModel.Resize == "WE" && _isDown)
+            {
+                double _widthChange, _heightChange;
+                Point pos = e.GetPosition(Application.Current.MainWindow);
+                _widthChange = Math.Min((_startPoint.X - pos.X), (KlassViewModel.KlassModel.Width - KlassModel.MinSize));
+                //_heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - KlassModel.MinSize));
+                //_newWidth = _startPoint.X - pos.X;
+                KlassViewModel.KlassModel.Width -= _widthChange;
+                //KlassViewModel.KlassModel.Height -= _heightChange;
                 _startPoint = pos;
 
             }
@@ -152,6 +176,10 @@ namespace RajdRed.Views
         }
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                KlassViewModel.ShowNodes();
+            }));
             _selectedElement = KlassViewModel;
             int boarder = KlassViewModel.OnSide(e.GetPosition(this));
             KlassViewModel.KlassModel.Resize = "arrow";
@@ -170,6 +198,10 @@ namespace RajdRed.Views
                 case 4:
                     Cursor = Cursors.SizeNS;
                     KlassViewModel.KlassModel.Resize = "NS";
+                    break;
+                case 5:
+                    Cursor = Cursors.SizeWE;
+                    KlassViewModel.KlassModel.Resize = "WE";
                     break;
                 default:
                     break;

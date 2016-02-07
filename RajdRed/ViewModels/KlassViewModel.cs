@@ -96,6 +96,11 @@ namespace RajdRed.ViewModels
                     //bottomBoarder = true;
                     return 4;
                 }
+                else if ((p.Y > Top && p.Y < (Bottom - 20)) && p.X > (Right - 5))
+                {
+                    //bottomBoarder = true;
+                    return 5;
+                }
                 else
                     return 1; //skapar ingen förändring
 
