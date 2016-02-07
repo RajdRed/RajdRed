@@ -3,6 +3,7 @@ using RajdRed.Repositories;
 using RajdRed.Views;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace RajdRed.ViewModels
 {
@@ -158,10 +159,11 @@ namespace RajdRed.ViewModels
             }
         }
 
-        public void Move(double dx, double dy)
+        public void Move(Point p)
         {
-            KlassModel.PositionLeft += dx;
-            KlassModel.PositionTop += dy;
+            Point posRelative = Mouse.GetPosition(KlassView);
+            KlassModel.PositionLeft = p.X - posRelative.X;
+            KlassModel.PositionTop = p.Y - posRelative.Y;
         }
     }
 }

@@ -16,7 +16,6 @@ namespace RajdRed.Views
     {
         public KlassViewModel KlassViewModel { get { return DataContext as KlassViewModel; } }
         private Point _posOnUserControlOnHit;
-        private Point _posOnStartDraging;
         private Point _startPoint;
         private bool _isDown = false;
         private KlassViewModel _selectedElement = null;
@@ -30,7 +29,6 @@ namespace RajdRed.Views
                 {
                     CaptureMouse();
                     KlassViewModel.SetKlassView(this);
-                    _posOnUserControlOnHit = new Point(ActualWidth / 2, ActualHeight / 2);
                     KlassViewModel.KlassModel.PositionLeft = KlassViewModel.KlassModel.PositionLeft - (ActualWidth / 2);
                     KlassViewModel.KlassModel.PositionTop = KlassViewModel.KlassModel.PositionTop - (ActualHeight / 2);
 
@@ -82,7 +80,6 @@ namespace RajdRed.Views
 
             CaptureMouse();
             _posOnUserControlOnHit = Mouse.GetPosition(this);
-            _posOnStartDraging = e.GetPosition(Application.Current.MainWindow);
 
             KlassViewModel.Select();
 
@@ -96,11 +93,9 @@ namespace RajdRed.Views
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
 
-                if (!(KlassViewModel.KlassModel.OnField && ((p.Y - _posOnUserControlOnHit.Y) <= 100.5)))
-                    SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
-
-                if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
-                    SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
+                if (!(KlassViewModel.KlassModel.OnField && ((p.Y - _posOnUserControlOnHit.Y) <= 100.5))
+                    && !((p.X - _posOnUserControlOnHit.X) <= 0.5))
+                    KlassViewModel.KlassRepository.MainRepository.MoveSelected(p);                
             }
 
             if (KlassViewModel.KlassModel.Resize == "NWSE" && _isDown)
@@ -117,7 +112,7 @@ namespace RajdRed.Views
             }
             else if (KlassViewModel.KlassModel.Resize == "NS" && _isDown)
             {
-                double _widthChange, _heightChange;
+                double _heightChange;
                 Point pos = e.GetPosition(Application.Current.MainWindow);
                 //_widthChange = Math.Min((_startPoint.X - pos.X), (KlassViewModel.KlassModel.Width - KlassModel.MinSize));
                 _heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - KlassModel.MinSize));
@@ -129,7 +124,7 @@ namespace RajdRed.Views
             }
             else if (KlassViewModel.KlassModel.Resize == "WE" && _isDown)
             {
-                double _widthChange, _heightChange;
+                double _widthChange;
                 Point pos = e.GetPosition(Application.Current.MainWindow);
                 _widthChange = Math.Min((_startPoint.X - pos.X), (KlassViewModel.KlassModel.Width - KlassModel.MinSize));
                 //_heightChange = Math.Min((_startPoint.Y - pos.Y), (KlassViewModel.KlassModel.Height - KlassModel.MinSize));

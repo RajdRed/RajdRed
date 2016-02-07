@@ -171,11 +171,11 @@ namespace RajdRed.Repositories
             return null;
         }
 
-        public void MoveSelected(double dx, double dy)
+        public void MoveSelected(Point p)
         {
             if (HasSelected())
                 foreach (KlassViewModel k in this)
-                    k.Move(dx, dy);
+                    k.Move(p);
         }
     }
 }
