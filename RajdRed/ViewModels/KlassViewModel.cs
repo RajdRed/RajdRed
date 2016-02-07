@@ -85,16 +85,24 @@ namespace RajdRed.ViewModels
                     //leftBoarder
                     return 2;
                 }
-                else if ((p.X > Left && ((p.Y > (Top + (this.KlassModel.Height - 20))) && (p.Y < Bottom))) && (p.Y > Top && ((p.X > (Left + this.KlassModel.Width - 20))) && (p.X < Right)))
+                else if ((p.X > Left && ((p.Y > (Top + (Bottom - 20))) && (p.Y < Bottom))) && (p.Y > Top && ((p.X > (Left + Right - 20))) && (p.X < Right)))
+
                 {
-                    //rightBoarder
+                    //rightBoarder och leftboarder -> nere i hörnet
                     return 3;
                 }
-                //else if (p.Y > Top && ((p.X > (Left + this.KlassModel.Width - 20))) && (p.X < Right))
-                //{
-                //    //bottomBoarder = true;
-                //    return 4;
-                //}
+
+                else if ( (p.X > Left && p.X < (Right - 20) ) && p.Y > (Bottom -5))
+                {
+                    //bottomBoarder = true;
+                    return 4;
+                }
+                else if ((p.Y > Top && p.Y < (Bottom - 20)) && p.X > (Right - 5))
+                {
+                    //bottomBoarder = true;
+                    return 5;
+                }
+
                 else
                     return 1; //skapar ingen förändring
 

@@ -288,5 +288,16 @@ namespace RajdRed
         {
            _mainRepository.Select(_mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).TextBoxModel);
         }
+
+        private void Line_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void Line_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+
+        }
     }
 }
