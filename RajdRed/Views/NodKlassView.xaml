@@ -21,11 +21,11 @@
             <BeginStoryboard>
                 <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="ContentScale"
-                                         Storyboard.TargetProperty="ScaleX" 
-                                         To="1.5" Duration="0:0:0.2"/>
+                                     Storyboard.TargetProperty="ScaleX" 
+                                     To="1.5" Duration="0:0:0.2"/>
                     <DoubleAnimation Storyboard.TargetName="ContentScale"
-                                         Storyboard.TargetProperty="ScaleY" 
-                                         To="1.5" Duration="0:0:0.2"/>
+                                     Storyboard.TargetProperty="ScaleY" 
+                                     To="1.5" Duration="0:0:0.2"/>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
@@ -33,41 +33,25 @@
             <BeginStoryboard>
                 <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="ContentScale"
-                                         Storyboard.TargetProperty="ScaleX" 
-                                         Duration="0:0:0.2"/>
+                                     Storyboard.TargetProperty="ScaleX" 
+                                     Duration="0:0:0.2"/>
                     <DoubleAnimation Storyboard.TargetName="ContentScale"
-                                         Storyboard.TargetProperty="ScaleY" 
-                                         Duration="0:0:0.2"/>
+                                     Storyboard.TargetProperty="ScaleY" 
+                                     Duration="0:0:0.2"/>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-    <ItemsControl>
-        <Grid>
-            <Ellipse Width="14" Height="14" StrokeThickness="1">
-                <Ellipse.Resources>
-                    <Style TargetType="Ellipse">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
-                                <Setter Property="Fill" Value="#A4D6FC"/>
-                                <Setter Property="Stroke" Value="Black"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Ellipse.Resources>
-            </Ellipse>
-            <ContentPresenter Content="{Binding NodKlassModel.Path}"
+    <ContentPresenter Content="{Binding NodKlassModel.Path}"
                       VerticalAlignment="{Binding NodKlassModel.VerticalContentAlignment}"
                       HorizontalAlignment="{Binding NodKlassModel.HorizontalContentAlignment}"
                       RenderTransformOrigin="0.5 0.5"
                       >
-                <ContentPresenter.RenderTransform>
-                    <TransformGroup>
-                        <RotateTransform Angle="{Binding NodKlassModel.Angle}"/>
-                        <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
-                    </TransformGroup>
-                </ContentPresenter.RenderTransform>
-            </ContentPresenter>
-        </Grid>
-    </ItemsControl>
+        <ContentPresenter.RenderTransform>
+            <TransformGroup>
+                <RotateTransform Angle="{Binding NodKlassModel.Angle}"/>
+                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
+            </TransformGroup>
+        </ContentPresenter.RenderTransform>
+    </ContentPresenter>
 </UserControl>

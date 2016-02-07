@@ -42,13 +42,14 @@
     </UserControl.Triggers>
     <ItemsControl>
         <Grid>
-        <Ellipse Width="14" Height="14" StrokeThickness="1">
+        <Ellipse Width="15" Height="15" StrokeThickness="1" Opacity="0.5">
                 <Ellipse.Resources>
                     <Style TargetType="Ellipse">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
                                 <Setter Property="Fill" Value="#A4D6FC"/>
-                                <Setter Property="Stroke" Value="#71C1F7"/>
+                                <Setter Property="Stroke" Value="Black"/>
+                                <!--#71C1F7-->
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
