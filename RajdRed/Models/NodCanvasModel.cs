@@ -26,7 +26,7 @@ namespace RajdRed.Models
 
         void SetLinje(LinjeModel lm)
         {
-            LinjeModelList.Add(lm);
+            LinjeListModel.Add(lm);
         }
 
         public static NodCanvasModel CopyNod(NodKlassModel n)
@@ -36,7 +36,7 @@ namespace RajdRed.Models
                 Height = n.Height,
                 Width = n.Width,
                 IsSelected = n.IsSelected,
-                LinjeModelList = n.LinjeModelList,
+                LinjeListModel = n.LinjeListModel,
                 OnField = n.OnField,
                 Path = n.Path,
                 NodTypesModel = n.NodTypesModel,
@@ -44,7 +44,7 @@ namespace RajdRed.Models
                 PositionTop = n.PositionTop
             };
 
-            foreach (LinjeModel l in n.LinjeModelList)
+            foreach (LinjeModel l in n.LinjeListModel)
             {
                 if (l.Nod1 == n)
                     l.Nod1 = ncm;

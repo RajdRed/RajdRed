@@ -1,4 +1,5 @@
 ﻿using RajdRed.Models;
+using RajdRed.Repositories.Base;
 using RajdRed.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,35 +7,57 @@ using System.Windows;
 
 namespace RajdRed.Repositories
 {
-    public class TextBoxRepository : ObservableCollection<TextBoxViewModel>
+    public class TextBoxRepository : BaseRepository<TextBoxViewModel>
     {
-        private bool _hasSelected = false;
-        public MainRepository MainRepository { get; set; }
-        public TextBoxRepository(MainRepository mr)
-        {
-            MainRepository = mr;
-        }
-
+        public TextBoxRepository(MainRepository m) : base(m) { }
         public TextBoxViewModel AddNewTextBox(Point p)
         {
             TextBoxViewModel tbvm = new TextBoxViewModel(p, this);
             Add(tbvm);
+            tbvm.Select();
 
             return tbvm;
         }
 
-        public void Select(TextBoxModel t)
+        // --------------------------------- Override Base ---------------------------------------- //
+
+        public override void Select(TextBoxViewModel t)
         {
-            _hasSelected = t.IsSelected = true;
+            t.Select();
         }
 
-        public void DeselectAllTextBoxes()
+        public override void Deselect(TextBoxViewModel t)
         {
-            foreach (TextBoxViewModel t in this)
-                t.TextBoxModel.IsSelected = false;
+            t.Deselect();
         }
 
-        public bool CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+        public override void DeselectAll()
+        {
+            if (HasSelected())
+            {
+                foreach (TextBoxViewModel t in this)
+                    t.TextBoxModel.IsSelected = false;
+            }
+        }
+
+        public override void DeleteSelected()
+        {
+            int size = this.Count;
+            List<TextBoxViewModel> deleteEverythingInThisList = new List<TextBoxViewModel>();
+
+            for (int i = 0; i < size; i++)
+                if (this[i].TextBoxModel.IsSelected)
+                    deleteEverythingInThisList.Add(this[i]);
+
+            foreach (TextBoxViewModel tbvm in deleteEverythingInThisList)
+            {
+                tbvm.Delete();
+            }
+        }
+
+        // -------------//------------------ Override Base END --------------//------------------------ //
+
+        public void SelectIfHit(Point mouseDownPos, Point mouseUpPos)
         {
             foreach (TextBoxViewModel tbvm in this)
             {
@@ -46,26 +69,10 @@ namespace RajdRed.Repositories
                 {
                     if (rightBotCorner.Y >= mouseDownPos.Y && leftTopCorner.Y <= mouseUpPos.Y)
                     {
-                        _hasSelected = tbvm.TextBoxModel.IsSelected = true;
-                        
+                        tbvm.Select();
                     }
                 }
             }
-            return _hasSelected;
-        }
-        public void DeleteSelected()
-        {
-            int size = this.Count;
-            List<TextBoxViewModel> deleteEverythingInThisList = new List<TextBoxViewModel>();
-
-            for (int i = 0; i < size; i++)
-                if (this[i].TextBoxModel.IsSelected)
-                    deleteEverythingInThisList.Add(this[i]);
-
-            foreach (TextBoxViewModel tbvm in deleteEverythingInThisList)
-                tbvm.Delete();
-
-            _hasSelected = false;
         }
     }
 }

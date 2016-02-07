@@ -1,15 +1,14 @@
 ﻿using RajdRed.Models;
+using RajdRed.Repositories.Base;
 using RajdRed.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace RajdRed.Repositories
 {
-    public class NodKlassRepository : ObservableCollection<NodKlassViewModel>
+    public class NodKlassRepository : BaseRepository<NodKlassViewModel>
     {
-		private int _numberOfSelected = 0;
-
-        public NodKlassRepository(KlassViewModel kvm)
+        public NodKlassRepository(MainRepository m, KlassViewModel kvm) : base(m)
         {
             //left
             for (int i = 1; i <= 4; i++)
@@ -51,24 +50,36 @@ namespace RajdRed.Repositories
                 }, kvm, this));
         }
 
-		public void Select(NodKlassModel n)
-		{
-            n.NodKlassViewModel.Select();
-		}
+        // --------------------------------- Override Base ---------------------------------------- //
 
-        public void Deselect(NodKlassModel n)
+        public override void Select(NodKlassViewModel t)
         {
-            n.NodKlassViewModel.Deselect();
+            t.Select();
         }
 
-        public void IncreaseSelected()
+        public override void Deselect(NodKlassViewModel t)
         {
-            _numberOfSelected++;
+            t.Deselect();
         }
 
-        public void DecreaseSelected()
+        public override void SelectAll()
         {
-            _numberOfSelected--;
+            if (HasSelected())
+            {
+                foreach (NodKlassViewModel n in this)
+                    n.Select();
+            }
         }
+
+        public override void DeselectAll()
+        {
+            if (HasSelected())
+            {
+                foreach (NodKlassViewModel n in this)
+                    n.Deselect();
+            }
+        }
+
+        // -------------//------------------ Override Base END --------------//------------------------ //
     }
 }

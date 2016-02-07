@@ -48,6 +48,13 @@ namespace RajdRed.Views
                 NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.ShowAllKlassNodes();
             }));
 
+            if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                NodCanvasViewModel.NodCanvasRepository.MainRepository.DeselectAll();
+            }
+
+            NodCanvasViewModel.Select();
+
             e.Handled = true;
         }
 
@@ -90,6 +97,8 @@ namespace RajdRed.Views
             {
                 NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.HideAllKlassNodes();
             }));
+
+            e.Handled = true;
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)

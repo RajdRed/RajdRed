@@ -28,7 +28,16 @@ namespace RajdRed.Views
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                NodKlassViewModel.NodKlassRepository.MainRepository.DeselectAll();
+            }
+
             NodKlassViewModel.NodKlassModel.IsPressed = true;
+            
+            if (NodKlassViewModel.IsSet())
+                NodKlassViewModel.Select();
+            
             e.Handled = true;
         }
 

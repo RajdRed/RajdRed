@@ -7,19 +7,20 @@ using System.Windows.Controls;
 namespace RajdRed.ViewModels
 {
     public class KlassViewModel
-    {
-        //AdornerLayer aLayer;
-        
+    {  
+        //Standard properties
         public KlassModel KlassModel { get; set; }
         public KlassView KlassView { get; set; }
         public KlassRepository KlassRepository { get; set; }
+
+        //Extra properties
         public NodKlassRepository NodKlassRepository { get; set; }
 
         public KlassViewModel(Point startPosition, KlassRepository kr)
         {
             KlassRepository = kr;
             KlassModel = new KlassModel(this, startPosition);
-            NodKlassRepository = new NodKlassRepository(this);
+            NodKlassRepository = new NodKlassRepository(KlassRepository.MainRepository, this);
         }
 
         public KlassViewModel(KlassModel km)
@@ -28,6 +29,11 @@ namespace RajdRed.ViewModels
         }
 
         public KlassViewModel(){}
+
+        public bool IsSelected()
+        {
+            return (KlassModel.IsSelected ? true : false);
+        }
 
         public void Delete()
         {
@@ -39,20 +45,33 @@ namespace RajdRed.ViewModels
                 }
             }
 
+            Deselect();
             KlassRepository.Remove(this);
         }
 
 
         public void Select()
         {
-            KlassModel.IsSelected = true;
-            KlassRepository.IncreaseSelected();
+            if (!IsSelected())
+            {
+                KlassModel.IsSelected = true;
+                KlassRepository.IncreaseSelected();
+
+                foreach (NodKlassViewModel n in NodKlassRepository)
+                {
+                    if (n.IsSet())
+                        n.Select();
+                }
+            }
         }
 
         public void Deselect()
         {
-            KlassModel.IsSelected = false;
-            KlassRepository.DecreaseSelected();
+            if (IsSelected())
+            {
+                KlassModel.IsSelected = false;
+                KlassRepository.DecreaseSelected();
+            }
         }
 
         public void SetKlassView(KlassView kv)
@@ -129,5 +148,6 @@ namespace RajdRed.ViewModels
                     n.Hide();
             }
         }
+
     }
 }

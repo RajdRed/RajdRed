@@ -192,7 +192,7 @@ namespace RajdRed
 			}
 
             //Checks if intersect with RajdElements on Canvas
-            _mainRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+            _mainRepository.SelectIfHit(mouseDownPos, mouseUpPos);
 
             e.Handled = true;
 		}
@@ -287,7 +287,7 @@ namespace RajdRed
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           _mainRepository.Select(_mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).TextBoxModel);
+           _mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).Select();
         }
     }
 }

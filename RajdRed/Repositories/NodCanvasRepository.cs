@@ -1,5 +1,6 @@
 ﻿using RajdRed.Models;
 using RajdRed.Models.Base;
+using RajdRed.Repositories.Base;
 using RajdRed.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,20 +8,14 @@ using System.Windows;
 
 namespace RajdRed.Repositories
 {
-    public class NodCanvasRepository : ObservableCollection<NodCanvasViewModel>
+    public class NodCanvasRepository : BaseRepository<NodCanvasViewModel>
     {
-        private int _numberOfSelected = 0;
-        MainRepository _mainRepository;
-        public MainRepository MainRepository { get { return _mainRepository; } }
-        public NodCanvasRepository(MainRepository mr)
-        {
-            _mainRepository = mr;
-        }
-
+        public NodCanvasRepository(MainRepository m) : base(m) { }
         public NodCanvasViewModel AddNewCanvasNod(Point p)
         {
             NodCanvasViewModel nkvm = new NodCanvasViewModel(p, this);
             Add(nkvm);
+            nkvm.Select();
 
             return nkvm;
         }
@@ -33,7 +28,57 @@ namespace RajdRed.Repositories
             return nkvm;
         }
 
-		public int CheckIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
+        // --------------------------------- Override Base ---------------------------------------- //
+        public override void Select(NodCanvasViewModel n)
+        {
+            n.Select();
+        }
+
+        public override void Deselect(NodCanvasViewModel n)
+        {
+            n.Deselect();
+        }
+
+        public override void SelectAll()
+        {
+            if (NumberOfSelected != this.Count)
+            {
+                foreach (NodCanvasViewModel n in this)
+                    n.Select();
+            }
+        }
+
+        public override void DeselectAll()
+        {
+            if (HasSelected())
+            {
+                foreach (NodCanvasViewModel n in this)
+                {
+                    if (n.IsSelected())
+                    {
+                        n.Deselect();
+                    }
+                }
+            }
+        }
+
+        public override void DeleteSelected()
+        {
+            int size = this.Count;
+            List<NodCanvasViewModel> deleteEverythingInThisList = new List<NodCanvasViewModel>();
+
+            for (int i = 0; i < size; i++)
+                if (this[i].NodCanvasModel.IsSelected)
+                    deleteEverythingInThisList.Add(this[i]);
+
+            foreach (NodCanvasViewModel ncvm in deleteEverythingInThisList)
+                ncvm.Delete();
+        }
+
+        // -------------//------------------ Override Base END --------------//------------------------ //
+
+
+		public void SelectIfHit(Point mouseDownPos, Point mouseUpPos, ref List<NodModelBase> nodList)
         {
 			//Nummer 1 - Markera alla noder
             foreach (NodCanvasViewModel ncm in this)
@@ -52,62 +97,6 @@ namespace RajdRed.Repositories
                     }
                 }
             }
-
-            return _numberOfSelected;
-        }
-
-        public void DeselectAllCanvasNodes()
-        {
-            if (HasSelected())
-            {
-                foreach (NodCanvasViewModel n in this)
-                {
-                    if (n.NodCanvasModel.IsSelected)
-                    {
-                        n.Select();
-                    }
-                }
-            }
-        }
-
-        public void DeleteSelected()
-        {
-            int size = this.Count;
-            List<NodCanvasViewModel> deleteEverythingInThisList = new List<NodCanvasViewModel>();
-
-            for (int i = 0; i < size; i++)
-                if (this[i].NodCanvasModel.IsSelected)
-                    deleteEverythingInThisList.Add(this[i]);
-
-            foreach (NodCanvasViewModel ncvm in deleteEverythingInThisList)
-                ncvm.Delete();
-
-            _numberOfSelected = 0;
-        }
-
-        public bool HasSelected()
-        {
-            return (_numberOfSelected != 0 ? true : false);
-        }
-
-        public void IncreaseSelected()
-        {
-            _numberOfSelected++;
-        }
-
-        public void DecreaseSelected()
-        {
-            _numberOfSelected--;
-        }
-
-        public void Select(NodCanvasModel n)
-        {
-            n.NodCanvasViewModel.Select();
-        }
-
-        public void Deselect(NodCanvasModel n)
-        {
-            n.NodCanvasViewModel.Deselect();
         }
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Adds\LinjeListModel.cs" />
     <Compile Include="Models\Adds\NodTypesModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
     <Compile Include="Models\Base\NodModelBase.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="NodSettings.xaml.cs">
       <DependentUpon>NodSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Base\BaseRepository.cs" />
     <Compile Include="Repositories\NodCanvasRepository.cs" />
     <Compile Include="Repositories\NodKlassRepository.cs" />
     <Compile Include="Repositories\KlassRepository.cs" />

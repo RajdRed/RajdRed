@@ -13,7 +13,6 @@ namespace RajdRed.Repositories
 {
     public class MainRepository
     {
-        private int _numberOfSelected = 0;
         private MainWindow _mainWindow;
         public MainWindow MainWindow
         {
@@ -55,85 +54,94 @@ namespace RajdRed.Repositories
         }
 
 
-        public int CheckIfHit(Point mouseDownPos, Point mouseUpPos)
+        public void SelectIfHit(Point mouseDownPos, Point mouseUpPos)
         {
 			List<NodModelBase> nmbList = new List<NodModelBase>();
 
             /* kontroll för klasser innanför selection */
-            _numberOfSelected += KlassRepository.CheckIfHit(mouseDownPos, mouseUpPos, ref nmbList);
+            KlassRepository.SelectIfHit(mouseDownPos, mouseUpPos, ref nmbList);
 
             /*Kontroll för canvasnoder inanför selection*/
-            _numberOfSelected += NodCanvasRepository.CheckIfHit(mouseDownPos, mouseUpPos, ref nmbList);
+            NodCanvasRepository.SelectIfHit(mouseDownPos, mouseUpPos, ref nmbList);
 
             /*Kontroll för canvasnoder inanför selection*/
-            _numberOfSelected += TextBoxRepository.CheckIfHit(mouseDownPos, mouseUpPos);
+            TextBoxRepository.SelectIfHit(mouseDownPos, mouseUpPos);
 
 			SelectLinesOfNod(ref nmbList);
-
-            return _numberOfSelected;
         }
 
         public void Select(RajdElement re)
         {
-			if (re is KlassModel)
-				_klassRepository.Select(re as KlassModel);
-			else if (re is LinjeModel)
-				_linjeRepository.Select(re as LinjeModel);
-			else if (re is NodCanvasModel)
-				_nodCanvasRepository.Select(re as NodCanvasModel);
+			if (re is KlassModel) {
+                KlassModel k = re as KlassModel;
+                _klassRepository.Select(k.KlassViewModel);
+            }
+			else if (re is LinjeModel) {
+                LinjeModel l = re as LinjeModel;
+                _linjeRepository.Select(l.LinjeViewModel);
+            }
+			else if (re is NodCanvasModel) {
+                NodCanvasModel n = re as NodCanvasModel;
+                _nodCanvasRepository.Select(n.NodCanvasViewModel);
+            }
             else if (re is TextBoxModel)
-                _textBoxRepository.Select(re as TextBoxModel);
-
-            _numberOfSelected++;
+            {
+                TextBoxModel t = re as TextBoxModel;
+                _textBoxRepository.Select(t.TextBoxViewModel);
+            }
         }
 
         public void Deselect(RajdElement re)
         {
             if (re is KlassModel)
-                _klassRepository.Deselect(re as KlassModel);
+            {
+                KlassModel k = re as KlassModel;
+                _klassRepository.Deselect(k.KlassViewModel);
+            }
             else if (re is LinjeModel)
-                _linjeRepository.Deselect(re as LinjeModel);
+            {
+                LinjeModel l = re as LinjeModel;
+                _linjeRepository.Deselect(l.LinjeViewModel);
+            }
             else if (re is NodCanvasModel)
-                _nodCanvasRepository.Deselect(re as NodCanvasModel);
+            {
+                NodCanvasModel n = re as NodCanvasModel;
+                _nodCanvasRepository.Deselect(n.NodCanvasViewModel);
+            }
             else if (re is TextBoxModel)
-                _textBoxRepository.Deselect(re as TextBoxModel);
-
-            _numberOfSelected--;
+            {
+                TextBoxModel t = re as TextBoxModel;
+                _textBoxRepository.Deselect(t.TextBoxViewModel);
+            }
         }
 
         public bool HasSelected()
         {
-            return (_numberOfSelected != 0 ? true : false);
-        }
-
-        public bool HasNoSelected()
-        {
-            return (_numberOfSelected == 0 ? true : false);
+            return (_klassRepository.HasSelected()
+                || _linjeRepository.HasSelected()
+                || _nodCanvasRepository.HasSelected()
+                || _textBoxRepository.HasSelected() ? true : false);
         }
 
         public void DeselectAll()
         {
-            if (_numberOfSelected != 0)
+            if (HasSelected())
             {
-                _klassRepository.DeselectAllClasses();
-                _linjeRepository.DeselectAllLines();
-                _nodCanvasRepository.DeselectAllCanvasNodes();
-                _textBoxRepository.DeselectAllTextBoxes();
-
-                _numberOfSelected = 0;
+                _klassRepository.DeselectAll();
+                _linjeRepository.DeselectAll();
+                _nodCanvasRepository.DeselectAll();
+                _textBoxRepository.DeselectAll();
             }
         }
 
         public void DeleteSelected()
         {
-            if (_numberOfSelected != 0)
+            if (HasSelected())
             {
                 _klassRepository.DeleteSelected();
                 _linjeRepository.DeleteSelected();
                 _nodCanvasRepository.DeleteSelected();
                 _textBoxRepository.DeleteSelected();
-
-                _numberOfSelected = 0;
             }
         }
 
@@ -144,7 +152,7 @@ namespace RajdRed.Repositories
 			/* selektera alla linjer som hör till noden */
 			foreach (NodModelBase n in nmbList)
 			{
-				foreach (LinjeModel l in n.LinjeModelList)
+				foreach (LinjeModel l in n.LinjeListModel)
 				{
 					Select(l);
 					selectedLinjerList.Add(l);
@@ -162,7 +170,7 @@ namespace RajdRed.Repositories
 				{
 					bool shouldNodBeSelected = true;
 
-					foreach (LinjeModel lm in li.Nod1.LinjeModelList)
+					foreach (LinjeModel lm in li.Nod1.LinjeListModel)
 					{
 						if (!lm.IsSelected)
 						{
@@ -174,7 +182,7 @@ namespace RajdRed.Repositories
 					if (shouldNodBeSelected)
 					{
 						if (li.Nod1 is NodCanvasModel)
-							Select(li.Nod1);
+							Select(li.Nod1 as NodCanvasModel);
                         else
                         {
                             NodKlassModel n = li.Nod1 as NodKlassModel;
@@ -187,7 +195,7 @@ namespace RajdRed.Repositories
 				{
 					bool shouldNodBeSelected = true;
 
-					foreach (LinjeModel lm in li.Nod2.LinjeModelList)
+					foreach (LinjeModel lm in li.Nod2.LinjeListModel)
 					{
 						if (!lm.IsSelected)
 						{
@@ -198,7 +206,7 @@ namespace RajdRed.Repositories
 
 					if (shouldNodBeSelected)
 						if (li.Nod2 is NodCanvasModel)
-							Select(li.Nod2);
+							Select(li.Nod2 as NodCanvasModel);
 						else
                         {
                             NodKlassModel n = li.Nod2 as NodKlassModel;
@@ -215,7 +223,7 @@ namespace RajdRed.Repositories
             /* Deselekterar alla linjer som hör till noden */
             foreach (NodModelBase n in nmbList)
             {
-                foreach (LinjeModel l in n.LinjeModelList)
+                foreach (LinjeModel l in n.LinjeListModel)
                 {
                     Deselect(l);
                     selectedLinjerList.Add(l);
@@ -233,7 +241,7 @@ namespace RajdRed.Repositories
                 {
                     bool shouldNodBeSelected = false;
 
-                    foreach (LinjeModel lm in li.Nod1.LinjeModelList)
+                    foreach (LinjeModel lm in li.Nod1.LinjeListModel)
                     {
                         if (lm.IsSelected)
                         {
@@ -245,7 +253,7 @@ namespace RajdRed.Repositories
                     if (!shouldNodBeSelected)
                     {
                         if (li.Nod1 is NodCanvasModel)
-                            Deselect(li.Nod1);
+                            Deselect(li.Nod1 as NodCanvasModel);
                         else
                         {
                             NodKlassModel n = li.Nod1 as NodKlassModel;
@@ -258,7 +266,7 @@ namespace RajdRed.Repositories
                 {
                     bool shouldNodBeSelected = false;
 
-                    foreach (LinjeModel lm in li.Nod2.LinjeModelList)
+                    foreach (LinjeModel lm in li.Nod2.LinjeListModel)
                     {
                         if (lm.IsSelected)
                         {
@@ -269,7 +277,7 @@ namespace RajdRed.Repositories
 
                     if (!shouldNodBeSelected)
                         if (li.Nod2 is NodCanvasModel)
-                            Deselect(li.Nod2);
+                            Deselect(li.Nod2 as NodCanvasModel);
                         else
                         {
                             NodKlassModel n = li.Nod2 as NodKlassModel;

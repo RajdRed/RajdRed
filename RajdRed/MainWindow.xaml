@@ -131,8 +131,17 @@
                               X2="{Binding LinjeModel.X2}"
                               Y2="{Binding LinjeModel.Y2}"
                               StrokeThickness="3"
-                              Stroke="Black"
                               MouseDown="Line_MouseDown">
+                            <Line.Style>
+                                <Style TargetType="Line">
+                                    <Setter Property="Stroke" Value="Black"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LinjeModel.IsSelected}" Value="True">
+                                            <Setter Property="Stroke" Value="Red"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Line.Style>
                         </Line>
                     </Canvas>
                 </DataTemplate>

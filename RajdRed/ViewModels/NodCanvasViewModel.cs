@@ -42,12 +42,13 @@ namespace RajdRed.ViewModels
 
         public void Delete()
         {
+            Deselect();
             NodCanvasRepository.Remove(this);
         }
 
         public bool HasLines()
         {
-            return (NodCanvasModel.LinjeModelList.Count != 0) ? true : false;
+            return (NodCanvasModel.LinjeListModel.Count != 0) ? true : false;
         }
 
         public void SetNodCanvasView(NodCanvasView ncv)
@@ -62,18 +63,18 @@ namespace RajdRed.ViewModels
                 LinjeModel share = LinjeModel.GetSharingLinje(this.NodCanvasModel, ncvm.NodCanvasModel);
                 if (share != null)
                 {
-                    ncvm.NodCanvasModel.LinjeModelList.Remove(share);
-                    NodCanvasRepository.MainRepository.LinjeRepository.Remove(share.LinjeViewModel);
+                    ncvm.NodCanvasModel.LinjeListModel.Remove(share);
+                    share.LinjeViewModel.Delete();
                 }
 
-                foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeModelList)
+                foreach (LinjeModel l in ncvm.NodCanvasModel.LinjeListModel)
                 {
                     l.ReplaceNod(ncvm.NodCanvasModel, this.NodCanvasModel);
-                    NodCanvasModel.LinjeModelList.Add(l);
+                    NodCanvasModel.LinjeListModel.Add(l);
                 }
             }
 
-            NodCanvasRepository.Remove(ncvm);
+            ncvm.Delete();
         }
 
         public bool IsInArea(Point p)
@@ -140,14 +141,30 @@ namespace RajdRed.ViewModels
 
         public void Select()
         {
-            NodCanvasModel.IsSelected = true;
-            NodCanvasRepository.IncreaseSelected();
+            if (!IsSelected())
+            {
+                NodCanvasModel.IsSelected = true;
+                NodCanvasRepository.IncreaseSelected();
+
+                foreach (LinjeModel l in NodCanvasModel.LinjeListModel)
+                {
+                    l.LinjeViewModel.Select();
+                }
+            }
         }
 
         public void Deselect()
         {
-            NodCanvasModel.IsSelected = false;
-            NodCanvasRepository.DecreaseSelected();
+            if (IsSelected())
+            {
+                NodCanvasModel.IsSelected = false;
+                NodCanvasRepository.DecreaseSelected();
+            }
+        }
+
+        public bool IsSelected()
+        {
+            return (NodCanvasModel.IsSelected ? true : false);
         }
     }
 }

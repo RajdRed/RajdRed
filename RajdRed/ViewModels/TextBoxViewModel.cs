@@ -28,9 +28,34 @@ namespace RajdRed.ViewModels
         {
             TextBoxView = t;
         }
+
+        public void Select()
+        {
+            if (!IsSelected())
+            {
+                TextBoxModel.IsSelected = true;
+                TextBoxRepository.IncreaseSelected();
+            }
+        }
+
+        public void Deselect()
+        {
+            if (IsSelected())
+            {
+                TextBoxModel.IsSelected = true;
+                TextBoxRepository.DecreaseSelected();
+            }
+        }
+
         public void Delete()
-        {        
+        {
+            Deselect();
             TextBoxRepository.Remove(this);
+        }
+
+        public bool IsSelected()
+        {
+            return (TextBoxModel.IsSelected ? true : false);
         }
     }
 }

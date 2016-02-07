@@ -1,91 +1,75 @@
-﻿using RajdRed.Models;
-using RajdRed.Models.Base;
+﻿using RajdRed.Models.Base;
+using RajdRed.Repositories.Base;
 using RajdRed.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace RajdRed.Repositories
 {
-    public class LinjeRepository : ObservableCollection<LinjeViewModel>
+    public class LinjeRepository : BaseRepository<LinjeViewModel>
     {
-        private int _numberOfSelected = 0;
-        MainRepository _mainRepository;
-        public MainRepository MainRepository { get { return _mainRepository; } }
-
-        public LinjeRepository(MainRepository mr)
-        {
-            _mainRepository = mr;
-        }
-
+        public LinjeRepository(MainRepository m) : base(m) { }
         public LinjeViewModel AddNewLinje(NodModelBase n1, NodModelBase n2)
         {
             LinjeViewModel lvm = new LinjeViewModel(this, n1, n2);
 
-            n1.LinjeModelList.Add(lvm.LinjeModel);
-            n2.LinjeModelList.Add(lvm.LinjeModel);
+            n1.LinjeListModel.Add(lvm.LinjeModel);
+            n2.LinjeListModel.Add(lvm.LinjeModel);
 
             Add(lvm);
+
+            lvm.Select();
 
             return lvm;
         }
 
-        public void DeselectAllLines()
+        // --------------------------------- Override Base ---------------------------------------- //
+
+        public override void SelectAll()
+        {
+            if (NumberOfSelected != this.Count)
+            {
+                foreach (LinjeViewModel l in this)
+                    l.Select();
+            }
+        }
+
+        public override void DeselectAll()
         {
             if (HasSelected())
             {
                 foreach (LinjeViewModel l in this)
                 {
-                    if (l.LinjeModel.IsSelected)
-                    {
-                        l.LinjeModel.IsSelected = false;
-                    }
+                    if (NumberOfSelected == 0)
+                        break;
+                        
+                    l.Deselect();
                 }
             }
         }
 
-        public void DeleteSelected()
+        public override void DeleteSelected()
         {
             int size = this.Count;
             List<LinjeViewModel> deleteEverythingInThisList = new List<LinjeViewModel>();
 
             for (int i = 0; i < size; i++)
-                if (this[i].LinjeModel.IsSelected)
+                if (this[i].IsSelected())
                     deleteEverythingInThisList.Add(this[i]);
 
             foreach (LinjeViewModel lvm in deleteEverythingInThisList)
                 lvm.Delete();
-
-            _numberOfSelected = 0;
         }
 
-        public bool HasSelected()
+        public override void Select(LinjeViewModel l)
         {
-            return (_numberOfSelected != 0 ? true : false);
+            l.Select();
         }
 
-        public void Select(LinjeModel l)
+        public override void Deselect(LinjeViewModel l)
         {
-            l.LinjeViewModel.Select();
+            l.Deselect();
         }
 
-        public void Deselect(LinjeModel l)
-        {
-            l.LinjeViewModel.Deselect();
-        }
-
-        public void IncreaseSelected()
-        {
-            _numberOfSelected++;
-        }
-
-        public void DecreaseSelected()
-        {
-            _numberOfSelected--;
-        }
+        // -------------//------------------ Override Base END --------------//------------------------ //
     }
 }

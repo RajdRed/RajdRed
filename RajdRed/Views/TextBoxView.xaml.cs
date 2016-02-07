@@ -1,18 +1,7 @@
 ﻿using RajdRed.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RajdRed.Views
 {
@@ -32,18 +21,23 @@ namespace RajdRed.Views
 
                 GotKeyboardFocus += (s,e) =>
                 {
-                    TextBoxViewModel.TextBoxRepository.MainRepository.Select(TextBoxViewModel.TextBoxModel);
+                    TextBoxViewModel.Select();
                 };
 
                 LostKeyboardFocus += (s, e) =>
                 {
-                    TextBoxViewModel.TextBoxModel.IsSelected = false;
+                    TextBoxViewModel.Deselect();
                 };
             };
         }
 
         private void TextBoxBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                TextBoxViewModel.TextBoxRepository.MainRepository.DeselectAll();
+            }
+
             CaptureMouse();
             _posOnUserControlOnHit = Mouse.GetPosition(this);
             e.Handled = true;
