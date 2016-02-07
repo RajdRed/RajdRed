@@ -122,7 +122,7 @@
                     <Canvas/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+            <ItemsControl.ItemTemplate >
                 <DataTemplate DataType="{x:Type vm:LinjeViewModel}">
                     <Canvas>
                         <Line DataContext="{Binding}"
@@ -131,7 +131,9 @@
                               X2="{Binding LinjeModel.X2}"
                               Y2="{Binding LinjeModel.Y2}"
                               StrokeThickness="3"
-                              MouseDown="Line_MouseDown">
+                              MouseDown="Line_MouseDown"
+                              MouseEnter="Line_MouseEnter"
+                              MouseLeave="Line_MouseLeave">
                             <Line.Style>
                                 <Style TargetType="Line">
                                     <Setter Property="Stroke" Value="Black"></Setter>

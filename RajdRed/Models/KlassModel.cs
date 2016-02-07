@@ -12,9 +12,10 @@ namespace RajdRed.Models
         public KlassViewModel KlassViewModel { get; set; }
         public static double MinSize = 110;
 
-        private bool _resize = false;
-        public bool Resize
+        private string _resize ="arrow";
+        public string Resize
         {
+            
             get
             {
                 return _resize;
@@ -123,7 +124,7 @@ namespace RajdRed.Models
         public KlassModel(KlassViewModel kvm, Point startPosition)
         {
             KlassViewModel = kvm;
-            Header = "New Class *";
+            Header = "New Class";
             PositionLeft = startPosition.X;
             PositionTop = startPosition.Y;
 		}

@@ -104,9 +104,10 @@ namespace RajdRed
 		private void theCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
             Keyboard.ClearFocus();
-            _mainRepository.DeselectAll();
 
             /************  För selectionverktyget  ***************/
+			if (!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl))
+				_mainRepository.DeselectAll();
 
             mouseDownPos = e.GetPosition(theCanvas);
 
@@ -288,6 +289,17 @@ namespace RajdRed
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
            _mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).Select();
+        }
+
+        private void Line_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void Line_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+
         }
     }
 }
