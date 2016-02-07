@@ -62,6 +62,8 @@ namespace RajdRed.ViewModels
                     if (n.IsSet())
                         n.Select();
                 }
+
+                SetPositionRelativeToView();
             }
         }
 
@@ -159,11 +161,24 @@ namespace RajdRed.ViewModels
             }
         }
 
+        public void SetPositionRelativeToView()
+        {
+            if (KlassView != null)
+                KlassModel.PositionRelative = Mouse.GetPosition(KlassView);
+            else
+                KlassModel.PositionRelative = new Point(KlassModel.MinSize/2,KlassModel.MinSize/2);
+        }
+
+        public Point GetPositionRelativeToView()
+        {
+            return KlassModel.PositionRelative;
+        }
+        
         public void Move(Point p)
         {
-            Point posRelative = Mouse.GetPosition(KlassView);
-            KlassModel.PositionLeft = p.X - posRelative.X;
-            KlassModel.PositionTop = p.Y - posRelative.Y;
+            KlassModel.PositionLeft = p.X - GetPositionRelativeToView().X;
+            KlassModel.PositionTop = p.Y - GetPositionRelativeToView().Y;
         }
+    
     }
 }

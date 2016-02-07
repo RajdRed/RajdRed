@@ -76,13 +76,16 @@ namespace RajdRed.Repositories
         }
 
         // -------------//------------------ Override Base END --------------//------------------------ //
-
-        public void MoveSelected(double dx, double dy)
+        
+        public void MoveSelected(Point p)
         {
             if (HasSelected())
             {
                 foreach (NodCanvasViewModel n in this)
-                    n.Move(dx, dy);
+                {
+                    if (n.IsSelected())
+                        n.Move(p);
+                }
             }
         }
 

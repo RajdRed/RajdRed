@@ -171,11 +171,28 @@ namespace RajdRed.Repositories
             return null;
         }
 
+        //public void SetPositionRelativeToView()
+        //{
+        //    if (HasSelected())
+        //    {
+        //        foreach (KlassViewModel k in this)
+        //        {
+        //            if (k.IsSelected())
+        //                k.SetPositionRelativeToView();
+        //        }
+        //    }
+        //}
+
         public void MoveSelected(Point p)
         {
             if (HasSelected())
+            {
                 foreach (KlassViewModel k in this)
-                    k.Move(p);
+                {
+                    if (k.IsSelected())
+                        k.Move(p);
+                }
+            }
         }
     }
 }

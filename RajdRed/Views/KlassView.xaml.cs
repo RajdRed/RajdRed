@@ -25,10 +25,11 @@ namespace RajdRed.Views
             InitializeComponent();
             Loaded += (sender, eArgs) =>
             {
+                KlassViewModel.SetKlassView(this);
+
                 if (!KlassViewModel.KlassModel.OnField)
                 {
                     CaptureMouse();
-                    KlassViewModel.SetKlassView(this);
                     KlassViewModel.KlassModel.PositionLeft = KlassViewModel.KlassModel.PositionLeft - (ActualWidth / 2);
                     KlassViewModel.KlassModel.PositionTop = KlassViewModel.KlassModel.PositionTop - (ActualHeight / 2);
 
@@ -94,7 +95,7 @@ namespace RajdRed.Views
                 Point p = e.GetPosition(Application.Current.MainWindow);
 
                 if (!(KlassViewModel.KlassModel.OnField && ((p.Y - _posOnUserControlOnHit.Y) <= 100.5))
-                    && !((p.X - _posOnUserControlOnHit.X) <= 0.5))
+                    && !((p.X - _posOnUserControlOnHit.X) <= 0.5) && IsLoaded)
                     KlassViewModel.KlassRepository.MainRepository.MoveSelected(p);                
             }
 

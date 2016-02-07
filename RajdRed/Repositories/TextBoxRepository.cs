@@ -75,11 +75,16 @@ namespace RajdRed.Repositories
             }
         }
 
-        public void MoveSelected(double dx, double dy)
+        public void MoveSelected(Point p)
         {
             if (HasSelected())
+            {
                 foreach (TextBoxViewModel t in this)
-                    t.Move(dx, dy);
+                {
+                    if (t.IsSelected())
+                        t.Move(p);
+                }
+            }
         }
     }
 }

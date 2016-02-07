@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace RajdRed.ViewModels
 {
@@ -35,6 +36,7 @@ namespace RajdRed.ViewModels
             {
                 TextBoxModel.IsSelected = true;
                 TextBoxRepository.IncreaseSelected();
+                SetPositionRelativeToView();
             }
         }
 
@@ -58,10 +60,23 @@ namespace RajdRed.ViewModels
             return (TextBoxModel.IsSelected ? true : false);
         }
 
-        public void Move(double dx, double dy)
+        public void SetPositionRelativeToView()
         {
-            TextBoxModel.PositionLeft += dx;
-            TextBoxModel.PositionTop += dy;
+            if (TextBoxView != null)
+                TextBoxModel.PositionRelative = Mouse.GetPosition(TextBoxView);
+            else
+                TextBoxModel.PositionRelative = new Point(KlassModel.MinSize / 2, KlassModel.MinSize / 2);
+        }
+
+        public Point GetPositionRelativeToView()
+        {
+            return TextBoxModel.PositionRelative;
+        }
+
+        public void Move(Point p)
+        {
+            TextBoxModel.PositionLeft = p.X - GetPositionRelativeToView().X;
+            TextBoxModel.PositionTop = p.Y - GetPositionRelativeToView().Y;
         }
     }
 }

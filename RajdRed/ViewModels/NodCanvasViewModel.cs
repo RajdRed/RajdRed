@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace RajdRed.ViewModels
 {
@@ -148,6 +149,8 @@ namespace RajdRed.ViewModels
                 {
                     l.LinjeViewModel.Select();
                 }
+
+                SetPositionRelativeToView();
             }
         }
 
@@ -165,10 +168,23 @@ namespace RajdRed.ViewModels
             return (NodCanvasModel.IsSelected ? true : false);
         }
 
-        public void Move(double dx, double dy)
+        public void SetPositionRelativeToView()
         {
-            NodCanvasModel.PositionLeft += dx;
-            NodCanvasModel.PositionTop += dy;
+            if (NodCanvasView != null)
+                NodCanvasModel.PositionRelative = Mouse.GetPosition(NodCanvasView);
+            else
+                NodCanvasModel.PositionRelative = new Point(KlassModel.MinSize / 2, KlassModel.MinSize / 2);
+        }
+
+        public Point GetPositionRelativeToView()
+        {
+            return NodCanvasModel.PositionRelative;
+        }
+
+        public void Move(Point p)
+        {
+            NodCanvasModel.PositionLeft = p.X - GetPositionRelativeToView().X;
+            NodCanvasModel.PositionTop = p.Y - GetPositionRelativeToView().Y;
         }
     }
 }

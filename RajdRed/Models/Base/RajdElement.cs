@@ -17,15 +17,11 @@ namespace RajdRed.Models.Base
         
         public bool OnField { get; set; }
 
-        private int _zIndex = 0;
-        public int ZIndex
+        private Point _positionRelative;
+        public Point PositionRelative
         {
-            get { return _zIndex; }
-            set { 
-                _zIndex = value;
-                OnPropertyChanged("ZIndex");
-            }
+            get { return _positionRelative; }
+            set { _positionRelative = value; }
         }
-        
     }
 }
