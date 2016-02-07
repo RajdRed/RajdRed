@@ -42,24 +42,25 @@
     </UserControl.Triggers>
     <ItemsControl>
         <Grid>
-        <Ellipse Width="15" Height="15" StrokeThickness="1" Opacity="0.5">
+        <Ellipse Width="14" Height="14" StrokeThickness="1">
                 <Ellipse.Resources>
                     <Style TargetType="Ellipse">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
-                                <Setter Property="Fill" Value="#A4D6FC"/>
-                                <Setter Property="Stroke" Value="Black"/>
+                                <Setter Property="Fill" Value="#AAA4D6FC"/>
+                                <Setter Property="Stroke" Value="#71C1F7"/>
                                 <!--#71C1F7-->
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Ellipse.Resources>
         </Ellipse>
-        <ContentPresenter Content="{Binding NodCanvasModel.Path}"
+            <ContentPresenter Content="{Binding NodCanvasModel.Path}"
                       RenderTransformOrigin="0.5 0.5"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Center">
-            <ContentPresenter.RenderTransform>
+                      VerticalAlignment="Center"
+                      x:Name="Content">
+                <ContentPresenter.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
                 </TransformGroup>
