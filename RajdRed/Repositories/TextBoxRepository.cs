@@ -54,7 +54,7 @@ namespace RajdRed.Repositories
                 tbvm.Delete();
             }
         }
-
+       
         // -------------//------------------ Override Base END --------------//------------------------ //
 
         public void SelectIfHit(Point mouseDownPos, Point mouseUpPos)
