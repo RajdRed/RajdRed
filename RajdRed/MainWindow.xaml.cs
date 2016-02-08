@@ -145,6 +145,8 @@ namespace RajdRed
 		private void theCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
             Keyboard.ClearFocus();
+            this.Focus();
+            Keyboard.Focus(this);
 
             /************  För selectionverktyget  ***************/
 			if (!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl))
@@ -328,7 +330,6 @@ namespace RajdRed
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           Keyboard.ClearFocus();
            _mainRepository.TextBoxRepository.DeselectAll();
            _mainRepository.TextBoxRepository.AddNewTextBox();
 
