@@ -62,7 +62,10 @@ namespace RajdRed.ViewModels
         public void Edit()
         {
             if (IsSelected())
+            {
                 TextBoxModel.Editable = true;
+                TextBoxView.TextBoxField.SelectAll();
+            }
         }
 
         public void StopEdit()
