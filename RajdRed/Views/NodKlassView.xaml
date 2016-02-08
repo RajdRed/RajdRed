@@ -15,7 +15,7 @@
              MouseLeave="UserControl_MouseLeave"
              MouseUp="UserControl_MouseUp"
 			 MouseEnter="UserControl_MouseEnter"
-             
+             Background="Transparent"
              BorderThickness="1">
     <UserControl.Resources>
         <Style TargetType="UserControl">
