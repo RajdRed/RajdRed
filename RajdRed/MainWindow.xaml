@@ -27,6 +27,7 @@
     <Canvas 
         MouseLeftButtonDown="theCanvas_MouseLeftButtonDown" 
         MouseLeftButtonUp="theCanvas_MouseLeftButtonUp" 
+		MouseRightButtonDown="theCanvas_MouseRightButtonDown"
         Name="theCanvas" Background="#EAEDF2">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>

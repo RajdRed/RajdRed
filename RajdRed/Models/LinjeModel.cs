@@ -96,7 +96,6 @@ namespace RajdRed.Models
                 OnPropertyChanged("IsSelected");
             }
         }
-        
 
         public LinjeModel(LinjeViewModel lvm, NodModelBase n1, NodModelBase n2)
         {

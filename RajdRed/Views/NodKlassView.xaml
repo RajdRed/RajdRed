@@ -16,8 +16,22 @@
              MouseUp="UserControl_MouseUp"
 			 MouseEnter="UserControl_MouseEnter"
              Background="Transparent"
+<<<<<<< HEAD
              
              >
+=======
+             BorderThickness="1">
+    <UserControl.Resources>
+        <Style TargetType="UserControl">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
+                    <Setter Property="Background" Value="#AAA4D6FC"/>
+                    <Setter Property="BorderBrush" Value="#71C1F7"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+>>>>>>> refs/remotes/origin/MVVM
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="MouseEnter">
             <BeginStoryboard>
