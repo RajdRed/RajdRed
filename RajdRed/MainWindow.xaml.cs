@@ -348,6 +348,26 @@ namespace RajdRed
 
 		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
+			Point pt = e.GetPosition(theCanvas);
+
+			if (pt.Y > 101.0) {
+				ContextMenu cm = new ContextMenu();
+
+				cm.Items.Clear();
+				MenuItem mi;
+				MenuItem mi2;
+
+				mi = new MenuItem();
+				mi.Header = "Create Textbox / Multiplicity";
+				mi.Click += new RoutedEventHandler(MenuItem_Click);
+				mi2 = new MenuItem();
+				mi2.Header = "Help";
+				mi2.Click += new RoutedEventHandler(settingsMenu.HelpButton_Click);
+				cm.Items.Add(mi);
+				cm.Items.Add(mi2);
+				cm.IsOpen = true;
+			}
+			
 			if (isArchiveMenuActive)
 			{
 				theCanvas.Children.Remove(archiveMenu);

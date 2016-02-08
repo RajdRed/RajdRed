@@ -27,8 +27,11 @@ namespace RajdRed.Views
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
 
-                SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
-                SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+				if (!((p.Y - _posOnUserControlOnHit.Y) <= 100.5))
+					SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+
+				if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
+					SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
             }
 
             e.Handled = true;
