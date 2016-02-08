@@ -42,6 +42,13 @@ namespace RajdRed.Models
             }
         }
 
+        private bool _editable = false;
+        public bool Editable
+        {
+            get { return _editable; }
+            set { _editable = value; OnPropertyChanged("Editable"); }
+        }
+        
         public Visibility Visible
         {
             get

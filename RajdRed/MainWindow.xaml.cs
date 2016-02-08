@@ -55,9 +55,7 @@ namespace RajdRed
 				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
 
-            _mainRepository.Select(
-                _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow)).KlassModel
-                );
+            _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
         }
 
         private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
@@ -214,7 +212,6 @@ namespace RajdRed
 
         private void theCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
 		{
-            Keyboard.Focus(this);
 			theCanvas.ReleaseMouseCapture();
 			selectionBox.Visibility = Visibility.Collapsed;
 
@@ -331,7 +328,11 @@ namespace RajdRed
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           _mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this)).Select();
+           Keyboard.ClearFocus();
+           _mainRepository.TextBoxRepository.DeselectAll();
+           _mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this));
+
+           e.Handled = true;
         }
 
         private void Line_MouseEnter(object sender, MouseEventArgs e)

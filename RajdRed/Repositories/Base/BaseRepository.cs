@@ -4,11 +4,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RajdRed.Repositories.Base
 {
     public abstract class BaseRepository<T> : ObservableCollection<T>
     {
+        //Använd till vad du vill...
+        public Point TempPosition { get; set; }
+
         private int _numberOfSelected = 0;
         private MainRepository _mainRepository;
 

@@ -42,8 +42,9 @@ namespace RajdRed.ViewModels
         {
             if (IsSelected())
             {
-                TextBoxModel.IsSelected = true;
+                TextBoxModel.IsSelected = false;
                 TextBoxRepository.DecreaseSelected();
+                StopEdit();
             }
         }
 
@@ -56,6 +57,17 @@ namespace RajdRed.ViewModels
         public bool IsSelected()
         {
             return (TextBoxModel.IsSelected ? true : false);
+        }
+
+        public void Edit()
+        {
+            if (IsSelected())
+                TextBoxModel.Editable = true;
+        }
+
+        public void StopEdit()
+        {
+            TextBoxModel.Editable = false;
         }
     }
 }

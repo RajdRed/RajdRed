@@ -13,6 +13,9 @@ namespace RajdRed.Repositories
 {
     public class MainRepository
     {
+        //Använd till vad du vill...
+        public Point TempPosition { get; set; }
+
         private MainWindow _mainWindow;
         public MainWindow MainWindow
         {

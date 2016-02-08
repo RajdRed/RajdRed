@@ -36,7 +36,7 @@ namespace RajdRed.Repositories
             if (HasSelected())
             {
                 foreach (TextBoxViewModel t in this)
-                    t.TextBoxModel.IsSelected = false;
+                    t.Deselect();
             }
         }
 
@@ -55,7 +55,7 @@ namespace RajdRed.Repositories
             }
         }
 
-        // -------------//------------------ Override Base END --------------//------------------------ //
+        // -------------//---------------- Override Base END --------------//------------------------ //
 
         public void SelectIfHit(Point mouseDownPos, Point mouseUpPos)
         {
