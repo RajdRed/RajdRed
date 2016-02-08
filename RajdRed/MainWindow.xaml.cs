@@ -40,6 +40,21 @@ namespace RajdRed
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             _mainRepository.DeselectAll();
+
+			if (isArchiveMenuActive)
+			{
+				theCanvas.Children.Remove(archiveMenu);
+				isArchiveMenuActive = false;
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+
+			if (isSettingsMenuActive)
+			{
+				theCanvas.Children.Remove(settingsMenu);
+				isSettingsMenuActive = false;
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+
             _mainRepository.Select(
                 _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow)).KlassModel
                 );
