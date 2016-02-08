@@ -347,8 +347,6 @@ namespace RajdRed
                     _mainRepository.DeleteSelected();
 				}
 			}
-
-            k.Handled = true;
 		}
 
         public void DeselectAll()
