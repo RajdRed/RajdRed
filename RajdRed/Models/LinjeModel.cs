@@ -94,7 +94,6 @@ namespace RajdRed.Models
             {
                 base.IsSelected = value;
                 OnPropertyChanged("IsSelected");
-                OnPropertyChanged("Color");
             }
         }
 

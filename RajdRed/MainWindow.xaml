@@ -27,6 +27,7 @@
     <Canvas 
         MouseLeftButtonDown="theCanvas_MouseLeftButtonDown" 
         MouseLeftButtonUp="theCanvas_MouseLeftButtonUp" 
+		MouseRightButtonDown="theCanvas_MouseRightButtonDown"
         Name="theCanvas" Background="#EAEDF2">
         <Grid Name="menuBot" Height="100" Background="#4f5b6d" Grid.Row="0" Width="{Binding ActualWidth, ElementName=theCanvas}">
             <Grid.RowDefinitions>
@@ -139,7 +140,7 @@
                                     <Setter Property="Stroke" Value="Black"></Setter>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding LinjeModel.IsSelected}" Value="True">
-                                            <Setter Property="Stroke" Value="Red"></Setter>
+                                            <Setter Property="Stroke" Value="#A4D6FC"></Setter>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

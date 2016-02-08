@@ -15,7 +15,18 @@
              MouseLeave="UserControl_MouseLeave"
              MouseUp="UserControl_MouseUp"
 			 MouseEnter="UserControl_MouseEnter"
-             Background="Transparent">
+             Background="Transparent"
+             BorderThickness="1">
+    <UserControl.Resources>
+        <Style TargetType="UserControl">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
+                    <Setter Property="Background" Value="#AAA4D6FC"/>
+                    <Setter Property="BorderBrush" Value="#71C1F7"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="MouseEnter">
             <BeginStoryboard>

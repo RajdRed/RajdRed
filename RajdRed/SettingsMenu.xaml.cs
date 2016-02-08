@@ -48,15 +48,5 @@
  			mw.isSettingsMenuActive = false;
  			mw.settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
  		}
-
-        private void Border_MouseLeave(object sender, MouseEventArgs e)
-        {
-            MainWindow mw = (MainWindow)Application.Current.MainWindow;
-            mw.theCanvas.Children.Remove(this);            
-            mw.isSettingsMenuActive = false;
-            mw.settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
-
-            e.Handled = true;
-        }
   	}
   }
