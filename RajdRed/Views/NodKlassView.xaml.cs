@@ -91,7 +91,10 @@ namespace RajdRed.Views
 
 		private void UserControl_MouseEnter(object sender, MouseEventArgs e)
 		{
-
+            if (!NodKlassViewModel.NodKlassModel.IsSet)
+            {
+                NodKlassViewModel.TurnToAssosiation();
+            }
 		}
 
 		private void UserControl_MouseLeave(object sender, MouseEventArgs e)
@@ -110,6 +113,10 @@ namespace RajdRed.Views
                 }
 
                 NodKlassViewModel.NodKlassModel.IsPressed = false;
+            }
+            else if (!NodKlassViewModel.NodKlassModel.IsSet)
+            {
+                NodKlassViewModel.TurnToNode();
             }
 		}              
     }
