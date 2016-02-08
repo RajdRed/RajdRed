@@ -47,8 +47,8 @@
                     <Style TargetType="Ellipse">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
-                                <Setter Property="Fill" Value="#AAA4D6FC"/>
-                                <Setter Property="Stroke" Value="#71C1F7"/>
+                                <Setter Property="Fill" Value="#5581BEF7"/>
+                                <Setter Property="Stroke" Value="#58ACFA"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

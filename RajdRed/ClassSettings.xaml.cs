@@ -41,15 +41,7 @@ namespace RajdRed
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
-			BindingExpression classNameBE = BindingOperations.GetBindingExpression(ClassName, TextBox.TextProperty);
-			BindingExpression attributesBE = BindingOperations.GetBindingExpression(Attributes, TextBox.TextProperty);
-			BindingExpression methodsBE = BindingOperations.GetBindingExpression(Methods, TextBox.TextProperty);
-
-			classNameBE.UpdateSource();
-			attributesBE.UpdateSource();
-			methodsBE.UpdateSource();
-
-			_kvm.KlassView.CloseSettings(this, _backgroundGrid);
+            Save();
         }
 
         private void ClassSettings_Loaded(object sender, RoutedEventArgs e)
@@ -61,6 +53,19 @@ namespace RajdRed
             DoubleAnimation da = new DoubleAnimation(1, new Duration(TimeSpan.FromSeconds(0.17)));
             sct.BeginAnimation(ScaleTransform.ScaleXProperty, da);
             sct.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+        }
+
+        public void Save()
+        {
+            BindingExpression classNameBE = BindingOperations.GetBindingExpression(ClassName, TextBox.TextProperty);
+            BindingExpression attributesBE = BindingOperations.GetBindingExpression(Attributes, TextBox.TextProperty);
+            BindingExpression methodsBE = BindingOperations.GetBindingExpression(Methods, TextBox.TextProperty);
+
+            classNameBE.UpdateSource();
+            attributesBE.UpdateSource();
+            methodsBE.UpdateSource();
+
+            _kvm.KlassView.CloseSettings(this, _backgroundGrid);
         }
     }
 }

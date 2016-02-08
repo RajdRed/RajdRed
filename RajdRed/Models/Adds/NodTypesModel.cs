@@ -49,13 +49,13 @@ namespace RajdRed.Models.Adds
             Data = new PathGeometry(
             new List<PathFigure>() 
             { 
-                new PathFigure(new Point(7.5, 0), 
+                new PathFigure(new Point(6, 0), 
                 new List<PathSegment>()
                 {
-                    new LineSegment(new Point(7.5, 0), true),
-                    new LineSegment(new Point(15, 7.5), true),
-                    new LineSegment(new Point(7.5, 15), true),
-                    new LineSegment(new Point(0, 7.5), true)
+                    new LineSegment(new Point(6, 0), true),
+                    new LineSegment(new Point(12, 6), true),
+                    new LineSegment(new Point(6, 12), true),
+                    new LineSegment(new Point(0, 6), true)
                 }, 
                 true) 
             }),
@@ -74,13 +74,13 @@ namespace RajdRed.Models.Adds
             Data = new PathGeometry(
             new List<PathFigure>() 
             { 
-                new PathFigure(new Point(7.5, 0), 
+                new PathFigure(new Point(6, 0), 
                 new List<PathSegment>()
                 {
-                    new LineSegment(new Point(7.5, 0), true),
-                    new LineSegment(new Point(15, 7.5), true),
-                    new LineSegment(new Point(7.5, 15), true),
-                    new LineSegment(new Point(0, 7.5), true)
+                    new LineSegment(new Point(6, 0), true),
+                    new LineSegment(new Point(12, 6), true),
+                    new LineSegment(new Point(6, 12), true),
+                    new LineSegment(new Point(0, 6), true)
                 }, 
                 true) 
             }),
@@ -100,12 +100,12 @@ namespace RajdRed.Models.Adds
             Data = new PathGeometry(
             new List<PathFigure>() 
             { 
-                new PathFigure(new Point(7.5, 0), 
+                new PathFigure(new Point(6, 0), 
                 new List<PathSegment>()
                 {
-                    new LineSegment(new Point(7.5, 0), true),
-                    new LineSegment(new Point(15, 15), true),
-                    new LineSegment(new Point(0, 15), true)
+                    new LineSegment(new Point(6, 0), true),
+                    new LineSegment(new Point(12, 12), true),
+                    new LineSegment(new Point(0, 12), true)
                 }, 
                 true) 
             }),
