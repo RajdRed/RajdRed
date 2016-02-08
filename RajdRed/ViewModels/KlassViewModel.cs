@@ -49,7 +49,6 @@ namespace RajdRed.ViewModels
             KlassRepository.Remove(this);
         }
 
-
         public void Select()
         {
             if (!IsSelected())
@@ -77,6 +76,10 @@ namespace RajdRed.ViewModels
         public void SetKlassView(KlassView kv)
         {
             KlassView = kv;
+            kv.SizeChanged += (sender, args) => {
+                KlassModel.Width = kv.ActualWidth;
+                KlassModel.Height = kv.ActualHeight;
+            };
         }
 
         public Point PositionOnCanvas()
