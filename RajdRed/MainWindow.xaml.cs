@@ -40,6 +40,21 @@ namespace RajdRed
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             _mainRepository.DeselectAll();
+
+			if (isArchiveMenuActive)
+			{
+				theCanvas.Children.Remove(archiveMenu);
+				isArchiveMenuActive = false;
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+
+			if (isSettingsMenuActive)
+			{
+				theCanvas.Children.Remove(settingsMenu);
+				isSettingsMenuActive = false;
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+
             _mainRepository.Select(
                 _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow)).KlassModel
                 );
@@ -60,7 +75,35 @@ namespace RajdRed
 
         private void Ellipse_CloseWindow(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+
+			int classlength = mw._mainRepository.KlassRepository.Count;
+			int linjelength = mw._mainRepository.LinjeRepository.Count;
+			int nodlength = mw._mainRepository.NodCanvasRepository.Count;
+			int textlength = mw._mainRepository.TextBoxRepository.Count;
+
+			if (classlength > 0 || linjelength > 0 || nodlength > 0 || textlength > 0)
+			{
+				MessageBoxResult messageBoxResult = MessageBox.Show("Vill du spara dokumentet \"" + mw.TitleTextBox.Text + "\" till PDF?", "Save current?", System.Windows.MessageBoxButton.YesNoCancel);
+
+				if (messageBoxResult == MessageBoxResult.Yes)
+				{
+					bool didISave = archiveMenu.openSaveBox(mw);
+
+					if (didISave)
+						Application.Current.Shutdown();
+				}
+
+				else if (messageBoxResult != MessageBoxResult.Cancel)
+					Application.Current.Shutdown();
+			}
+
+			else
+				Application.Current.Shutdown();
+
+			mw.theCanvas.Children.Remove(this);
+			mw.isArchiveMenuActive = false;
+			mw.archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
         }
 
         private void WindowDragAndMove(object sender, MouseButtonEventArgs e)
@@ -301,5 +344,22 @@ namespace RajdRed
             Cursor = Cursors.Arrow;
 
         }
+
+		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			if (isArchiveMenuActive)
+			{
+				theCanvas.Children.Remove(archiveMenu);
+				isArchiveMenuActive = false;
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+
+			if (isSettingsMenuActive)
+			{
+				theCanvas.Children.Remove(settingsMenu);
+				isSettingsMenuActive = false;
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+		}
     }
 }
