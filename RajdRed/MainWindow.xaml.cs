@@ -11,6 +11,7 @@ using RajdRed.ViewModels;
 using System.Collections.Generic;
 using System.Windows.Shapes;
 using RajdRed.Models;
+using System.Reflection;
 
 namespace RajdRed
 {
@@ -63,14 +64,31 @@ namespace RajdRed
         private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
+			minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max.jpg", UriKind.Absolute));
         }
 
         private void Ellipse_MaximizeWindow(object sender, MouseButtonEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
+			if (WindowState == WindowState.Maximized)
+			{
+				WindowState = WindowState.Normal;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max.jpg", UriKind.Absolute));
+			}
 
-            else WindowState = WindowState.Maximized;
+			else
+			{
+				WindowState = WindowState.Maximized;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max2.jpg", UriKind.Absolute));
+			}
         }
 
         private void Ellipse_CloseWindow(object sender, MouseButtonEventArgs e)
