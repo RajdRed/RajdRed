@@ -37,7 +37,7 @@
   			mw.settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
   		}
  
- 		private void HelpButton_Click(object sender, RoutedEventArgs e)
+ 		public void HelpButton_Click(object sender, RoutedEventArgs e)
  		{
  			MainWindow mw = (MainWindow)Application.Current.MainWindow;
  			HelpWindow helpWindow = new HelpWindow();
