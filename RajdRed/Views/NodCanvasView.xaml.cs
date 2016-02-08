@@ -65,23 +65,23 @@ namespace RajdRed.Views
             {
                 Point p = e.GetPosition(Application.Current.MainWindow);
 
-               if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                {
-                    double dx = (p.X - _startDragPosition.X) * (p.X - _startDragPosition.X);
-                    double dy = (p.Y - _startDragPosition.Y) * (p.Y - _startDragPosition.Y);
+               //if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+               // {
+               //     double dx = (p.X - _startDragPosition.X) * (p.X - _startDragPosition.X);
+               //     double dy = (p.Y - _startDragPosition.Y) * (p.Y - _startDragPosition.Y);
 
-                    if (dx >= dy) {
-                        SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
-                        SetValue(Canvas.TopProperty, _startDragPosition.Y - _posOnUserControlOnHit.Y);
-                    }
-                    else
-                    {
-                        SetValue(Canvas.LeftProperty, _startDragPosition.X - _posOnUserControlOnHit.X);
-                        SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
-                    }
-                }
+               //     if (dx >= dy) {
+               //         SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
+               //         SetValue(Canvas.TopProperty, _startDragPosition.Y - _posOnUserControlOnHit.Y);
+               //     }
+               //     else
+               //     {
+               //         SetValue(Canvas.LeftProperty, _startDragPosition.X - _posOnUserControlOnHit.X);
+               //         SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
+               //     }
+               // }
 
-                else
+               // else
                 {
 					if (!((p.Y - _posOnUserControlOnHit.Y) <= 100.5))
 						SetValue(Canvas.TopProperty, p.Y - _posOnUserControlOnHit.Y);
