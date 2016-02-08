@@ -10,9 +10,9 @@ namespace RajdRed.Repositories
     public class TextBoxRepository : BaseRepository<TextBoxViewModel>
     {
         public TextBoxRepository(MainRepository m) : base(m) { }
-        public TextBoxViewModel AddNewTextBox(Point p)
+        public TextBoxViewModel AddNewTextBox()
         {
-            TextBoxViewModel tbvm = new TextBoxViewModel(p, this);
+            TextBoxViewModel tbvm = new TextBoxViewModel(TempPosition, this);
             Add(tbvm);
             tbvm.Select();
 

@@ -330,7 +330,7 @@ namespace RajdRed
         {
            Keyboard.ClearFocus();
            _mainRepository.TextBoxRepository.DeselectAll();
-           _mainRepository.TextBoxRepository.AddNewTextBox(Mouse.GetPosition(this));
+           _mainRepository.TextBoxRepository.AddNewTextBox();
 
            e.Handled = true;
         }
@@ -348,7 +348,7 @@ namespace RajdRed
 
 		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			Point pt = e.GetPosition(theCanvas);
+			Point pt = _mainRepository.TextBoxRepository.TempPosition = e.GetPosition(theCanvas);
 
 			if (pt.Y > 101.0) {
 				ContextMenu cm = new ContextMenu();
