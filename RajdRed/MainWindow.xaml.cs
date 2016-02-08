@@ -11,6 +11,7 @@ using RajdRed.ViewModels;
 using System.Collections.Generic;
 using System.Windows.Shapes;
 using RajdRed.Models;
+using System.Reflection;
 
 namespace RajdRed
 {
@@ -56,19 +57,38 @@ namespace RajdRed
 			}
 
             _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
+
+            e.Handled = true;
         }
 
         private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
+			minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max.jpg", UriKind.Absolute));
         }
 
         private void Ellipse_MaximizeWindow(object sender, MouseButtonEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
+			if (WindowState == WindowState.Maximized)
+			{
+				WindowState = WindowState.Normal;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max.jpg", UriKind.Absolute));
+			}
 
-            else WindowState = WindowState.Maximized;
+			else
+			{
+				WindowState = WindowState.Maximized;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max2.jpg", UriKind.Absolute));
+			}
         }
 
         private void Ellipse_CloseWindow(object sender, MouseButtonEventArgs e)
@@ -106,13 +126,26 @@ namespace RajdRed
 
         private void WindowDragAndMove(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2 && WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
+			if (e.ClickCount == 2 && WindowState == WindowState.Maximized)
+			{
+				WindowState = WindowState.Normal;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max.jpg", UriKind.Absolute));
+			}
 
-            else if (e.ClickCount == 2 && WindowState == WindowState.Normal)
-                WindowState = WindowState.Maximized;
-
+			else if (e.ClickCount == 2 && WindowState == WindowState.Normal)
+			{
+				WindowState = WindowState.Maximized;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max2.jpg", UriKind.Absolute));
+			}
             else DragMove();
+
+            e.Handled = true;
         }
 
         private void Button_ArchiveMenu_MouseDown(object sender, MouseButtonEventArgs e)
@@ -140,6 +173,8 @@ namespace RajdRed
 				isArchiveMenuActive = false;
 				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
+
+            e.Handled = true;
         }
 
 		private void theCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -339,12 +374,14 @@ namespace RajdRed
         private void Line_MouseEnter(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Hand;
+
+            e.Handled = true;
         }
 
         private void Line_MouseLeave(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Arrow;
-
+            e.Handled = true;
         }
 
 		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -382,6 +419,8 @@ namespace RajdRed
 				isSettingsMenuActive = false;
 				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
+
+            e.Handled = true;
 		}
     }
 }

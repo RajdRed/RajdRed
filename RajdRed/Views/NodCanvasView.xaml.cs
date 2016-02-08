@@ -43,7 +43,6 @@ namespace RajdRed.Views
 
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            CaptureMouse();
             _startDragPosition = _posOnUserControlOnHit = Mouse.GetPosition(this);
 
             Dispatcher.Invoke(new Action(() => {
@@ -56,7 +55,7 @@ namespace RajdRed.Views
             }
 
             NodCanvasViewModel.Select();
-
+            CaptureMouse();
             e.Handled = true;
         }
 
