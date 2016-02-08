@@ -1,4 +1,5 @@
-﻿using RajdRed.ViewModels;
+﻿using RajdRed.Models;
+using RajdRed.ViewModels;
 using System;
 using System.Threading;
 using System.Windows;
@@ -102,6 +103,71 @@ namespace RajdRed.Views
             {
                 NodCanvasViewModel.NodCanvasRepository.MainRepository.KlassRepository.HideAllKlassNodes();
             }));
+
+            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                foreach(LinjeModel l in this.NodCanvasViewModel.NodCanvasModel.LinjeListModel)
+                {
+                    double x, y;
+                    if(l.Nod1 == this.NodCanvasViewModel.NodCanvasModel)
+                    {
+                        
+                        if((l.Nod1.PositionTop-l.Nod2.PositionTop) < 0)
+                            y = l.Nod2.PositionTop - l.Nod1.PositionTop;
+                        else
+                            y = l.Nod1.PositionTop - l.Nod2.PositionTop;
+                        if ((l.Nod1.PositionLeft - l.Nod2.PositionLeft) < 0)
+                            x = l.Nod2.PositionLeft - l.Nod1.PositionLeft;
+                        else
+                            x = l.Nod1.PositionLeft - l.Nod2.PositionLeft;
+                        if (x < y)
+                        {
+                            if ((l.Nod1.PositionLeft - l.Nod2.PositionLeft) < 0)
+                                l.Nod1.PositionLeft = l.Nod1.PositionLeft + x;// l.Nod1.PositionLeft;
+                            else
+                                l.Nod1.PositionLeft = l.Nod1.PositionLeft - x;
+                        }
+                        else
+                        {
+                            if ((l.Nod1.PositionTop - l.Nod2.PositionTop) < 0)
+                                l.Nod1.PositionTop = l.Nod1.PositionTop + y;// l.Nod1.PositionTop;
+                            else
+                                l.Nod1.PositionTop = l.Nod1.PositionTop - y;// l.Nod1.PositionTop;
+                        }
+
+                    }
+                    else
+                    { 
+                        
+                        if((l.Nod2.PositionTop-l.Nod1.PositionTop) < 0)
+                            y = l.Nod1.PositionTop - l.Nod2.PositionTop;
+                        else
+                            y = l.Nod2.PositionTop - l.Nod1.PositionTop;
+                        if ((l.Nod2.PositionLeft - l.Nod1.PositionLeft) < 0)
+                            x = l.Nod1.PositionLeft - l.Nod2.PositionLeft;
+                        else
+                            x = l.Nod2.PositionLeft - l.Nod1.PositionLeft;
+                        if (x < y)
+                        {
+                            if((l.Nod2.PositionLeft - l.Nod1.PositionLeft) < 0)
+                                l.Nod2.PositionLeft = l.Nod2.PositionLeft + x;// l.Nod1.PositionLeft;
+                            else
+                                l.Nod2.PositionLeft = l.Nod2.PositionLeft - x;
+                        }
+                           
+                        else
+                        {
+                            if((l.Nod2.PositionTop - l.Nod1.PositionTop) < 0)
+                                l.Nod2.PositionTop = l.Nod2.PositionTop + y;// l.Nod1.PositionTop;
+                            else
+                                l.Nod2.PositionTop = l.Nod2.PositionTop - y;// l.Nod1.PositionTop;
+                        }
+                            
+                    
+
+                    }
+                }
+            }
 
             e.Handled = true;
         }
