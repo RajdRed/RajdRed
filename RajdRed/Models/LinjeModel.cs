@@ -98,18 +98,6 @@ namespace RajdRed.Models
             }
         }
 
-        public Brush Color
-        {
-            get 
-            {
-                if (IsSelected)
-                    return Brushes.Red;
-                else
-                    return Brushes.Transparent;
-            }
-        }
-        
-
         public LinjeModel(LinjeViewModel lvm, NodModelBase n1, NodModelBase n2)
         {
             LinjeViewModel = lvm;

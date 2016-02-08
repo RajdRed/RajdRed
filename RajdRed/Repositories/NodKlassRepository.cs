@@ -11,7 +11,7 @@ namespace RajdRed.Repositories
         public NodKlassRepository(MainRepository m, KlassViewModel kvm) : base(m)
         {
             //left
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
                 Add(new NodKlassViewModel(new NodKlassModel() {
                     Row = i,
                     Column = 0,
@@ -20,7 +20,7 @@ namespace RajdRed.Repositories
                 }, kvm, this));
 
             //right
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
                 Add(new NodKlassViewModel(new NodKlassModel()
                 {
                     Row = i,
@@ -30,7 +30,7 @@ namespace RajdRed.Repositories
                 }, kvm, this));
 
             //top
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
                 Add(new NodKlassViewModel(new NodKlassModel()
                 {
                     Row = 0,
@@ -40,7 +40,7 @@ namespace RajdRed.Repositories
                 }, kvm, this));
 
             //bottom
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
                 Add(new NodKlassViewModel(new NodKlassModel()
                 {
                     Row = 5,
