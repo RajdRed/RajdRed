@@ -21,7 +21,35 @@ namespace RajdRed
 
 		private void exitButton_click(object sender, RoutedEventArgs e)
 		{
-			Application.Current.Shutdown();
+			MainWindow mw = (MainWindow)Application.Current.MainWindow;
+
+			int classlength = mw._mainRepository.KlassRepository.Count;
+			int linjelength = mw._mainRepository.LinjeRepository.Count;
+			int nodlength = mw._mainRepository.NodCanvasRepository.Count;
+			int textlength = mw._mainRepository.TextBoxRepository.Count;
+
+			if (classlength > 0 || linjelength > 0 || nodlength > 0 || textlength > 0)
+			{
+				MessageBoxResult messageBoxResult = MessageBox.Show("Vill du spara dokumentet \"" + mw.TitleTextBox.Text + "\" till PDF?", "Save current?", System.Windows.MessageBoxButton.YesNoCancel);
+
+				if (messageBoxResult == MessageBoxResult.Yes)
+				{
+					bool didISave = openSaveBox(mw);
+
+					if (didISave)
+						Application.Current.Shutdown();
+				}
+
+				else if (messageBoxResult != MessageBoxResult.Cancel)
+					Application.Current.Shutdown();
+			}
+
+			else
+				Application.Current.Shutdown();
+
+			mw.theCanvas.Children.Remove(this);
+			mw.isArchiveMenuActive = false;
+			mw.archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 		}
 
 		private void newButton_click(object sender, RoutedEventArgs e)
@@ -89,7 +117,7 @@ namespace RajdRed
 			openSaveBox((MainWindow)Application.Current.MainWindow);
 		}
 
-		private bool openSaveBox(MainWindow mw)
+		public bool openSaveBox(MainWindow mw)
 		{
 			Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
 			dlg.FileName = mw.TitleTextBox.Text; // Default file name
