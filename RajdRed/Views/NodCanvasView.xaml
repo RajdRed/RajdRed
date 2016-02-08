@@ -49,7 +49,6 @@
                             <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
                                 <Setter Property="Fill" Value="#AAA4D6FC"/>
                                 <Setter Property="Stroke" Value="#71C1F7"/>
-                                <!--#71C1F7-->
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

@@ -94,18 +94,6 @@ namespace RajdRed.Models
             {
                 base.IsSelected = value;
                 OnPropertyChanged("IsSelected");
-                OnPropertyChanged("Color");
-            }
-        }
-
-        public Brush Color
-        {
-            get 
-            {
-                if (IsSelected)
-                    return Brushes.Red;
-                else
-                    return Brushes.Transparent;
             }
         }
         
