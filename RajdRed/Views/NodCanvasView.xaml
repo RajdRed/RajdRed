@@ -62,7 +62,7 @@
                       x:Name="Content">
                 <ContentPresenter.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
+                    <ScaleTransform x:Name="ContentScale" ScaleX="0.7" ScaleY="0.7"/>
                 </TransformGroup>
             </ContentPresenter.RenderTransform>
         </ContentPresenter>

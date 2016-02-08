@@ -27,7 +27,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave">
+    <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave" Background="Transparent">
         <Border PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" 
                 MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" 
                 CornerRadius="2,2,2,2" BorderThickness="1" Opacity="0.5">
