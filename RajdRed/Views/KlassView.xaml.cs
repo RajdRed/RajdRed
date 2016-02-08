@@ -52,7 +52,7 @@ namespace RajdRed.Views
                 Canvas.SetTop(g, 0);
 
                 ClassSettings cs = new ClassSettings(KlassViewModel, g);
-                g.MouseDown += (sendr, eventArgs) => { CloseSettings(cs, g); };	//Skapar ett mouseDown-event för Grid g som anropar CloseSettings
+                g.MouseDown += (sendr, eventArgs) => { cs.Save(); };	//Skapar ett mouseDown-event för Grid g som anropar CloseSettings
 
                 double x = (KlassViewModel.KlassModel.PositionLeft + _posOnUserControlOnHit.X - cs.Width / 2.33);
                 double y = (KlassViewModel.KlassModel.PositionTop + _posOnUserControlOnHit.Y - cs.Height / 2);

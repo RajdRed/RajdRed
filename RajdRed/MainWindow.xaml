@@ -140,7 +140,7 @@
                                     <Setter Property="Stroke" Value="Black"></Setter>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding LinjeModel.IsSelected}" Value="True">
-                                            <Setter Property="Stroke" Value="#A4D6FC"></Setter>
+                                            <Setter Property="Stroke" Value="#CC81BEF7"></Setter>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
