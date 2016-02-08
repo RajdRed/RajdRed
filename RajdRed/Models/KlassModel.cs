@@ -36,7 +36,7 @@ namespace RajdRed.Models
             set
             {
                 base.IsSelected = value;
-                OnPropertyChanged("Selected");
+                OnPropertyChanged("IsSelected");
             }
         }
 

@@ -11,9 +11,9 @@
              MouseUp="UserControl_MouseUp"
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
-             Background="{Binding NodCanvasModel.Background}"
              HorizontalContentAlignment="Center"
-             VerticalContentAlignment="Center">
+             VerticalContentAlignment="Center"
+             Background="Transparent">
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="MouseEnter">
             <BeginStoryboard>
@@ -40,12 +40,33 @@
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-    <ContentPresenter Content="{Binding NodCanvasModel.Path}"
-                      RenderTransformOrigin="0.5 0.5">
-        <ContentPresenter.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
-            </TransformGroup>
-        </ContentPresenter.RenderTransform>
-    </ContentPresenter>
+    <ItemsControl>
+        <Grid>
+        <Ellipse Width="14" Height="14" StrokeThickness="1">
+                <Ellipse.Resources>
+                    <Style TargetType="Ellipse">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding NodCanvasModel.IsSelected}" Value="true">
+                                <Setter Property="Fill" Value="#AAA4D6FC"/>
+                                <Setter Property="Stroke" Value="#71C1F7"/>
+                                <!--#71C1F7-->
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Ellipse.Resources>
+        </Ellipse>
+            <ContentPresenter Content="{Binding NodCanvasModel.Path}"
+                      RenderTransformOrigin="0.5 0.5"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      x:Name="Content">
+                <ContentPresenter.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="ContentScale" ScaleX="0.7" ScaleY="0.7"/>
+                </TransformGroup>
+            </ContentPresenter.RenderTransform>
+        </ContentPresenter>
+        </Grid>
+    </ItemsControl>
+    
 </UserControl>

@@ -30,13 +30,13 @@
     <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave" Background="Transparent">
         <Border PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" 
                 MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" 
-                CornerRadius="2,2,2,2" BorderThickness="1">
+                CornerRadius="2,2,2,2" BorderThickness="1" Opacity="0.5">
             <Border.Resources>
                 <Style TargetType="Border">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding KlassModel.IsSelected}" Value="true">
-                            <Setter Property="Background" Value="#CCE8FE"/>
-                            <Setter Property="BorderBrush" Value="#99D1FF"/>
+                            <Setter Property="Background" Value="#A4D6FC"/>
+                            <Setter Property="BorderBrush" Value="#71C1F7"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
