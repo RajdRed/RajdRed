@@ -126,12 +126,23 @@ namespace RajdRed
 
         private void WindowDragAndMove(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2 && WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
+			if (e.ClickCount == 2 && WindowState == WindowState.Maximized)
+			{
+				WindowState = WindowState.Normal;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max.jpg", UriKind.Absolute));
+			}
 
-            else if (e.ClickCount == 2 && WindowState == WindowState.Normal)
-                WindowState = WindowState.Maximized;
-
+			else if (e.ClickCount == 2 && WindowState == WindowState.Normal)
+			{
+				WindowState = WindowState.Maximized;
+				minmaxImage.Source = new BitmapImage(new Uri(@"pack://application:,,,/"
+			 + Assembly.GetExecutingAssembly().GetName().Name
+			 + ";component/"
+			 + "Images/menu-max2.jpg", UriKind.Absolute));
+			}
             else DragMove();
 
             e.Handled = true;
