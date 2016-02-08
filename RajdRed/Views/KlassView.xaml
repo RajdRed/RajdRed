@@ -17,7 +17,7 @@
         <DataTemplate x:Key="NodTemplate" DataType="{x:Type vm:NodKlassViewModel}">
             <v:NodKlassView/>
         </DataTemplate>
-        
+
         <Style TargetType="v:NodKlassView" x:Key="NodKlassViewStyle">
             <Setter Property="Visibility" Value="Hidden"></Setter>
             <Style.Triggers>
@@ -27,7 +27,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave">
+    <Grid Name="OuterGrid" MouseLeave="OuterGrid_MouseLeave" Background="Transparent">
         <Border PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" 
                 MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" 
                 CornerRadius="2,2,2,2" BorderThickness="1">
@@ -54,16 +54,16 @@
                         <RowDefinition Height="40*"/>
                         <RowDefinition Height="40*"/>
                     </Grid.RowDefinitions>
-					<Border Name="bgTopRow" Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0" >
+                    <Border Name="bgTopRow" Grid.Row="0" Background="#222931" CornerRadius="2,2,0,0" >
                         <Grid>
                             <Label Padding="5" Foreground="White" FontSize="10" HorizontalContentAlignment="Center" 
                                    FontWeight="Bold" Content="{Binding KlassModel.Header}" />
                         </Grid>
                     </Border>
-					<Grid Name="bgMidRow" Grid.Row="1" Background="#323a45">
+                    <Grid Name="bgMidRow" Grid.Row="1" Background="#323a45">
                         <TextBlock Text="{Binding KlassModel.Attributes}" Name="Attributes" Padding="5" Foreground="White"/>
                     </Grid>
-					<Border Name="bgBotRow" Background="#222931" Grid.Row="2" CornerRadius="0,0,2,2">
+                    <Border Name="bgBotRow" Background="#222931" Grid.Row="2" CornerRadius="0,0,2,2">
                         <Grid Grid.Row="2">
                             <TextBlock Text="{Binding KlassModel.Methods}" Name="Methods" Padding="5" Foreground="White" />
                         </Grid>
@@ -76,20 +76,18 @@
                 <ItemsPanelTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="10*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
-                            <RowDefinition Height="10*"></RowDefinition>
+                            <RowDefinition Height="16*"></RowDefinition>
+                            <RowDefinition Height="26*"></RowDefinition>
+                            <RowDefinition Height="26*"></RowDefinition>
+                            <RowDefinition Height="26*"></RowDefinition>
+                            <RowDefinition Height="16*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="16*"/>
+                            <ColumnDefinition Width="26*"/>
+                            <ColumnDefinition Width="26*"/>
+                            <ColumnDefinition Width="26*"/>
+                            <ColumnDefinition Width="16*"/>
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </ItemsPanelTemplate>
