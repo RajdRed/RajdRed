@@ -10,9 +10,9 @@ namespace RajdRed.Repositories
     public class TextBoxRepository : BaseRepository<TextBoxViewModel>
     {
         public TextBoxRepository(MainRepository m) : base(m) { }
-        public TextBoxViewModel AddNewTextBox(Point p)
+        public TextBoxViewModel AddNewTextBox()
         {
-            TextBoxViewModel tbvm = new TextBoxViewModel(p, this);
+            TextBoxViewModel tbvm = new TextBoxViewModel(TempPosition, this);
             Add(tbvm);
             tbvm.Select();
 
@@ -36,7 +36,7 @@ namespace RajdRed.Repositories
             if (HasSelected())
             {
                 foreach (TextBoxViewModel t in this)
-                    t.TextBoxModel.IsSelected = false;
+                    t.Deselect();
             }
         }
 
@@ -55,7 +55,7 @@ namespace RajdRed.Repositories
             }
         }
 
-        // -------------//------------------ Override Base END --------------//------------------------ //
+        // -------------//---------------- Override Base END --------------//------------------------ //
 
         public void SelectIfHit(Point mouseDownPos, Point mouseUpPos)
         {

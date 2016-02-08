@@ -105,7 +105,6 @@ namespace RajdRed.Repositories
             }
         }
 
-
         // -------------//------------------ Override Base END --------------//------------------------ //
 
         public bool HasNodeSelected()

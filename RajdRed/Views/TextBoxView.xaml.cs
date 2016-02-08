@@ -18,29 +18,7 @@ namespace RajdRed.Views
             Loaded += (sender, args) =>
             {
                 TextBoxViewModel.SetView(this);
-
-                GotKeyboardFocus += (s,e) =>
-                {
-                    TextBoxViewModel.Select();
-                };
-
-                LostKeyboardFocus += (s, e) =>
-                {
-                    TextBoxViewModel.Deselect();
-                };
             };
-        }
-
-        private void TextBoxBorder_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-            {
-                TextBoxViewModel.TextBoxRepository.MainRepository.DeselectAll();
-            }
-
-            CaptureMouse();
-            _posOnUserControlOnHit = Mouse.GetPosition(this);
-            e.Handled = true;
         }
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
@@ -55,11 +33,36 @@ namespace RajdRed.Views
 				if (!((p.X - _posOnUserControlOnHit.X) <= 0.5))
 					SetValue(Canvas.LeftProperty, p.X - _posOnUserControlOnHit.X);
             }
+
+            e.Handled = true;
         }
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ReleaseMouseCapture();
+
+            e.Handled = true;
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                TextBoxViewModel.Edit();
+            }
+            else
+            {
+                if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                {
+                    TextBoxViewModel.TextBoxRepository.MainRepository.DeselectAll();
+                }
+
+                CaptureMouse();
+                TextBoxViewModel.Select();
+                _posOnUserControlOnHit = Mouse.GetPosition(this);
+            }
+                
+            e.Handled = true;
         }
 
     }

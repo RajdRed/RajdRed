@@ -43,7 +43,7 @@ namespace RajdRed.Views
         public void KlassGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mw = (MainWindow)Application.Current.MainWindow;
-            Keyboard.Focus(mw);
+            Keyboard.Focus(this);
 
             if (e.ClickCount == 2)
             {
