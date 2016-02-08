@@ -344,5 +344,22 @@ namespace RajdRed
             Cursor = Cursors.Arrow;
 
         }
+
+		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			if (isArchiveMenuActive)
+			{
+				theCanvas.Children.Remove(archiveMenu);
+				isArchiveMenuActive = false;
+				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+
+			if (isSettingsMenuActive)
+			{
+				theCanvas.Children.Remove(settingsMenu);
+				isSettingsMenuActive = false;
+				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
+			}
+		}
     }
 }
