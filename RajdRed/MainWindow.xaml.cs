@@ -56,6 +56,8 @@ namespace RajdRed
 			}
 
             _mainRepository.KlassRepository.AddNewKlass(e.GetPosition(Application.Current.MainWindow));
+
+            e.Handled = true;
         }
 
         private void Ellipse_MinimizeWindow(object sender, MouseButtonEventArgs e)
@@ -113,6 +115,8 @@ namespace RajdRed
                 WindowState = WindowState.Maximized;
 
             else DragMove();
+
+            e.Handled = true;
         }
 
         private void Button_ArchiveMenu_MouseDown(object sender, MouseButtonEventArgs e)
@@ -140,6 +144,8 @@ namespace RajdRed
 				isArchiveMenuActive = false;
 				archiveMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
+
+            e.Handled = true;
         }
 
 		private void theCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -312,6 +318,8 @@ namespace RajdRed
                     _mainRepository.DeleteSelected();
 				}
 			}
+
+            k.Handled = true;
 		}
 
         public void DeselectAll()
@@ -339,12 +347,14 @@ namespace RajdRed
         private void Line_MouseEnter(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Hand;
+
+            e.Handled = true;
         }
 
         private void Line_MouseLeave(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Arrow;
-
+            e.Handled = true;
         }
 
 		private void theCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -382,6 +392,8 @@ namespace RajdRed
 				isSettingsMenuActive = false;
 				settingsMenuBtn.SetCurrentValue(Control.BackgroundProperty, Brushes.Transparent);
 			}
+
+            e.Handled = true;
 		}
     }
 }

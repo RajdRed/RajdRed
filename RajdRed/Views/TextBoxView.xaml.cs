@@ -1,4 +1,5 @@
 ﻿using RajdRed.ViewModels;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ namespace RajdRed.Views
             Loaded += (sender, args) =>
             {
                 TextBoxViewModel.SetView(this);
+                args.Handled = true;
             };
         }
 
@@ -57,9 +59,9 @@ namespace RajdRed.Views
                     TextBoxViewModel.TextBoxRepository.MainRepository.DeselectAll();
                 }
 
-                CaptureMouse();
                 TextBoxViewModel.Select();
                 _posOnUserControlOnHit = Mouse.GetPosition(this);
+                CaptureMouse();
             }
                 
             e.Handled = true;
