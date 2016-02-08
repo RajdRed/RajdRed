@@ -21,6 +21,7 @@ namespace RajdRed
 
     public partial class MainWindow : Window
     {
+        private Stack<MainRepository> _history = new Stack<MainRepository>();
 		private ArchiveMenu archiveMenu = new ArchiveMenu();
 		private SettingsMenu settingsMenu = new SettingsMenu();
         public bool isArchiveMenuActive = false;
@@ -347,6 +348,12 @@ namespace RajdRed
                     _mainRepository.DeleteSelected();
 				}
 			}
+
+            if (k.Key == Key.Z)
+            {
+                Undo();
+            }
+
 		}
 
         public void DeselectAll()
@@ -422,5 +429,22 @@ namespace RajdRed
 
             e.Handled = true;
 		}
+
+        private void Store()
+        {
+            _history.Push(new MainRepository(this));
+        }
+
+        private void Undo()
+        {
+            MainRepository m = new MainRepository(this);
+            if (_history.Count != 0)
+                m = _history.Pop();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Store();
+        }
     }
 }
