@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RajdRed.HelpWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="HelpWindow" WindowStartupLocation="CenterOwner" Height="400" Width="800" Background="Transparent" WindowStyle="None" AllowsTransparency="True">
+        Title="HelpWindow" WindowStartupLocation="CenterOwner" Height="550" Width="800" Background="Transparent" WindowStyle="None" AllowsTransparency="True">
 	<Grid Margin="5" Background="Transparent">
 		<Grid.Effect>
 			<DropShadowEffect BlurRadius="5" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
@@ -46,19 +46,30 @@
 				</Grid>
 				<!-- **************** **** **************** -->
 				<!-- *************** Content ************** -->
-				<Grid Grid.Row="1" Margin="20">
-					<TextBlock>
+				<Grid Grid.Row="1" Margin="20,20,20,-80">
+					<TextBlock Margin="0,0,0,-45">
+                        <Bold FontSize="13">What is RajdRed UML Maker?</Bold>
+                        <LineBreak></LineBreak>
+						<LineBreak></LineBreak>
+                        RajdRed UML Maker is a simple program for making UML diagrams. Before using this program you should have some knowledge 
+						<LineBreak></LineBreak>about UML diagrams. Skip to "What is a UML diagram?" if you miss this knowledge.
+                        <LineBreak></LineBreak>
+                        <LineBreak></LineBreak>
 						<Bold FontSize="13">How to use RajdRed UML Maker</Bold>
 						<LineBreak></LineBreak>
 						<LineBreak></LineBreak>
-						RajdRed UML Maker is a simple program for making UML diagrams. Before using this program you should have some knowledge 
-						<LineBreak></LineBreak>about UML diagrams. If you don't, skip to what is a UML diagram.
-						<LineBreak></LineBreak>
-						<LineBreak></LineBreak>
+                        <Bold FontSize="11">Create and edit Classes</Bold>
+                        <LineBreak></LineBreak>
 						RajdRed UML Maker gives the user the opportunity to create UML diagrams in a very simple way. Classes are dragged out to the work
-						<LineBreak></LineBreak>area. The classes can be edited by double clicking on them and relations can be dragged to other classes. Different kinds of relations
-						<LineBreak></LineBreak>can easily be used by clicking on the nodes that are connecting the classes to each other.
+						<LineBreak></LineBreak>area. The classes can be edited by double-clicking on them, then choose wether to edit header, attributes or methods.
 						<LineBreak></LineBreak>
+						<LineBreak></LineBreak>
+                        <Bold FontSize="11">Create and edit Relationships</Bold>
+                        <LineBreak></LineBreak>
+                        Relations can be dragged to other classes. Place your mouse over one of the plusses attached to a class. Press and drag towards the
+                        <LineBreak></LineBreak>other class you want to make the relationship with. If you press down shift while dragging a node it will automaticlly attach with
+                        <LineBreak></LineBreak>its sibling node in a straight line. This to make your digram look symmetric.
+                        <LineBreak></LineBreak>
 						<LineBreak></LineBreak>
 						<Bold FontSize="13">What is a UML diagram?</Bold>
 						<LineBreak></LineBreak>
