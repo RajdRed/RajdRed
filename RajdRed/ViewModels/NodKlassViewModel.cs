@@ -34,7 +34,7 @@ namespace RajdRed.ViewModels
 
         private void KlassModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (NodKlassModel.IsSet)
+            if (NodKlassModel.IsSet && (e.PropertyName == "PositionLeft" || e.PropertyName == "PositionTop"))
             {
                 Point p = GetPositionRelativeCanvas();
                 NodKlassModel.PositionLeft = p.X;
